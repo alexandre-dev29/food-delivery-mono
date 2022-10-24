@@ -1,4 +1,5 @@
 import { Scalar } from '@nestjs/graphql';
+import { AuthUser } from '@food-delivery-mono/data-access';
 
 export type Tokens = {
   access_token: string;

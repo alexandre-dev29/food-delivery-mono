@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator graphql_generated {
+  provider    = "node node_modules/prisma-nestjs-graphql"
+  output      = "../libs/data-access/src/@generated"
+  purgeOutput = true
+  emitSingle  = true
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL_ALL")
+}
+
+model AuthUser {
+  id               String   @id @default(cuid())
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  userId           String   @db.VarChar(60)
+  refreshToken     String?
+  //@HideField()
+  phoneNumber      String   @db.VarChar(20)
+  password         String   @db.VarChar(100)
+  username         String   @db.VarChar(100)
+  Role             Role?    @relation(fields: [roleRoleId], references: [roleId])
+  roleRoleId       String?
+  isPhoneConfirmed Boolean  @default(false)
+}
+
+model Role {
+  roleId    String     @id @default(cuid())
+  userRole  String
+  AuthUser  AuthUser[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Users {
+  idUser    String         @id @default(cuid())
+  firstName String?
+  lastName  String?
+  userName  String
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  profile   Profile?       @relation(fields: [profileId], references: [profileId])
+  profileId String?        @unique
+  adresses  UserAdresses[]
+}
+
+model Profile {
+  profileId      String      @id @default(cuid())
+  bio            String
+  dateOfBirth    DateTime?
+  placeOfBirth   DateTime?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  user           Users?
+  profilePicture FileEntity?
+}
+
+model UserAdresses {
+  idAdresse  String   @id @default(cuid())
+  userId     String
+  adressName String
+  longitude  String
+  latitude   String
+  elevation  String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  user       Users    @relation(fields: [userId], references: [idUser])
+}
+
+model FileEntity {
+  id        String   @id @default(cuid())
+  fileName  String
+  fileUrl   String
+  key       String
+  profileId String   @unique
+  profile   Profile  @relation(fields: [profileId], references: [profileId])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

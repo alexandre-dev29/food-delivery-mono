@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { MercuriusDriver, MercuriusDriverConfig } from '@nestjs/mercurius';
 import { ConfigModule } from '@nestjs/config';
+import { TwilioOperationsModule } from '@food-delivery-mono/twilio-operations';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { ConfigModule } from '@nestjs/config';
       autoSchemaFile: true,
     }),
     ConfigModule.forRoot(),
+    TwilioOperationsModule,
   ],
   controllers: [],
   providers: [],

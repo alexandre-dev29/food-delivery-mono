@@ -21,6 +21,9 @@
       "@food-delivery-mono/app-security": [
         "libs/app-security/src/index.ts"
       ],
+      "@food-delivery-mono/data-access": [
+        "libs/data-access/src/index.ts"
+      ],
       "@food-delivery-mono/shared-types": [
         "libs/shared-types/src/index.ts"
       ],

@@ -10,11 +10,27 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@food-delivery-mono/app-security": [
+        "libs/app-security/src/index.ts"
+      ],
+      "@food-delivery-mono/shared-types": [
+        "libs/shared-types/src/index.ts"
+      ],
+      "@food-delivery-mono/twilio-operations": [
+        "libs/twilio-operations/src/index.ts"
+      ],
+      "@food-delivery-mono/utilities": [
+        "libs/utilities/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

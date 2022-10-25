@@ -14,7 +14,6 @@ export enum UsersScalarFieldEnum {
   userName = 'userName',
   createdAt = 'createdAt',
   updatedAt = 'updatedAt',
-  profileId = 'profileId',
 }
 
 export enum UserAdressesScalarFieldEnum {
@@ -42,6 +41,7 @@ export enum ProfileScalarFieldEnum {
   placeOfBirth = 'placeOfBirth',
   createdAt = 'createdAt',
   updatedAt = 'updatedAt',
+  userId = 'userId',
 }
 
 export enum TransactionIsolationLevel {
@@ -66,9 +66,9 @@ export enum FileEntityScalarFieldEnum {
   fileName = 'fileName',
   fileUrl = 'fileUrl',
   key = 'key',
-  profileId = 'profileId',
   createdAt = 'createdAt',
   updatedAt = 'updatedAt',
+  profileId = 'profileId',
 }
 
 export enum AuthUserScalarFieldEnum {
@@ -84,36 +84,15 @@ export enum AuthUserScalarFieldEnum {
   isPhoneConfirmed = 'isPhoneConfirmed',
 }
 
-registerEnumType(AuthUserScalarFieldEnum, {
-  name: 'AuthUserScalarFieldEnum',
-  description: undefined,
-});
-registerEnumType(FileEntityScalarFieldEnum, {
-  name: 'FileEntityScalarFieldEnum',
-  description: undefined,
-});
+registerEnumType(AuthUserScalarFieldEnum, { name: 'AuthUserScalarFieldEnum', description: undefined });
+registerEnumType(FileEntityScalarFieldEnum, { name: 'FileEntityScalarFieldEnum', description: undefined });
 registerEnumType(QueryMode, { name: 'QueryMode', description: undefined });
 registerEnumType(SortOrder, { name: 'SortOrder', description: undefined });
-registerEnumType(TransactionIsolationLevel, {
-  name: 'TransactionIsolationLevel',
-  description: undefined,
-});
-registerEnumType(ProfileScalarFieldEnum, {
-  name: 'ProfileScalarFieldEnum',
-  description: undefined,
-});
-registerEnumType(RoleScalarFieldEnum, {
-  name: 'RoleScalarFieldEnum',
-  description: undefined,
-});
-registerEnumType(UserAdressesScalarFieldEnum, {
-  name: 'UserAdressesScalarFieldEnum',
-  description: undefined,
-});
-registerEnumType(UsersScalarFieldEnum, {
-  name: 'UsersScalarFieldEnum',
-  description: undefined,
-});
+registerEnumType(TransactionIsolationLevel, { name: 'TransactionIsolationLevel', description: undefined });
+registerEnumType(ProfileScalarFieldEnum, { name: 'ProfileScalarFieldEnum', description: undefined });
+registerEnumType(RoleScalarFieldEnum, { name: 'RoleScalarFieldEnum', description: undefined });
+registerEnumType(UserAdressesScalarFieldEnum, { name: 'UserAdressesScalarFieldEnum', description: undefined });
+registerEnumType(UsersScalarFieldEnum, { name: 'UsersScalarFieldEnum', description: undefined });
 
 @ObjectType()
 export class AggregateAuthUser {
@@ -770,9 +749,7 @@ export class AuthUserUncheckedUpdateManyWithoutRoleNestedInput {
   @Field(() => [AuthUserCreateOrConnectWithoutRoleInput], { nullable: true })
   @Type(() => AuthUserCreateOrConnectWithoutRoleInput)
   connectOrCreate?: Array<AuthUserCreateOrConnectWithoutRoleInput>;
-  @Field(() => [AuthUserUpsertWithWhereUniqueWithoutRoleInput], {
-    nullable: true,
-  })
+  @Field(() => [AuthUserUpsertWithWhereUniqueWithoutRoleInput], { nullable: true })
   @Type(() => AuthUserUpsertWithWhereUniqueWithoutRoleInput)
   upsert?: Array<AuthUserUpsertWithWhereUniqueWithoutRoleInput>;
   @Field(() => AuthUserCreateManyRoleInputEnvelope, { nullable: true })
@@ -790,14 +767,10 @@ export class AuthUserUncheckedUpdateManyWithoutRoleNestedInput {
   @Field(() => [AuthUserWhereUniqueInput], { nullable: true })
   @Type(() => AuthUserWhereUniqueInput)
   connect?: Array<AuthUserWhereUniqueInput>;
-  @Field(() => [AuthUserUpdateWithWhereUniqueWithoutRoleInput], {
-    nullable: true,
-  })
+  @Field(() => [AuthUserUpdateWithWhereUniqueWithoutRoleInput], { nullable: true })
   @Type(() => AuthUserUpdateWithWhereUniqueWithoutRoleInput)
   update?: Array<AuthUserUpdateWithWhereUniqueWithoutRoleInput>;
-  @Field(() => [AuthUserUpdateManyWithWhereWithoutRoleInput], {
-    nullable: true,
-  })
+  @Field(() => [AuthUserUpdateManyWithWhereWithoutRoleInput], { nullable: true })
   @Type(() => AuthUserUpdateManyWithWhereWithoutRoleInput)
   updateMany?: Array<AuthUserUpdateManyWithWhereWithoutRoleInput>;
   @Field(() => [AuthUserScalarWhereInput], { nullable: true })
@@ -915,9 +888,7 @@ export class AuthUserUpdateManyWithoutRoleNestedInput {
   @Field(() => [AuthUserCreateOrConnectWithoutRoleInput], { nullable: true })
   @Type(() => AuthUserCreateOrConnectWithoutRoleInput)
   connectOrCreate?: Array<AuthUserCreateOrConnectWithoutRoleInput>;
-  @Field(() => [AuthUserUpsertWithWhereUniqueWithoutRoleInput], {
-    nullable: true,
-  })
+  @Field(() => [AuthUserUpsertWithWhereUniqueWithoutRoleInput], { nullable: true })
   @Type(() => AuthUserUpsertWithWhereUniqueWithoutRoleInput)
   upsert?: Array<AuthUserUpsertWithWhereUniqueWithoutRoleInput>;
   @Field(() => AuthUserCreateManyRoleInputEnvelope, { nullable: true })
@@ -935,14 +906,10 @@ export class AuthUserUpdateManyWithoutRoleNestedInput {
   @Field(() => [AuthUserWhereUniqueInput], { nullable: true })
   @Type(() => AuthUserWhereUniqueInput)
   connect?: Array<AuthUserWhereUniqueInput>;
-  @Field(() => [AuthUserUpdateWithWhereUniqueWithoutRoleInput], {
-    nullable: true,
-  })
+  @Field(() => [AuthUserUpdateWithWhereUniqueWithoutRoleInput], { nullable: true })
   @Type(() => AuthUserUpdateWithWhereUniqueWithoutRoleInput)
   update?: Array<AuthUserUpdateWithWhereUniqueWithoutRoleInput>;
-  @Field(() => [AuthUserUpdateManyWithWhereWithoutRoleInput], {
-    nullable: true,
-  })
+  @Field(() => [AuthUserUpdateManyWithWhereWithoutRoleInput], { nullable: true })
   @Type(() => AuthUserUpdateManyWithWhereWithoutRoleInput)
   updateMany?: Array<AuthUserUpdateManyWithWhereWithoutRoleInput>;
   @Field(() => [AuthUserScalarWhereInput], { nullable: true })
@@ -1259,11 +1226,11 @@ export class FileEntityCountAggregateInput {
   @Field(() => Boolean, { nullable: true })
   key?: true;
   @Field(() => Boolean, { nullable: true })
-  profileId?: true;
-  @Field(() => Boolean, { nullable: true })
   createdAt?: true;
   @Field(() => Boolean, { nullable: true })
   updatedAt?: true;
+  @Field(() => Boolean, { nullable: true })
+  profileId?: true;
   @Field(() => Boolean, { nullable: true })
   _all?: true;
 }
@@ -1279,11 +1246,11 @@ export class FileEntityCountAggregate {
   @Field(() => Int, { nullable: false })
   key!: number;
   @Field(() => Int, { nullable: false })
-  profileId!: number;
-  @Field(() => Int, { nullable: false })
   createdAt!: number;
   @Field(() => Int, { nullable: false })
   updatedAt!: number;
+  @Field(() => Int, { nullable: false })
+  profileId!: number;
   @Field(() => Int, { nullable: false })
   _all!: number;
 }
@@ -1299,11 +1266,11 @@ export class FileEntityCountOrderByAggregateInput {
   @Field(() => SortOrder, { nullable: true })
   key?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
-  profileId?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
   createdAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  profileId?: keyof typeof SortOrder;
 }
 
 @InputType()
@@ -1316,12 +1283,12 @@ export class FileEntityCreateManyInput {
   fileUrl!: string;
   @Field(() => String, { nullable: false })
   key!: string;
-  @Field(() => String, { nullable: false })
-  profileId!: string;
   @Field(() => Date, { nullable: true })
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
+  @Field(() => String, { nullable: false })
+  profileId!: string;
 }
 
 @InputType()
@@ -1331,9 +1298,7 @@ export class FileEntityCreateNestedOneWithoutProfileInput {
   create?: InstanceType<typeof FileEntityCreateWithoutProfileInput>;
   @Field(() => FileEntityCreateOrConnectWithoutProfileInput, { nullable: true })
   @Type(() => FileEntityCreateOrConnectWithoutProfileInput)
-  connectOrCreate?: InstanceType<
-    typeof FileEntityCreateOrConnectWithoutProfileInput
-  >;
+  connectOrCreate?: InstanceType<typeof FileEntityCreateOrConnectWithoutProfileInput>;
   @Field(() => FileEntityWhereUniqueInput, { nullable: true })
   @Type(() => FileEntityWhereUniqueInput)
   connect?: InstanceType<typeof FileEntityWhereUniqueInput>;
@@ -1375,16 +1340,12 @@ export class FileEntityCreateInput {
   fileUrl!: string;
   @Field(() => String, { nullable: false })
   key!: string;
-  @Field(() => ProfileCreateNestedOneWithoutProfilePictureInput, {
-    nullable: false,
-  })
-  profile!: InstanceType<
-    typeof ProfileCreateNestedOneWithoutProfilePictureInput
-  >;
   @Field(() => Date, { nullable: true })
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
+  @Field(() => ProfileCreateNestedOneWithoutProfilePictureInput, { nullable: false })
+  Profile!: InstanceType<typeof ProfileCreateNestedOneWithoutProfilePictureInput>;
 }
 
 @InputType()
@@ -1420,12 +1381,12 @@ export class FileEntityGroupBy {
   fileUrl!: string;
   @Field(() => String, { nullable: false })
   key!: string;
-  @Field(() => String, { nullable: false })
-  profileId!: string;
   @Field(() => Date, { nullable: false })
   createdAt!: Date | string;
   @Field(() => Date, { nullable: false })
   updatedAt!: Date | string;
+  @Field(() => String, { nullable: false })
+  profileId!: string;
   @Field(() => FileEntityCountAggregate, { nullable: true })
   _count?: InstanceType<typeof FileEntityCountAggregate>;
   @Field(() => FileEntityMinAggregate, { nullable: true })
@@ -1445,11 +1406,11 @@ export class FileEntityMaxAggregateInput {
   @Field(() => Boolean, { nullable: true })
   key?: true;
   @Field(() => Boolean, { nullable: true })
-  profileId?: true;
-  @Field(() => Boolean, { nullable: true })
   createdAt?: true;
   @Field(() => Boolean, { nullable: true })
   updatedAt?: true;
+  @Field(() => Boolean, { nullable: true })
+  profileId?: true;
 }
 
 @ObjectType()
@@ -1462,12 +1423,12 @@ export class FileEntityMaxAggregate {
   fileUrl?: string;
   @Field(() => String, { nullable: true })
   key?: string;
-  @Field(() => String, { nullable: true })
-  profileId?: string;
   @Field(() => Date, { nullable: true })
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
+  @Field(() => String, { nullable: true })
+  profileId?: string;
 }
 
 @InputType()
@@ -1481,11 +1442,11 @@ export class FileEntityMaxOrderByAggregateInput {
   @Field(() => SortOrder, { nullable: true })
   key?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
-  profileId?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
   createdAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  profileId?: keyof typeof SortOrder;
 }
 
 @InputType()
@@ -1499,11 +1460,11 @@ export class FileEntityMinAggregateInput {
   @Field(() => Boolean, { nullable: true })
   key?: true;
   @Field(() => Boolean, { nullable: true })
-  profileId?: true;
-  @Field(() => Boolean, { nullable: true })
   createdAt?: true;
   @Field(() => Boolean, { nullable: true })
   updatedAt?: true;
+  @Field(() => Boolean, { nullable: true })
+  profileId?: true;
 }
 
 @ObjectType()
@@ -1516,12 +1477,12 @@ export class FileEntityMinAggregate {
   fileUrl?: string;
   @Field(() => String, { nullable: true })
   key?: string;
-  @Field(() => String, { nullable: true })
-  profileId?: string;
   @Field(() => Date, { nullable: true })
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
+  @Field(() => String, { nullable: true })
+  profileId?: string;
 }
 
 @InputType()
@@ -1535,11 +1496,11 @@ export class FileEntityMinOrderByAggregateInput {
   @Field(() => SortOrder, { nullable: true })
   key?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
-  profileId?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
   createdAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  profileId?: keyof typeof SortOrder;
 }
 
 @InputType()
@@ -1553,11 +1514,11 @@ export class FileEntityOrderByWithAggregationInput {
   @Field(() => SortOrder, { nullable: true })
   key?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
-  profileId?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
   createdAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  profileId?: keyof typeof SortOrder;
   @Field(() => FileEntityCountOrderByAggregateInput, { nullable: true })
   _count?: InstanceType<typeof FileEntityCountOrderByAggregateInput>;
   @Field(() => FileEntityMaxOrderByAggregateInput, { nullable: true })
@@ -1577,13 +1538,13 @@ export class FileEntityOrderByWithRelationInput {
   @Field(() => SortOrder, { nullable: true })
   key?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
-  profileId?: keyof typeof SortOrder;
-  @Field(() => ProfileOrderByWithRelationInput, { nullable: true })
-  profile?: InstanceType<typeof ProfileOrderByWithRelationInput>;
-  @Field(() => SortOrder, { nullable: true })
   createdAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  profileId?: keyof typeof SortOrder;
+  @Field(() => ProfileOrderByWithRelationInput, { nullable: true })
+  Profile?: InstanceType<typeof ProfileOrderByWithRelationInput>;
 }
 
 @InputType()
@@ -1610,12 +1571,12 @@ export class FileEntityScalarWhereWithAggregatesInput {
   fileUrl?: InstanceType<typeof StringWithAggregatesFilter>;
   @Field(() => StringWithAggregatesFilter, { nullable: true })
   key?: InstanceType<typeof StringWithAggregatesFilter>;
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  profileId?: InstanceType<typeof StringWithAggregatesFilter>;
   @Field(() => DateTimeWithAggregatesFilter, { nullable: true })
   createdAt?: InstanceType<typeof DateTimeWithAggregatesFilter>;
   @Field(() => DateTimeWithAggregatesFilter, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeWithAggregatesFilter>;
+  @Field(() => StringWithAggregatesFilter, { nullable: true })
+  profileId?: InstanceType<typeof StringWithAggregatesFilter>;
 }
 
 @InputType()
@@ -1625,9 +1586,7 @@ export class FileEntityUncheckedCreateNestedOneWithoutProfileInput {
   create?: InstanceType<typeof FileEntityCreateWithoutProfileInput>;
   @Field(() => FileEntityCreateOrConnectWithoutProfileInput, { nullable: true })
   @Type(() => FileEntityCreateOrConnectWithoutProfileInput)
-  connectOrCreate?: InstanceType<
-    typeof FileEntityCreateOrConnectWithoutProfileInput
-  >;
+  connectOrCreate?: InstanceType<typeof FileEntityCreateOrConnectWithoutProfileInput>;
   @Field(() => FileEntityWhereUniqueInput, { nullable: true })
   @Type(() => FileEntityWhereUniqueInput)
   connect?: InstanceType<typeof FileEntityWhereUniqueInput>;
@@ -1659,12 +1618,12 @@ export class FileEntityUncheckedCreateInput {
   fileUrl!: string;
   @Field(() => String, { nullable: false })
   key!: string;
-  @Field(() => String, { nullable: false })
-  profileId!: string;
   @Field(() => Date, { nullable: true })
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
+  @Field(() => String, { nullable: false })
+  profileId!: string;
 }
 
 @InputType()
@@ -1677,12 +1636,12 @@ export class FileEntityUncheckedUpdateManyInput {
   fileUrl?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   key?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  profileId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  profileId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
 }
 
 @InputType()
@@ -1692,9 +1651,7 @@ export class FileEntityUncheckedUpdateOneWithoutProfileNestedInput {
   create?: InstanceType<typeof FileEntityCreateWithoutProfileInput>;
   @Field(() => FileEntityCreateOrConnectWithoutProfileInput, { nullable: true })
   @Type(() => FileEntityCreateOrConnectWithoutProfileInput)
-  connectOrCreate?: InstanceType<
-    typeof FileEntityCreateOrConnectWithoutProfileInput
-  >;
+  connectOrCreate?: InstanceType<typeof FileEntityCreateOrConnectWithoutProfileInput>;
   @Field(() => FileEntityUpsertWithoutProfileInput, { nullable: true })
   @Type(() => FileEntityUpsertWithoutProfileInput)
   upsert?: InstanceType<typeof FileEntityUpsertWithoutProfileInput>;
@@ -1736,12 +1693,12 @@ export class FileEntityUncheckedUpdateInput {
   fileUrl?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   key?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  profileId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  profileId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
 }
 
 @InputType()
@@ -1767,9 +1724,7 @@ export class FileEntityUpdateOneWithoutProfileNestedInput {
   create?: InstanceType<typeof FileEntityCreateWithoutProfileInput>;
   @Field(() => FileEntityCreateOrConnectWithoutProfileInput, { nullable: true })
   @Type(() => FileEntityCreateOrConnectWithoutProfileInput)
-  connectOrCreate?: InstanceType<
-    typeof FileEntityCreateOrConnectWithoutProfileInput
-  >;
+  connectOrCreate?: InstanceType<typeof FileEntityCreateOrConnectWithoutProfileInput>;
   @Field(() => FileEntityUpsertWithoutProfileInput, { nullable: true })
   @Type(() => FileEntityUpsertWithoutProfileInput)
   upsert?: InstanceType<typeof FileEntityUpsertWithoutProfileInput>;
@@ -1811,16 +1766,12 @@ export class FileEntityUpdateInput {
   fileUrl?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   key?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => ProfileUpdateOneRequiredWithoutProfilePictureNestedInput, {
-    nullable: true,
-  })
-  profile?: InstanceType<
-    typeof ProfileUpdateOneRequiredWithoutProfilePictureNestedInput
-  >;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => ProfileUpdateOneRequiredWithoutProfilePictureNestedInput, { nullable: true })
+  Profile?: InstanceType<typeof ProfileUpdateOneRequiredWithoutProfilePictureNestedInput>;
 }
 
 @InputType()
@@ -1857,14 +1808,14 @@ export class FileEntityWhereInput {
   fileUrl?: InstanceType<typeof StringFilter>;
   @Field(() => StringFilter, { nullable: true })
   key?: InstanceType<typeof StringFilter>;
-  @Field(() => StringFilter, { nullable: true })
-  profileId?: InstanceType<typeof StringFilter>;
-  @Field(() => ProfileRelationFilter, { nullable: true })
-  profile?: InstanceType<typeof ProfileRelationFilter>;
   @Field(() => DateTimeFilter, { nullable: true })
   createdAt?: InstanceType<typeof DateTimeFilter>;
   @Field(() => DateTimeFilter, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  profileId?: InstanceType<typeof StringFilter>;
+  @Field(() => ProfileRelationFilter, { nullable: true })
+  Profile?: InstanceType<typeof ProfileRelationFilter>;
 }
 
 @ObjectType()
@@ -1877,14 +1828,14 @@ export class FileEntity {
   fileUrl!: string;
   @Field(() => String, { nullable: false })
   key!: string;
-  @Field(() => String, { nullable: false })
-  profileId!: string;
-  @Field(() => Profile, { nullable: false })
-  profile?: InstanceType<typeof Profile>;
   @Field(() => Date, { nullable: false })
   createdAt!: Date;
   @Field(() => Date, { nullable: false })
   updatedAt!: Date;
+  @Field(() => String, { nullable: false })
+  profileId!: string;
+  @Field(() => Profile, { nullable: false })
+  Profile?: InstanceType<typeof Profile>;
 }
 
 @InputType()
@@ -2622,6 +2573,8 @@ export class ProfileCountAggregateInput {
   @Field(() => Boolean, { nullable: true })
   updatedAt?: true;
   @Field(() => Boolean, { nullable: true })
+  userId?: true;
+  @Field(() => Boolean, { nullable: true })
   _all?: true;
 }
 
@@ -2640,6 +2593,8 @@ export class ProfileCountAggregate {
   @Field(() => Int, { nullable: false })
   updatedAt!: number;
   @Field(() => Int, { nullable: false })
+  userId!: number;
+  @Field(() => Int, { nullable: false })
   _all!: number;
 }
 
@@ -2657,6 +2612,8 @@ export class ProfileCountOrderByAggregateInput {
   createdAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  userId?: keyof typeof SortOrder;
 }
 
 @InputType()
@@ -2673,6 +2630,8 @@ export class ProfileCreateManyInput {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
+  @Field(() => String, { nullable: true })
+  userId?: string;
 }
 
 @InputType()
@@ -2680,13 +2639,9 @@ export class ProfileCreateNestedOneWithoutProfilePictureInput {
   @Field(() => ProfileCreateWithoutProfilePictureInput, { nullable: true })
   @Type(() => ProfileCreateWithoutProfilePictureInput)
   create?: InstanceType<typeof ProfileCreateWithoutProfilePictureInput>;
-  @Field(() => ProfileCreateOrConnectWithoutProfilePictureInput, {
-    nullable: true,
-  })
+  @Field(() => ProfileCreateOrConnectWithoutProfilePictureInput, { nullable: true })
   @Type(() => ProfileCreateOrConnectWithoutProfilePictureInput)
-  connectOrCreate?: InstanceType<
-    typeof ProfileCreateOrConnectWithoutProfilePictureInput
-  >;
+  connectOrCreate?: InstanceType<typeof ProfileCreateOrConnectWithoutProfilePictureInput>;
   @Field(() => ProfileWhereUniqueInput, { nullable: true })
   @Type(() => ProfileWhereUniqueInput)
   connect?: InstanceType<typeof ProfileWhereUniqueInput>;
@@ -2758,9 +2713,7 @@ export class ProfileCreateWithoutUserInput {
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
   @Field(() => FileEntityCreateNestedOneWithoutProfileInput, { nullable: true })
-  profilePicture?: InstanceType<
-    typeof FileEntityCreateNestedOneWithoutProfileInput
-  >;
+  profilePicture?: InstanceType<typeof FileEntityCreateNestedOneWithoutProfileInput>;
 }
 
 @InputType()
@@ -2777,12 +2730,10 @@ export class ProfileCreateInput {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
+  @Field(() => FileEntityCreateNestedOneWithoutProfileInput, { nullable: true })
+  profilePicture?: InstanceType<typeof FileEntityCreateNestedOneWithoutProfileInput>;
   @Field(() => UsersCreateNestedOneWithoutProfileInput, { nullable: true })
   user?: InstanceType<typeof UsersCreateNestedOneWithoutProfileInput>;
-  @Field(() => FileEntityCreateNestedOneWithoutProfileInput, { nullable: true })
-  profilePicture?: InstanceType<
-    typeof FileEntityCreateNestedOneWithoutProfileInput
-  >;
 }
 
 @InputType()
@@ -2822,6 +2773,8 @@ export class ProfileGroupBy {
   createdAt!: Date | string;
   @Field(() => Date, { nullable: false })
   updatedAt!: Date | string;
+  @Field(() => String, { nullable: true })
+  userId?: string;
   @Field(() => ProfileCountAggregate, { nullable: true })
   _count?: InstanceType<typeof ProfileCountAggregate>;
   @Field(() => ProfileMinAggregate, { nullable: true })
@@ -2844,6 +2797,8 @@ export class ProfileMaxAggregateInput {
   createdAt?: true;
   @Field(() => Boolean, { nullable: true })
   updatedAt?: true;
+  @Field(() => Boolean, { nullable: true })
+  userId?: true;
 }
 
 @ObjectType()
@@ -2860,6 +2815,8 @@ export class ProfileMaxAggregate {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
+  @Field(() => String, { nullable: true })
+  userId?: string;
 }
 
 @InputType()
@@ -2876,6 +2833,8 @@ export class ProfileMaxOrderByAggregateInput {
   createdAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  userId?: keyof typeof SortOrder;
 }
 
 @InputType()
@@ -2892,6 +2851,8 @@ export class ProfileMinAggregateInput {
   createdAt?: true;
   @Field(() => Boolean, { nullable: true })
   updatedAt?: true;
+  @Field(() => Boolean, { nullable: true })
+  userId?: true;
 }
 
 @ObjectType()
@@ -2908,6 +2869,8 @@ export class ProfileMinAggregate {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
+  @Field(() => String, { nullable: true })
+  userId?: string;
 }
 
 @InputType()
@@ -2924,6 +2887,8 @@ export class ProfileMinOrderByAggregateInput {
   createdAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  userId?: keyof typeof SortOrder;
 }
 
 @InputType()
@@ -2940,6 +2905,8 @@ export class ProfileOrderByWithAggregationInput {
   createdAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  userId?: keyof typeof SortOrder;
   @Field(() => ProfileCountOrderByAggregateInput, { nullable: true })
   _count?: InstanceType<typeof ProfileCountOrderByAggregateInput>;
   @Field(() => ProfileMaxOrderByAggregateInput, { nullable: true })
@@ -2962,10 +2929,12 @@ export class ProfileOrderByWithRelationInput {
   createdAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
-  @Field(() => UsersOrderByWithRelationInput, { nullable: true })
-  user?: InstanceType<typeof UsersOrderByWithRelationInput>;
   @Field(() => FileEntityOrderByWithRelationInput, { nullable: true })
   profilePicture?: InstanceType<typeof FileEntityOrderByWithRelationInput>;
+  @Field(() => UsersOrderByWithRelationInput, { nullable: true })
+  user?: InstanceType<typeof UsersOrderByWithRelationInput>;
+  @Field(() => SortOrder, { nullable: true })
+  userId?: keyof typeof SortOrder;
 }
 
 @InputType()
@@ -2996,6 +2965,21 @@ export class ProfileScalarWhereWithAggregatesInput {
   createdAt?: InstanceType<typeof DateTimeWithAggregatesFilter>;
   @Field(() => DateTimeWithAggregatesFilter, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeWithAggregatesFilter>;
+  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
+  userId?: InstanceType<typeof StringNullableWithAggregatesFilter>;
+}
+
+@InputType()
+export class ProfileUncheckedCreateNestedOneWithoutUserInput {
+  @Field(() => ProfileCreateWithoutUserInput, { nullable: true })
+  @Type(() => ProfileCreateWithoutUserInput)
+  create?: InstanceType<typeof ProfileCreateWithoutUserInput>;
+  @Field(() => ProfileCreateOrConnectWithoutUserInput, { nullable: true })
+  @Type(() => ProfileCreateOrConnectWithoutUserInput)
+  connectOrCreate?: InstanceType<typeof ProfileCreateOrConnectWithoutUserInput>;
+  @Field(() => ProfileWhereUniqueInput, { nullable: true })
+  @Type(() => ProfileWhereUniqueInput)
+  connect?: InstanceType<typeof ProfileWhereUniqueInput>;
 }
 
 @InputType()
@@ -3012,10 +2996,8 @@ export class ProfileUncheckedCreateWithoutProfilePictureInput {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
-  @Field(() => UsersUncheckedCreateNestedOneWithoutProfileInput, {
-    nullable: true,
-  })
-  user?: InstanceType<typeof UsersUncheckedCreateNestedOneWithoutProfileInput>;
+  @Field(() => String, { nullable: true })
+  userId?: string;
 }
 
 @InputType()
@@ -3032,12 +3014,8 @@ export class ProfileUncheckedCreateWithoutUserInput {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
-  @Field(() => FileEntityUncheckedCreateNestedOneWithoutProfileInput, {
-    nullable: true,
-  })
-  profilePicture?: InstanceType<
-    typeof FileEntityUncheckedCreateNestedOneWithoutProfileInput
-  >;
+  @Field(() => FileEntityUncheckedCreateNestedOneWithoutProfileInput, { nullable: true })
+  profilePicture?: InstanceType<typeof FileEntityUncheckedCreateNestedOneWithoutProfileInput>;
 }
 
 @InputType()
@@ -3054,16 +3032,10 @@ export class ProfileUncheckedCreateInput {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
-  @Field(() => UsersUncheckedCreateNestedOneWithoutProfileInput, {
-    nullable: true,
-  })
-  user?: InstanceType<typeof UsersUncheckedCreateNestedOneWithoutProfileInput>;
-  @Field(() => FileEntityUncheckedCreateNestedOneWithoutProfileInput, {
-    nullable: true,
-  })
-  profilePicture?: InstanceType<
-    typeof FileEntityUncheckedCreateNestedOneWithoutProfileInput
-  >;
+  @Field(() => FileEntityUncheckedCreateNestedOneWithoutProfileInput, { nullable: true })
+  profilePicture?: InstanceType<typeof FileEntityUncheckedCreateNestedOneWithoutProfileInput>;
+  @Field(() => String, { nullable: true })
+  userId?: string;
 }
 
 @InputType()
@@ -3075,13 +3047,36 @@ export class ProfileUncheckedUpdateManyInput {
   @Field(() => NullableDateTimeFieldUpdateOperationsInput, { nullable: true })
   dateOfBirth?: InstanceType<typeof NullableDateTimeFieldUpdateOperationsInput>;
   @Field(() => NullableDateTimeFieldUpdateOperationsInput, { nullable: true })
-  placeOfBirth?: InstanceType<
-    typeof NullableDateTimeFieldUpdateOperationsInput
-  >;
+  placeOfBirth?: InstanceType<typeof NullableDateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  userId?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class ProfileUncheckedUpdateOneWithoutUserNestedInput {
+  @Field(() => ProfileCreateWithoutUserInput, { nullable: true })
+  @Type(() => ProfileCreateWithoutUserInput)
+  create?: InstanceType<typeof ProfileCreateWithoutUserInput>;
+  @Field(() => ProfileCreateOrConnectWithoutUserInput, { nullable: true })
+  @Type(() => ProfileCreateOrConnectWithoutUserInput)
+  connectOrCreate?: InstanceType<typeof ProfileCreateOrConnectWithoutUserInput>;
+  @Field(() => ProfileUpsertWithoutUserInput, { nullable: true })
+  @Type(() => ProfileUpsertWithoutUserInput)
+  upsert?: InstanceType<typeof ProfileUpsertWithoutUserInput>;
+  @Field(() => Boolean, { nullable: true })
+  disconnect?: boolean;
+  @Field(() => Boolean, { nullable: true })
+  delete?: boolean;
+  @Field(() => ProfileWhereUniqueInput, { nullable: true })
+  @Type(() => ProfileWhereUniqueInput)
+  connect?: InstanceType<typeof ProfileWhereUniqueInput>;
+  @Field(() => ProfileUpdateWithoutUserInput, { nullable: true })
+  @Type(() => ProfileUpdateWithoutUserInput)
+  update?: InstanceType<typeof ProfileUpdateWithoutUserInput>;
 }
 
 @InputType()
@@ -3093,17 +3088,13 @@ export class ProfileUncheckedUpdateWithoutProfilePictureInput {
   @Field(() => NullableDateTimeFieldUpdateOperationsInput, { nullable: true })
   dateOfBirth?: InstanceType<typeof NullableDateTimeFieldUpdateOperationsInput>;
   @Field(() => NullableDateTimeFieldUpdateOperationsInput, { nullable: true })
-  placeOfBirth?: InstanceType<
-    typeof NullableDateTimeFieldUpdateOperationsInput
-  >;
+  placeOfBirth?: InstanceType<typeof NullableDateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => UsersUncheckedUpdateOneWithoutProfileNestedInput, {
-    nullable: true,
-  })
-  user?: InstanceType<typeof UsersUncheckedUpdateOneWithoutProfileNestedInput>;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  userId?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
 }
 
 @InputType()
@@ -3115,19 +3106,13 @@ export class ProfileUncheckedUpdateWithoutUserInput {
   @Field(() => NullableDateTimeFieldUpdateOperationsInput, { nullable: true })
   dateOfBirth?: InstanceType<typeof NullableDateTimeFieldUpdateOperationsInput>;
   @Field(() => NullableDateTimeFieldUpdateOperationsInput, { nullable: true })
-  placeOfBirth?: InstanceType<
-    typeof NullableDateTimeFieldUpdateOperationsInput
-  >;
+  placeOfBirth?: InstanceType<typeof NullableDateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => FileEntityUncheckedUpdateOneWithoutProfileNestedInput, {
-    nullable: true,
-  })
-  profilePicture?: InstanceType<
-    typeof FileEntityUncheckedUpdateOneWithoutProfileNestedInput
-  >;
+  @Field(() => FileEntityUncheckedUpdateOneWithoutProfileNestedInput, { nullable: true })
+  profilePicture?: InstanceType<typeof FileEntityUncheckedUpdateOneWithoutProfileNestedInput>;
 }
 
 @InputType()
@@ -3139,23 +3124,15 @@ export class ProfileUncheckedUpdateInput {
   @Field(() => NullableDateTimeFieldUpdateOperationsInput, { nullable: true })
   dateOfBirth?: InstanceType<typeof NullableDateTimeFieldUpdateOperationsInput>;
   @Field(() => NullableDateTimeFieldUpdateOperationsInput, { nullable: true })
-  placeOfBirth?: InstanceType<
-    typeof NullableDateTimeFieldUpdateOperationsInput
-  >;
+  placeOfBirth?: InstanceType<typeof NullableDateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => UsersUncheckedUpdateOneWithoutProfileNestedInput, {
-    nullable: true,
-  })
-  user?: InstanceType<typeof UsersUncheckedUpdateOneWithoutProfileNestedInput>;
-  @Field(() => FileEntityUncheckedUpdateOneWithoutProfileNestedInput, {
-    nullable: true,
-  })
-  profilePicture?: InstanceType<
-    typeof FileEntityUncheckedUpdateOneWithoutProfileNestedInput
-  >;
+  @Field(() => FileEntityUncheckedUpdateOneWithoutProfileNestedInput, { nullable: true })
+  profilePicture?: InstanceType<typeof FileEntityUncheckedUpdateOneWithoutProfileNestedInput>;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  userId?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
 }
 
 @InputType()
@@ -3167,9 +3144,7 @@ export class ProfileUpdateManyMutationInput {
   @Field(() => NullableDateTimeFieldUpdateOperationsInput, { nullable: true })
   dateOfBirth?: InstanceType<typeof NullableDateTimeFieldUpdateOperationsInput>;
   @Field(() => NullableDateTimeFieldUpdateOperationsInput, { nullable: true })
-  placeOfBirth?: InstanceType<
-    typeof NullableDateTimeFieldUpdateOperationsInput
-  >;
+  placeOfBirth?: InstanceType<typeof NullableDateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
@@ -3181,13 +3156,9 @@ export class ProfileUpdateOneRequiredWithoutProfilePictureNestedInput {
   @Field(() => ProfileCreateWithoutProfilePictureInput, { nullable: true })
   @Type(() => ProfileCreateWithoutProfilePictureInput)
   create?: InstanceType<typeof ProfileCreateWithoutProfilePictureInput>;
-  @Field(() => ProfileCreateOrConnectWithoutProfilePictureInput, {
-    nullable: true,
-  })
+  @Field(() => ProfileCreateOrConnectWithoutProfilePictureInput, { nullable: true })
   @Type(() => ProfileCreateOrConnectWithoutProfilePictureInput)
-  connectOrCreate?: InstanceType<
-    typeof ProfileCreateOrConnectWithoutProfilePictureInput
-  >;
+  connectOrCreate?: InstanceType<typeof ProfileCreateOrConnectWithoutProfilePictureInput>;
   @Field(() => ProfileUpsertWithoutProfilePictureInput, { nullable: true })
   @Type(() => ProfileUpsertWithoutProfilePictureInput)
   upsert?: InstanceType<typeof ProfileUpsertWithoutProfilePictureInput>;
@@ -3231,9 +3202,7 @@ export class ProfileUpdateWithoutProfilePictureInput {
   @Field(() => NullableDateTimeFieldUpdateOperationsInput, { nullable: true })
   dateOfBirth?: InstanceType<typeof NullableDateTimeFieldUpdateOperationsInput>;
   @Field(() => NullableDateTimeFieldUpdateOperationsInput, { nullable: true })
-  placeOfBirth?: InstanceType<
-    typeof NullableDateTimeFieldUpdateOperationsInput
-  >;
+  placeOfBirth?: InstanceType<typeof NullableDateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
@@ -3251,17 +3220,13 @@ export class ProfileUpdateWithoutUserInput {
   @Field(() => NullableDateTimeFieldUpdateOperationsInput, { nullable: true })
   dateOfBirth?: InstanceType<typeof NullableDateTimeFieldUpdateOperationsInput>;
   @Field(() => NullableDateTimeFieldUpdateOperationsInput, { nullable: true })
-  placeOfBirth?: InstanceType<
-    typeof NullableDateTimeFieldUpdateOperationsInput
-  >;
+  placeOfBirth?: InstanceType<typeof NullableDateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => FileEntityUpdateOneWithoutProfileNestedInput, { nullable: true })
-  profilePicture?: InstanceType<
-    typeof FileEntityUpdateOneWithoutProfileNestedInput
-  >;
+  profilePicture?: InstanceType<typeof FileEntityUpdateOneWithoutProfileNestedInput>;
 }
 
 @InputType()
@@ -3273,19 +3238,15 @@ export class ProfileUpdateInput {
   @Field(() => NullableDateTimeFieldUpdateOperationsInput, { nullable: true })
   dateOfBirth?: InstanceType<typeof NullableDateTimeFieldUpdateOperationsInput>;
   @Field(() => NullableDateTimeFieldUpdateOperationsInput, { nullable: true })
-  placeOfBirth?: InstanceType<
-    typeof NullableDateTimeFieldUpdateOperationsInput
-  >;
+  placeOfBirth?: InstanceType<typeof NullableDateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => FileEntityUpdateOneWithoutProfileNestedInput, { nullable: true })
+  profilePicture?: InstanceType<typeof FileEntityUpdateOneWithoutProfileNestedInput>;
   @Field(() => UsersUpdateOneWithoutProfileNestedInput, { nullable: true })
   user?: InstanceType<typeof UsersUpdateOneWithoutProfileNestedInput>;
-  @Field(() => FileEntityUpdateOneWithoutProfileNestedInput, { nullable: true })
-  profilePicture?: InstanceType<
-    typeof FileEntityUpdateOneWithoutProfileNestedInput
-  >;
 }
 
 @InputType()
@@ -3312,6 +3273,8 @@ export class ProfileUpsertWithoutUserInput {
 export class ProfileWhereUniqueInput {
   @Field(() => String, { nullable: true })
   profileId?: string;
+  @Field(() => String, { nullable: true })
+  userId?: string;
 }
 
 @InputType()
@@ -3334,10 +3297,12 @@ export class ProfileWhereInput {
   createdAt?: InstanceType<typeof DateTimeFilter>;
   @Field(() => DateTimeFilter, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFilter>;
-  @Field(() => UsersRelationFilter, { nullable: true })
-  user?: InstanceType<typeof UsersRelationFilter>;
   @Field(() => FileEntityRelationFilter, { nullable: true })
   profilePicture?: InstanceType<typeof FileEntityRelationFilter>;
+  @Field(() => UsersRelationFilter, { nullable: true })
+  user?: InstanceType<typeof UsersRelationFilter>;
+  @Field(() => StringNullableFilter, { nullable: true })
+  userId?: InstanceType<typeof StringNullableFilter>;
 }
 
 @ObjectType()
@@ -3354,10 +3319,12 @@ export class Profile {
   createdAt!: Date;
   @Field(() => Date, { nullable: false })
   updatedAt!: Date;
-  @Field(() => Users, { nullable: true })
-  user?: InstanceType<typeof Users> | null;
   @Field(() => FileEntity, { nullable: true })
   profilePicture?: InstanceType<typeof FileEntity> | null;
+  @Field(() => Users, { nullable: true })
+  user?: InstanceType<typeof Users> | null;
+  @Field(() => String, { nullable: true })
+  userId!: string | null;
 }
 
 @InputType()
@@ -3560,9 +3527,7 @@ export class RoleCreateNestedOneWithoutAuthUserInput {
   create?: InstanceType<typeof RoleCreateWithoutAuthUserInput>;
   @Field(() => RoleCreateOrConnectWithoutAuthUserInput, { nullable: true })
   @Type(() => RoleCreateOrConnectWithoutAuthUserInput)
-  connectOrCreate?: InstanceType<
-    typeof RoleCreateOrConnectWithoutAuthUserInput
-  >;
+  connectOrCreate?: InstanceType<typeof RoleCreateOrConnectWithoutAuthUserInput>;
   @Field(() => RoleWhereUniqueInput, { nullable: true })
   @Type(() => RoleWhereUniqueInput)
   connect?: InstanceType<typeof RoleWhereUniqueInput>;
@@ -3793,12 +3758,8 @@ export class RoleUncheckedCreateInput {
   roleId?: string;
   @Field(() => String, { nullable: false })
   userRole!: string;
-  @Field(() => AuthUserUncheckedCreateNestedManyWithoutRoleInput, {
-    nullable: true,
-  })
-  AuthUser?: InstanceType<
-    typeof AuthUserUncheckedCreateNestedManyWithoutRoleInput
-  >;
+  @Field(() => AuthUserUncheckedCreateNestedManyWithoutRoleInput, { nullable: true })
+  AuthUser?: InstanceType<typeof AuthUserUncheckedCreateNestedManyWithoutRoleInput>;
   @Field(() => Date, { nullable: true })
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
@@ -3835,12 +3796,8 @@ export class RoleUncheckedUpdateInput {
   roleId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   userRole?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => AuthUserUncheckedUpdateManyWithoutRoleNestedInput, {
-    nullable: true,
-  })
-  AuthUser?: InstanceType<
-    typeof AuthUserUncheckedUpdateManyWithoutRoleNestedInput
-  >;
+  @Field(() => AuthUserUncheckedUpdateManyWithoutRoleNestedInput, { nullable: true })
+  AuthUser?: InstanceType<typeof AuthUserUncheckedUpdateManyWithoutRoleNestedInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
@@ -3866,9 +3823,7 @@ export class RoleUpdateOneWithoutAuthUserNestedInput {
   create?: InstanceType<typeof RoleCreateWithoutAuthUserInput>;
   @Field(() => RoleCreateOrConnectWithoutAuthUserInput, { nullable: true })
   @Type(() => RoleCreateOrConnectWithoutAuthUserInput)
-  connectOrCreate?: InstanceType<
-    typeof RoleCreateOrConnectWithoutAuthUserInput
-  >;
+  connectOrCreate?: InstanceType<typeof RoleCreateOrConnectWithoutAuthUserInput>;
   @Field(() => RoleUpsertWithoutAuthUserInput, { nullable: true })
   @Type(() => RoleUpsertWithoutAuthUserInput)
   upsert?: InstanceType<typeof RoleUpsertWithoutAuthUserInput>;
@@ -4246,9 +4201,7 @@ export class UserAdressesCreateNestedManyWithoutUserInput {
   @Field(() => [UserAdressesCreateWithoutUserInput], { nullable: true })
   @Type(() => UserAdressesCreateWithoutUserInput)
   create?: Array<UserAdressesCreateWithoutUserInput>;
-  @Field(() => [UserAdressesCreateOrConnectWithoutUserInput], {
-    nullable: true,
-  })
+  @Field(() => [UserAdressesCreateOrConnectWithoutUserInput], { nullable: true })
   @Type(() => UserAdressesCreateOrConnectWithoutUserInput)
   connectOrCreate?: Array<UserAdressesCreateOrConnectWithoutUserInput>;
   @Field(() => UserAdressesCreateManyUserInputEnvelope, { nullable: true })
@@ -4597,9 +4550,7 @@ export class UserAdressesUncheckedCreateNestedManyWithoutUserInput {
   @Field(() => [UserAdressesCreateWithoutUserInput], { nullable: true })
   @Type(() => UserAdressesCreateWithoutUserInput)
   create?: Array<UserAdressesCreateWithoutUserInput>;
-  @Field(() => [UserAdressesCreateOrConnectWithoutUserInput], {
-    nullable: true,
-  })
+  @Field(() => [UserAdressesCreateOrConnectWithoutUserInput], { nullable: true })
   @Type(() => UserAdressesCreateOrConnectWithoutUserInput)
   connectOrCreate?: Array<UserAdressesCreateOrConnectWithoutUserInput>;
   @Field(() => UserAdressesCreateManyUserInputEnvelope, { nullable: true })
@@ -4671,14 +4622,10 @@ export class UserAdressesUncheckedUpdateManyWithoutUserNestedInput {
   @Field(() => [UserAdressesCreateWithoutUserInput], { nullable: true })
   @Type(() => UserAdressesCreateWithoutUserInput)
   create?: Array<UserAdressesCreateWithoutUserInput>;
-  @Field(() => [UserAdressesCreateOrConnectWithoutUserInput], {
-    nullable: true,
-  })
+  @Field(() => [UserAdressesCreateOrConnectWithoutUserInput], { nullable: true })
   @Type(() => UserAdressesCreateOrConnectWithoutUserInput)
   connectOrCreate?: Array<UserAdressesCreateOrConnectWithoutUserInput>;
-  @Field(() => [UserAdressesUpsertWithWhereUniqueWithoutUserInput], {
-    nullable: true,
-  })
+  @Field(() => [UserAdressesUpsertWithWhereUniqueWithoutUserInput], { nullable: true })
   @Type(() => UserAdressesUpsertWithWhereUniqueWithoutUserInput)
   upsert?: Array<UserAdressesUpsertWithWhereUniqueWithoutUserInput>;
   @Field(() => UserAdressesCreateManyUserInputEnvelope, { nullable: true })
@@ -4696,14 +4643,10 @@ export class UserAdressesUncheckedUpdateManyWithoutUserNestedInput {
   @Field(() => [UserAdressesWhereUniqueInput], { nullable: true })
   @Type(() => UserAdressesWhereUniqueInput)
   connect?: Array<UserAdressesWhereUniqueInput>;
-  @Field(() => [UserAdressesUpdateWithWhereUniqueWithoutUserInput], {
-    nullable: true,
-  })
+  @Field(() => [UserAdressesUpdateWithWhereUniqueWithoutUserInput], { nullable: true })
   @Type(() => UserAdressesUpdateWithWhereUniqueWithoutUserInput)
   update?: Array<UserAdressesUpdateWithWhereUniqueWithoutUserInput>;
-  @Field(() => [UserAdressesUpdateManyWithWhereWithoutUserInput], {
-    nullable: true,
-  })
+  @Field(() => [UserAdressesUpdateManyWithWhereWithoutUserInput], { nullable: true })
   @Type(() => UserAdressesUpdateManyWithWhereWithoutUserInput)
   updateMany?: Array<UserAdressesUpdateManyWithWhereWithoutUserInput>;
   @Field(() => [UserAdressesScalarWhereInput], { nullable: true })
@@ -4802,14 +4745,10 @@ export class UserAdressesUpdateManyWithoutUserNestedInput {
   @Field(() => [UserAdressesCreateWithoutUserInput], { nullable: true })
   @Type(() => UserAdressesCreateWithoutUserInput)
   create?: Array<UserAdressesCreateWithoutUserInput>;
-  @Field(() => [UserAdressesCreateOrConnectWithoutUserInput], {
-    nullable: true,
-  })
+  @Field(() => [UserAdressesCreateOrConnectWithoutUserInput], { nullable: true })
   @Type(() => UserAdressesCreateOrConnectWithoutUserInput)
   connectOrCreate?: Array<UserAdressesCreateOrConnectWithoutUserInput>;
-  @Field(() => [UserAdressesUpsertWithWhereUniqueWithoutUserInput], {
-    nullable: true,
-  })
+  @Field(() => [UserAdressesUpsertWithWhereUniqueWithoutUserInput], { nullable: true })
   @Type(() => UserAdressesUpsertWithWhereUniqueWithoutUserInput)
   upsert?: Array<UserAdressesUpsertWithWhereUniqueWithoutUserInput>;
   @Field(() => UserAdressesCreateManyUserInputEnvelope, { nullable: true })
@@ -4827,14 +4766,10 @@ export class UserAdressesUpdateManyWithoutUserNestedInput {
   @Field(() => [UserAdressesWhereUniqueInput], { nullable: true })
   @Type(() => UserAdressesWhereUniqueInput)
   connect?: Array<UserAdressesWhereUniqueInput>;
-  @Field(() => [UserAdressesUpdateWithWhereUniqueWithoutUserInput], {
-    nullable: true,
-  })
+  @Field(() => [UserAdressesUpdateWithWhereUniqueWithoutUserInput], { nullable: true })
   @Type(() => UserAdressesUpdateWithWhereUniqueWithoutUserInput)
   update?: Array<UserAdressesUpdateWithWhereUniqueWithoutUserInput>;
-  @Field(() => [UserAdressesUpdateManyWithWhereWithoutUserInput], {
-    nullable: true,
-  })
+  @Field(() => [UserAdressesUpdateManyWithWhereWithoutUserInput], { nullable: true })
   @Type(() => UserAdressesUpdateManyWithWhereWithoutUserInput)
   updateMany?: Array<UserAdressesUpdateManyWithWhereWithoutUserInput>;
   @Field(() => [UserAdressesScalarWhereInput], { nullable: true })
@@ -4886,9 +4821,7 @@ export class UserAdressesUpdateInput {
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => UsersUpdateOneRequiredWithoutAdressesNestedInput, {
-    nullable: true,
-  })
+  @Field(() => UsersUpdateOneRequiredWithoutAdressesNestedInput, { nullable: true })
   user?: InstanceType<typeof UsersUpdateOneRequiredWithoutAdressesNestedInput>;
 }
 
@@ -5111,8 +5044,6 @@ export class UsersCountAggregateInput {
   @Field(() => Boolean, { nullable: true })
   updatedAt?: true;
   @Field(() => Boolean, { nullable: true })
-  profileId?: true;
-  @Field(() => Boolean, { nullable: true })
   _all?: true;
 }
 
@@ -5131,8 +5062,6 @@ export class UsersCountAggregate {
   @Field(() => Int, { nullable: false })
   updatedAt!: number;
   @Field(() => Int, { nullable: false })
-  profileId!: number;
-  @Field(() => Int, { nullable: false })
   _all!: number;
 }
 
@@ -5150,8 +5079,6 @@ export class UsersCountOrderByAggregateInput {
   createdAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  profileId?: keyof typeof SortOrder;
 }
 
 @ObjectType()
@@ -5174,8 +5101,6 @@ export class UsersCreateManyInput {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
-  @Field(() => String, { nullable: true })
-  profileId?: string;
 }
 
 @InputType()
@@ -5185,9 +5110,7 @@ export class UsersCreateNestedOneWithoutAdressesInput {
   create?: InstanceType<typeof UsersCreateWithoutAdressesInput>;
   @Field(() => UsersCreateOrConnectWithoutAdressesInput, { nullable: true })
   @Type(() => UsersCreateOrConnectWithoutAdressesInput)
-  connectOrCreate?: InstanceType<
-    typeof UsersCreateOrConnectWithoutAdressesInput
-  >;
+  connectOrCreate?: InstanceType<typeof UsersCreateOrConnectWithoutAdressesInput>;
   @Field(() => UsersWhereUniqueInput, { nullable: true })
   @Type(() => UsersWhereUniqueInput)
   connect?: InstanceType<typeof UsersWhereUniqueInput>;
@@ -5200,9 +5123,7 @@ export class UsersCreateNestedOneWithoutProfileInput {
   create?: InstanceType<typeof UsersCreateWithoutProfileInput>;
   @Field(() => UsersCreateOrConnectWithoutProfileInput, { nullable: true })
   @Type(() => UsersCreateOrConnectWithoutProfileInput)
-  connectOrCreate?: InstanceType<
-    typeof UsersCreateOrConnectWithoutProfileInput
-  >;
+  connectOrCreate?: InstanceType<typeof UsersCreateOrConnectWithoutProfileInput>;
   @Field(() => UsersWhereUniqueInput, { nullable: true })
   @Type(() => UsersWhereUniqueInput)
   connect?: InstanceType<typeof UsersWhereUniqueInput>;
@@ -5321,8 +5242,6 @@ export class UsersGroupBy {
   createdAt!: Date | string;
   @Field(() => Date, { nullable: false })
   updatedAt!: Date | string;
-  @Field(() => String, { nullable: true })
-  profileId?: string;
   @Field(() => UsersCountAggregate, { nullable: true })
   _count?: InstanceType<typeof UsersCountAggregate>;
   @Field(() => UsersMinAggregate, { nullable: true })
@@ -5345,8 +5264,6 @@ export class UsersMaxAggregateInput {
   createdAt?: true;
   @Field(() => Boolean, { nullable: true })
   updatedAt?: true;
-  @Field(() => Boolean, { nullable: true })
-  profileId?: true;
 }
 
 @ObjectType()
@@ -5363,8 +5280,6 @@ export class UsersMaxAggregate {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
-  @Field(() => String, { nullable: true })
-  profileId?: string;
 }
 
 @InputType()
@@ -5381,8 +5296,6 @@ export class UsersMaxOrderByAggregateInput {
   createdAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  profileId?: keyof typeof SortOrder;
 }
 
 @InputType()
@@ -5399,8 +5312,6 @@ export class UsersMinAggregateInput {
   createdAt?: true;
   @Field(() => Boolean, { nullable: true })
   updatedAt?: true;
-  @Field(() => Boolean, { nullable: true })
-  profileId?: true;
 }
 
 @ObjectType()
@@ -5417,8 +5328,6 @@ export class UsersMinAggregate {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
-  @Field(() => String, { nullable: true })
-  profileId?: string;
 }
 
 @InputType()
@@ -5435,8 +5344,6 @@ export class UsersMinOrderByAggregateInput {
   createdAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  profileId?: keyof typeof SortOrder;
 }
 
 @InputType()
@@ -5453,8 +5360,6 @@ export class UsersOrderByWithAggregationInput {
   createdAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  profileId?: keyof typeof SortOrder;
   @Field(() => UsersCountOrderByAggregateInput, { nullable: true })
   _count?: InstanceType<typeof UsersCountOrderByAggregateInput>;
   @Field(() => UsersMaxOrderByAggregateInput, { nullable: true })
@@ -5479,8 +5384,6 @@ export class UsersOrderByWithRelationInput {
   updatedAt?: keyof typeof SortOrder;
   @Field(() => ProfileOrderByWithRelationInput, { nullable: true })
   profile?: InstanceType<typeof ProfileOrderByWithRelationInput>;
-  @Field(() => SortOrder, { nullable: true })
-  profileId?: keyof typeof SortOrder;
   @Field(() => UserAdressesOrderByRelationAggregateInput, { nullable: true })
   adresses?: InstanceType<typeof UserAdressesOrderByRelationAggregateInput>;
 }
@@ -5513,23 +5416,6 @@ export class UsersScalarWhereWithAggregatesInput {
   createdAt?: InstanceType<typeof DateTimeWithAggregatesFilter>;
   @Field(() => DateTimeWithAggregatesFilter, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeWithAggregatesFilter>;
-  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
-  profileId?: InstanceType<typeof StringNullableWithAggregatesFilter>;
-}
-
-@InputType()
-export class UsersUncheckedCreateNestedOneWithoutProfileInput {
-  @Field(() => UsersCreateWithoutProfileInput, { nullable: true })
-  @Type(() => UsersCreateWithoutProfileInput)
-  create?: InstanceType<typeof UsersCreateWithoutProfileInput>;
-  @Field(() => UsersCreateOrConnectWithoutProfileInput, { nullable: true })
-  @Type(() => UsersCreateOrConnectWithoutProfileInput)
-  connectOrCreate?: InstanceType<
-    typeof UsersCreateOrConnectWithoutProfileInput
-  >;
-  @Field(() => UsersWhereUniqueInput, { nullable: true })
-  @Type(() => UsersWhereUniqueInput)
-  connect?: InstanceType<typeof UsersWhereUniqueInput>;
 }
 
 @InputType()
@@ -5546,8 +5432,8 @@ export class UsersUncheckedCreateWithoutAdressesInput {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
-  @Field(() => String, { nullable: true })
-  profileId?: string;
+  @Field(() => ProfileUncheckedCreateNestedOneWithoutUserInput, { nullable: true })
+  profile?: InstanceType<typeof ProfileUncheckedCreateNestedOneWithoutUserInput>;
 }
 
 @InputType()
@@ -5564,12 +5450,8 @@ export class UsersUncheckedCreateWithoutProfileInput {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
-  @Field(() => UserAdressesUncheckedCreateNestedManyWithoutUserInput, {
-    nullable: true,
-  })
-  adresses?: InstanceType<
-    typeof UserAdressesUncheckedCreateNestedManyWithoutUserInput
-  >;
+  @Field(() => UserAdressesUncheckedCreateNestedManyWithoutUserInput, { nullable: true })
+  adresses?: InstanceType<typeof UserAdressesUncheckedCreateNestedManyWithoutUserInput>;
 }
 
 @InputType()
@@ -5586,14 +5468,10 @@ export class UsersUncheckedCreateInput {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
-  @Field(() => String, { nullable: true })
-  profileId?: string;
-  @Field(() => UserAdressesUncheckedCreateNestedManyWithoutUserInput, {
-    nullable: true,
-  })
-  adresses?: InstanceType<
-    typeof UserAdressesUncheckedCreateNestedManyWithoutUserInput
-  >;
+  @Field(() => ProfileUncheckedCreateNestedOneWithoutUserInput, { nullable: true })
+  profile?: InstanceType<typeof ProfileUncheckedCreateNestedOneWithoutUserInput>;
+  @Field(() => UserAdressesUncheckedCreateNestedManyWithoutUserInput, { nullable: true })
+  adresses?: InstanceType<typeof UserAdressesUncheckedCreateNestedManyWithoutUserInput>;
 }
 
 @InputType()
@@ -5610,33 +5488,6 @@ export class UsersUncheckedUpdateManyInput {
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  profileId?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
-}
-
-@InputType()
-export class UsersUncheckedUpdateOneWithoutProfileNestedInput {
-  @Field(() => UsersCreateWithoutProfileInput, { nullable: true })
-  @Type(() => UsersCreateWithoutProfileInput)
-  create?: InstanceType<typeof UsersCreateWithoutProfileInput>;
-  @Field(() => UsersCreateOrConnectWithoutProfileInput, { nullable: true })
-  @Type(() => UsersCreateOrConnectWithoutProfileInput)
-  connectOrCreate?: InstanceType<
-    typeof UsersCreateOrConnectWithoutProfileInput
-  >;
-  @Field(() => UsersUpsertWithoutProfileInput, { nullable: true })
-  @Type(() => UsersUpsertWithoutProfileInput)
-  upsert?: InstanceType<typeof UsersUpsertWithoutProfileInput>;
-  @Field(() => Boolean, { nullable: true })
-  disconnect?: boolean;
-  @Field(() => Boolean, { nullable: true })
-  delete?: boolean;
-  @Field(() => UsersWhereUniqueInput, { nullable: true })
-  @Type(() => UsersWhereUniqueInput)
-  connect?: InstanceType<typeof UsersWhereUniqueInput>;
-  @Field(() => UsersUpdateWithoutProfileInput, { nullable: true })
-  @Type(() => UsersUpdateWithoutProfileInput)
-  update?: InstanceType<typeof UsersUpdateWithoutProfileInput>;
 }
 
 @InputType()
@@ -5653,8 +5504,8 @@ export class UsersUncheckedUpdateWithoutAdressesInput {
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  profileId?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
+  @Field(() => ProfileUncheckedUpdateOneWithoutUserNestedInput, { nullable: true })
+  profile?: InstanceType<typeof ProfileUncheckedUpdateOneWithoutUserNestedInput>;
 }
 
 @InputType()
@@ -5671,12 +5522,8 @@ export class UsersUncheckedUpdateWithoutProfileInput {
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => UserAdressesUncheckedUpdateManyWithoutUserNestedInput, {
-    nullable: true,
-  })
-  adresses?: InstanceType<
-    typeof UserAdressesUncheckedUpdateManyWithoutUserNestedInput
-  >;
+  @Field(() => UserAdressesUncheckedUpdateManyWithoutUserNestedInput, { nullable: true })
+  adresses?: InstanceType<typeof UserAdressesUncheckedUpdateManyWithoutUserNestedInput>;
 }
 
 @InputType()
@@ -5693,14 +5540,10 @@ export class UsersUncheckedUpdateInput {
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  profileId?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
-  @Field(() => UserAdressesUncheckedUpdateManyWithoutUserNestedInput, {
-    nullable: true,
-  })
-  adresses?: InstanceType<
-    typeof UserAdressesUncheckedUpdateManyWithoutUserNestedInput
-  >;
+  @Field(() => ProfileUncheckedUpdateOneWithoutUserNestedInput, { nullable: true })
+  profile?: InstanceType<typeof ProfileUncheckedUpdateOneWithoutUserNestedInput>;
+  @Field(() => UserAdressesUncheckedUpdateManyWithoutUserNestedInput, { nullable: true })
+  adresses?: InstanceType<typeof UserAdressesUncheckedUpdateManyWithoutUserNestedInput>;
 }
 
 @InputType()
@@ -5726,9 +5569,7 @@ export class UsersUpdateOneRequiredWithoutAdressesNestedInput {
   create?: InstanceType<typeof UsersCreateWithoutAdressesInput>;
   @Field(() => UsersCreateOrConnectWithoutAdressesInput, { nullable: true })
   @Type(() => UsersCreateOrConnectWithoutAdressesInput)
-  connectOrCreate?: InstanceType<
-    typeof UsersCreateOrConnectWithoutAdressesInput
-  >;
+  connectOrCreate?: InstanceType<typeof UsersCreateOrConnectWithoutAdressesInput>;
   @Field(() => UsersUpsertWithoutAdressesInput, { nullable: true })
   @Type(() => UsersUpsertWithoutAdressesInput)
   upsert?: InstanceType<typeof UsersUpsertWithoutAdressesInput>;
@@ -5747,9 +5588,7 @@ export class UsersUpdateOneWithoutProfileNestedInput {
   create?: InstanceType<typeof UsersCreateWithoutProfileInput>;
   @Field(() => UsersCreateOrConnectWithoutProfileInput, { nullable: true })
   @Type(() => UsersCreateOrConnectWithoutProfileInput)
-  connectOrCreate?: InstanceType<
-    typeof UsersCreateOrConnectWithoutProfileInput
-  >;
+  connectOrCreate?: InstanceType<typeof UsersCreateOrConnectWithoutProfileInput>;
   @Field(() => UsersUpsertWithoutProfileInput, { nullable: true })
   @Type(() => UsersUpsertWithoutProfileInput)
   upsert?: InstanceType<typeof UsersUpsertWithoutProfileInput>;
@@ -5845,8 +5684,6 @@ export class UsersUpsertWithoutProfileInput {
 export class UsersWhereUniqueInput {
   @Field(() => String, { nullable: true })
   idUser?: string;
-  @Field(() => String, { nullable: true })
-  profileId?: string;
 }
 
 @InputType()
@@ -5871,8 +5708,6 @@ export class UsersWhereInput {
   updatedAt?: InstanceType<typeof DateTimeFilter>;
   @Field(() => ProfileRelationFilter, { nullable: true })
   profile?: InstanceType<typeof ProfileRelationFilter>;
-  @Field(() => StringNullableFilter, { nullable: true })
-  profileId?: InstanceType<typeof StringNullableFilter>;
   @Field(() => UserAdressesListRelationFilter, { nullable: true })
   adresses?: InstanceType<typeof UserAdressesListRelationFilter>;
 }
@@ -5893,8 +5728,6 @@ export class Users {
   updatedAt!: Date;
   @Field(() => Profile, { nullable: true })
   profile?: InstanceType<typeof Profile> | null;
-  @Field(() => String, { nullable: true })
-  profileId!: string | null;
   @Field(() => [UserAdresses], { nullable: true })
   adresses?: Array<UserAdresses>;
   @Field(() => UsersCount, { nullable: false })

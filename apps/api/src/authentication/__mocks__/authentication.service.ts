@@ -4,7 +4,7 @@ import { jest } from '@jest/globals';
 import { AuthUser } from '@food-delivery-mono/data-access';
 import { LoginResponse } from '@food-delivery-mono/shared-types';
 
-export const AuthService = jest.fn().mockReturnValue({
+export const AuthenticationService = jest.fn().mockReturnValue({
   create: jest.fn<() => Promise<AuthUser>>().mockResolvedValue(authUserStub()),
 
   findAll: jest.fn<() => Promise<AuthUser[]>>().mockResolvedValue([authUserStub()]),

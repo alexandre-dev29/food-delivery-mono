@@ -1,10 +1,8 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { AuthenticationService } from './authentication.service';
 import { AuthUser, CreateOneAuthUserArgs, UpdateOneAuthUserArgs } from '@food-delivery-mono/data-access';
-import { UseGuards } from '@nestjs/common';
 import { CreateUserInput } from './Dto/auth-user.dto';
 import { LoginResponse } from '@food-delivery-mono/shared-types';
-import { MainAuthGuardGuard } from '@food-delivery-mono/app-security';
 
 @Resolver(() => AuthUser)
 export class AuthenticationResolver {
@@ -16,7 +14,6 @@ export class AuthenticationResolver {
   }
 
   @Query(() => [AuthUser], { name: 'getAllAuths' })
-  //@UseGuards(MainAuthGuardGuard)
   findAll() {
     return this.authService.findAll();
   }

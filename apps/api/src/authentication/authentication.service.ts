@@ -72,13 +72,14 @@ export class AuthenticationService {
       const responseTwilio = await this.twilioService.SendOtpVerificationCode(phoneNumber);
 
       if (responseTwilio.status == 'pending') {
+        const userCreated = await this.authPrismaService.users.create({ data: { userName: username } });
         const responseInsert = await this.authPrismaService.authUser.create({
           data: {
             phoneNumber: phoneNumber,
             roleRoleId: roleRecup.roleId,
             password: encryptedPassword,
             username: username,
-            userId: '',
+            userId: userCreated.idUser,
           },
         });
 
@@ -181,7 +182,7 @@ export class AuthenticationService {
     }
   }
 
-  async changeUserPassword(phoneNumber: string, newPassword: string) {
+  async changeUserPassword(phoneNumber: string, newPassword: string): Promise<boolean | any> {
     const foundedUser = await this.authPrismaService.authUser.findFirst({
       where: { phoneNumber: phoneNumber },
     });
@@ -190,10 +191,11 @@ export class AuthenticationService {
 
     const encryptedPassword = await bcrypt.hash(newPassword, 10).then((value) => value);
 
-    return this.authPrismaService.authUser.update({
+    await this.authPrismaService.authUser.update({
       where: { id: foundedUser.id },
       data: { password: encryptedPassword },
     });
+    return true;
   }
 
   async refreshUserRefreshToken(refreshToken: string) {

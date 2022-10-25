@@ -4,10 +4,22 @@ resourcePolicy:
   version: "default"
   importDerivedRoles:
     - common_roles
-  resource: "authUser:object"
+  resource: "Auth"
   rules:
     - actions: [ '*' ]
       effect: EFFECT_ALLOW
       derivedRoles:
         - admin
-
+        - user
+        - public
+    - actions:
+        - registerUser
+        - loginUser
+        - confirmPhoneNumber
+        - confirmOtpForForgot
+        - forgotPasswordStart
+        - askingForOtpCode
+      effect: EFFECT_ALLOW
+      roles:
+        - user
+        - admin

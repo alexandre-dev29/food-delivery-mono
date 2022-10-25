@@ -7,21 +7,13 @@ import { Tokens } from '@food-delivery-mono/shared-types';
 
 @Injectable()
 export class UtilityService {
-  constructor(
-    private configService: ConfigService,
-    private jwtService: JwtService
-  ) {}
+  constructor(private configService: ConfigService, private jwtService: JwtService) {}
 
   hashData = (data: string): Promise<string> => {
     return bcrypt.hash(data, 10);
   };
 
-  getTokens = async (
-    authUserId: string,
-    userId: string,
-    phoneNumber: string,
-    userRole: string
-  ): Promise<Tokens> => {
+  getTokens = async (authUserId: string, userId: string, phoneNumber: string, userRole: string): Promise<Tokens> => {
     const [accessToken, refreshToken] = await Promise.all([
       this.jwtService.signAsync(
         { sub: userId, phoneNumber, userRole, authUserId, userId },
@@ -45,24 +37,27 @@ export class UtilityService {
     } as Tokens;
   };
 
-  async getBufferFromReadStream(stream: () => Readable): Promise<Buffer> {
-    const mainStream = stream();
-    const chunks = [];
-
-    const buffer = await new Promise<Buffer>((resolve, reject) => {
-      let buffer: Buffer;
-
-      mainStream.on('data', function (chunk) {
-        chunks.push(chunk);
-      });
-
-      mainStream.on('end', function () {
-        buffer = Buffer.concat(chunks);
-        resolve(buffer);
-      });
-
-      mainStream.on('error', reject);
-    });
-    return buffer;
-  }
+  // async getBufferFromReadStream(stream:ReadableStream): Promise<Buffer> {
+  //   const mainStream = await stream.getReader().read();
+  //
+  //
+  //   const chunks = [];
+  //   Buffer.concat(await Array.)
+  //
+  //   const buffer = await new Promise<Buffer>((resolve, reject) => {
+  //     let buffer: Buffer;
+  //
+  //     mainStream.on('data', function (chunk) {
+  //       chunks.push(chunk);
+  //     });
+  //
+  //     mainStream.on('end', function () {
+  //       buffer = Buffer.concat(chunks);
+  //       resolve(buffer);
+  //     });
+  //
+  //     mainStream.on('error', reject);
+  //   });
+  //   return buffer.;
+  // }
 }

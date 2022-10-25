@@ -2,9 +2,14 @@
 apiVersion: "api.cerbos.dev/v1"
 description:
   name: common_roles
-  definition:
+  definitions:
     - name: admin
       parentRoles: [ 'user' ]
       condition:
         match:
           expr: request.principal.mainRole == "admin"
+    - name: public
+      parentRoles: [ 'user' ]
+      condition:
+        match:
+          expr: request.principal.id == "public"

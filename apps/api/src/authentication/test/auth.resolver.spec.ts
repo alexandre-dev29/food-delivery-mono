@@ -7,12 +7,7 @@ import { rolesStub } from '../../roles/test/stubs/roles.stub';
 import { GraphQLError } from 'graphql/error';
 import { AuthenticationResolver } from '../authentication.resolver';
 import { AuthenticationService } from '../authentication.service';
-import {
-  AuthUser,
-  CreateOneAuthUserArgs,
-  DataAccessPrismaService,
-  UpdateOneAuthUserArgs,
-} from '@food-delivery-mono/data-access';
+import { AuthUser, CreateOneAuthUserArgs, UpdateOneAuthUserArgs } from '@food-delivery-mono/data-access';
 
 jest.mock('../authentication.service.ts');
 
@@ -38,10 +33,7 @@ describe('AuthResolver', () => {
       imports: [],
       controllers: [AuthenticationResolver],
       providers: [AuthenticationService],
-    })
-      .overrideProvider(DataAccessPrismaService)
-      .useValue(prismaMocking)
-      .compile();
+    }).compile();
 
     authResolver = moduleRef.get<AuthenticationResolver>(AuthenticationResolver);
     authService = moduleRef.get<AuthenticationService>(AuthenticationService);

@@ -11,9 +11,8 @@ export interface FileUpload {
 export const GraphQLUpload = new GraphQLScalarType({
   name: 'Upload',
   description: 'The `Upload` scalar type represents a file upload.',
-  async parseValue(value: Promise<FileUpload | any>): Promise<FileUpload> {
-    console.log(value);
-    return GraphQLUpload.parseValue(value);
+  async parseValue(value: Promise<File>): Promise<File> {
+    return value;
   },
   parseLiteral(ast: any) {
     console.log(ast);

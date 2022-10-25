@@ -47,8 +47,7 @@ model Users {
   userName  String
   createdAt DateTime       @default(now())
   updatedAt DateTime       @updatedAt
-  profile   Profile?       @relation(fields: [profileId], references: [profileId])
-  profileId String?        @unique
+  profile   Profile?
   adresses  UserAdresses[]
 }
 
@@ -59,8 +58,20 @@ model Profile {
   placeOfBirth   DateTime?
   createdAt      DateTime    @default(now())
   updatedAt      DateTime    @updatedAt
-  user           Users?
   profilePicture FileEntity?
+  user           Users?      @relation(fields: [userId], references: [idUser])
+  userId         String?     @unique
+}
+
+model FileEntity {
+  id        String   @id @default(cuid())
+  fileName  String
+  fileUrl   String
+  key       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  profileId String   @unique
+  Profile   Profile  @relation(fields: [profileId], references: [profileId])
 }
 
 model UserAdresses {
@@ -73,15 +84,4 @@ model UserAdresses {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   user       Users    @relation(fields: [userId], references: [idUser])
-}
-
-model FileEntity {
-  id        String   @id @default(cuid())
-  fileName  String
-  fileUrl   String
-  key       String
-  profileId String   @unique
-  profile   Profile  @relation(fields: [profileId], references: [profileId])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }

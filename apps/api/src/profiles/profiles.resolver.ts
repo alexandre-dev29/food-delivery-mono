@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { ProfilesService } from './profiles.service';
 import { CreateOneProfileArgs, Profile, UpdateOneProfileArgs } from '@food-delivery-mono/data-access';
 import { FileService, UtilityService } from '@food-delivery-mono/utilities';
@@ -37,10 +37,13 @@ export class ProfilesResolver {
 
   @Mutation(() => Boolean)
   @UseGuards(MainAuthGuardGuard)
-  async updatePhotoProfile(@Args('myFile', { type: () => GraphQLUpload }) file: File, @CurrentUser() currentUser) {
+  async updatePhotoProfile(
+    @Args('myFile', { type: () => GraphQLUpload }) file: FileUpload,
+    @CurrentUser() currentUser
+  ) {
     try {
-      const { name } = file;
-      const bufferFile = Buffer.from(await file.arrayBuffer());
+      const { name } = file.fileElement;
+      const bufferFile = Buffer.from(await file.fileElement.arrayBuffer());
       const uploadResult = await this.fileService.uploadToS3(bufferFile, name);
       await this.profileService.updateProfilePicture(uploadResult, currentUser.userId, name);
       return true;

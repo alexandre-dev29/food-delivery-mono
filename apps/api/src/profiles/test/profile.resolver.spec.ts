@@ -4,6 +4,9 @@ import { profileStub } from './stubs/profile.stub';
 import { ProfilesService } from '../profiles.service';
 import { ProfilesResolver } from '../profiles.resolver';
 import { CreateOneProfileArgs, Profile } from '@food-delivery-mono/data-access';
+import { FileService, UtilityService } from '@food-delivery-mono/utilities';
+import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
 
 jest.mock('../profiles.service.ts');
 
@@ -14,7 +17,7 @@ describe('ProfileResolver', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [ProfilesResolver],
-      providers: [ProfilesService],
+      providers: [ProfilesService, UtilityService, ConfigService, JwtService, FileService],
     }).compile();
 
     profileResolver = module.get<ProfilesResolver>(ProfilesResolver);

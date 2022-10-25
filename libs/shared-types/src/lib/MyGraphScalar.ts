@@ -1,11 +1,7 @@
 import { GraphQLScalarType } from 'graphql';
-import { Readable } from 'stream';
 
 export interface FileUpload {
-  filename: string;
-  mimetype: string;
-  encoding: string;
-  createReadStream: () => Readable;
+  fileElement: File;
 }
 
 export const GraphQLUpload = new GraphQLScalarType({

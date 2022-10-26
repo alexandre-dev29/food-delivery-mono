@@ -3,7 +3,6 @@ import { GraphQLScalarType } from 'graphql';
 export interface FileUpload {
   fileElement: File;
 }
-
 export const GraphQLUpload = new GraphQLScalarType({
   name: 'Upload',
   description: 'The `Upload` scalar type represents a file upload.',

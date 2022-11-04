@@ -1,4 +1,4 @@
-import { ArgsType, Field, ID, InputType, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
+import { ArgsType, Field, HideField, ID, InputType, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
 
 export enum UsersScalarFieldEnum {
@@ -1429,7 +1429,7 @@ export class AuthUserCountAggregateInput {
   updatedAt?: true;
   @Field(() => Boolean, { nullable: true })
   userId?: true;
-  @Field(() => Boolean, { nullable: true })
+  @HideField()
   refreshToken?: true;
   @Field(() => Boolean, { nullable: true })
   phoneNumber?: true;
@@ -1455,11 +1455,11 @@ export class AuthUserCountAggregate {
   updatedAt!: number;
   @Field(() => Int, { nullable: false })
   userId!: number;
-  @Field(() => Int, { nullable: false })
+  @HideField()
   refreshToken!: number;
   @Field(() => Int, { nullable: false })
   phoneNumber!: number;
-  @Field(() => Int, { nullable: false })
+  @HideField()
   password!: number;
   @Field(() => Int, { nullable: false })
   username!: number;
@@ -1481,7 +1481,7 @@ export class AuthUserCountOrderByAggregateInput {
   updatedAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   userId?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
+  @HideField()
   refreshToken?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   phoneNumber?: keyof typeof SortOrder;
@@ -1514,7 +1514,7 @@ export class AuthUserCreateManyRoleInput {
   updatedAt?: Date | string;
   @Field(() => String, { nullable: false })
   userId!: string;
-  @Field(() => String, { nullable: true })
+  @HideField()
   refreshToken?: string;
   @Field(() => String, { nullable: false })
   phoneNumber!: string;
@@ -1536,7 +1536,7 @@ export class AuthUserCreateManyInput {
   updatedAt?: Date | string;
   @Field(() => String, { nullable: false })
   userId!: string;
-  @Field(() => String, { nullable: true })
+  @HideField()
   refreshToken?: string;
   @Field(() => String, { nullable: false })
   phoneNumber!: string;
@@ -1586,7 +1586,7 @@ export class AuthUserCreateWithoutRoleInput {
   updatedAt?: Date | string;
   @Field(() => String, { nullable: false })
   userId!: string;
-  @Field(() => String, { nullable: true })
+  @HideField()
   refreshToken?: string;
   @Field(() => String, { nullable: false })
   phoneNumber!: string;
@@ -1608,7 +1608,7 @@ export class AuthUserCreateInput {
   updatedAt?: Date | string;
   @Field(() => String, { nullable: false })
   userId!: string;
-  @Field(() => String, { nullable: true })
+  @HideField()
   refreshToken?: string;
   @Field(() => String, { nullable: false })
   phoneNumber!: string;
@@ -1655,11 +1655,11 @@ export class AuthUserGroupBy {
   updatedAt!: Date | string;
   @Field(() => String, { nullable: false })
   userId!: string;
-  @Field(() => String, { nullable: true })
+  @HideField()
   refreshToken?: string;
   @Field(() => String, { nullable: false })
   phoneNumber!: string;
-  @Field(() => String, { nullable: false })
+  @HideField()
   password!: string;
   @Field(() => String, { nullable: false })
   username!: string;
@@ -1695,7 +1695,7 @@ export class AuthUserMaxAggregateInput {
   updatedAt?: true;
   @Field(() => Boolean, { nullable: true })
   userId?: true;
-  @Field(() => Boolean, { nullable: true })
+  @HideField()
   refreshToken?: true;
   @Field(() => Boolean, { nullable: true })
   phoneNumber?: true;
@@ -1719,11 +1719,11 @@ export class AuthUserMaxAggregate {
   updatedAt?: Date | string;
   @Field(() => String, { nullable: true })
   userId?: string;
-  @Field(() => String, { nullable: true })
+  @HideField()
   refreshToken?: string;
   @Field(() => String, { nullable: true })
   phoneNumber?: string;
-  @Field(() => String, { nullable: true })
+  @HideField()
   password?: string;
   @Field(() => String, { nullable: true })
   username?: string;
@@ -1743,7 +1743,7 @@ export class AuthUserMaxOrderByAggregateInput {
   updatedAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   userId?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
+  @HideField()
   refreshToken?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   phoneNumber?: keyof typeof SortOrder;
@@ -1767,7 +1767,7 @@ export class AuthUserMinAggregateInput {
   updatedAt?: true;
   @Field(() => Boolean, { nullable: true })
   userId?: true;
-  @Field(() => Boolean, { nullable: true })
+  @HideField()
   refreshToken?: true;
   @Field(() => Boolean, { nullable: true })
   phoneNumber?: true;
@@ -1791,11 +1791,11 @@ export class AuthUserMinAggregate {
   updatedAt?: Date | string;
   @Field(() => String, { nullable: true })
   userId?: string;
-  @Field(() => String, { nullable: true })
+  @HideField()
   refreshToken?: string;
   @Field(() => String, { nullable: true })
   phoneNumber?: string;
-  @Field(() => String, { nullable: true })
+  @HideField()
   password?: string;
   @Field(() => String, { nullable: true })
   username?: string;
@@ -1815,7 +1815,7 @@ export class AuthUserMinOrderByAggregateInput {
   updatedAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   userId?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
+  @HideField()
   refreshToken?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   phoneNumber?: keyof typeof SortOrder;
@@ -1845,7 +1845,7 @@ export class AuthUserOrderByWithAggregationInput {
   updatedAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   userId?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
+  @HideField()
   refreshToken?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   phoneNumber?: keyof typeof SortOrder;
@@ -1875,7 +1875,7 @@ export class AuthUserOrderByWithRelationInput {
   updatedAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   userId?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
+  @HideField()
   refreshToken?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   phoneNumber?: keyof typeof SortOrder;
@@ -1907,7 +1907,7 @@ export class AuthUserScalarWhereWithAggregatesInput {
   updatedAt?: InstanceType<typeof DateTimeWithAggregatesFilter>;
   @Field(() => StringWithAggregatesFilter, { nullable: true })
   userId?: InstanceType<typeof StringWithAggregatesFilter>;
-  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
+  @HideField()
   refreshToken?: InstanceType<typeof StringNullableWithAggregatesFilter>;
   @Field(() => StringWithAggregatesFilter, { nullable: true })
   phoneNumber?: InstanceType<typeof StringWithAggregatesFilter>;
@@ -1937,7 +1937,7 @@ export class AuthUserScalarWhereInput {
   updatedAt?: InstanceType<typeof DateTimeFilter>;
   @Field(() => StringFilter, { nullable: true })
   userId?: InstanceType<typeof StringFilter>;
-  @Field(() => StringNullableFilter, { nullable: true })
+  @HideField()
   refreshToken?: InstanceType<typeof StringNullableFilter>;
   @Field(() => StringFilter, { nullable: true })
   phoneNumber?: InstanceType<typeof StringFilter>;
@@ -1977,7 +1977,7 @@ export class AuthUserUncheckedCreateWithoutRoleInput {
   updatedAt?: Date | string;
   @Field(() => String, { nullable: false })
   userId!: string;
-  @Field(() => String, { nullable: true })
+  @HideField()
   refreshToken?: string;
   @Field(() => String, { nullable: false })
   phoneNumber!: string;
@@ -1999,7 +1999,7 @@ export class AuthUserUncheckedCreateInput {
   updatedAt?: Date | string;
   @Field(() => String, { nullable: false })
   userId!: string;
-  @Field(() => String, { nullable: true })
+  @HideField()
   refreshToken?: string;
   @Field(() => String, { nullable: false })
   phoneNumber!: string;
@@ -2023,7 +2023,7 @@ export class AuthUserUncheckedUpdateManyWithoutAuthUserInput {
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   userId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  @HideField()
   refreshToken?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   phoneNumber?: InstanceType<typeof StringFieldUpdateOperationsInput>;
@@ -2082,7 +2082,7 @@ export class AuthUserUncheckedUpdateManyInput {
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   userId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  @HideField()
   refreshToken?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   phoneNumber?: InstanceType<typeof StringFieldUpdateOperationsInput>;
@@ -2106,7 +2106,7 @@ export class AuthUserUncheckedUpdateWithoutRoleInput {
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   userId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  @HideField()
   refreshToken?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   phoneNumber?: InstanceType<typeof StringFieldUpdateOperationsInput>;
@@ -2128,7 +2128,7 @@ export class AuthUserUncheckedUpdateInput {
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   userId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  @HideField()
   refreshToken?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   phoneNumber?: InstanceType<typeof StringFieldUpdateOperationsInput>;
@@ -2152,7 +2152,7 @@ export class AuthUserUpdateManyMutationInput {
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   userId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  @HideField()
   refreshToken?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   phoneNumber?: InstanceType<typeof StringFieldUpdateOperationsInput>;
@@ -2231,7 +2231,7 @@ export class AuthUserUpdateWithoutRoleInput {
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   userId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  @HideField()
   refreshToken?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   phoneNumber?: InstanceType<typeof StringFieldUpdateOperationsInput>;
@@ -2253,7 +2253,7 @@ export class AuthUserUpdateInput {
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   userId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  @HideField()
   refreshToken?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   phoneNumber?: InstanceType<typeof StringFieldUpdateOperationsInput>;
@@ -2302,7 +2302,7 @@ export class AuthUserWhereInput {
   updatedAt?: InstanceType<typeof DateTimeFilter>;
   @Field(() => StringFilter, { nullable: true })
   userId?: InstanceType<typeof StringFilter>;
-  @Field(() => StringNullableFilter, { nullable: true })
+  @HideField()
   refreshToken?: InstanceType<typeof StringNullableFilter>;
   @Field(() => StringFilter, { nullable: true })
   phoneNumber?: InstanceType<typeof StringFilter>;
@@ -2328,11 +2328,11 @@ export class AuthUser {
   updatedAt!: Date;
   @Field(() => String, { nullable: false })
   userId!: string;
-  @Field(() => String, { nullable: true })
+  @HideField()
   refreshToken!: string | null;
   @Field(() => String, { nullable: false })
   phoneNumber!: string;
-  @Field(() => String, { nullable: false })
+  @HideField()
   password!: string;
   @Field(() => String, { nullable: false })
   username!: string;
@@ -5954,7 +5954,7 @@ export class RestauUsersCountAggregateInput {
   userName?: true;
   @Field(() => Boolean, { nullable: true })
   password?: true;
-  @Field(() => Boolean, { nullable: true })
+  @HideField()
   refreshToken?: true;
   @Field(() => Boolean, { nullable: true })
   userFullName?: true;
@@ -5976,9 +5976,9 @@ export class RestauUsersCountAggregate {
   idRestauUser!: number;
   @Field(() => Int, { nullable: false })
   userName!: number;
-  @Field(() => Int, { nullable: false })
+  @HideField()
   password!: number;
-  @Field(() => Int, { nullable: false })
+  @HideField()
   refreshToken!: number;
   @Field(() => Int, { nullable: false })
   userFullName!: number;
@@ -6002,7 +6002,7 @@ export class RestauUsersCountOrderByAggregateInput {
   userName?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   password?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
+  @HideField()
   refreshToken?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   userFullName?: keyof typeof SortOrder;
@@ -6033,8 +6033,8 @@ export class RestauUsersCreateManyRestaurantInput {
   userName!: string;
   @Field(() => String, { nullable: false })
   password!: string;
-  @Field(() => String, { nullable: false })
-  refreshToken!: string;
+  @HideField()
+  refreshToken?: string;
   @Field(() => String, { nullable: false })
   userFullName!: string;
   @Field(() => Date, { nullable: true })
@@ -6062,8 +6062,8 @@ export class RestauUsersCreateManyRoleInput {
   userName!: string;
   @Field(() => String, { nullable: false })
   password!: string;
-  @Field(() => String, { nullable: false })
-  refreshToken!: string;
+  @HideField()
+  refreshToken?: string;
   @Field(() => String, { nullable: false })
   userFullName!: string;
   @Field(() => String, { nullable: false })
@@ -6082,8 +6082,8 @@ export class RestauUsersCreateManyInput {
   userName!: string;
   @Field(() => String, { nullable: false })
   password!: string;
-  @Field(() => String, { nullable: false })
-  refreshToken!: string;
+  @HideField()
+  refreshToken?: string;
   @Field(() => String, { nullable: false })
   userFullName!: string;
   @Field(() => String, { nullable: false })
@@ -6156,8 +6156,8 @@ export class RestauUsersCreateWithoutRestaurantInput {
   userName!: string;
   @Field(() => String, { nullable: false })
   password!: string;
-  @Field(() => String, { nullable: false })
-  refreshToken!: string;
+  @HideField()
+  refreshToken?: string;
   @Field(() => String, { nullable: false })
   userFullName!: string;
   @Field(() => Date, { nullable: true })
@@ -6176,8 +6176,8 @@ export class RestauUsersCreateWithoutRoleInput {
   userName!: string;
   @Field(() => String, { nullable: false })
   password!: string;
-  @Field(() => String, { nullable: false })
-  refreshToken!: string;
+  @HideField()
+  refreshToken?: string;
   @Field(() => String, { nullable: false })
   userFullName!: string;
   @Field(() => Date, { nullable: true })
@@ -6196,8 +6196,8 @@ export class RestauUsersCreateInput {
   userName!: string;
   @Field(() => String, { nullable: false })
   password!: string;
-  @Field(() => String, { nullable: false })
-  refreshToken!: string;
+  @HideField()
+  refreshToken?: string;
   @Field(() => String, { nullable: false })
   userFullName!: string;
   @Field(() => Date, { nullable: true })
@@ -6239,10 +6239,10 @@ export class RestauUsersGroupBy {
   idRestauUser!: string;
   @Field(() => String, { nullable: false })
   userName!: string;
-  @Field(() => String, { nullable: false })
+  @HideField()
   password!: string;
-  @Field(() => String, { nullable: false })
-  refreshToken!: string;
+  @HideField()
+  refreshToken?: string;
   @Field(() => String, { nullable: false })
   userFullName!: string;
   @Field(() => String, { nullable: false })
@@ -6279,7 +6279,7 @@ export class RestauUsersMaxAggregateInput {
   userName?: true;
   @Field(() => Boolean, { nullable: true })
   password?: true;
-  @Field(() => Boolean, { nullable: true })
+  @HideField()
   refreshToken?: true;
   @Field(() => Boolean, { nullable: true })
   userFullName?: true;
@@ -6299,9 +6299,9 @@ export class RestauUsersMaxAggregate {
   idRestauUser?: string;
   @Field(() => String, { nullable: true })
   userName?: string;
-  @Field(() => String, { nullable: true })
+  @HideField()
   password?: string;
-  @Field(() => String, { nullable: true })
+  @HideField()
   refreshToken?: string;
   @Field(() => String, { nullable: true })
   userFullName?: string;
@@ -6323,7 +6323,7 @@ export class RestauUsersMaxOrderByAggregateInput {
   userName?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   password?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
+  @HideField()
   refreshToken?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   userFullName?: keyof typeof SortOrder;
@@ -6345,7 +6345,7 @@ export class RestauUsersMinAggregateInput {
   userName?: true;
   @Field(() => Boolean, { nullable: true })
   password?: true;
-  @Field(() => Boolean, { nullable: true })
+  @HideField()
   refreshToken?: true;
   @Field(() => Boolean, { nullable: true })
   userFullName?: true;
@@ -6365,9 +6365,9 @@ export class RestauUsersMinAggregate {
   idRestauUser?: string;
   @Field(() => String, { nullable: true })
   userName?: string;
-  @Field(() => String, { nullable: true })
+  @HideField()
   password?: string;
-  @Field(() => String, { nullable: true })
+  @HideField()
   refreshToken?: string;
   @Field(() => String, { nullable: true })
   userFullName?: string;
@@ -6389,7 +6389,7 @@ export class RestauUsersMinOrderByAggregateInput {
   userName?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   password?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
+  @HideField()
   refreshToken?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   userFullName?: keyof typeof SortOrder;
@@ -6417,7 +6417,7 @@ export class RestauUsersOrderByWithAggregationInput {
   userName?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   password?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
+  @HideField()
   refreshToken?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   userFullName?: keyof typeof SortOrder;
@@ -6445,7 +6445,7 @@ export class RestauUsersOrderByWithRelationInput {
   userName?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   password?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
+  @HideField()
   refreshToken?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   userFullName?: keyof typeof SortOrder;
@@ -6477,8 +6477,8 @@ export class RestauUsersScalarWhereWithAggregatesInput {
   userName?: InstanceType<typeof StringWithAggregatesFilter>;
   @Field(() => StringWithAggregatesFilter, { nullable: true })
   password?: InstanceType<typeof StringWithAggregatesFilter>;
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  refreshToken?: InstanceType<typeof StringWithAggregatesFilter>;
+  @HideField()
+  refreshToken?: InstanceType<typeof StringNullableWithAggregatesFilter>;
   @Field(() => StringWithAggregatesFilter, { nullable: true })
   userFullName?: InstanceType<typeof StringWithAggregatesFilter>;
   @Field(() => StringWithAggregatesFilter, { nullable: true })
@@ -6505,8 +6505,8 @@ export class RestauUsersScalarWhereInput {
   userName?: InstanceType<typeof StringFilter>;
   @Field(() => StringFilter, { nullable: true })
   password?: InstanceType<typeof StringFilter>;
-  @Field(() => StringFilter, { nullable: true })
-  refreshToken?: InstanceType<typeof StringFilter>;
+  @HideField()
+  refreshToken?: InstanceType<typeof StringNullableFilter>;
   @Field(() => StringFilter, { nullable: true })
   userFullName?: InstanceType<typeof StringFilter>;
   @Field(() => StringFilter, { nullable: true })
@@ -6559,8 +6559,8 @@ export class RestauUsersUncheckedCreateWithoutRestaurantInput {
   userName!: string;
   @Field(() => String, { nullable: false })
   password!: string;
-  @Field(() => String, { nullable: false })
-  refreshToken!: string;
+  @HideField()
+  refreshToken?: string;
   @Field(() => String, { nullable: false })
   userFullName!: string;
   @Field(() => Date, { nullable: true })
@@ -6579,8 +6579,8 @@ export class RestauUsersUncheckedCreateWithoutRoleInput {
   userName!: string;
   @Field(() => String, { nullable: false })
   password!: string;
-  @Field(() => String, { nullable: false })
-  refreshToken!: string;
+  @HideField()
+  refreshToken?: string;
   @Field(() => String, { nullable: false })
   userFullName!: string;
   @Field(() => String, { nullable: false })
@@ -6599,8 +6599,8 @@ export class RestauUsersUncheckedCreateInput {
   userName!: string;
   @Field(() => String, { nullable: false })
   password!: string;
-  @Field(() => String, { nullable: false })
-  refreshToken!: string;
+  @HideField()
+  refreshToken?: string;
   @Field(() => String, { nullable: false })
   userFullName!: string;
   @Field(() => String, { nullable: false })
@@ -6621,8 +6621,8 @@ export class RestauUsersUncheckedUpdateManyWithoutRestauUserInput {
   userName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  refreshToken?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @HideField()
+  refreshToken?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   userFullName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
@@ -6715,8 +6715,8 @@ export class RestauUsersUncheckedUpdateManyWithoutUsersInput {
   userName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  refreshToken?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @HideField()
+  refreshToken?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   userFullName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
@@ -6735,8 +6735,8 @@ export class RestauUsersUncheckedUpdateManyInput {
   userName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  refreshToken?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @HideField()
+  refreshToken?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   userFullName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
@@ -6757,8 +6757,8 @@ export class RestauUsersUncheckedUpdateWithoutRestaurantInput {
   userName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  refreshToken?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @HideField()
+  refreshToken?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   userFullName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
@@ -6777,8 +6777,8 @@ export class RestauUsersUncheckedUpdateWithoutRoleInput {
   userName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  refreshToken?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @HideField()
+  refreshToken?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   userFullName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
@@ -6797,8 +6797,8 @@ export class RestauUsersUncheckedUpdateInput {
   userName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  refreshToken?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @HideField()
+  refreshToken?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   userFullName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
@@ -6819,8 +6819,8 @@ export class RestauUsersUpdateManyMutationInput {
   userName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  refreshToken?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @HideField()
+  refreshToken?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   userFullName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
@@ -6951,8 +6951,8 @@ export class RestauUsersUpdateWithoutRestaurantInput {
   userName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  refreshToken?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @HideField()
+  refreshToken?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   userFullName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
@@ -6971,8 +6971,8 @@ export class RestauUsersUpdateWithoutRoleInput {
   userName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  refreshToken?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @HideField()
+  refreshToken?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   userFullName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
@@ -6991,8 +6991,8 @@ export class RestauUsersUpdateInput {
   userName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  refreshToken?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @HideField()
+  refreshToken?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   userFullName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
@@ -7051,8 +7051,8 @@ export class RestauUsersWhereInput {
   userName?: InstanceType<typeof StringFilter>;
   @Field(() => StringFilter, { nullable: true })
   password?: InstanceType<typeof StringFilter>;
-  @Field(() => StringFilter, { nullable: true })
-  refreshToken?: InstanceType<typeof StringFilter>;
+  @HideField()
+  refreshToken?: InstanceType<typeof StringNullableFilter>;
   @Field(() => StringFilter, { nullable: true })
   userFullName?: InstanceType<typeof StringFilter>;
   @Field(() => StringFilter, { nullable: true })
@@ -7075,10 +7075,10 @@ export class RestauUsers {
   idRestauUser!: string;
   @Field(() => String, { nullable: false })
   userName!: string;
-  @Field(() => String, { nullable: false })
+  @HideField()
   password!: string;
-  @Field(() => String, { nullable: false })
-  refreshToken!: string;
+  @HideField()
+  refreshToken!: string | null;
   @Field(() => String, { nullable: false })
   userFullName!: string;
   @Field(() => String, { nullable: false })

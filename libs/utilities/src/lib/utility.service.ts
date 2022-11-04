@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { ConfigService } from '@nestjs/config';
-import { Readable } from 'stream';
 import { Tokens } from '@food-delivery-mono/shared-types';
 
 @Injectable()
@@ -24,6 +23,34 @@ export class UtilityService {
       ),
       this.jwtService.signAsync(
         { sub: userId, phoneNumber, userRole, authUserId, userId },
+        {
+          expiresIn: 60 * 60 * 24 * 7,
+          secret: this.configService.get<string>('REFRESH_TOKEN_SECRET'),
+        }
+      ),
+    ]);
+
+    return {
+      access_token: accessToken,
+      refresh_token: refreshToken,
+    } as Tokens;
+  };
+  getTokensForRestauUsers = async (
+    userId: string,
+    userName: string,
+    userRole: string,
+    restauId: string
+  ): Promise<Tokens> => {
+    const [accessToken, refreshToken] = await Promise.all([
+      this.jwtService.signAsync(
+        { sub: userId, userName, userRole, userId, restauId },
+        {
+          expiresIn: 60 * 15,
+          secret: this.configService.get<string>('ACCESS_TOKEN_SECRET'),
+        }
+      ),
+      this.jwtService.signAsync(
+        {},
         {
           expiresIn: 60 * 60 * 24 * 7,
           secret: this.configService.get<string>('REFRESH_TOKEN_SECRET'),

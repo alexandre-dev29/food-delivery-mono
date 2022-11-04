@@ -43,6 +43,7 @@ describe('AuthResolver', () => {
       });
     });
   });
+
   describe('Get One auth users', () => {
     describe('when getUser is called', () => {
       let user: AuthUser;

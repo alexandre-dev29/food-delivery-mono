@@ -4,15 +4,22 @@ import { UsersService } from '../users.service';
 import { DataAccessPrismaService, Users } from '@food-delivery-mono/data-access';
 import { jest } from '@jest/globals';
 import { usersStub } from './stubs/users.stub';
+import { UsersServiceMock } from '../__mock__/users.service';
 
-jest.mock('../users.service.ts');
 describe('UserResolver', () => {
   let usersResolver: UsersResolver;
   let usersService: UsersService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [UsersResolver, UsersService, DataAccessPrismaService],
+      providers: [
+        UsersResolver,
+        {
+          provide: UsersService,
+          useValue: UsersServiceMock,
+        },
+        DataAccessPrismaService,
+      ],
     }).compile();
 
     usersResolver = module.get<UsersResolver>(UsersResolver);

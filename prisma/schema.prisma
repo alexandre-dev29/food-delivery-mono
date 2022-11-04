@@ -32,23 +32,15 @@ model AuthUser {
   isPhoneConfirmed Boolean  @default(false)
 }
 
-model Role {
-  roleId    String     @id @default(cuid())
-  userRole  String
-  AuthUser  AuthUser[]
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-}
-
 model Users {
-  idUser    String         @id @default(cuid())
+  idUser    String     @id @default(cuid())
   firstName String?
   lastName  String?
   userName  String
-  createdAt DateTime       @default(now())
-  updatedAt DateTime       @updatedAt
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
   profile   Profile?
-  adresses  UserAdresses[]
+  adresses  Adresses[]
 }
 
 model Profile {
@@ -58,30 +50,81 @@ model Profile {
   placeOfBirth   DateTime?
   createdAt      DateTime    @default(now())
   updatedAt      DateTime    @updatedAt
-  profilePicture FileEntity?
+  fileEntityId   String?     @unique
+  profilePicture FileEntity? @relation(fields: [fileEntityId], references: [id])
   user           Users?      @relation(fields: [userId], references: [idUser])
   userId         String?     @unique
 }
 
 model FileEntity {
-  id        String   @id @default(cuid())
-  fileName  String
-  fileUrl   String
-  key       String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  profileId String   @unique
-  Profile   Profile  @relation(fields: [profileId], references: [profileId])
+  id          String        @id @default(cuid())
+  fileName    String
+  fileUrl     String
+  key         String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  Restaurants Restaurants[]
+  Profiles    Profile[]
 }
 
-model UserAdresses {
-  idAdresse  String   @id @default(cuid())
-  userId     String
-  adressName String
-  longitude  String
-  latitude   String
-  elevation  String?
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  user       Users    @relation(fields: [userId], references: [idUser])
+model Adresses {
+  idAdresse    String       @id @default(cuid())
+  userId       String?
+  restaurantId String?
+  adressName   String
+  longitude    String
+  latitude     String
+  elevation    String?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  user         Users?       @relation(fields: [userId], references: [idUser])
+  restaurant   Restaurants? @relation(fields: [restaurantId], references: [idRestaurant])
+}
+
+model Role {
+  roleId     String        @id @default(cuid())
+  userRole   String
+  AuthUser   AuthUser[]
+  RestauUser RestauUsers[]
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+}
+
+model Restaurants {
+  idRestaurant      String            @id @default(cuid())
+  restauDescription String
+  restauName        String
+  restauMainImage   FileEntity        @relation(fields: [fileEntityId], references: [id])
+  creationDate      DateTime          @default(now())
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  adresses          Adresses[]
+  users             RestauUsers[]
+  otherImages       ImagesSecondary[]
+  fileEntityId      String
+}
+
+model RestauUsers {
+  idRestauUser String      @id @default(cuid())
+  userName     String
+  password     String
+  refreshToken String
+  userFullName String
+  restauId     String
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  restaurant   Restaurants @relation(fields: [restauId], references: [idRestaurant])
+  roleId       String
+  role         Role        @relation(fields: [roleId], references: [roleId])
+}
+
+model ImagesSecondary {
+  id            String       @id @default(cuid())
+  fileName      String
+  fileUrl       String
+  key           String
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  Restaurants   Restaurants? @relation(fields: [restaurantsId], references: [idRestaurant])
+  restaurantsId String?
 }

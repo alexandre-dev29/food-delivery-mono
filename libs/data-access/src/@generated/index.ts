@@ -1,28 +1,11 @@
-import { Field } from '@nestjs/graphql';
-import { ObjectType } from '@nestjs/graphql';
-import { ArgsType } from '@nestjs/graphql';
+import { ArgsType, Field, ID, InputType, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
-import { Int } from '@nestjs/graphql';
-import { InputType } from '@nestjs/graphql';
-import { registerEnumType } from '@nestjs/graphql';
-import { ID } from '@nestjs/graphql';
 
 export enum UsersScalarFieldEnum {
   idUser = 'idUser',
   firstName = 'firstName',
   lastName = 'lastName',
   userName = 'userName',
-  createdAt = 'createdAt',
-  updatedAt = 'updatedAt',
-}
-
-export enum UserAdressesScalarFieldEnum {
-  idAdresse = 'idAdresse',
-  userId = 'userId',
-  adressName = 'adressName',
-  longitude = 'longitude',
-  latitude = 'latitude',
-  elevation = 'elevation',
   createdAt = 'createdAt',
   updatedAt = 'updatedAt',
 }
@@ -34,6 +17,28 @@ export enum RoleScalarFieldEnum {
   updatedAt = 'updatedAt',
 }
 
+export enum RestaurantsScalarFieldEnum {
+  idRestaurant = 'idRestaurant',
+  restauDescription = 'restauDescription',
+  restauName = 'restauName',
+  creationDate = 'creationDate',
+  createdAt = 'createdAt',
+  updatedAt = 'updatedAt',
+  fileEntityId = 'fileEntityId',
+}
+
+export enum RestauUsersScalarFieldEnum {
+  idRestauUser = 'idRestauUser',
+  userName = 'userName',
+  password = 'password',
+  refreshToken = 'refreshToken',
+  userFullName = 'userFullName',
+  restauId = 'restauId',
+  createdAt = 'createdAt',
+  updatedAt = 'updatedAt',
+  roleId = 'roleId',
+}
+
 export enum ProfileScalarFieldEnum {
   profileId = 'profileId',
   bio = 'bio',
@@ -41,6 +46,7 @@ export enum ProfileScalarFieldEnum {
   placeOfBirth = 'placeOfBirth',
   createdAt = 'createdAt',
   updatedAt = 'updatedAt',
+  fileEntityId = 'fileEntityId',
   userId = 'userId',
 }
 
@@ -61,6 +67,16 @@ export enum QueryMode {
   insensitive = 'insensitive',
 }
 
+export enum ImagesSecondaryScalarFieldEnum {
+  id = 'id',
+  fileName = 'fileName',
+  fileUrl = 'fileUrl',
+  key = 'key',
+  createdAt = 'createdAt',
+  updatedAt = 'updatedAt',
+  restaurantsId = 'restaurantsId',
+}
+
 export enum FileEntityScalarFieldEnum {
   id = 'id',
   fileName = 'fileName',
@@ -68,7 +84,6 @@ export enum FileEntityScalarFieldEnum {
   key = 'key',
   createdAt = 'createdAt',
   updatedAt = 'updatedAt',
-  profileId = 'profileId',
 }
 
 export enum AuthUserScalarFieldEnum {
@@ -84,15 +99,1294 @@ export enum AuthUserScalarFieldEnum {
   isPhoneConfirmed = 'isPhoneConfirmed',
 }
 
+export enum AdressesScalarFieldEnum {
+  idAdresse = 'idAdresse',
+  userId = 'userId',
+  restaurantId = 'restaurantId',
+  adressName = 'adressName',
+  longitude = 'longitude',
+  latitude = 'latitude',
+  elevation = 'elevation',
+  createdAt = 'createdAt',
+  updatedAt = 'updatedAt',
+}
+
+registerEnumType(AdressesScalarFieldEnum, { name: 'AdressesScalarFieldEnum', description: undefined });
 registerEnumType(AuthUserScalarFieldEnum, { name: 'AuthUserScalarFieldEnum', description: undefined });
 registerEnumType(FileEntityScalarFieldEnum, { name: 'FileEntityScalarFieldEnum', description: undefined });
+registerEnumType(ImagesSecondaryScalarFieldEnum, { name: 'ImagesSecondaryScalarFieldEnum', description: undefined });
 registerEnumType(QueryMode, { name: 'QueryMode', description: undefined });
 registerEnumType(SortOrder, { name: 'SortOrder', description: undefined });
 registerEnumType(TransactionIsolationLevel, { name: 'TransactionIsolationLevel', description: undefined });
 registerEnumType(ProfileScalarFieldEnum, { name: 'ProfileScalarFieldEnum', description: undefined });
+registerEnumType(RestauUsersScalarFieldEnum, { name: 'RestauUsersScalarFieldEnum', description: undefined });
+registerEnumType(RestaurantsScalarFieldEnum, { name: 'RestaurantsScalarFieldEnum', description: undefined });
 registerEnumType(RoleScalarFieldEnum, { name: 'RoleScalarFieldEnum', description: undefined });
-registerEnumType(UserAdressesScalarFieldEnum, { name: 'UserAdressesScalarFieldEnum', description: undefined });
 registerEnumType(UsersScalarFieldEnum, { name: 'UsersScalarFieldEnum', description: undefined });
+
+@ArgsType()
+export class AdressesAggregateArgs {
+  @Field(() => AdressesWhereInput, { nullable: true })
+  @Type(() => AdressesWhereInput)
+  where?: InstanceType<typeof AdressesWhereInput>;
+  @Field(() => [AdressesOrderByWithRelationInput], { nullable: true })
+  orderBy?: Array<AdressesOrderByWithRelationInput>;
+  @Field(() => AdressesWhereUniqueInput, { nullable: true })
+  cursor?: InstanceType<typeof AdressesWhereUniqueInput>;
+  @Field(() => Int, { nullable: true })
+  take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
+  @Field(() => AdressesCountAggregateInput, { nullable: true })
+  _count?: InstanceType<typeof AdressesCountAggregateInput>;
+  @Field(() => AdressesMinAggregateInput, { nullable: true })
+  _min?: InstanceType<typeof AdressesMinAggregateInput>;
+  @Field(() => AdressesMaxAggregateInput, { nullable: true })
+  _max?: InstanceType<typeof AdressesMaxAggregateInput>;
+}
+
+@InputType()
+export class AdressesCountAggregateInput {
+  @Field(() => Boolean, { nullable: true })
+  idAdresse?: true;
+  @Field(() => Boolean, { nullable: true })
+  userId?: true;
+  @Field(() => Boolean, { nullable: true })
+  restaurantId?: true;
+  @Field(() => Boolean, { nullable: true })
+  adressName?: true;
+  @Field(() => Boolean, { nullable: true })
+  longitude?: true;
+  @Field(() => Boolean, { nullable: true })
+  latitude?: true;
+  @Field(() => Boolean, { nullable: true })
+  elevation?: true;
+  @Field(() => Boolean, { nullable: true })
+  createdAt?: true;
+  @Field(() => Boolean, { nullable: true })
+  updatedAt?: true;
+  @Field(() => Boolean, { nullable: true })
+  _all?: true;
+}
+
+@ObjectType()
+export class AdressesCountAggregate {
+  @Field(() => Int, { nullable: false })
+  idAdresse!: number;
+  @Field(() => Int, { nullable: false })
+  userId!: number;
+  @Field(() => Int, { nullable: false })
+  restaurantId!: number;
+  @Field(() => Int, { nullable: false })
+  adressName!: number;
+  @Field(() => Int, { nullable: false })
+  longitude!: number;
+  @Field(() => Int, { nullable: false })
+  latitude!: number;
+  @Field(() => Int, { nullable: false })
+  elevation!: number;
+  @Field(() => Int, { nullable: false })
+  createdAt!: number;
+  @Field(() => Int, { nullable: false })
+  updatedAt!: number;
+  @Field(() => Int, { nullable: false })
+  _all!: number;
+}
+
+@InputType()
+export class AdressesCountOrderByAggregateInput {
+  @Field(() => SortOrder, { nullable: true })
+  idAdresse?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  userId?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  restaurantId?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  adressName?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  longitude?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  latitude?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  elevation?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  createdAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  updatedAt?: keyof typeof SortOrder;
+}
+
+@InputType()
+export class AdressesCreateManyRestaurantInputEnvelope {
+  @Field(() => [AdressesCreateManyRestaurantInput], { nullable: false })
+  @Type(() => AdressesCreateManyRestaurantInput)
+  data!: Array<AdressesCreateManyRestaurantInput>;
+  @Field(() => Boolean, { nullable: true })
+  skipDuplicates?: boolean;
+}
+
+@InputType()
+export class AdressesCreateManyRestaurantInput {
+  @Field(() => String, { nullable: true })
+  idAdresse?: string;
+  @Field(() => String, { nullable: true })
+  userId?: string;
+  @Field(() => String, { nullable: false })
+  adressName!: string;
+  @Field(() => String, { nullable: false })
+  longitude!: string;
+  @Field(() => String, { nullable: false })
+  latitude!: string;
+  @Field(() => String, { nullable: true })
+  elevation?: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+}
+
+@InputType()
+export class AdressesCreateManyUserInputEnvelope {
+  @Field(() => [AdressesCreateManyUserInput], { nullable: false })
+  @Type(() => AdressesCreateManyUserInput)
+  data!: Array<AdressesCreateManyUserInput>;
+  @Field(() => Boolean, { nullable: true })
+  skipDuplicates?: boolean;
+}
+
+@InputType()
+export class AdressesCreateManyUserInput {
+  @Field(() => String, { nullable: true })
+  idAdresse?: string;
+  @Field(() => String, { nullable: true })
+  restaurantId?: string;
+  @Field(() => String, { nullable: false })
+  adressName!: string;
+  @Field(() => String, { nullable: false })
+  longitude!: string;
+  @Field(() => String, { nullable: false })
+  latitude!: string;
+  @Field(() => String, { nullable: true })
+  elevation?: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+}
+
+@InputType()
+export class AdressesCreateManyInput {
+  @Field(() => String, { nullable: true })
+  idAdresse?: string;
+  @Field(() => String, { nullable: true })
+  userId?: string;
+  @Field(() => String, { nullable: true })
+  restaurantId?: string;
+  @Field(() => String, { nullable: false })
+  adressName!: string;
+  @Field(() => String, { nullable: false })
+  longitude!: string;
+  @Field(() => String, { nullable: false })
+  latitude!: string;
+  @Field(() => String, { nullable: true })
+  elevation?: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+}
+
+@InputType()
+export class AdressesCreateNestedManyWithoutRestaurantInput {
+  @Field(() => [AdressesCreateWithoutRestaurantInput], { nullable: true })
+  @Type(() => AdressesCreateWithoutRestaurantInput)
+  create?: Array<AdressesCreateWithoutRestaurantInput>;
+  @Field(() => [AdressesCreateOrConnectWithoutRestaurantInput], { nullable: true })
+  @Type(() => AdressesCreateOrConnectWithoutRestaurantInput)
+  connectOrCreate?: Array<AdressesCreateOrConnectWithoutRestaurantInput>;
+  @Field(() => AdressesCreateManyRestaurantInputEnvelope, { nullable: true })
+  @Type(() => AdressesCreateManyRestaurantInputEnvelope)
+  createMany?: InstanceType<typeof AdressesCreateManyRestaurantInputEnvelope>;
+  @Field(() => [AdressesWhereUniqueInput], { nullable: true })
+  @Type(() => AdressesWhereUniqueInput)
+  connect?: Array<AdressesWhereUniqueInput>;
+}
+
+@InputType()
+export class AdressesCreateNestedManyWithoutUserInput {
+  @Field(() => [AdressesCreateWithoutUserInput], { nullable: true })
+  @Type(() => AdressesCreateWithoutUserInput)
+  create?: Array<AdressesCreateWithoutUserInput>;
+  @Field(() => [AdressesCreateOrConnectWithoutUserInput], { nullable: true })
+  @Type(() => AdressesCreateOrConnectWithoutUserInput)
+  connectOrCreate?: Array<AdressesCreateOrConnectWithoutUserInput>;
+  @Field(() => AdressesCreateManyUserInputEnvelope, { nullable: true })
+  @Type(() => AdressesCreateManyUserInputEnvelope)
+  createMany?: InstanceType<typeof AdressesCreateManyUserInputEnvelope>;
+  @Field(() => [AdressesWhereUniqueInput], { nullable: true })
+  @Type(() => AdressesWhereUniqueInput)
+  connect?: Array<AdressesWhereUniqueInput>;
+}
+
+@InputType()
+export class AdressesCreateOrConnectWithoutRestaurantInput {
+  @Field(() => AdressesWhereUniqueInput, { nullable: false })
+  @Type(() => AdressesWhereUniqueInput)
+  where!: InstanceType<typeof AdressesWhereUniqueInput>;
+  @Field(() => AdressesCreateWithoutRestaurantInput, { nullable: false })
+  @Type(() => AdressesCreateWithoutRestaurantInput)
+  create!: InstanceType<typeof AdressesCreateWithoutRestaurantInput>;
+}
+
+@InputType()
+export class AdressesCreateOrConnectWithoutUserInput {
+  @Field(() => AdressesWhereUniqueInput, { nullable: false })
+  @Type(() => AdressesWhereUniqueInput)
+  where!: InstanceType<typeof AdressesWhereUniqueInput>;
+  @Field(() => AdressesCreateWithoutUserInput, { nullable: false })
+  @Type(() => AdressesCreateWithoutUserInput)
+  create!: InstanceType<typeof AdressesCreateWithoutUserInput>;
+}
+
+@InputType()
+export class AdressesCreateWithoutRestaurantInput {
+  @Field(() => String, { nullable: true })
+  idAdresse?: string;
+  @Field(() => String, { nullable: false })
+  adressName!: string;
+  @Field(() => String, { nullable: false })
+  longitude!: string;
+  @Field(() => String, { nullable: false })
+  latitude!: string;
+  @Field(() => String, { nullable: true })
+  elevation?: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => UsersCreateNestedOneWithoutAdressesInput, { nullable: true })
+  user?: InstanceType<typeof UsersCreateNestedOneWithoutAdressesInput>;
+}
+
+@InputType()
+export class AdressesCreateWithoutUserInput {
+  @Field(() => String, { nullable: true })
+  idAdresse?: string;
+  @Field(() => String, { nullable: false })
+  adressName!: string;
+  @Field(() => String, { nullable: false })
+  longitude!: string;
+  @Field(() => String, { nullable: false })
+  latitude!: string;
+  @Field(() => String, { nullable: true })
+  elevation?: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => RestaurantsCreateNestedOneWithoutAdressesInput, { nullable: true })
+  restaurant?: InstanceType<typeof RestaurantsCreateNestedOneWithoutAdressesInput>;
+}
+
+@InputType()
+export class AdressesCreateInput {
+  @Field(() => String, { nullable: true })
+  idAdresse?: string;
+  @Field(() => String, { nullable: false })
+  adressName!: string;
+  @Field(() => String, { nullable: false })
+  longitude!: string;
+  @Field(() => String, { nullable: false })
+  latitude!: string;
+  @Field(() => String, { nullable: true })
+  elevation?: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => UsersCreateNestedOneWithoutAdressesInput, { nullable: true })
+  user?: InstanceType<typeof UsersCreateNestedOneWithoutAdressesInput>;
+  @Field(() => RestaurantsCreateNestedOneWithoutAdressesInput, { nullable: true })
+  restaurant?: InstanceType<typeof RestaurantsCreateNestedOneWithoutAdressesInput>;
+}
+
+@ArgsType()
+export class AdressesGroupByArgs {
+  @Field(() => AdressesWhereInput, { nullable: true })
+  @Type(() => AdressesWhereInput)
+  where?: InstanceType<typeof AdressesWhereInput>;
+  @Field(() => [AdressesOrderByWithAggregationInput], { nullable: true })
+  orderBy?: Array<AdressesOrderByWithAggregationInput>;
+  @Field(() => [AdressesScalarFieldEnum], { nullable: false })
+  by!: Array<keyof typeof AdressesScalarFieldEnum>;
+  @Field(() => AdressesScalarWhereWithAggregatesInput, { nullable: true })
+  having?: InstanceType<typeof AdressesScalarWhereWithAggregatesInput>;
+  @Field(() => Int, { nullable: true })
+  take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
+  @Field(() => AdressesCountAggregateInput, { nullable: true })
+  _count?: InstanceType<typeof AdressesCountAggregateInput>;
+  @Field(() => AdressesMinAggregateInput, { nullable: true })
+  _min?: InstanceType<typeof AdressesMinAggregateInput>;
+  @Field(() => AdressesMaxAggregateInput, { nullable: true })
+  _max?: InstanceType<typeof AdressesMaxAggregateInput>;
+}
+
+@ObjectType()
+export class AdressesGroupBy {
+  @Field(() => String, { nullable: false })
+  idAdresse!: string;
+  @Field(() => String, { nullable: true })
+  userId?: string;
+  @Field(() => String, { nullable: true })
+  restaurantId?: string;
+  @Field(() => String, { nullable: false })
+  adressName!: string;
+  @Field(() => String, { nullable: false })
+  longitude!: string;
+  @Field(() => String, { nullable: false })
+  latitude!: string;
+  @Field(() => String, { nullable: true })
+  elevation?: string;
+  @Field(() => Date, { nullable: false })
+  createdAt!: Date | string;
+  @Field(() => Date, { nullable: false })
+  updatedAt!: Date | string;
+  @Field(() => AdressesCountAggregate, { nullable: true })
+  _count?: InstanceType<typeof AdressesCountAggregate>;
+  @Field(() => AdressesMinAggregate, { nullable: true })
+  _min?: InstanceType<typeof AdressesMinAggregate>;
+  @Field(() => AdressesMaxAggregate, { nullable: true })
+  _max?: InstanceType<typeof AdressesMaxAggregate>;
+}
+
+@InputType()
+export class AdressesListRelationFilter {
+  @Field(() => AdressesWhereInput, { nullable: true })
+  every?: InstanceType<typeof AdressesWhereInput>;
+  @Field(() => AdressesWhereInput, { nullable: true })
+  some?: InstanceType<typeof AdressesWhereInput>;
+  @Field(() => AdressesWhereInput, { nullable: true })
+  none?: InstanceType<typeof AdressesWhereInput>;
+}
+
+@InputType()
+export class AdressesMaxAggregateInput {
+  @Field(() => Boolean, { nullable: true })
+  idAdresse?: true;
+  @Field(() => Boolean, { nullable: true })
+  userId?: true;
+  @Field(() => Boolean, { nullable: true })
+  restaurantId?: true;
+  @Field(() => Boolean, { nullable: true })
+  adressName?: true;
+  @Field(() => Boolean, { nullable: true })
+  longitude?: true;
+  @Field(() => Boolean, { nullable: true })
+  latitude?: true;
+  @Field(() => Boolean, { nullable: true })
+  elevation?: true;
+  @Field(() => Boolean, { nullable: true })
+  createdAt?: true;
+  @Field(() => Boolean, { nullable: true })
+  updatedAt?: true;
+}
+
+@ObjectType()
+export class AdressesMaxAggregate {
+  @Field(() => String, { nullable: true })
+  idAdresse?: string;
+  @Field(() => String, { nullable: true })
+  userId?: string;
+  @Field(() => String, { nullable: true })
+  restaurantId?: string;
+  @Field(() => String, { nullable: true })
+  adressName?: string;
+  @Field(() => String, { nullable: true })
+  longitude?: string;
+  @Field(() => String, { nullable: true })
+  latitude?: string;
+  @Field(() => String, { nullable: true })
+  elevation?: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+}
+
+@InputType()
+export class AdressesMaxOrderByAggregateInput {
+  @Field(() => SortOrder, { nullable: true })
+  idAdresse?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  userId?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  restaurantId?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  adressName?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  longitude?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  latitude?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  elevation?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  createdAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  updatedAt?: keyof typeof SortOrder;
+}
+
+@InputType()
+export class AdressesMinAggregateInput {
+  @Field(() => Boolean, { nullable: true })
+  idAdresse?: true;
+  @Field(() => Boolean, { nullable: true })
+  userId?: true;
+  @Field(() => Boolean, { nullable: true })
+  restaurantId?: true;
+  @Field(() => Boolean, { nullable: true })
+  adressName?: true;
+  @Field(() => Boolean, { nullable: true })
+  longitude?: true;
+  @Field(() => Boolean, { nullable: true })
+  latitude?: true;
+  @Field(() => Boolean, { nullable: true })
+  elevation?: true;
+  @Field(() => Boolean, { nullable: true })
+  createdAt?: true;
+  @Field(() => Boolean, { nullable: true })
+  updatedAt?: true;
+}
+
+@ObjectType()
+export class AdressesMinAggregate {
+  @Field(() => String, { nullable: true })
+  idAdresse?: string;
+  @Field(() => String, { nullable: true })
+  userId?: string;
+  @Field(() => String, { nullable: true })
+  restaurantId?: string;
+  @Field(() => String, { nullable: true })
+  adressName?: string;
+  @Field(() => String, { nullable: true })
+  longitude?: string;
+  @Field(() => String, { nullable: true })
+  latitude?: string;
+  @Field(() => String, { nullable: true })
+  elevation?: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+}
+
+@InputType()
+export class AdressesMinOrderByAggregateInput {
+  @Field(() => SortOrder, { nullable: true })
+  idAdresse?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  userId?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  restaurantId?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  adressName?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  longitude?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  latitude?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  elevation?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  createdAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  updatedAt?: keyof typeof SortOrder;
+}
+
+@InputType()
+export class AdressesOrderByRelationAggregateInput {
+  @Field(() => SortOrder, { nullable: true })
+  _count?: keyof typeof SortOrder;
+}
+
+@InputType()
+export class AdressesOrderByWithAggregationInput {
+  @Field(() => SortOrder, { nullable: true })
+  idAdresse?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  userId?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  restaurantId?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  adressName?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  longitude?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  latitude?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  elevation?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  createdAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  updatedAt?: keyof typeof SortOrder;
+  @Field(() => AdressesCountOrderByAggregateInput, { nullable: true })
+  _count?: InstanceType<typeof AdressesCountOrderByAggregateInput>;
+  @Field(() => AdressesMaxOrderByAggregateInput, { nullable: true })
+  _max?: InstanceType<typeof AdressesMaxOrderByAggregateInput>;
+  @Field(() => AdressesMinOrderByAggregateInput, { nullable: true })
+  _min?: InstanceType<typeof AdressesMinOrderByAggregateInput>;
+}
+
+@InputType()
+export class AdressesOrderByWithRelationInput {
+  @Field(() => SortOrder, { nullable: true })
+  idAdresse?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  userId?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  restaurantId?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  adressName?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  longitude?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  latitude?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  elevation?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  createdAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  updatedAt?: keyof typeof SortOrder;
+  @Field(() => UsersOrderByWithRelationInput, { nullable: true })
+  user?: InstanceType<typeof UsersOrderByWithRelationInput>;
+  @Field(() => RestaurantsOrderByWithRelationInput, { nullable: true })
+  restaurant?: InstanceType<typeof RestaurantsOrderByWithRelationInput>;
+}
+
+@InputType()
+export class AdressesScalarWhereWithAggregatesInput {
+  @Field(() => [AdressesScalarWhereWithAggregatesInput], { nullable: true })
+  AND?: Array<AdressesScalarWhereWithAggregatesInput>;
+  @Field(() => [AdressesScalarWhereWithAggregatesInput], { nullable: true })
+  OR?: Array<AdressesScalarWhereWithAggregatesInput>;
+  @Field(() => [AdressesScalarWhereWithAggregatesInput], { nullable: true })
+  NOT?: Array<AdressesScalarWhereWithAggregatesInput>;
+  @Field(() => StringWithAggregatesFilter, { nullable: true })
+  idAdresse?: InstanceType<typeof StringWithAggregatesFilter>;
+  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
+  userId?: InstanceType<typeof StringNullableWithAggregatesFilter>;
+  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
+  restaurantId?: InstanceType<typeof StringNullableWithAggregatesFilter>;
+  @Field(() => StringWithAggregatesFilter, { nullable: true })
+  adressName?: InstanceType<typeof StringWithAggregatesFilter>;
+  @Field(() => StringWithAggregatesFilter, { nullable: true })
+  longitude?: InstanceType<typeof StringWithAggregatesFilter>;
+  @Field(() => StringWithAggregatesFilter, { nullable: true })
+  latitude?: InstanceType<typeof StringWithAggregatesFilter>;
+  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
+  elevation?: InstanceType<typeof StringNullableWithAggregatesFilter>;
+  @Field(() => DateTimeWithAggregatesFilter, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeWithAggregatesFilter>;
+  @Field(() => DateTimeWithAggregatesFilter, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeWithAggregatesFilter>;
+}
+
+@InputType()
+export class AdressesScalarWhereInput {
+  @Field(() => [AdressesScalarWhereInput], { nullable: true })
+  AND?: Array<AdressesScalarWhereInput>;
+  @Field(() => [AdressesScalarWhereInput], { nullable: true })
+  OR?: Array<AdressesScalarWhereInput>;
+  @Field(() => [AdressesScalarWhereInput], { nullable: true })
+  NOT?: Array<AdressesScalarWhereInput>;
+  @Field(() => StringFilter, { nullable: true })
+  idAdresse?: InstanceType<typeof StringFilter>;
+  @Field(() => StringNullableFilter, { nullable: true })
+  userId?: InstanceType<typeof StringNullableFilter>;
+  @Field(() => StringNullableFilter, { nullable: true })
+  restaurantId?: InstanceType<typeof StringNullableFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  adressName?: InstanceType<typeof StringFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  longitude?: InstanceType<typeof StringFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  latitude?: InstanceType<typeof StringFilter>;
+  @Field(() => StringNullableFilter, { nullable: true })
+  elevation?: InstanceType<typeof StringNullableFilter>;
+  @Field(() => DateTimeFilter, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFilter>;
+  @Field(() => DateTimeFilter, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFilter>;
+}
+
+@InputType()
+export class AdressesUncheckedCreateNestedManyWithoutRestaurantInput {
+  @Field(() => [AdressesCreateWithoutRestaurantInput], { nullable: true })
+  @Type(() => AdressesCreateWithoutRestaurantInput)
+  create?: Array<AdressesCreateWithoutRestaurantInput>;
+  @Field(() => [AdressesCreateOrConnectWithoutRestaurantInput], { nullable: true })
+  @Type(() => AdressesCreateOrConnectWithoutRestaurantInput)
+  connectOrCreate?: Array<AdressesCreateOrConnectWithoutRestaurantInput>;
+  @Field(() => AdressesCreateManyRestaurantInputEnvelope, { nullable: true })
+  @Type(() => AdressesCreateManyRestaurantInputEnvelope)
+  createMany?: InstanceType<typeof AdressesCreateManyRestaurantInputEnvelope>;
+  @Field(() => [AdressesWhereUniqueInput], { nullable: true })
+  @Type(() => AdressesWhereUniqueInput)
+  connect?: Array<AdressesWhereUniqueInput>;
+}
+
+@InputType()
+export class AdressesUncheckedCreateNestedManyWithoutUserInput {
+  @Field(() => [AdressesCreateWithoutUserInput], { nullable: true })
+  @Type(() => AdressesCreateWithoutUserInput)
+  create?: Array<AdressesCreateWithoutUserInput>;
+  @Field(() => [AdressesCreateOrConnectWithoutUserInput], { nullable: true })
+  @Type(() => AdressesCreateOrConnectWithoutUserInput)
+  connectOrCreate?: Array<AdressesCreateOrConnectWithoutUserInput>;
+  @Field(() => AdressesCreateManyUserInputEnvelope, { nullable: true })
+  @Type(() => AdressesCreateManyUserInputEnvelope)
+  createMany?: InstanceType<typeof AdressesCreateManyUserInputEnvelope>;
+  @Field(() => [AdressesWhereUniqueInput], { nullable: true })
+  @Type(() => AdressesWhereUniqueInput)
+  connect?: Array<AdressesWhereUniqueInput>;
+}
+
+@InputType()
+export class AdressesUncheckedCreateWithoutRestaurantInput {
+  @Field(() => String, { nullable: true })
+  idAdresse?: string;
+  @Field(() => String, { nullable: true })
+  userId?: string;
+  @Field(() => String, { nullable: false })
+  adressName!: string;
+  @Field(() => String, { nullable: false })
+  longitude!: string;
+  @Field(() => String, { nullable: false })
+  latitude!: string;
+  @Field(() => String, { nullable: true })
+  elevation?: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+}
+
+@InputType()
+export class AdressesUncheckedCreateWithoutUserInput {
+  @Field(() => String, { nullable: true })
+  idAdresse?: string;
+  @Field(() => String, { nullable: true })
+  restaurantId?: string;
+  @Field(() => String, { nullable: false })
+  adressName!: string;
+  @Field(() => String, { nullable: false })
+  longitude!: string;
+  @Field(() => String, { nullable: false })
+  latitude!: string;
+  @Field(() => String, { nullable: true })
+  elevation?: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+}
+
+@InputType()
+export class AdressesUncheckedCreateInput {
+  @Field(() => String, { nullable: true })
+  idAdresse?: string;
+  @Field(() => String, { nullable: true })
+  userId?: string;
+  @Field(() => String, { nullable: true })
+  restaurantId?: string;
+  @Field(() => String, { nullable: false })
+  adressName!: string;
+  @Field(() => String, { nullable: false })
+  longitude!: string;
+  @Field(() => String, { nullable: false })
+  latitude!: string;
+  @Field(() => String, { nullable: true })
+  elevation?: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+}
+
+@InputType()
+export class AdressesUncheckedUpdateManyWithoutAdressesInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idAdresse?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  restaurantId?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  adressName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  longitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  latitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  elevation?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class AdressesUncheckedUpdateManyWithoutRestaurantNestedInput {
+  @Field(() => [AdressesCreateWithoutRestaurantInput], { nullable: true })
+  @Type(() => AdressesCreateWithoutRestaurantInput)
+  create?: Array<AdressesCreateWithoutRestaurantInput>;
+  @Field(() => [AdressesCreateOrConnectWithoutRestaurantInput], { nullable: true })
+  @Type(() => AdressesCreateOrConnectWithoutRestaurantInput)
+  connectOrCreate?: Array<AdressesCreateOrConnectWithoutRestaurantInput>;
+  @Field(() => [AdressesUpsertWithWhereUniqueWithoutRestaurantInput], { nullable: true })
+  @Type(() => AdressesUpsertWithWhereUniqueWithoutRestaurantInput)
+  upsert?: Array<AdressesUpsertWithWhereUniqueWithoutRestaurantInput>;
+  @Field(() => AdressesCreateManyRestaurantInputEnvelope, { nullable: true })
+  @Type(() => AdressesCreateManyRestaurantInputEnvelope)
+  createMany?: InstanceType<typeof AdressesCreateManyRestaurantInputEnvelope>;
+  @Field(() => [AdressesWhereUniqueInput], { nullable: true })
+  @Type(() => AdressesWhereUniqueInput)
+  set?: Array<AdressesWhereUniqueInput>;
+  @Field(() => [AdressesWhereUniqueInput], { nullable: true })
+  @Type(() => AdressesWhereUniqueInput)
+  disconnect?: Array<AdressesWhereUniqueInput>;
+  @Field(() => [AdressesWhereUniqueInput], { nullable: true })
+  @Type(() => AdressesWhereUniqueInput)
+  delete?: Array<AdressesWhereUniqueInput>;
+  @Field(() => [AdressesWhereUniqueInput], { nullable: true })
+  @Type(() => AdressesWhereUniqueInput)
+  connect?: Array<AdressesWhereUniqueInput>;
+  @Field(() => [AdressesUpdateWithWhereUniqueWithoutRestaurantInput], { nullable: true })
+  @Type(() => AdressesUpdateWithWhereUniqueWithoutRestaurantInput)
+  update?: Array<AdressesUpdateWithWhereUniqueWithoutRestaurantInput>;
+  @Field(() => [AdressesUpdateManyWithWhereWithoutRestaurantInput], { nullable: true })
+  @Type(() => AdressesUpdateManyWithWhereWithoutRestaurantInput)
+  updateMany?: Array<AdressesUpdateManyWithWhereWithoutRestaurantInput>;
+  @Field(() => [AdressesScalarWhereInput], { nullable: true })
+  @Type(() => AdressesScalarWhereInput)
+  deleteMany?: Array<AdressesScalarWhereInput>;
+}
+
+@InputType()
+export class AdressesUncheckedUpdateManyWithoutUserNestedInput {
+  @Field(() => [AdressesCreateWithoutUserInput], { nullable: true })
+  @Type(() => AdressesCreateWithoutUserInput)
+  create?: Array<AdressesCreateWithoutUserInput>;
+  @Field(() => [AdressesCreateOrConnectWithoutUserInput], { nullable: true })
+  @Type(() => AdressesCreateOrConnectWithoutUserInput)
+  connectOrCreate?: Array<AdressesCreateOrConnectWithoutUserInput>;
+  @Field(() => [AdressesUpsertWithWhereUniqueWithoutUserInput], { nullable: true })
+  @Type(() => AdressesUpsertWithWhereUniqueWithoutUserInput)
+  upsert?: Array<AdressesUpsertWithWhereUniqueWithoutUserInput>;
+  @Field(() => AdressesCreateManyUserInputEnvelope, { nullable: true })
+  @Type(() => AdressesCreateManyUserInputEnvelope)
+  createMany?: InstanceType<typeof AdressesCreateManyUserInputEnvelope>;
+  @Field(() => [AdressesWhereUniqueInput], { nullable: true })
+  @Type(() => AdressesWhereUniqueInput)
+  set?: Array<AdressesWhereUniqueInput>;
+  @Field(() => [AdressesWhereUniqueInput], { nullable: true })
+  @Type(() => AdressesWhereUniqueInput)
+  disconnect?: Array<AdressesWhereUniqueInput>;
+  @Field(() => [AdressesWhereUniqueInput], { nullable: true })
+  @Type(() => AdressesWhereUniqueInput)
+  delete?: Array<AdressesWhereUniqueInput>;
+  @Field(() => [AdressesWhereUniqueInput], { nullable: true })
+  @Type(() => AdressesWhereUniqueInput)
+  connect?: Array<AdressesWhereUniqueInput>;
+  @Field(() => [AdressesUpdateWithWhereUniqueWithoutUserInput], { nullable: true })
+  @Type(() => AdressesUpdateWithWhereUniqueWithoutUserInput)
+  update?: Array<AdressesUpdateWithWhereUniqueWithoutUserInput>;
+  @Field(() => [AdressesUpdateManyWithWhereWithoutUserInput], { nullable: true })
+  @Type(() => AdressesUpdateManyWithWhereWithoutUserInput)
+  updateMany?: Array<AdressesUpdateManyWithWhereWithoutUserInput>;
+  @Field(() => [AdressesScalarWhereInput], { nullable: true })
+  @Type(() => AdressesScalarWhereInput)
+  deleteMany?: Array<AdressesScalarWhereInput>;
+}
+
+@InputType()
+export class AdressesUncheckedUpdateManyInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idAdresse?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  userId?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  restaurantId?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  adressName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  longitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  latitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  elevation?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class AdressesUncheckedUpdateWithoutRestaurantInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idAdresse?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  userId?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  adressName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  longitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  latitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  elevation?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class AdressesUncheckedUpdateWithoutUserInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idAdresse?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  restaurantId?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  adressName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  longitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  latitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  elevation?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class AdressesUncheckedUpdateInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idAdresse?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  userId?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  restaurantId?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  adressName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  longitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  latitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  elevation?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class AdressesUpdateManyMutationInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idAdresse?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  adressName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  longitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  latitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  elevation?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class AdressesUpdateManyWithWhereWithoutRestaurantInput {
+  @Field(() => AdressesScalarWhereInput, { nullable: false })
+  @Type(() => AdressesScalarWhereInput)
+  where!: InstanceType<typeof AdressesScalarWhereInput>;
+  @Field(() => AdressesUpdateManyMutationInput, { nullable: false })
+  @Type(() => AdressesUpdateManyMutationInput)
+  data!: InstanceType<typeof AdressesUpdateManyMutationInput>;
+}
+
+@InputType()
+export class AdressesUpdateManyWithWhereWithoutUserInput {
+  @Field(() => AdressesScalarWhereInput, { nullable: false })
+  @Type(() => AdressesScalarWhereInput)
+  where!: InstanceType<typeof AdressesScalarWhereInput>;
+  @Field(() => AdressesUpdateManyMutationInput, { nullable: false })
+  @Type(() => AdressesUpdateManyMutationInput)
+  data!: InstanceType<typeof AdressesUpdateManyMutationInput>;
+}
+
+@InputType()
+export class AdressesUpdateManyWithoutRestaurantNestedInput {
+  @Field(() => [AdressesCreateWithoutRestaurantInput], { nullable: true })
+  @Type(() => AdressesCreateWithoutRestaurantInput)
+  create?: Array<AdressesCreateWithoutRestaurantInput>;
+  @Field(() => [AdressesCreateOrConnectWithoutRestaurantInput], { nullable: true })
+  @Type(() => AdressesCreateOrConnectWithoutRestaurantInput)
+  connectOrCreate?: Array<AdressesCreateOrConnectWithoutRestaurantInput>;
+  @Field(() => [AdressesUpsertWithWhereUniqueWithoutRestaurantInput], { nullable: true })
+  @Type(() => AdressesUpsertWithWhereUniqueWithoutRestaurantInput)
+  upsert?: Array<AdressesUpsertWithWhereUniqueWithoutRestaurantInput>;
+  @Field(() => AdressesCreateManyRestaurantInputEnvelope, { nullable: true })
+  @Type(() => AdressesCreateManyRestaurantInputEnvelope)
+  createMany?: InstanceType<typeof AdressesCreateManyRestaurantInputEnvelope>;
+  @Field(() => [AdressesWhereUniqueInput], { nullable: true })
+  @Type(() => AdressesWhereUniqueInput)
+  set?: Array<AdressesWhereUniqueInput>;
+  @Field(() => [AdressesWhereUniqueInput], { nullable: true })
+  @Type(() => AdressesWhereUniqueInput)
+  disconnect?: Array<AdressesWhereUniqueInput>;
+  @Field(() => [AdressesWhereUniqueInput], { nullable: true })
+  @Type(() => AdressesWhereUniqueInput)
+  delete?: Array<AdressesWhereUniqueInput>;
+  @Field(() => [AdressesWhereUniqueInput], { nullable: true })
+  @Type(() => AdressesWhereUniqueInput)
+  connect?: Array<AdressesWhereUniqueInput>;
+  @Field(() => [AdressesUpdateWithWhereUniqueWithoutRestaurantInput], { nullable: true })
+  @Type(() => AdressesUpdateWithWhereUniqueWithoutRestaurantInput)
+  update?: Array<AdressesUpdateWithWhereUniqueWithoutRestaurantInput>;
+  @Field(() => [AdressesUpdateManyWithWhereWithoutRestaurantInput], { nullable: true })
+  @Type(() => AdressesUpdateManyWithWhereWithoutRestaurantInput)
+  updateMany?: Array<AdressesUpdateManyWithWhereWithoutRestaurantInput>;
+  @Field(() => [AdressesScalarWhereInput], { nullable: true })
+  @Type(() => AdressesScalarWhereInput)
+  deleteMany?: Array<AdressesScalarWhereInput>;
+}
+
+@InputType()
+export class AdressesUpdateManyWithoutUserNestedInput {
+  @Field(() => [AdressesCreateWithoutUserInput], { nullable: true })
+  @Type(() => AdressesCreateWithoutUserInput)
+  create?: Array<AdressesCreateWithoutUserInput>;
+  @Field(() => [AdressesCreateOrConnectWithoutUserInput], { nullable: true })
+  @Type(() => AdressesCreateOrConnectWithoutUserInput)
+  connectOrCreate?: Array<AdressesCreateOrConnectWithoutUserInput>;
+  @Field(() => [AdressesUpsertWithWhereUniqueWithoutUserInput], { nullable: true })
+  @Type(() => AdressesUpsertWithWhereUniqueWithoutUserInput)
+  upsert?: Array<AdressesUpsertWithWhereUniqueWithoutUserInput>;
+  @Field(() => AdressesCreateManyUserInputEnvelope, { nullable: true })
+  @Type(() => AdressesCreateManyUserInputEnvelope)
+  createMany?: InstanceType<typeof AdressesCreateManyUserInputEnvelope>;
+  @Field(() => [AdressesWhereUniqueInput], { nullable: true })
+  @Type(() => AdressesWhereUniqueInput)
+  set?: Array<AdressesWhereUniqueInput>;
+  @Field(() => [AdressesWhereUniqueInput], { nullable: true })
+  @Type(() => AdressesWhereUniqueInput)
+  disconnect?: Array<AdressesWhereUniqueInput>;
+  @Field(() => [AdressesWhereUniqueInput], { nullable: true })
+  @Type(() => AdressesWhereUniqueInput)
+  delete?: Array<AdressesWhereUniqueInput>;
+  @Field(() => [AdressesWhereUniqueInput], { nullable: true })
+  @Type(() => AdressesWhereUniqueInput)
+  connect?: Array<AdressesWhereUniqueInput>;
+  @Field(() => [AdressesUpdateWithWhereUniqueWithoutUserInput], { nullable: true })
+  @Type(() => AdressesUpdateWithWhereUniqueWithoutUserInput)
+  update?: Array<AdressesUpdateWithWhereUniqueWithoutUserInput>;
+  @Field(() => [AdressesUpdateManyWithWhereWithoutUserInput], { nullable: true })
+  @Type(() => AdressesUpdateManyWithWhereWithoutUserInput)
+  updateMany?: Array<AdressesUpdateManyWithWhereWithoutUserInput>;
+  @Field(() => [AdressesScalarWhereInput], { nullable: true })
+  @Type(() => AdressesScalarWhereInput)
+  deleteMany?: Array<AdressesScalarWhereInput>;
+}
+
+@InputType()
+export class AdressesUpdateWithWhereUniqueWithoutRestaurantInput {
+  @Field(() => AdressesWhereUniqueInput, { nullable: false })
+  @Type(() => AdressesWhereUniqueInput)
+  where!: InstanceType<typeof AdressesWhereUniqueInput>;
+  @Field(() => AdressesUpdateWithoutRestaurantInput, { nullable: false })
+  @Type(() => AdressesUpdateWithoutRestaurantInput)
+  data!: InstanceType<typeof AdressesUpdateWithoutRestaurantInput>;
+}
+
+@InputType()
+export class AdressesUpdateWithWhereUniqueWithoutUserInput {
+  @Field(() => AdressesWhereUniqueInput, { nullable: false })
+  @Type(() => AdressesWhereUniqueInput)
+  where!: InstanceType<typeof AdressesWhereUniqueInput>;
+  @Field(() => AdressesUpdateWithoutUserInput, { nullable: false })
+  @Type(() => AdressesUpdateWithoutUserInput)
+  data!: InstanceType<typeof AdressesUpdateWithoutUserInput>;
+}
+
+@InputType()
+export class AdressesUpdateWithoutRestaurantInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idAdresse?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  adressName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  longitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  latitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  elevation?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => UsersUpdateOneWithoutAdressesNestedInput, { nullable: true })
+  user?: InstanceType<typeof UsersUpdateOneWithoutAdressesNestedInput>;
+}
+
+@InputType()
+export class AdressesUpdateWithoutUserInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idAdresse?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  adressName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  longitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  latitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  elevation?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => RestaurantsUpdateOneWithoutAdressesNestedInput, { nullable: true })
+  restaurant?: InstanceType<typeof RestaurantsUpdateOneWithoutAdressesNestedInput>;
+}
+
+@InputType()
+export class AdressesUpdateInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idAdresse?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  adressName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  longitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  latitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  elevation?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => UsersUpdateOneWithoutAdressesNestedInput, { nullable: true })
+  user?: InstanceType<typeof UsersUpdateOneWithoutAdressesNestedInput>;
+  @Field(() => RestaurantsUpdateOneWithoutAdressesNestedInput, { nullable: true })
+  restaurant?: InstanceType<typeof RestaurantsUpdateOneWithoutAdressesNestedInput>;
+}
+
+@InputType()
+export class AdressesUpsertWithWhereUniqueWithoutRestaurantInput {
+  @Field(() => AdressesWhereUniqueInput, { nullable: false })
+  @Type(() => AdressesWhereUniqueInput)
+  where!: InstanceType<typeof AdressesWhereUniqueInput>;
+  @Field(() => AdressesUpdateWithoutRestaurantInput, { nullable: false })
+  @Type(() => AdressesUpdateWithoutRestaurantInput)
+  update!: InstanceType<typeof AdressesUpdateWithoutRestaurantInput>;
+  @Field(() => AdressesCreateWithoutRestaurantInput, { nullable: false })
+  @Type(() => AdressesCreateWithoutRestaurantInput)
+  create!: InstanceType<typeof AdressesCreateWithoutRestaurantInput>;
+}
+
+@InputType()
+export class AdressesUpsertWithWhereUniqueWithoutUserInput {
+  @Field(() => AdressesWhereUniqueInput, { nullable: false })
+  @Type(() => AdressesWhereUniqueInput)
+  where!: InstanceType<typeof AdressesWhereUniqueInput>;
+  @Field(() => AdressesUpdateWithoutUserInput, { nullable: false })
+  @Type(() => AdressesUpdateWithoutUserInput)
+  update!: InstanceType<typeof AdressesUpdateWithoutUserInput>;
+  @Field(() => AdressesCreateWithoutUserInput, { nullable: false })
+  @Type(() => AdressesCreateWithoutUserInput)
+  create!: InstanceType<typeof AdressesCreateWithoutUserInput>;
+}
+
+@InputType()
+export class AdressesWhereUniqueInput {
+  @Field(() => String, { nullable: true })
+  idAdresse?: string;
+}
+
+@InputType()
+export class AdressesWhereInput {
+  @Field(() => [AdressesWhereInput], { nullable: true })
+  AND?: Array<AdressesWhereInput>;
+  @Field(() => [AdressesWhereInput], { nullable: true })
+  OR?: Array<AdressesWhereInput>;
+  @Field(() => [AdressesWhereInput], { nullable: true })
+  NOT?: Array<AdressesWhereInput>;
+  @Field(() => StringFilter, { nullable: true })
+  idAdresse?: InstanceType<typeof StringFilter>;
+  @Field(() => StringNullableFilter, { nullable: true })
+  userId?: InstanceType<typeof StringNullableFilter>;
+  @Field(() => StringNullableFilter, { nullable: true })
+  restaurantId?: InstanceType<typeof StringNullableFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  adressName?: InstanceType<typeof StringFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  longitude?: InstanceType<typeof StringFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  latitude?: InstanceType<typeof StringFilter>;
+  @Field(() => StringNullableFilter, { nullable: true })
+  elevation?: InstanceType<typeof StringNullableFilter>;
+  @Field(() => DateTimeFilter, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFilter>;
+  @Field(() => DateTimeFilter, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFilter>;
+  @Field(() => UsersRelationFilter, { nullable: true })
+  user?: InstanceType<typeof UsersRelationFilter>;
+  @Field(() => RestaurantsRelationFilter, { nullable: true })
+  restaurant?: InstanceType<typeof RestaurantsRelationFilter>;
+}
+
+@ObjectType()
+export class Adresses {
+  @Field(() => ID, { nullable: false })
+  idAdresse!: string;
+  @Field(() => String, { nullable: true })
+  userId!: string | null;
+  @Field(() => String, { nullable: true })
+  restaurantId!: string | null;
+  @Field(() => String, { nullable: false })
+  adressName!: string;
+  @Field(() => String, { nullable: false })
+  longitude!: string;
+  @Field(() => String, { nullable: false })
+  latitude!: string;
+  @Field(() => String, { nullable: true })
+  elevation!: string | null;
+  @Field(() => Date, { nullable: false })
+  createdAt!: Date;
+  @Field(() => Date, { nullable: false })
+  updatedAt!: Date;
+  @Field(() => Users, { nullable: true })
+  user?: InstanceType<typeof Users> | null;
+  @Field(() => Restaurants, { nullable: true })
+  restaurant?: InstanceType<typeof Restaurants> | null;
+}
+
+@ObjectType()
+export class AggregateAdresses {
+  @Field(() => AdressesCountAggregate, { nullable: true })
+  _count?: InstanceType<typeof AdressesCountAggregate>;
+  @Field(() => AdressesMinAggregate, { nullable: true })
+  _min?: InstanceType<typeof AdressesMinAggregate>;
+  @Field(() => AdressesMaxAggregate, { nullable: true })
+  _max?: InstanceType<typeof AdressesMaxAggregate>;
+}
+
+@ArgsType()
+export class CreateManyAdressesArgs {
+  @Field(() => [AdressesCreateManyInput], { nullable: false })
+  @Type(() => AdressesCreateManyInput)
+  data!: Array<AdressesCreateManyInput>;
+  @Field(() => Boolean, { nullable: true })
+  skipDuplicates?: boolean;
+}
+
+@ArgsType()
+export class CreateOneAdressesArgs {
+  @Field(() => AdressesCreateInput, { nullable: false })
+  @Type(() => AdressesCreateInput)
+  data!: InstanceType<typeof AdressesCreateInput>;
+}
+
+@ArgsType()
+export class DeleteManyAdressesArgs {
+  @Field(() => AdressesWhereInput, { nullable: true })
+  @Type(() => AdressesWhereInput)
+  where?: InstanceType<typeof AdressesWhereInput>;
+}
+
+@ArgsType()
+export class DeleteOneAdressesArgs {
+  @Field(() => AdressesWhereUniqueInput, { nullable: false })
+  @Type(() => AdressesWhereUniqueInput)
+  where!: InstanceType<typeof AdressesWhereUniqueInput>;
+}
+
+@ArgsType()
+export class FindFirstAdressesArgs {
+  @Field(() => AdressesWhereInput, { nullable: true })
+  @Type(() => AdressesWhereInput)
+  where?: InstanceType<typeof AdressesWhereInput>;
+  @Field(() => [AdressesOrderByWithRelationInput], { nullable: true })
+  orderBy?: Array<AdressesOrderByWithRelationInput>;
+  @Field(() => AdressesWhereUniqueInput, { nullable: true })
+  cursor?: InstanceType<typeof AdressesWhereUniqueInput>;
+  @Field(() => Int, { nullable: true })
+  take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
+  @Field(() => [AdressesScalarFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof AdressesScalarFieldEnum>;
+}
+
+@ArgsType()
+export class FindManyAdressesArgs {
+  @Field(() => AdressesWhereInput, { nullable: true })
+  @Type(() => AdressesWhereInput)
+  where?: InstanceType<typeof AdressesWhereInput>;
+  @Field(() => [AdressesOrderByWithRelationInput], { nullable: true })
+  orderBy?: Array<AdressesOrderByWithRelationInput>;
+  @Field(() => AdressesWhereUniqueInput, { nullable: true })
+  cursor?: InstanceType<typeof AdressesWhereUniqueInput>;
+  @Field(() => Int, { nullable: true })
+  take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
+  @Field(() => [AdressesScalarFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof AdressesScalarFieldEnum>;
+}
+
+@ArgsType()
+export class FindUniqueAdressesArgs {
+  @Field(() => AdressesWhereUniqueInput, { nullable: false })
+  @Type(() => AdressesWhereUniqueInput)
+  where!: InstanceType<typeof AdressesWhereUniqueInput>;
+}
+
+@ArgsType()
+export class UpdateManyAdressesArgs {
+  @Field(() => AdressesUpdateManyMutationInput, { nullable: false })
+  @Type(() => AdressesUpdateManyMutationInput)
+  data!: InstanceType<typeof AdressesUpdateManyMutationInput>;
+  @Field(() => AdressesWhereInput, { nullable: true })
+  @Type(() => AdressesWhereInput)
+  where?: InstanceType<typeof AdressesWhereInput>;
+}
+
+@ArgsType()
+export class UpdateOneAdressesArgs {
+  @Field(() => AdressesUpdateInput, { nullable: false })
+  @Type(() => AdressesUpdateInput)
+  data!: InstanceType<typeof AdressesUpdateInput>;
+  @Field(() => AdressesWhereUniqueInput, { nullable: false })
+  @Type(() => AdressesWhereUniqueInput)
+  where!: InstanceType<typeof AdressesWhereUniqueInput>;
+}
+
+@ArgsType()
+export class UpsertOneAdressesArgs {
+  @Field(() => AdressesWhereUniqueInput, { nullable: false })
+  @Type(() => AdressesWhereUniqueInput)
+  where!: InstanceType<typeof AdressesWhereUniqueInput>;
+  @Field(() => AdressesCreateInput, { nullable: false })
+  @Type(() => AdressesCreateInput)
+  create!: InstanceType<typeof AdressesCreateInput>;
+  @Field(() => AdressesUpdateInput, { nullable: false })
+  @Type(() => AdressesUpdateInput)
+  update!: InstanceType<typeof AdressesUpdateInput>;
+}
 
 @ObjectType()
 export class AggregateAuthUser {
@@ -104,7 +1398,7 @@ export class AggregateAuthUser {
   _max?: InstanceType<typeof AuthUserMaxAggregate>;
 }
 
-@InputType()
+@ArgsType()
 export class AuthUserAggregateArgs {
   @Field(() => AuthUserWhereInput, { nullable: true })
   @Type(() => AuthUserWhereInput)
@@ -328,7 +1622,7 @@ export class AuthUserCreateInput {
   isPhoneConfirmed?: boolean;
 }
 
-@InputType()
+@ArgsType()
 export class AuthUserGroupByArgs {
   @Field(() => AuthUserWhereInput, { nullable: true })
   @Type(() => AuthUserWhereInput)
@@ -1050,7 +2344,7 @@ export class AuthUser {
   isPhoneConfirmed!: boolean;
 }
 
-@InputType()
+@ArgsType()
 export class CreateManyAuthUserArgs {
   @Field(() => [AuthUserCreateManyInput], { nullable: false })
   @Type(() => AuthUserCreateManyInput)
@@ -1059,28 +2353,28 @@ export class CreateManyAuthUserArgs {
   skipDuplicates?: boolean;
 }
 
-@InputType()
+@ArgsType()
 export class CreateOneAuthUserArgs {
   @Field(() => AuthUserCreateInput, { nullable: false })
   @Type(() => AuthUserCreateInput)
   data!: InstanceType<typeof AuthUserCreateInput>;
 }
 
-@InputType()
+@ArgsType()
 export class DeleteManyAuthUserArgs {
   @Field(() => AuthUserWhereInput, { nullable: true })
   @Type(() => AuthUserWhereInput)
   where?: InstanceType<typeof AuthUserWhereInput>;
 }
 
-@InputType()
+@ArgsType()
 export class DeleteOneAuthUserArgs {
   @Field(() => AuthUserWhereUniqueInput, { nullable: false })
   @Type(() => AuthUserWhereUniqueInput)
   where!: InstanceType<typeof AuthUserWhereUniqueInput>;
 }
 
-@InputType()
+@ArgsType()
 export class FindFirstAuthUserArgs {
   @Field(() => AuthUserWhereInput, { nullable: true })
   @Type(() => AuthUserWhereInput)
@@ -1097,7 +2391,7 @@ export class FindFirstAuthUserArgs {
   distinct?: Array<keyof typeof AuthUserScalarFieldEnum>;
 }
 
-@InputType()
+@ArgsType()
 export class FindManyAuthUserArgs {
   @Field(() => AuthUserWhereInput, { nullable: true })
   @Type(() => AuthUserWhereInput)
@@ -1114,14 +2408,14 @@ export class FindManyAuthUserArgs {
   distinct?: Array<keyof typeof AuthUserScalarFieldEnum>;
 }
 
-@InputType()
+@ArgsType()
 export class FindUniqueAuthUserArgs {
   @Field(() => AuthUserWhereUniqueInput, { nullable: false })
   @Type(() => AuthUserWhereUniqueInput)
   where!: InstanceType<typeof AuthUserWhereUniqueInput>;
 }
 
-@InputType()
+@ArgsType()
 export class UpdateManyAuthUserArgs {
   @Field(() => AuthUserUpdateManyMutationInput, { nullable: false })
   @Type(() => AuthUserUpdateManyMutationInput)
@@ -1131,7 +2425,7 @@ export class UpdateManyAuthUserArgs {
   where?: InstanceType<typeof AuthUserWhereInput>;
 }
 
-@InputType()
+@ArgsType()
 export class UpdateOneAuthUserArgs {
   @Field(() => AuthUserUpdateInput, { nullable: false })
   @Type(() => AuthUserUpdateInput)
@@ -1141,7 +2435,7 @@ export class UpdateOneAuthUserArgs {
   where!: InstanceType<typeof AuthUserWhereUniqueInput>;
 }
 
-@InputType()
+@ArgsType()
 export class UpsertOneAuthUserArgs {
   @Field(() => AuthUserWhereUniqueInput, { nullable: false })
   @Type(() => AuthUserWhereUniqueInput)
@@ -1164,7 +2458,7 @@ export class AggregateFileEntity {
   _max?: InstanceType<typeof FileEntityMaxAggregate>;
 }
 
-@InputType()
+@ArgsType()
 export class CreateManyFileEntityArgs {
   @Field(() => [FileEntityCreateManyInput], { nullable: false })
   @Type(() => FileEntityCreateManyInput)
@@ -1173,28 +2467,28 @@ export class CreateManyFileEntityArgs {
   skipDuplicates?: boolean;
 }
 
-@InputType()
+@ArgsType()
 export class CreateOneFileEntityArgs {
   @Field(() => FileEntityCreateInput, { nullable: false })
   @Type(() => FileEntityCreateInput)
   data!: InstanceType<typeof FileEntityCreateInput>;
 }
 
-@InputType()
+@ArgsType()
 export class DeleteManyFileEntityArgs {
   @Field(() => FileEntityWhereInput, { nullable: true })
   @Type(() => FileEntityWhereInput)
   where?: InstanceType<typeof FileEntityWhereInput>;
 }
 
-@InputType()
+@ArgsType()
 export class DeleteOneFileEntityArgs {
   @Field(() => FileEntityWhereUniqueInput, { nullable: false })
   @Type(() => FileEntityWhereUniqueInput)
   where!: InstanceType<typeof FileEntityWhereUniqueInput>;
 }
 
-@InputType()
+@ArgsType()
 export class FileEntityAggregateArgs {
   @Field(() => FileEntityWhereInput, { nullable: true })
   @Type(() => FileEntityWhereInput)
@@ -1230,8 +2524,6 @@ export class FileEntityCountAggregateInput {
   @Field(() => Boolean, { nullable: true })
   updatedAt?: true;
   @Field(() => Boolean, { nullable: true })
-  profileId?: true;
-  @Field(() => Boolean, { nullable: true })
   _all?: true;
 }
 
@@ -1250,8 +2542,6 @@ export class FileEntityCountAggregate {
   @Field(() => Int, { nullable: false })
   updatedAt!: number;
   @Field(() => Int, { nullable: false })
-  profileId!: number;
-  @Field(() => Int, { nullable: false })
   _all!: number;
 }
 
@@ -1269,8 +2559,14 @@ export class FileEntityCountOrderByAggregateInput {
   createdAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  profileId?: keyof typeof SortOrder;
+}
+
+@ObjectType()
+export class FileEntityCount {
+  @Field(() => Int, { nullable: false })
+  Restaurants?: number;
+  @Field(() => Int, { nullable: false })
+  Profiles?: number;
 }
 
 @InputType()
@@ -1287,35 +2583,56 @@ export class FileEntityCreateManyInput {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
-  @Field(() => String, { nullable: false })
-  profileId!: string;
 }
 
 @InputType()
-export class FileEntityCreateNestedOneWithoutProfileInput {
-  @Field(() => FileEntityCreateWithoutProfileInput, { nullable: true })
-  @Type(() => FileEntityCreateWithoutProfileInput)
-  create?: InstanceType<typeof FileEntityCreateWithoutProfileInput>;
-  @Field(() => FileEntityCreateOrConnectWithoutProfileInput, { nullable: true })
-  @Type(() => FileEntityCreateOrConnectWithoutProfileInput)
-  connectOrCreate?: InstanceType<typeof FileEntityCreateOrConnectWithoutProfileInput>;
+export class FileEntityCreateNestedOneWithoutProfilesInput {
+  @Field(() => FileEntityCreateWithoutProfilesInput, { nullable: true })
+  @Type(() => FileEntityCreateWithoutProfilesInput)
+  create?: InstanceType<typeof FileEntityCreateWithoutProfilesInput>;
+  @Field(() => FileEntityCreateOrConnectWithoutProfilesInput, { nullable: true })
+  @Type(() => FileEntityCreateOrConnectWithoutProfilesInput)
+  connectOrCreate?: InstanceType<typeof FileEntityCreateOrConnectWithoutProfilesInput>;
   @Field(() => FileEntityWhereUniqueInput, { nullable: true })
   @Type(() => FileEntityWhereUniqueInput)
   connect?: InstanceType<typeof FileEntityWhereUniqueInput>;
 }
 
 @InputType()
-export class FileEntityCreateOrConnectWithoutProfileInput {
-  @Field(() => FileEntityWhereUniqueInput, { nullable: false })
+export class FileEntityCreateNestedOneWithoutRestaurantsInput {
+  @Field(() => FileEntityCreateWithoutRestaurantsInput, { nullable: true })
+  @Type(() => FileEntityCreateWithoutRestaurantsInput)
+  create?: InstanceType<typeof FileEntityCreateWithoutRestaurantsInput>;
+  @Field(() => FileEntityCreateOrConnectWithoutRestaurantsInput, { nullable: true })
+  @Type(() => FileEntityCreateOrConnectWithoutRestaurantsInput)
+  connectOrCreate?: InstanceType<typeof FileEntityCreateOrConnectWithoutRestaurantsInput>;
+  @Field(() => FileEntityWhereUniqueInput, { nullable: true })
   @Type(() => FileEntityWhereUniqueInput)
-  where!: InstanceType<typeof FileEntityWhereUniqueInput>;
-  @Field(() => FileEntityCreateWithoutProfileInput, { nullable: false })
-  @Type(() => FileEntityCreateWithoutProfileInput)
-  create!: InstanceType<typeof FileEntityCreateWithoutProfileInput>;
+  connect?: InstanceType<typeof FileEntityWhereUniqueInput>;
 }
 
 @InputType()
-export class FileEntityCreateWithoutProfileInput {
+export class FileEntityCreateOrConnectWithoutProfilesInput {
+  @Field(() => FileEntityWhereUniqueInput, { nullable: false })
+  @Type(() => FileEntityWhereUniqueInput)
+  where!: InstanceType<typeof FileEntityWhereUniqueInput>;
+  @Field(() => FileEntityCreateWithoutProfilesInput, { nullable: false })
+  @Type(() => FileEntityCreateWithoutProfilesInput)
+  create!: InstanceType<typeof FileEntityCreateWithoutProfilesInput>;
+}
+
+@InputType()
+export class FileEntityCreateOrConnectWithoutRestaurantsInput {
+  @Field(() => FileEntityWhereUniqueInput, { nullable: false })
+  @Type(() => FileEntityWhereUniqueInput)
+  where!: InstanceType<typeof FileEntityWhereUniqueInput>;
+  @Field(() => FileEntityCreateWithoutRestaurantsInput, { nullable: false })
+  @Type(() => FileEntityCreateWithoutRestaurantsInput)
+  create!: InstanceType<typeof FileEntityCreateWithoutRestaurantsInput>;
+}
+
+@InputType()
+export class FileEntityCreateWithoutProfilesInput {
   @Field(() => String, { nullable: true })
   id?: string;
   @Field(() => String, { nullable: false })
@@ -1328,6 +2645,26 @@ export class FileEntityCreateWithoutProfileInput {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
+  @Field(() => RestaurantsCreateNestedManyWithoutRestauMainImageInput, { nullable: true })
+  Restaurants?: InstanceType<typeof RestaurantsCreateNestedManyWithoutRestauMainImageInput>;
+}
+
+@InputType()
+export class FileEntityCreateWithoutRestaurantsInput {
+  @Field(() => String, { nullable: true })
+  id?: string;
+  @Field(() => String, { nullable: false })
+  fileName!: string;
+  @Field(() => String, { nullable: false })
+  fileUrl!: string;
+  @Field(() => String, { nullable: false })
+  key!: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => ProfileCreateNestedManyWithoutProfilePictureInput, { nullable: true })
+  Profiles?: InstanceType<typeof ProfileCreateNestedManyWithoutProfilePictureInput>;
 }
 
 @InputType()
@@ -1344,11 +2681,13 @@ export class FileEntityCreateInput {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
-  @Field(() => ProfileCreateNestedOneWithoutProfilePictureInput, { nullable: false })
-  Profile!: InstanceType<typeof ProfileCreateNestedOneWithoutProfilePictureInput>;
+  @Field(() => RestaurantsCreateNestedManyWithoutRestauMainImageInput, { nullable: true })
+  Restaurants?: InstanceType<typeof RestaurantsCreateNestedManyWithoutRestauMainImageInput>;
+  @Field(() => ProfileCreateNestedManyWithoutProfilePictureInput, { nullable: true })
+  Profiles?: InstanceType<typeof ProfileCreateNestedManyWithoutProfilePictureInput>;
 }
 
-@InputType()
+@ArgsType()
 export class FileEntityGroupByArgs {
   @Field(() => FileEntityWhereInput, { nullable: true })
   @Type(() => FileEntityWhereInput)
@@ -1385,8 +2724,6 @@ export class FileEntityGroupBy {
   createdAt!: Date | string;
   @Field(() => Date, { nullable: false })
   updatedAt!: Date | string;
-  @Field(() => String, { nullable: false })
-  profileId!: string;
   @Field(() => FileEntityCountAggregate, { nullable: true })
   _count?: InstanceType<typeof FileEntityCountAggregate>;
   @Field(() => FileEntityMinAggregate, { nullable: true })
@@ -1409,8 +2746,6 @@ export class FileEntityMaxAggregateInput {
   createdAt?: true;
   @Field(() => Boolean, { nullable: true })
   updatedAt?: true;
-  @Field(() => Boolean, { nullable: true })
-  profileId?: true;
 }
 
 @ObjectType()
@@ -1427,8 +2762,6 @@ export class FileEntityMaxAggregate {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
-  @Field(() => String, { nullable: true })
-  profileId?: string;
 }
 
 @InputType()
@@ -1445,8 +2778,6 @@ export class FileEntityMaxOrderByAggregateInput {
   createdAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  profileId?: keyof typeof SortOrder;
 }
 
 @InputType()
@@ -1463,8 +2794,6 @@ export class FileEntityMinAggregateInput {
   createdAt?: true;
   @Field(() => Boolean, { nullable: true })
   updatedAt?: true;
-  @Field(() => Boolean, { nullable: true })
-  profileId?: true;
 }
 
 @ObjectType()
@@ -1481,8 +2810,6 @@ export class FileEntityMinAggregate {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
-  @Field(() => String, { nullable: true })
-  profileId?: string;
 }
 
 @InputType()
@@ -1499,8 +2826,6 @@ export class FileEntityMinOrderByAggregateInput {
   createdAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  profileId?: keyof typeof SortOrder;
 }
 
 @InputType()
@@ -1517,8 +2842,6 @@ export class FileEntityOrderByWithAggregationInput {
   createdAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  profileId?: keyof typeof SortOrder;
   @Field(() => FileEntityCountOrderByAggregateInput, { nullable: true })
   _count?: InstanceType<typeof FileEntityCountOrderByAggregateInput>;
   @Field(() => FileEntityMaxOrderByAggregateInput, { nullable: true })
@@ -1541,10 +2864,10 @@ export class FileEntityOrderByWithRelationInput {
   createdAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  profileId?: keyof typeof SortOrder;
-  @Field(() => ProfileOrderByWithRelationInput, { nullable: true })
-  Profile?: InstanceType<typeof ProfileOrderByWithRelationInput>;
+  @Field(() => RestaurantsOrderByRelationAggregateInput, { nullable: true })
+  Restaurants?: InstanceType<typeof RestaurantsOrderByRelationAggregateInput>;
+  @Field(() => ProfileOrderByRelationAggregateInput, { nullable: true })
+  Profiles?: InstanceType<typeof ProfileOrderByRelationAggregateInput>;
 }
 
 @InputType()
@@ -1575,25 +2898,10 @@ export class FileEntityScalarWhereWithAggregatesInput {
   createdAt?: InstanceType<typeof DateTimeWithAggregatesFilter>;
   @Field(() => DateTimeWithAggregatesFilter, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeWithAggregatesFilter>;
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  profileId?: InstanceType<typeof StringWithAggregatesFilter>;
 }
 
 @InputType()
-export class FileEntityUncheckedCreateNestedOneWithoutProfileInput {
-  @Field(() => FileEntityCreateWithoutProfileInput, { nullable: true })
-  @Type(() => FileEntityCreateWithoutProfileInput)
-  create?: InstanceType<typeof FileEntityCreateWithoutProfileInput>;
-  @Field(() => FileEntityCreateOrConnectWithoutProfileInput, { nullable: true })
-  @Type(() => FileEntityCreateOrConnectWithoutProfileInput)
-  connectOrCreate?: InstanceType<typeof FileEntityCreateOrConnectWithoutProfileInput>;
-  @Field(() => FileEntityWhereUniqueInput, { nullable: true })
-  @Type(() => FileEntityWhereUniqueInput)
-  connect?: InstanceType<typeof FileEntityWhereUniqueInput>;
-}
-
-@InputType()
-export class FileEntityUncheckedCreateWithoutProfileInput {
+export class FileEntityUncheckedCreateWithoutProfilesInput {
   @Field(() => String, { nullable: true })
   id?: string;
   @Field(() => String, { nullable: false })
@@ -1606,6 +2914,26 @@ export class FileEntityUncheckedCreateWithoutProfileInput {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
+  @Field(() => RestaurantsUncheckedCreateNestedManyWithoutRestauMainImageInput, { nullable: true })
+  Restaurants?: InstanceType<typeof RestaurantsUncheckedCreateNestedManyWithoutRestauMainImageInput>;
+}
+
+@InputType()
+export class FileEntityUncheckedCreateWithoutRestaurantsInput {
+  @Field(() => String, { nullable: true })
+  id?: string;
+  @Field(() => String, { nullable: false })
+  fileName!: string;
+  @Field(() => String, { nullable: false })
+  fileUrl!: string;
+  @Field(() => String, { nullable: false })
+  key!: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => ProfileUncheckedCreateNestedManyWithoutProfilePictureInput, { nullable: true })
+  Profiles?: InstanceType<typeof ProfileUncheckedCreateNestedManyWithoutProfilePictureInput>;
 }
 
 @InputType()
@@ -1622,8 +2950,10 @@ export class FileEntityUncheckedCreateInput {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
-  @Field(() => String, { nullable: false })
-  profileId!: string;
+  @Field(() => RestaurantsUncheckedCreateNestedManyWithoutRestauMainImageInput, { nullable: true })
+  Restaurants?: InstanceType<typeof RestaurantsUncheckedCreateNestedManyWithoutRestauMainImageInput>;
+  @Field(() => ProfileUncheckedCreateNestedManyWithoutProfilePictureInput, { nullable: true })
+  Profiles?: InstanceType<typeof ProfileUncheckedCreateNestedManyWithoutProfilePictureInput>;
 }
 
 @InputType()
@@ -1640,35 +2970,10 @@ export class FileEntityUncheckedUpdateManyInput {
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  profileId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
 }
 
 @InputType()
-export class FileEntityUncheckedUpdateOneWithoutProfileNestedInput {
-  @Field(() => FileEntityCreateWithoutProfileInput, { nullable: true })
-  @Type(() => FileEntityCreateWithoutProfileInput)
-  create?: InstanceType<typeof FileEntityCreateWithoutProfileInput>;
-  @Field(() => FileEntityCreateOrConnectWithoutProfileInput, { nullable: true })
-  @Type(() => FileEntityCreateOrConnectWithoutProfileInput)
-  connectOrCreate?: InstanceType<typeof FileEntityCreateOrConnectWithoutProfileInput>;
-  @Field(() => FileEntityUpsertWithoutProfileInput, { nullable: true })
-  @Type(() => FileEntityUpsertWithoutProfileInput)
-  upsert?: InstanceType<typeof FileEntityUpsertWithoutProfileInput>;
-  @Field(() => Boolean, { nullable: true })
-  disconnect?: boolean;
-  @Field(() => Boolean, { nullable: true })
-  delete?: boolean;
-  @Field(() => FileEntityWhereUniqueInput, { nullable: true })
-  @Type(() => FileEntityWhereUniqueInput)
-  connect?: InstanceType<typeof FileEntityWhereUniqueInput>;
-  @Field(() => FileEntityUpdateWithoutProfileInput, { nullable: true })
-  @Type(() => FileEntityUpdateWithoutProfileInput)
-  update?: InstanceType<typeof FileEntityUpdateWithoutProfileInput>;
-}
-
-@InputType()
-export class FileEntityUncheckedUpdateWithoutProfileInput {
+export class FileEntityUncheckedUpdateWithoutProfilesInput {
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   id?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
@@ -1681,6 +2986,26 @@ export class FileEntityUncheckedUpdateWithoutProfileInput {
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => RestaurantsUncheckedUpdateManyWithoutRestauMainImageNestedInput, { nullable: true })
+  Restaurants?: InstanceType<typeof RestaurantsUncheckedUpdateManyWithoutRestauMainImageNestedInput>;
+}
+
+@InputType()
+export class FileEntityUncheckedUpdateWithoutRestaurantsInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  id?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  fileName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  fileUrl?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  key?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => ProfileUncheckedUpdateManyWithoutProfilePictureNestedInput, { nullable: true })
+  Profiles?: InstanceType<typeof ProfileUncheckedUpdateManyWithoutProfilePictureNestedInput>;
 }
 
 @InputType()
@@ -1697,8 +3022,10 @@ export class FileEntityUncheckedUpdateInput {
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  profileId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => RestaurantsUncheckedUpdateManyWithoutRestauMainImageNestedInput, { nullable: true })
+  Restaurants?: InstanceType<typeof RestaurantsUncheckedUpdateManyWithoutRestauMainImageNestedInput>;
+  @Field(() => ProfileUncheckedUpdateManyWithoutProfilePictureNestedInput, { nullable: true })
+  Profiles?: InstanceType<typeof ProfileUncheckedUpdateManyWithoutProfilePictureNestedInput>;
 }
 
 @InputType()
@@ -1718,16 +3045,35 @@ export class FileEntityUpdateManyMutationInput {
 }
 
 @InputType()
-export class FileEntityUpdateOneWithoutProfileNestedInput {
-  @Field(() => FileEntityCreateWithoutProfileInput, { nullable: true })
-  @Type(() => FileEntityCreateWithoutProfileInput)
-  create?: InstanceType<typeof FileEntityCreateWithoutProfileInput>;
-  @Field(() => FileEntityCreateOrConnectWithoutProfileInput, { nullable: true })
-  @Type(() => FileEntityCreateOrConnectWithoutProfileInput)
-  connectOrCreate?: InstanceType<typeof FileEntityCreateOrConnectWithoutProfileInput>;
-  @Field(() => FileEntityUpsertWithoutProfileInput, { nullable: true })
-  @Type(() => FileEntityUpsertWithoutProfileInput)
-  upsert?: InstanceType<typeof FileEntityUpsertWithoutProfileInput>;
+export class FileEntityUpdateOneRequiredWithoutRestaurantsNestedInput {
+  @Field(() => FileEntityCreateWithoutRestaurantsInput, { nullable: true })
+  @Type(() => FileEntityCreateWithoutRestaurantsInput)
+  create?: InstanceType<typeof FileEntityCreateWithoutRestaurantsInput>;
+  @Field(() => FileEntityCreateOrConnectWithoutRestaurantsInput, { nullable: true })
+  @Type(() => FileEntityCreateOrConnectWithoutRestaurantsInput)
+  connectOrCreate?: InstanceType<typeof FileEntityCreateOrConnectWithoutRestaurantsInput>;
+  @Field(() => FileEntityUpsertWithoutRestaurantsInput, { nullable: true })
+  @Type(() => FileEntityUpsertWithoutRestaurantsInput)
+  upsert?: InstanceType<typeof FileEntityUpsertWithoutRestaurantsInput>;
+  @Field(() => FileEntityWhereUniqueInput, { nullable: true })
+  @Type(() => FileEntityWhereUniqueInput)
+  connect?: InstanceType<typeof FileEntityWhereUniqueInput>;
+  @Field(() => FileEntityUpdateWithoutRestaurantsInput, { nullable: true })
+  @Type(() => FileEntityUpdateWithoutRestaurantsInput)
+  update?: InstanceType<typeof FileEntityUpdateWithoutRestaurantsInput>;
+}
+
+@InputType()
+export class FileEntityUpdateOneWithoutProfilesNestedInput {
+  @Field(() => FileEntityCreateWithoutProfilesInput, { nullable: true })
+  @Type(() => FileEntityCreateWithoutProfilesInput)
+  create?: InstanceType<typeof FileEntityCreateWithoutProfilesInput>;
+  @Field(() => FileEntityCreateOrConnectWithoutProfilesInput, { nullable: true })
+  @Type(() => FileEntityCreateOrConnectWithoutProfilesInput)
+  connectOrCreate?: InstanceType<typeof FileEntityCreateOrConnectWithoutProfilesInput>;
+  @Field(() => FileEntityUpsertWithoutProfilesInput, { nullable: true })
+  @Type(() => FileEntityUpsertWithoutProfilesInput)
+  upsert?: InstanceType<typeof FileEntityUpsertWithoutProfilesInput>;
   @Field(() => Boolean, { nullable: true })
   disconnect?: boolean;
   @Field(() => Boolean, { nullable: true })
@@ -1735,13 +3081,13 @@ export class FileEntityUpdateOneWithoutProfileNestedInput {
   @Field(() => FileEntityWhereUniqueInput, { nullable: true })
   @Type(() => FileEntityWhereUniqueInput)
   connect?: InstanceType<typeof FileEntityWhereUniqueInput>;
-  @Field(() => FileEntityUpdateWithoutProfileInput, { nullable: true })
-  @Type(() => FileEntityUpdateWithoutProfileInput)
-  update?: InstanceType<typeof FileEntityUpdateWithoutProfileInput>;
+  @Field(() => FileEntityUpdateWithoutProfilesInput, { nullable: true })
+  @Type(() => FileEntityUpdateWithoutProfilesInput)
+  update?: InstanceType<typeof FileEntityUpdateWithoutProfilesInput>;
 }
 
 @InputType()
-export class FileEntityUpdateWithoutProfileInput {
+export class FileEntityUpdateWithoutProfilesInput {
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   id?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
@@ -1754,6 +3100,26 @@ export class FileEntityUpdateWithoutProfileInput {
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => RestaurantsUpdateManyWithoutRestauMainImageNestedInput, { nullable: true })
+  Restaurants?: InstanceType<typeof RestaurantsUpdateManyWithoutRestauMainImageNestedInput>;
+}
+
+@InputType()
+export class FileEntityUpdateWithoutRestaurantsInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  id?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  fileName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  fileUrl?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  key?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => ProfileUpdateManyWithoutProfilePictureNestedInput, { nullable: true })
+  Profiles?: InstanceType<typeof ProfileUpdateManyWithoutProfilePictureNestedInput>;
 }
 
 @InputType()
@@ -1770,26 +3136,36 @@ export class FileEntityUpdateInput {
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => ProfileUpdateOneRequiredWithoutProfilePictureNestedInput, { nullable: true })
-  Profile?: InstanceType<typeof ProfileUpdateOneRequiredWithoutProfilePictureNestedInput>;
+  @Field(() => RestaurantsUpdateManyWithoutRestauMainImageNestedInput, { nullable: true })
+  Restaurants?: InstanceType<typeof RestaurantsUpdateManyWithoutRestauMainImageNestedInput>;
+  @Field(() => ProfileUpdateManyWithoutProfilePictureNestedInput, { nullable: true })
+  Profiles?: InstanceType<typeof ProfileUpdateManyWithoutProfilePictureNestedInput>;
 }
 
 @InputType()
-export class FileEntityUpsertWithoutProfileInput {
-  @Field(() => FileEntityUpdateWithoutProfileInput, { nullable: false })
-  @Type(() => FileEntityUpdateWithoutProfileInput)
-  update!: InstanceType<typeof FileEntityUpdateWithoutProfileInput>;
-  @Field(() => FileEntityCreateWithoutProfileInput, { nullable: false })
-  @Type(() => FileEntityCreateWithoutProfileInput)
-  create!: InstanceType<typeof FileEntityCreateWithoutProfileInput>;
+export class FileEntityUpsertWithoutProfilesInput {
+  @Field(() => FileEntityUpdateWithoutProfilesInput, { nullable: false })
+  @Type(() => FileEntityUpdateWithoutProfilesInput)
+  update!: InstanceType<typeof FileEntityUpdateWithoutProfilesInput>;
+  @Field(() => FileEntityCreateWithoutProfilesInput, { nullable: false })
+  @Type(() => FileEntityCreateWithoutProfilesInput)
+  create!: InstanceType<typeof FileEntityCreateWithoutProfilesInput>;
+}
+
+@InputType()
+export class FileEntityUpsertWithoutRestaurantsInput {
+  @Field(() => FileEntityUpdateWithoutRestaurantsInput, { nullable: false })
+  @Type(() => FileEntityUpdateWithoutRestaurantsInput)
+  update!: InstanceType<typeof FileEntityUpdateWithoutRestaurantsInput>;
+  @Field(() => FileEntityCreateWithoutRestaurantsInput, { nullable: false })
+  @Type(() => FileEntityCreateWithoutRestaurantsInput)
+  create!: InstanceType<typeof FileEntityCreateWithoutRestaurantsInput>;
 }
 
 @InputType()
 export class FileEntityWhereUniqueInput {
   @Field(() => String, { nullable: true })
   id?: string;
-  @Field(() => String, { nullable: true })
-  profileId?: string;
 }
 
 @InputType()
@@ -1812,10 +3188,10 @@ export class FileEntityWhereInput {
   createdAt?: InstanceType<typeof DateTimeFilter>;
   @Field(() => DateTimeFilter, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFilter>;
-  @Field(() => StringFilter, { nullable: true })
-  profileId?: InstanceType<typeof StringFilter>;
-  @Field(() => ProfileRelationFilter, { nullable: true })
-  Profile?: InstanceType<typeof ProfileRelationFilter>;
+  @Field(() => RestaurantsListRelationFilter, { nullable: true })
+  Restaurants?: InstanceType<typeof RestaurantsListRelationFilter>;
+  @Field(() => ProfileListRelationFilter, { nullable: true })
+  Profiles?: InstanceType<typeof ProfileListRelationFilter>;
 }
 
 @ObjectType()
@@ -1832,13 +3208,15 @@ export class FileEntity {
   createdAt!: Date;
   @Field(() => Date, { nullable: false })
   updatedAt!: Date;
-  @Field(() => String, { nullable: false })
-  profileId!: string;
-  @Field(() => Profile, { nullable: false })
-  Profile?: InstanceType<typeof Profile>;
+  @Field(() => [Restaurants], { nullable: true })
+  Restaurants?: Array<Restaurants>;
+  @Field(() => [Profile], { nullable: true })
+  Profiles?: Array<Profile>;
+  @Field(() => FileEntityCount, { nullable: false })
+  _count?: InstanceType<typeof FileEntityCount>;
 }
 
-@InputType()
+@ArgsType()
 export class FindFirstFileEntityArgs {
   @Field(() => FileEntityWhereInput, { nullable: true })
   @Type(() => FileEntityWhereInput)
@@ -1855,7 +3233,7 @@ export class FindFirstFileEntityArgs {
   distinct?: Array<keyof typeof FileEntityScalarFieldEnum>;
 }
 
-@InputType()
+@ArgsType()
 export class FindManyFileEntityArgs {
   @Field(() => FileEntityWhereInput, { nullable: true })
   @Type(() => FileEntityWhereInput)
@@ -1872,14 +3250,14 @@ export class FindManyFileEntityArgs {
   distinct?: Array<keyof typeof FileEntityScalarFieldEnum>;
 }
 
-@InputType()
+@ArgsType()
 export class FindUniqueFileEntityArgs {
   @Field(() => FileEntityWhereUniqueInput, { nullable: false })
   @Type(() => FileEntityWhereUniqueInput)
   where!: InstanceType<typeof FileEntityWhereUniqueInput>;
 }
 
-@InputType()
+@ArgsType()
 export class UpdateManyFileEntityArgs {
   @Field(() => FileEntityUpdateManyMutationInput, { nullable: false })
   @Type(() => FileEntityUpdateManyMutationInput)
@@ -1889,7 +3267,7 @@ export class UpdateManyFileEntityArgs {
   where?: InstanceType<typeof FileEntityWhereInput>;
 }
 
-@InputType()
+@ArgsType()
 export class UpdateOneFileEntityArgs {
   @Field(() => FileEntityUpdateInput, { nullable: false })
   @Type(() => FileEntityUpdateInput)
@@ -1899,7 +3277,7 @@ export class UpdateOneFileEntityArgs {
   where!: InstanceType<typeof FileEntityWhereUniqueInput>;
 }
 
-@InputType()
+@ArgsType()
 export class UpsertOneFileEntityArgs {
   @Field(() => FileEntityWhereUniqueInput, { nullable: false })
   @Type(() => FileEntityWhereUniqueInput)
@@ -1910,6 +3288,892 @@ export class UpsertOneFileEntityArgs {
   @Field(() => FileEntityUpdateInput, { nullable: false })
   @Type(() => FileEntityUpdateInput)
   update!: InstanceType<typeof FileEntityUpdateInput>;
+}
+
+@ObjectType()
+export class AggregateImagesSecondary {
+  @Field(() => ImagesSecondaryCountAggregate, { nullable: true })
+  _count?: InstanceType<typeof ImagesSecondaryCountAggregate>;
+  @Field(() => ImagesSecondaryMinAggregate, { nullable: true })
+  _min?: InstanceType<typeof ImagesSecondaryMinAggregate>;
+  @Field(() => ImagesSecondaryMaxAggregate, { nullable: true })
+  _max?: InstanceType<typeof ImagesSecondaryMaxAggregate>;
+}
+
+@ArgsType()
+export class CreateManyImagesSecondaryArgs {
+  @Field(() => [ImagesSecondaryCreateManyInput], { nullable: false })
+  @Type(() => ImagesSecondaryCreateManyInput)
+  data!: Array<ImagesSecondaryCreateManyInput>;
+  @Field(() => Boolean, { nullable: true })
+  skipDuplicates?: boolean;
+}
+
+@ArgsType()
+export class CreateOneImagesSecondaryArgs {
+  @Field(() => ImagesSecondaryCreateInput, { nullable: false })
+  @Type(() => ImagesSecondaryCreateInput)
+  data!: InstanceType<typeof ImagesSecondaryCreateInput>;
+}
+
+@ArgsType()
+export class DeleteManyImagesSecondaryArgs {
+  @Field(() => ImagesSecondaryWhereInput, { nullable: true })
+  @Type(() => ImagesSecondaryWhereInput)
+  where?: InstanceType<typeof ImagesSecondaryWhereInput>;
+}
+
+@ArgsType()
+export class DeleteOneImagesSecondaryArgs {
+  @Field(() => ImagesSecondaryWhereUniqueInput, { nullable: false })
+  @Type(() => ImagesSecondaryWhereUniqueInput)
+  where!: InstanceType<typeof ImagesSecondaryWhereUniqueInput>;
+}
+
+@ArgsType()
+export class FindFirstImagesSecondaryArgs {
+  @Field(() => ImagesSecondaryWhereInput, { nullable: true })
+  @Type(() => ImagesSecondaryWhereInput)
+  where?: InstanceType<typeof ImagesSecondaryWhereInput>;
+  @Field(() => [ImagesSecondaryOrderByWithRelationInput], { nullable: true })
+  orderBy?: Array<ImagesSecondaryOrderByWithRelationInput>;
+  @Field(() => ImagesSecondaryWhereUniqueInput, { nullable: true })
+  cursor?: InstanceType<typeof ImagesSecondaryWhereUniqueInput>;
+  @Field(() => Int, { nullable: true })
+  take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
+  @Field(() => [ImagesSecondaryScalarFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof ImagesSecondaryScalarFieldEnum>;
+}
+
+@ArgsType()
+export class FindManyImagesSecondaryArgs {
+  @Field(() => ImagesSecondaryWhereInput, { nullable: true })
+  @Type(() => ImagesSecondaryWhereInput)
+  where?: InstanceType<typeof ImagesSecondaryWhereInput>;
+  @Field(() => [ImagesSecondaryOrderByWithRelationInput], { nullable: true })
+  orderBy?: Array<ImagesSecondaryOrderByWithRelationInput>;
+  @Field(() => ImagesSecondaryWhereUniqueInput, { nullable: true })
+  cursor?: InstanceType<typeof ImagesSecondaryWhereUniqueInput>;
+  @Field(() => Int, { nullable: true })
+  take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
+  @Field(() => [ImagesSecondaryScalarFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof ImagesSecondaryScalarFieldEnum>;
+}
+
+@ArgsType()
+export class FindUniqueImagesSecondaryArgs {
+  @Field(() => ImagesSecondaryWhereUniqueInput, { nullable: false })
+  @Type(() => ImagesSecondaryWhereUniqueInput)
+  where!: InstanceType<typeof ImagesSecondaryWhereUniqueInput>;
+}
+
+@ArgsType()
+export class ImagesSecondaryAggregateArgs {
+  @Field(() => ImagesSecondaryWhereInput, { nullable: true })
+  @Type(() => ImagesSecondaryWhereInput)
+  where?: InstanceType<typeof ImagesSecondaryWhereInput>;
+  @Field(() => [ImagesSecondaryOrderByWithRelationInput], { nullable: true })
+  orderBy?: Array<ImagesSecondaryOrderByWithRelationInput>;
+  @Field(() => ImagesSecondaryWhereUniqueInput, { nullable: true })
+  cursor?: InstanceType<typeof ImagesSecondaryWhereUniqueInput>;
+  @Field(() => Int, { nullable: true })
+  take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
+  @Field(() => ImagesSecondaryCountAggregateInput, { nullable: true })
+  _count?: InstanceType<typeof ImagesSecondaryCountAggregateInput>;
+  @Field(() => ImagesSecondaryMinAggregateInput, { nullable: true })
+  _min?: InstanceType<typeof ImagesSecondaryMinAggregateInput>;
+  @Field(() => ImagesSecondaryMaxAggregateInput, { nullable: true })
+  _max?: InstanceType<typeof ImagesSecondaryMaxAggregateInput>;
+}
+
+@InputType()
+export class ImagesSecondaryCountAggregateInput {
+  @Field(() => Boolean, { nullable: true })
+  id?: true;
+  @Field(() => Boolean, { nullable: true })
+  fileName?: true;
+  @Field(() => Boolean, { nullable: true })
+  fileUrl?: true;
+  @Field(() => Boolean, { nullable: true })
+  key?: true;
+  @Field(() => Boolean, { nullable: true })
+  createdAt?: true;
+  @Field(() => Boolean, { nullable: true })
+  updatedAt?: true;
+  @Field(() => Boolean, { nullable: true })
+  restaurantsId?: true;
+  @Field(() => Boolean, { nullable: true })
+  _all?: true;
+}
+
+@ObjectType()
+export class ImagesSecondaryCountAggregate {
+  @Field(() => Int, { nullable: false })
+  id!: number;
+  @Field(() => Int, { nullable: false })
+  fileName!: number;
+  @Field(() => Int, { nullable: false })
+  fileUrl!: number;
+  @Field(() => Int, { nullable: false })
+  key!: number;
+  @Field(() => Int, { nullable: false })
+  createdAt!: number;
+  @Field(() => Int, { nullable: false })
+  updatedAt!: number;
+  @Field(() => Int, { nullable: false })
+  restaurantsId!: number;
+  @Field(() => Int, { nullable: false })
+  _all!: number;
+}
+
+@InputType()
+export class ImagesSecondaryCountOrderByAggregateInput {
+  @Field(() => SortOrder, { nullable: true })
+  id?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  fileName?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  fileUrl?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  key?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  createdAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  updatedAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  restaurantsId?: keyof typeof SortOrder;
+}
+
+@InputType()
+export class ImagesSecondaryCreateManyRestaurantsInputEnvelope {
+  @Field(() => [ImagesSecondaryCreateManyRestaurantsInput], { nullable: false })
+  @Type(() => ImagesSecondaryCreateManyRestaurantsInput)
+  data!: Array<ImagesSecondaryCreateManyRestaurantsInput>;
+  @Field(() => Boolean, { nullable: true })
+  skipDuplicates?: boolean;
+}
+
+@InputType()
+export class ImagesSecondaryCreateManyRestaurantsInput {
+  @Field(() => String, { nullable: true })
+  id?: string;
+  @Field(() => String, { nullable: false })
+  fileName!: string;
+  @Field(() => String, { nullable: false })
+  fileUrl!: string;
+  @Field(() => String, { nullable: false })
+  key!: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+}
+
+@InputType()
+export class ImagesSecondaryCreateManyInput {
+  @Field(() => String, { nullable: true })
+  id?: string;
+  @Field(() => String, { nullable: false })
+  fileName!: string;
+  @Field(() => String, { nullable: false })
+  fileUrl!: string;
+  @Field(() => String, { nullable: false })
+  key!: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => String, { nullable: true })
+  restaurantsId?: string;
+}
+
+@InputType()
+export class ImagesSecondaryCreateNestedManyWithoutRestaurantsInput {
+  @Field(() => [ImagesSecondaryCreateWithoutRestaurantsInput], { nullable: true })
+  @Type(() => ImagesSecondaryCreateWithoutRestaurantsInput)
+  create?: Array<ImagesSecondaryCreateWithoutRestaurantsInput>;
+  @Field(() => [ImagesSecondaryCreateOrConnectWithoutRestaurantsInput], { nullable: true })
+  @Type(() => ImagesSecondaryCreateOrConnectWithoutRestaurantsInput)
+  connectOrCreate?: Array<ImagesSecondaryCreateOrConnectWithoutRestaurantsInput>;
+  @Field(() => ImagesSecondaryCreateManyRestaurantsInputEnvelope, { nullable: true })
+  @Type(() => ImagesSecondaryCreateManyRestaurantsInputEnvelope)
+  createMany?: InstanceType<typeof ImagesSecondaryCreateManyRestaurantsInputEnvelope>;
+  @Field(() => [ImagesSecondaryWhereUniqueInput], { nullable: true })
+  @Type(() => ImagesSecondaryWhereUniqueInput)
+  connect?: Array<ImagesSecondaryWhereUniqueInput>;
+}
+
+@InputType()
+export class ImagesSecondaryCreateOrConnectWithoutRestaurantsInput {
+  @Field(() => ImagesSecondaryWhereUniqueInput, { nullable: false })
+  @Type(() => ImagesSecondaryWhereUniqueInput)
+  where!: InstanceType<typeof ImagesSecondaryWhereUniqueInput>;
+  @Field(() => ImagesSecondaryCreateWithoutRestaurantsInput, { nullable: false })
+  @Type(() => ImagesSecondaryCreateWithoutRestaurantsInput)
+  create!: InstanceType<typeof ImagesSecondaryCreateWithoutRestaurantsInput>;
+}
+
+@InputType()
+export class ImagesSecondaryCreateWithoutRestaurantsInput {
+  @Field(() => String, { nullable: true })
+  id?: string;
+  @Field(() => String, { nullable: false })
+  fileName!: string;
+  @Field(() => String, { nullable: false })
+  fileUrl!: string;
+  @Field(() => String, { nullable: false })
+  key!: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+}
+
+@InputType()
+export class ImagesSecondaryCreateInput {
+  @Field(() => String, { nullable: true })
+  id?: string;
+  @Field(() => String, { nullable: false })
+  fileName!: string;
+  @Field(() => String, { nullable: false })
+  fileUrl!: string;
+  @Field(() => String, { nullable: false })
+  key!: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => RestaurantsCreateNestedOneWithoutOtherImagesInput, { nullable: true })
+  Restaurants?: InstanceType<typeof RestaurantsCreateNestedOneWithoutOtherImagesInput>;
+}
+
+@ArgsType()
+export class ImagesSecondaryGroupByArgs {
+  @Field(() => ImagesSecondaryWhereInput, { nullable: true })
+  @Type(() => ImagesSecondaryWhereInput)
+  where?: InstanceType<typeof ImagesSecondaryWhereInput>;
+  @Field(() => [ImagesSecondaryOrderByWithAggregationInput], { nullable: true })
+  orderBy?: Array<ImagesSecondaryOrderByWithAggregationInput>;
+  @Field(() => [ImagesSecondaryScalarFieldEnum], { nullable: false })
+  by!: Array<keyof typeof ImagesSecondaryScalarFieldEnum>;
+  @Field(() => ImagesSecondaryScalarWhereWithAggregatesInput, { nullable: true })
+  having?: InstanceType<typeof ImagesSecondaryScalarWhereWithAggregatesInput>;
+  @Field(() => Int, { nullable: true })
+  take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
+  @Field(() => ImagesSecondaryCountAggregateInput, { nullable: true })
+  _count?: InstanceType<typeof ImagesSecondaryCountAggregateInput>;
+  @Field(() => ImagesSecondaryMinAggregateInput, { nullable: true })
+  _min?: InstanceType<typeof ImagesSecondaryMinAggregateInput>;
+  @Field(() => ImagesSecondaryMaxAggregateInput, { nullable: true })
+  _max?: InstanceType<typeof ImagesSecondaryMaxAggregateInput>;
+}
+
+@ObjectType()
+export class ImagesSecondaryGroupBy {
+  @Field(() => String, { nullable: false })
+  id!: string;
+  @Field(() => String, { nullable: false })
+  fileName!: string;
+  @Field(() => String, { nullable: false })
+  fileUrl!: string;
+  @Field(() => String, { nullable: false })
+  key!: string;
+  @Field(() => Date, { nullable: false })
+  createdAt!: Date | string;
+  @Field(() => Date, { nullable: false })
+  updatedAt!: Date | string;
+  @Field(() => String, { nullable: true })
+  restaurantsId?: string;
+  @Field(() => ImagesSecondaryCountAggregate, { nullable: true })
+  _count?: InstanceType<typeof ImagesSecondaryCountAggregate>;
+  @Field(() => ImagesSecondaryMinAggregate, { nullable: true })
+  _min?: InstanceType<typeof ImagesSecondaryMinAggregate>;
+  @Field(() => ImagesSecondaryMaxAggregate, { nullable: true })
+  _max?: InstanceType<typeof ImagesSecondaryMaxAggregate>;
+}
+
+@InputType()
+export class ImagesSecondaryListRelationFilter {
+  @Field(() => ImagesSecondaryWhereInput, { nullable: true })
+  every?: InstanceType<typeof ImagesSecondaryWhereInput>;
+  @Field(() => ImagesSecondaryWhereInput, { nullable: true })
+  some?: InstanceType<typeof ImagesSecondaryWhereInput>;
+  @Field(() => ImagesSecondaryWhereInput, { nullable: true })
+  none?: InstanceType<typeof ImagesSecondaryWhereInput>;
+}
+
+@InputType()
+export class ImagesSecondaryMaxAggregateInput {
+  @Field(() => Boolean, { nullable: true })
+  id?: true;
+  @Field(() => Boolean, { nullable: true })
+  fileName?: true;
+  @Field(() => Boolean, { nullable: true })
+  fileUrl?: true;
+  @Field(() => Boolean, { nullable: true })
+  key?: true;
+  @Field(() => Boolean, { nullable: true })
+  createdAt?: true;
+  @Field(() => Boolean, { nullable: true })
+  updatedAt?: true;
+  @Field(() => Boolean, { nullable: true })
+  restaurantsId?: true;
+}
+
+@ObjectType()
+export class ImagesSecondaryMaxAggregate {
+  @Field(() => String, { nullable: true })
+  id?: string;
+  @Field(() => String, { nullable: true })
+  fileName?: string;
+  @Field(() => String, { nullable: true })
+  fileUrl?: string;
+  @Field(() => String, { nullable: true })
+  key?: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => String, { nullable: true })
+  restaurantsId?: string;
+}
+
+@InputType()
+export class ImagesSecondaryMaxOrderByAggregateInput {
+  @Field(() => SortOrder, { nullable: true })
+  id?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  fileName?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  fileUrl?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  key?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  createdAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  updatedAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  restaurantsId?: keyof typeof SortOrder;
+}
+
+@InputType()
+export class ImagesSecondaryMinAggregateInput {
+  @Field(() => Boolean, { nullable: true })
+  id?: true;
+  @Field(() => Boolean, { nullable: true })
+  fileName?: true;
+  @Field(() => Boolean, { nullable: true })
+  fileUrl?: true;
+  @Field(() => Boolean, { nullable: true })
+  key?: true;
+  @Field(() => Boolean, { nullable: true })
+  createdAt?: true;
+  @Field(() => Boolean, { nullable: true })
+  updatedAt?: true;
+  @Field(() => Boolean, { nullable: true })
+  restaurantsId?: true;
+}
+
+@ObjectType()
+export class ImagesSecondaryMinAggregate {
+  @Field(() => String, { nullable: true })
+  id?: string;
+  @Field(() => String, { nullable: true })
+  fileName?: string;
+  @Field(() => String, { nullable: true })
+  fileUrl?: string;
+  @Field(() => String, { nullable: true })
+  key?: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => String, { nullable: true })
+  restaurantsId?: string;
+}
+
+@InputType()
+export class ImagesSecondaryMinOrderByAggregateInput {
+  @Field(() => SortOrder, { nullable: true })
+  id?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  fileName?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  fileUrl?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  key?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  createdAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  updatedAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  restaurantsId?: keyof typeof SortOrder;
+}
+
+@InputType()
+export class ImagesSecondaryOrderByRelationAggregateInput {
+  @Field(() => SortOrder, { nullable: true })
+  _count?: keyof typeof SortOrder;
+}
+
+@InputType()
+export class ImagesSecondaryOrderByWithAggregationInput {
+  @Field(() => SortOrder, { nullable: true })
+  id?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  fileName?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  fileUrl?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  key?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  createdAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  updatedAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  restaurantsId?: keyof typeof SortOrder;
+  @Field(() => ImagesSecondaryCountOrderByAggregateInput, { nullable: true })
+  _count?: InstanceType<typeof ImagesSecondaryCountOrderByAggregateInput>;
+  @Field(() => ImagesSecondaryMaxOrderByAggregateInput, { nullable: true })
+  _max?: InstanceType<typeof ImagesSecondaryMaxOrderByAggregateInput>;
+  @Field(() => ImagesSecondaryMinOrderByAggregateInput, { nullable: true })
+  _min?: InstanceType<typeof ImagesSecondaryMinOrderByAggregateInput>;
+}
+
+@InputType()
+export class ImagesSecondaryOrderByWithRelationInput {
+  @Field(() => SortOrder, { nullable: true })
+  id?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  fileName?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  fileUrl?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  key?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  createdAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  updatedAt?: keyof typeof SortOrder;
+  @Field(() => RestaurantsOrderByWithRelationInput, { nullable: true })
+  Restaurants?: InstanceType<typeof RestaurantsOrderByWithRelationInput>;
+  @Field(() => SortOrder, { nullable: true })
+  restaurantsId?: keyof typeof SortOrder;
+}
+
+@InputType()
+export class ImagesSecondaryScalarWhereWithAggregatesInput {
+  @Field(() => [ImagesSecondaryScalarWhereWithAggregatesInput], { nullable: true })
+  AND?: Array<ImagesSecondaryScalarWhereWithAggregatesInput>;
+  @Field(() => [ImagesSecondaryScalarWhereWithAggregatesInput], { nullable: true })
+  OR?: Array<ImagesSecondaryScalarWhereWithAggregatesInput>;
+  @Field(() => [ImagesSecondaryScalarWhereWithAggregatesInput], { nullable: true })
+  NOT?: Array<ImagesSecondaryScalarWhereWithAggregatesInput>;
+  @Field(() => StringWithAggregatesFilter, { nullable: true })
+  id?: InstanceType<typeof StringWithAggregatesFilter>;
+  @Field(() => StringWithAggregatesFilter, { nullable: true })
+  fileName?: InstanceType<typeof StringWithAggregatesFilter>;
+  @Field(() => StringWithAggregatesFilter, { nullable: true })
+  fileUrl?: InstanceType<typeof StringWithAggregatesFilter>;
+  @Field(() => StringWithAggregatesFilter, { nullable: true })
+  key?: InstanceType<typeof StringWithAggregatesFilter>;
+  @Field(() => DateTimeWithAggregatesFilter, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeWithAggregatesFilter>;
+  @Field(() => DateTimeWithAggregatesFilter, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeWithAggregatesFilter>;
+  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
+  restaurantsId?: InstanceType<typeof StringNullableWithAggregatesFilter>;
+}
+
+@InputType()
+export class ImagesSecondaryScalarWhereInput {
+  @Field(() => [ImagesSecondaryScalarWhereInput], { nullable: true })
+  AND?: Array<ImagesSecondaryScalarWhereInput>;
+  @Field(() => [ImagesSecondaryScalarWhereInput], { nullable: true })
+  OR?: Array<ImagesSecondaryScalarWhereInput>;
+  @Field(() => [ImagesSecondaryScalarWhereInput], { nullable: true })
+  NOT?: Array<ImagesSecondaryScalarWhereInput>;
+  @Field(() => StringFilter, { nullable: true })
+  id?: InstanceType<typeof StringFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  fileName?: InstanceType<typeof StringFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  fileUrl?: InstanceType<typeof StringFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  key?: InstanceType<typeof StringFilter>;
+  @Field(() => DateTimeFilter, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFilter>;
+  @Field(() => DateTimeFilter, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFilter>;
+  @Field(() => StringNullableFilter, { nullable: true })
+  restaurantsId?: InstanceType<typeof StringNullableFilter>;
+}
+
+@InputType()
+export class ImagesSecondaryUncheckedCreateNestedManyWithoutRestaurantsInput {
+  @Field(() => [ImagesSecondaryCreateWithoutRestaurantsInput], { nullable: true })
+  @Type(() => ImagesSecondaryCreateWithoutRestaurantsInput)
+  create?: Array<ImagesSecondaryCreateWithoutRestaurantsInput>;
+  @Field(() => [ImagesSecondaryCreateOrConnectWithoutRestaurantsInput], { nullable: true })
+  @Type(() => ImagesSecondaryCreateOrConnectWithoutRestaurantsInput)
+  connectOrCreate?: Array<ImagesSecondaryCreateOrConnectWithoutRestaurantsInput>;
+  @Field(() => ImagesSecondaryCreateManyRestaurantsInputEnvelope, { nullable: true })
+  @Type(() => ImagesSecondaryCreateManyRestaurantsInputEnvelope)
+  createMany?: InstanceType<typeof ImagesSecondaryCreateManyRestaurantsInputEnvelope>;
+  @Field(() => [ImagesSecondaryWhereUniqueInput], { nullable: true })
+  @Type(() => ImagesSecondaryWhereUniqueInput)
+  connect?: Array<ImagesSecondaryWhereUniqueInput>;
+}
+
+@InputType()
+export class ImagesSecondaryUncheckedCreateWithoutRestaurantsInput {
+  @Field(() => String, { nullable: true })
+  id?: string;
+  @Field(() => String, { nullable: false })
+  fileName!: string;
+  @Field(() => String, { nullable: false })
+  fileUrl!: string;
+  @Field(() => String, { nullable: false })
+  key!: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+}
+
+@InputType()
+export class ImagesSecondaryUncheckedCreateInput {
+  @Field(() => String, { nullable: true })
+  id?: string;
+  @Field(() => String, { nullable: false })
+  fileName!: string;
+  @Field(() => String, { nullable: false })
+  fileUrl!: string;
+  @Field(() => String, { nullable: false })
+  key!: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => String, { nullable: true })
+  restaurantsId?: string;
+}
+
+@InputType()
+export class ImagesSecondaryUncheckedUpdateManyWithoutOtherImagesInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  id?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  fileName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  fileUrl?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  key?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class ImagesSecondaryUncheckedUpdateManyWithoutRestaurantsNestedInput {
+  @Field(() => [ImagesSecondaryCreateWithoutRestaurantsInput], { nullable: true })
+  @Type(() => ImagesSecondaryCreateWithoutRestaurantsInput)
+  create?: Array<ImagesSecondaryCreateWithoutRestaurantsInput>;
+  @Field(() => [ImagesSecondaryCreateOrConnectWithoutRestaurantsInput], { nullable: true })
+  @Type(() => ImagesSecondaryCreateOrConnectWithoutRestaurantsInput)
+  connectOrCreate?: Array<ImagesSecondaryCreateOrConnectWithoutRestaurantsInput>;
+  @Field(() => [ImagesSecondaryUpsertWithWhereUniqueWithoutRestaurantsInput], { nullable: true })
+  @Type(() => ImagesSecondaryUpsertWithWhereUniqueWithoutRestaurantsInput)
+  upsert?: Array<ImagesSecondaryUpsertWithWhereUniqueWithoutRestaurantsInput>;
+  @Field(() => ImagesSecondaryCreateManyRestaurantsInputEnvelope, { nullable: true })
+  @Type(() => ImagesSecondaryCreateManyRestaurantsInputEnvelope)
+  createMany?: InstanceType<typeof ImagesSecondaryCreateManyRestaurantsInputEnvelope>;
+  @Field(() => [ImagesSecondaryWhereUniqueInput], { nullable: true })
+  @Type(() => ImagesSecondaryWhereUniqueInput)
+  set?: Array<ImagesSecondaryWhereUniqueInput>;
+  @Field(() => [ImagesSecondaryWhereUniqueInput], { nullable: true })
+  @Type(() => ImagesSecondaryWhereUniqueInput)
+  disconnect?: Array<ImagesSecondaryWhereUniqueInput>;
+  @Field(() => [ImagesSecondaryWhereUniqueInput], { nullable: true })
+  @Type(() => ImagesSecondaryWhereUniqueInput)
+  delete?: Array<ImagesSecondaryWhereUniqueInput>;
+  @Field(() => [ImagesSecondaryWhereUniqueInput], { nullable: true })
+  @Type(() => ImagesSecondaryWhereUniqueInput)
+  connect?: Array<ImagesSecondaryWhereUniqueInput>;
+  @Field(() => [ImagesSecondaryUpdateWithWhereUniqueWithoutRestaurantsInput], { nullable: true })
+  @Type(() => ImagesSecondaryUpdateWithWhereUniqueWithoutRestaurantsInput)
+  update?: Array<ImagesSecondaryUpdateWithWhereUniqueWithoutRestaurantsInput>;
+  @Field(() => [ImagesSecondaryUpdateManyWithWhereWithoutRestaurantsInput], { nullable: true })
+  @Type(() => ImagesSecondaryUpdateManyWithWhereWithoutRestaurantsInput)
+  updateMany?: Array<ImagesSecondaryUpdateManyWithWhereWithoutRestaurantsInput>;
+  @Field(() => [ImagesSecondaryScalarWhereInput], { nullable: true })
+  @Type(() => ImagesSecondaryScalarWhereInput)
+  deleteMany?: Array<ImagesSecondaryScalarWhereInput>;
+}
+
+@InputType()
+export class ImagesSecondaryUncheckedUpdateManyInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  id?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  fileName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  fileUrl?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  key?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  restaurantsId?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class ImagesSecondaryUncheckedUpdateWithoutRestaurantsInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  id?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  fileName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  fileUrl?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  key?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class ImagesSecondaryUncheckedUpdateInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  id?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  fileName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  fileUrl?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  key?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  restaurantsId?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class ImagesSecondaryUpdateManyMutationInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  id?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  fileName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  fileUrl?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  key?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class ImagesSecondaryUpdateManyWithWhereWithoutRestaurantsInput {
+  @Field(() => ImagesSecondaryScalarWhereInput, { nullable: false })
+  @Type(() => ImagesSecondaryScalarWhereInput)
+  where!: InstanceType<typeof ImagesSecondaryScalarWhereInput>;
+  @Field(() => ImagesSecondaryUpdateManyMutationInput, { nullable: false })
+  @Type(() => ImagesSecondaryUpdateManyMutationInput)
+  data!: InstanceType<typeof ImagesSecondaryUpdateManyMutationInput>;
+}
+
+@InputType()
+export class ImagesSecondaryUpdateManyWithoutRestaurantsNestedInput {
+  @Field(() => [ImagesSecondaryCreateWithoutRestaurantsInput], { nullable: true })
+  @Type(() => ImagesSecondaryCreateWithoutRestaurantsInput)
+  create?: Array<ImagesSecondaryCreateWithoutRestaurantsInput>;
+  @Field(() => [ImagesSecondaryCreateOrConnectWithoutRestaurantsInput], { nullable: true })
+  @Type(() => ImagesSecondaryCreateOrConnectWithoutRestaurantsInput)
+  connectOrCreate?: Array<ImagesSecondaryCreateOrConnectWithoutRestaurantsInput>;
+  @Field(() => [ImagesSecondaryUpsertWithWhereUniqueWithoutRestaurantsInput], { nullable: true })
+  @Type(() => ImagesSecondaryUpsertWithWhereUniqueWithoutRestaurantsInput)
+  upsert?: Array<ImagesSecondaryUpsertWithWhereUniqueWithoutRestaurantsInput>;
+  @Field(() => ImagesSecondaryCreateManyRestaurantsInputEnvelope, { nullable: true })
+  @Type(() => ImagesSecondaryCreateManyRestaurantsInputEnvelope)
+  createMany?: InstanceType<typeof ImagesSecondaryCreateManyRestaurantsInputEnvelope>;
+  @Field(() => [ImagesSecondaryWhereUniqueInput], { nullable: true })
+  @Type(() => ImagesSecondaryWhereUniqueInput)
+  set?: Array<ImagesSecondaryWhereUniqueInput>;
+  @Field(() => [ImagesSecondaryWhereUniqueInput], { nullable: true })
+  @Type(() => ImagesSecondaryWhereUniqueInput)
+  disconnect?: Array<ImagesSecondaryWhereUniqueInput>;
+  @Field(() => [ImagesSecondaryWhereUniqueInput], { nullable: true })
+  @Type(() => ImagesSecondaryWhereUniqueInput)
+  delete?: Array<ImagesSecondaryWhereUniqueInput>;
+  @Field(() => [ImagesSecondaryWhereUniqueInput], { nullable: true })
+  @Type(() => ImagesSecondaryWhereUniqueInput)
+  connect?: Array<ImagesSecondaryWhereUniqueInput>;
+  @Field(() => [ImagesSecondaryUpdateWithWhereUniqueWithoutRestaurantsInput], { nullable: true })
+  @Type(() => ImagesSecondaryUpdateWithWhereUniqueWithoutRestaurantsInput)
+  update?: Array<ImagesSecondaryUpdateWithWhereUniqueWithoutRestaurantsInput>;
+  @Field(() => [ImagesSecondaryUpdateManyWithWhereWithoutRestaurantsInput], { nullable: true })
+  @Type(() => ImagesSecondaryUpdateManyWithWhereWithoutRestaurantsInput)
+  updateMany?: Array<ImagesSecondaryUpdateManyWithWhereWithoutRestaurantsInput>;
+  @Field(() => [ImagesSecondaryScalarWhereInput], { nullable: true })
+  @Type(() => ImagesSecondaryScalarWhereInput)
+  deleteMany?: Array<ImagesSecondaryScalarWhereInput>;
+}
+
+@InputType()
+export class ImagesSecondaryUpdateWithWhereUniqueWithoutRestaurantsInput {
+  @Field(() => ImagesSecondaryWhereUniqueInput, { nullable: false })
+  @Type(() => ImagesSecondaryWhereUniqueInput)
+  where!: InstanceType<typeof ImagesSecondaryWhereUniqueInput>;
+  @Field(() => ImagesSecondaryUpdateWithoutRestaurantsInput, { nullable: false })
+  @Type(() => ImagesSecondaryUpdateWithoutRestaurantsInput)
+  data!: InstanceType<typeof ImagesSecondaryUpdateWithoutRestaurantsInput>;
+}
+
+@InputType()
+export class ImagesSecondaryUpdateWithoutRestaurantsInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  id?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  fileName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  fileUrl?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  key?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class ImagesSecondaryUpdateInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  id?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  fileName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  fileUrl?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  key?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => RestaurantsUpdateOneWithoutOtherImagesNestedInput, { nullable: true })
+  Restaurants?: InstanceType<typeof RestaurantsUpdateOneWithoutOtherImagesNestedInput>;
+}
+
+@InputType()
+export class ImagesSecondaryUpsertWithWhereUniqueWithoutRestaurantsInput {
+  @Field(() => ImagesSecondaryWhereUniqueInput, { nullable: false })
+  @Type(() => ImagesSecondaryWhereUniqueInput)
+  where!: InstanceType<typeof ImagesSecondaryWhereUniqueInput>;
+  @Field(() => ImagesSecondaryUpdateWithoutRestaurantsInput, { nullable: false })
+  @Type(() => ImagesSecondaryUpdateWithoutRestaurantsInput)
+  update!: InstanceType<typeof ImagesSecondaryUpdateWithoutRestaurantsInput>;
+  @Field(() => ImagesSecondaryCreateWithoutRestaurantsInput, { nullable: false })
+  @Type(() => ImagesSecondaryCreateWithoutRestaurantsInput)
+  create!: InstanceType<typeof ImagesSecondaryCreateWithoutRestaurantsInput>;
+}
+
+@InputType()
+export class ImagesSecondaryWhereUniqueInput {
+  @Field(() => String, { nullable: true })
+  id?: string;
+}
+
+@InputType()
+export class ImagesSecondaryWhereInput {
+  @Field(() => [ImagesSecondaryWhereInput], { nullable: true })
+  AND?: Array<ImagesSecondaryWhereInput>;
+  @Field(() => [ImagesSecondaryWhereInput], { nullable: true })
+  OR?: Array<ImagesSecondaryWhereInput>;
+  @Field(() => [ImagesSecondaryWhereInput], { nullable: true })
+  NOT?: Array<ImagesSecondaryWhereInput>;
+  @Field(() => StringFilter, { nullable: true })
+  id?: InstanceType<typeof StringFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  fileName?: InstanceType<typeof StringFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  fileUrl?: InstanceType<typeof StringFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  key?: InstanceType<typeof StringFilter>;
+  @Field(() => DateTimeFilter, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFilter>;
+  @Field(() => DateTimeFilter, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFilter>;
+  @Field(() => RestaurantsRelationFilter, { nullable: true })
+  Restaurants?: InstanceType<typeof RestaurantsRelationFilter>;
+  @Field(() => StringNullableFilter, { nullable: true })
+  restaurantsId?: InstanceType<typeof StringNullableFilter>;
+}
+
+@ObjectType()
+export class ImagesSecondary {
+  @Field(() => ID, { nullable: false })
+  id!: string;
+  @Field(() => String, { nullable: false })
+  fileName!: string;
+  @Field(() => String, { nullable: false })
+  fileUrl!: string;
+  @Field(() => String, { nullable: false })
+  key!: string;
+  @Field(() => Date, { nullable: false })
+  createdAt!: Date;
+  @Field(() => Date, { nullable: false })
+  updatedAt!: Date;
+  @Field(() => Restaurants, { nullable: true })
+  Restaurants?: InstanceType<typeof Restaurants> | null;
+  @Field(() => String, { nullable: true })
+  restaurantsId!: string | null;
+}
+
+@ArgsType()
+export class UpdateManyImagesSecondaryArgs {
+  @Field(() => ImagesSecondaryUpdateManyMutationInput, { nullable: false })
+  @Type(() => ImagesSecondaryUpdateManyMutationInput)
+  data!: InstanceType<typeof ImagesSecondaryUpdateManyMutationInput>;
+  @Field(() => ImagesSecondaryWhereInput, { nullable: true })
+  @Type(() => ImagesSecondaryWhereInput)
+  where?: InstanceType<typeof ImagesSecondaryWhereInput>;
+}
+
+@ArgsType()
+export class UpdateOneImagesSecondaryArgs {
+  @Field(() => ImagesSecondaryUpdateInput, { nullable: false })
+  @Type(() => ImagesSecondaryUpdateInput)
+  data!: InstanceType<typeof ImagesSecondaryUpdateInput>;
+  @Field(() => ImagesSecondaryWhereUniqueInput, { nullable: false })
+  @Type(() => ImagesSecondaryWhereUniqueInput)
+  where!: InstanceType<typeof ImagesSecondaryWhereUniqueInput>;
+}
+
+@ArgsType()
+export class UpsertOneImagesSecondaryArgs {
+  @Field(() => ImagesSecondaryWhereUniqueInput, { nullable: false })
+  @Type(() => ImagesSecondaryWhereUniqueInput)
+  where!: InstanceType<typeof ImagesSecondaryWhereUniqueInput>;
+  @Field(() => ImagesSecondaryCreateInput, { nullable: false })
+  @Type(() => ImagesSecondaryCreateInput)
+  create!: InstanceType<typeof ImagesSecondaryCreateInput>;
+  @Field(() => ImagesSecondaryUpdateInput, { nullable: false })
+  @Type(() => ImagesSecondaryUpdateInput)
+  update!: InstanceType<typeof ImagesSecondaryUpdateInput>;
 }
 
 @ObjectType()
@@ -2466,7 +4730,7 @@ export class AggregateProfile {
   _max?: InstanceType<typeof ProfileMaxAggregate>;
 }
 
-@InputType()
+@ArgsType()
 export class CreateManyProfileArgs {
   @Field(() => [ProfileCreateManyInput], { nullable: false })
   @Type(() => ProfileCreateManyInput)
@@ -2475,28 +4739,28 @@ export class CreateManyProfileArgs {
   skipDuplicates?: boolean;
 }
 
-@InputType()
+@ArgsType()
 export class CreateOneProfileArgs {
   @Field(() => ProfileCreateInput, { nullable: false })
   @Type(() => ProfileCreateInput)
   data!: InstanceType<typeof ProfileCreateInput>;
 }
 
-@InputType()
+@ArgsType()
 export class DeleteManyProfileArgs {
   @Field(() => ProfileWhereInput, { nullable: true })
   @Type(() => ProfileWhereInput)
   where?: InstanceType<typeof ProfileWhereInput>;
 }
 
-@InputType()
+@ArgsType()
 export class DeleteOneProfileArgs {
   @Field(() => ProfileWhereUniqueInput, { nullable: false })
   @Type(() => ProfileWhereUniqueInput)
   where!: InstanceType<typeof ProfileWhereUniqueInput>;
 }
 
-@InputType()
+@ArgsType()
 export class FindFirstProfileArgs {
   @Field(() => ProfileWhereInput, { nullable: true })
   @Type(() => ProfileWhereInput)
@@ -2513,7 +4777,7 @@ export class FindFirstProfileArgs {
   distinct?: Array<keyof typeof ProfileScalarFieldEnum>;
 }
 
-@InputType()
+@ArgsType()
 export class FindManyProfileArgs {
   @Field(() => ProfileWhereInput, { nullable: true })
   @Type(() => ProfileWhereInput)
@@ -2530,14 +4794,14 @@ export class FindManyProfileArgs {
   distinct?: Array<keyof typeof ProfileScalarFieldEnum>;
 }
 
-@InputType()
+@ArgsType()
 export class FindUniqueProfileArgs {
   @Field(() => ProfileWhereUniqueInput, { nullable: false })
   @Type(() => ProfileWhereUniqueInput)
   where!: InstanceType<typeof ProfileWhereUniqueInput>;
 }
 
-@InputType()
+@ArgsType()
 export class ProfileAggregateArgs {
   @Field(() => ProfileWhereInput, { nullable: true })
   @Type(() => ProfileWhereInput)
@@ -2573,6 +4837,8 @@ export class ProfileCountAggregateInput {
   @Field(() => Boolean, { nullable: true })
   updatedAt?: true;
   @Field(() => Boolean, { nullable: true })
+  fileEntityId?: true;
+  @Field(() => Boolean, { nullable: true })
   userId?: true;
   @Field(() => Boolean, { nullable: true })
   _all?: true;
@@ -2592,6 +4858,8 @@ export class ProfileCountAggregate {
   createdAt!: number;
   @Field(() => Int, { nullable: false })
   updatedAt!: number;
+  @Field(() => Int, { nullable: false })
+  fileEntityId!: number;
   @Field(() => Int, { nullable: false })
   userId!: number;
   @Field(() => Int, { nullable: false })
@@ -2613,11 +4881,22 @@ export class ProfileCountOrderByAggregateInput {
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
+  fileEntityId?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
   userId?: keyof typeof SortOrder;
 }
 
 @InputType()
-export class ProfileCreateManyInput {
+export class ProfileCreateManyProfilePictureInputEnvelope {
+  @Field(() => [ProfileCreateManyProfilePictureInput], { nullable: false })
+  @Type(() => ProfileCreateManyProfilePictureInput)
+  data!: Array<ProfileCreateManyProfilePictureInput>;
+  @Field(() => Boolean, { nullable: true })
+  skipDuplicates?: boolean;
+}
+
+@InputType()
+export class ProfileCreateManyProfilePictureInput {
   @Field(() => String, { nullable: true })
   profileId?: string;
   @Field(() => String, { nullable: false })
@@ -2635,16 +4914,39 @@ export class ProfileCreateManyInput {
 }
 
 @InputType()
-export class ProfileCreateNestedOneWithoutProfilePictureInput {
-  @Field(() => ProfileCreateWithoutProfilePictureInput, { nullable: true })
+export class ProfileCreateManyInput {
+  @Field(() => String, { nullable: true })
+  profileId?: string;
+  @Field(() => String, { nullable: false })
+  bio!: string;
+  @Field(() => Date, { nullable: true })
+  dateOfBirth?: Date | string;
+  @Field(() => Date, { nullable: true })
+  placeOfBirth?: Date | string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => String, { nullable: true })
+  fileEntityId?: string;
+  @Field(() => String, { nullable: true })
+  userId?: string;
+}
+
+@InputType()
+export class ProfileCreateNestedManyWithoutProfilePictureInput {
+  @Field(() => [ProfileCreateWithoutProfilePictureInput], { nullable: true })
   @Type(() => ProfileCreateWithoutProfilePictureInput)
-  create?: InstanceType<typeof ProfileCreateWithoutProfilePictureInput>;
-  @Field(() => ProfileCreateOrConnectWithoutProfilePictureInput, { nullable: true })
+  create?: Array<ProfileCreateWithoutProfilePictureInput>;
+  @Field(() => [ProfileCreateOrConnectWithoutProfilePictureInput], { nullable: true })
   @Type(() => ProfileCreateOrConnectWithoutProfilePictureInput)
-  connectOrCreate?: InstanceType<typeof ProfileCreateOrConnectWithoutProfilePictureInput>;
-  @Field(() => ProfileWhereUniqueInput, { nullable: true })
+  connectOrCreate?: Array<ProfileCreateOrConnectWithoutProfilePictureInput>;
+  @Field(() => ProfileCreateManyProfilePictureInputEnvelope, { nullable: true })
+  @Type(() => ProfileCreateManyProfilePictureInputEnvelope)
+  createMany?: InstanceType<typeof ProfileCreateManyProfilePictureInputEnvelope>;
+  @Field(() => [ProfileWhereUniqueInput], { nullable: true })
   @Type(() => ProfileWhereUniqueInput)
-  connect?: InstanceType<typeof ProfileWhereUniqueInput>;
+  connect?: Array<ProfileWhereUniqueInput>;
 }
 
 @InputType()
@@ -2712,8 +5014,8 @@ export class ProfileCreateWithoutUserInput {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
-  @Field(() => FileEntityCreateNestedOneWithoutProfileInput, { nullable: true })
-  profilePicture?: InstanceType<typeof FileEntityCreateNestedOneWithoutProfileInput>;
+  @Field(() => FileEntityCreateNestedOneWithoutProfilesInput, { nullable: true })
+  profilePicture?: InstanceType<typeof FileEntityCreateNestedOneWithoutProfilesInput>;
 }
 
 @InputType()
@@ -2730,13 +5032,13 @@ export class ProfileCreateInput {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
-  @Field(() => FileEntityCreateNestedOneWithoutProfileInput, { nullable: true })
-  profilePicture?: InstanceType<typeof FileEntityCreateNestedOneWithoutProfileInput>;
+  @Field(() => FileEntityCreateNestedOneWithoutProfilesInput, { nullable: true })
+  profilePicture?: InstanceType<typeof FileEntityCreateNestedOneWithoutProfilesInput>;
   @Field(() => UsersCreateNestedOneWithoutProfileInput, { nullable: true })
   user?: InstanceType<typeof UsersCreateNestedOneWithoutProfileInput>;
 }
 
-@InputType()
+@ArgsType()
 export class ProfileGroupByArgs {
   @Field(() => ProfileWhereInput, { nullable: true })
   @Type(() => ProfileWhereInput)
@@ -2774,6 +5076,8 @@ export class ProfileGroupBy {
   @Field(() => Date, { nullable: false })
   updatedAt!: Date | string;
   @Field(() => String, { nullable: true })
+  fileEntityId?: string;
+  @Field(() => String, { nullable: true })
   userId?: string;
   @Field(() => ProfileCountAggregate, { nullable: true })
   _count?: InstanceType<typeof ProfileCountAggregate>;
@@ -2781,6 +5085,16 @@ export class ProfileGroupBy {
   _min?: InstanceType<typeof ProfileMinAggregate>;
   @Field(() => ProfileMaxAggregate, { nullable: true })
   _max?: InstanceType<typeof ProfileMaxAggregate>;
+}
+
+@InputType()
+export class ProfileListRelationFilter {
+  @Field(() => ProfileWhereInput, { nullable: true })
+  every?: InstanceType<typeof ProfileWhereInput>;
+  @Field(() => ProfileWhereInput, { nullable: true })
+  some?: InstanceType<typeof ProfileWhereInput>;
+  @Field(() => ProfileWhereInput, { nullable: true })
+  none?: InstanceType<typeof ProfileWhereInput>;
 }
 
 @InputType()
@@ -2797,6 +5111,8 @@ export class ProfileMaxAggregateInput {
   createdAt?: true;
   @Field(() => Boolean, { nullable: true })
   updatedAt?: true;
+  @Field(() => Boolean, { nullable: true })
+  fileEntityId?: true;
   @Field(() => Boolean, { nullable: true })
   userId?: true;
 }
@@ -2816,6 +5132,8 @@ export class ProfileMaxAggregate {
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
   @Field(() => String, { nullable: true })
+  fileEntityId?: string;
+  @Field(() => String, { nullable: true })
   userId?: string;
 }
 
@@ -2833,6 +5151,8 @@ export class ProfileMaxOrderByAggregateInput {
   createdAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  fileEntityId?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   userId?: keyof typeof SortOrder;
 }
@@ -2852,6 +5172,8 @@ export class ProfileMinAggregateInput {
   @Field(() => Boolean, { nullable: true })
   updatedAt?: true;
   @Field(() => Boolean, { nullable: true })
+  fileEntityId?: true;
+  @Field(() => Boolean, { nullable: true })
   userId?: true;
 }
 
@@ -2869,6 +5191,8 @@ export class ProfileMinAggregate {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
+  @Field(() => String, { nullable: true })
+  fileEntityId?: string;
   @Field(() => String, { nullable: true })
   userId?: string;
 }
@@ -2888,7 +5212,15 @@ export class ProfileMinOrderByAggregateInput {
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
+  fileEntityId?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
   userId?: keyof typeof SortOrder;
+}
+
+@InputType()
+export class ProfileOrderByRelationAggregateInput {
+  @Field(() => SortOrder, { nullable: true })
+  _count?: keyof typeof SortOrder;
 }
 
 @InputType()
@@ -2905,6 +5237,8 @@ export class ProfileOrderByWithAggregationInput {
   createdAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  fileEntityId?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   userId?: keyof typeof SortOrder;
   @Field(() => ProfileCountOrderByAggregateInput, { nullable: true })
@@ -2929,6 +5263,8 @@ export class ProfileOrderByWithRelationInput {
   createdAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  fileEntityId?: keyof typeof SortOrder;
   @Field(() => FileEntityOrderByWithRelationInput, { nullable: true })
   profilePicture?: InstanceType<typeof FileEntityOrderByWithRelationInput>;
   @Field(() => UsersOrderByWithRelationInput, { nullable: true })
@@ -2966,7 +5302,51 @@ export class ProfileScalarWhereWithAggregatesInput {
   @Field(() => DateTimeWithAggregatesFilter, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeWithAggregatesFilter>;
   @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
+  fileEntityId?: InstanceType<typeof StringNullableWithAggregatesFilter>;
+  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
   userId?: InstanceType<typeof StringNullableWithAggregatesFilter>;
+}
+
+@InputType()
+export class ProfileScalarWhereInput {
+  @Field(() => [ProfileScalarWhereInput], { nullable: true })
+  AND?: Array<ProfileScalarWhereInput>;
+  @Field(() => [ProfileScalarWhereInput], { nullable: true })
+  OR?: Array<ProfileScalarWhereInput>;
+  @Field(() => [ProfileScalarWhereInput], { nullable: true })
+  NOT?: Array<ProfileScalarWhereInput>;
+  @Field(() => StringFilter, { nullable: true })
+  profileId?: InstanceType<typeof StringFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  bio?: InstanceType<typeof StringFilter>;
+  @Field(() => DateTimeNullableFilter, { nullable: true })
+  dateOfBirth?: InstanceType<typeof DateTimeNullableFilter>;
+  @Field(() => DateTimeNullableFilter, { nullable: true })
+  placeOfBirth?: InstanceType<typeof DateTimeNullableFilter>;
+  @Field(() => DateTimeFilter, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFilter>;
+  @Field(() => DateTimeFilter, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFilter>;
+  @Field(() => StringNullableFilter, { nullable: true })
+  fileEntityId?: InstanceType<typeof StringNullableFilter>;
+  @Field(() => StringNullableFilter, { nullable: true })
+  userId?: InstanceType<typeof StringNullableFilter>;
+}
+
+@InputType()
+export class ProfileUncheckedCreateNestedManyWithoutProfilePictureInput {
+  @Field(() => [ProfileCreateWithoutProfilePictureInput], { nullable: true })
+  @Type(() => ProfileCreateWithoutProfilePictureInput)
+  create?: Array<ProfileCreateWithoutProfilePictureInput>;
+  @Field(() => [ProfileCreateOrConnectWithoutProfilePictureInput], { nullable: true })
+  @Type(() => ProfileCreateOrConnectWithoutProfilePictureInput)
+  connectOrCreate?: Array<ProfileCreateOrConnectWithoutProfilePictureInput>;
+  @Field(() => ProfileCreateManyProfilePictureInputEnvelope, { nullable: true })
+  @Type(() => ProfileCreateManyProfilePictureInputEnvelope)
+  createMany?: InstanceType<typeof ProfileCreateManyProfilePictureInputEnvelope>;
+  @Field(() => [ProfileWhereUniqueInput], { nullable: true })
+  @Type(() => ProfileWhereUniqueInput)
+  connect?: Array<ProfileWhereUniqueInput>;
 }
 
 @InputType()
@@ -3014,8 +5394,8 @@ export class ProfileUncheckedCreateWithoutUserInput {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
-  @Field(() => FileEntityUncheckedCreateNestedOneWithoutProfileInput, { nullable: true })
-  profilePicture?: InstanceType<typeof FileEntityUncheckedCreateNestedOneWithoutProfileInput>;
+  @Field(() => String, { nullable: true })
+  fileEntityId?: string;
 }
 
 @InputType()
@@ -3032,10 +5412,65 @@ export class ProfileUncheckedCreateInput {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
-  @Field(() => FileEntityUncheckedCreateNestedOneWithoutProfileInput, { nullable: true })
-  profilePicture?: InstanceType<typeof FileEntityUncheckedCreateNestedOneWithoutProfileInput>;
+  @Field(() => String, { nullable: true })
+  fileEntityId?: string;
   @Field(() => String, { nullable: true })
   userId?: string;
+}
+
+@InputType()
+export class ProfileUncheckedUpdateManyWithoutProfilePictureNestedInput {
+  @Field(() => [ProfileCreateWithoutProfilePictureInput], { nullable: true })
+  @Type(() => ProfileCreateWithoutProfilePictureInput)
+  create?: Array<ProfileCreateWithoutProfilePictureInput>;
+  @Field(() => [ProfileCreateOrConnectWithoutProfilePictureInput], { nullable: true })
+  @Type(() => ProfileCreateOrConnectWithoutProfilePictureInput)
+  connectOrCreate?: Array<ProfileCreateOrConnectWithoutProfilePictureInput>;
+  @Field(() => [ProfileUpsertWithWhereUniqueWithoutProfilePictureInput], { nullable: true })
+  @Type(() => ProfileUpsertWithWhereUniqueWithoutProfilePictureInput)
+  upsert?: Array<ProfileUpsertWithWhereUniqueWithoutProfilePictureInput>;
+  @Field(() => ProfileCreateManyProfilePictureInputEnvelope, { nullable: true })
+  @Type(() => ProfileCreateManyProfilePictureInputEnvelope)
+  createMany?: InstanceType<typeof ProfileCreateManyProfilePictureInputEnvelope>;
+  @Field(() => [ProfileWhereUniqueInput], { nullable: true })
+  @Type(() => ProfileWhereUniqueInput)
+  set?: Array<ProfileWhereUniqueInput>;
+  @Field(() => [ProfileWhereUniqueInput], { nullable: true })
+  @Type(() => ProfileWhereUniqueInput)
+  disconnect?: Array<ProfileWhereUniqueInput>;
+  @Field(() => [ProfileWhereUniqueInput], { nullable: true })
+  @Type(() => ProfileWhereUniqueInput)
+  delete?: Array<ProfileWhereUniqueInput>;
+  @Field(() => [ProfileWhereUniqueInput], { nullable: true })
+  @Type(() => ProfileWhereUniqueInput)
+  connect?: Array<ProfileWhereUniqueInput>;
+  @Field(() => [ProfileUpdateWithWhereUniqueWithoutProfilePictureInput], { nullable: true })
+  @Type(() => ProfileUpdateWithWhereUniqueWithoutProfilePictureInput)
+  update?: Array<ProfileUpdateWithWhereUniqueWithoutProfilePictureInput>;
+  @Field(() => [ProfileUpdateManyWithWhereWithoutProfilePictureInput], { nullable: true })
+  @Type(() => ProfileUpdateManyWithWhereWithoutProfilePictureInput)
+  updateMany?: Array<ProfileUpdateManyWithWhereWithoutProfilePictureInput>;
+  @Field(() => [ProfileScalarWhereInput], { nullable: true })
+  @Type(() => ProfileScalarWhereInput)
+  deleteMany?: Array<ProfileScalarWhereInput>;
+}
+
+@InputType()
+export class ProfileUncheckedUpdateManyWithoutProfilesInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  profileId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  bio?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => NullableDateTimeFieldUpdateOperationsInput, { nullable: true })
+  dateOfBirth?: InstanceType<typeof NullableDateTimeFieldUpdateOperationsInput>;
+  @Field(() => NullableDateTimeFieldUpdateOperationsInput, { nullable: true })
+  placeOfBirth?: InstanceType<typeof NullableDateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  userId?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
 }
 
 @InputType()
@@ -3052,6 +5487,8 @@ export class ProfileUncheckedUpdateManyInput {
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  fileEntityId?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
   @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
   userId?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
 }
@@ -3111,8 +5548,8 @@ export class ProfileUncheckedUpdateWithoutUserInput {
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => FileEntityUncheckedUpdateOneWithoutProfileNestedInput, { nullable: true })
-  profilePicture?: InstanceType<typeof FileEntityUncheckedUpdateOneWithoutProfileNestedInput>;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  fileEntityId?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
 }
 
 @InputType()
@@ -3129,8 +5566,8 @@ export class ProfileUncheckedUpdateInput {
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => FileEntityUncheckedUpdateOneWithoutProfileNestedInput, { nullable: true })
-  profilePicture?: InstanceType<typeof FileEntityUncheckedUpdateOneWithoutProfileNestedInput>;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  fileEntityId?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
   @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
   userId?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
 }
@@ -3152,22 +5589,50 @@ export class ProfileUpdateManyMutationInput {
 }
 
 @InputType()
-export class ProfileUpdateOneRequiredWithoutProfilePictureNestedInput {
-  @Field(() => ProfileCreateWithoutProfilePictureInput, { nullable: true })
+export class ProfileUpdateManyWithWhereWithoutProfilePictureInput {
+  @Field(() => ProfileScalarWhereInput, { nullable: false })
+  @Type(() => ProfileScalarWhereInput)
+  where!: InstanceType<typeof ProfileScalarWhereInput>;
+  @Field(() => ProfileUpdateManyMutationInput, { nullable: false })
+  @Type(() => ProfileUpdateManyMutationInput)
+  data!: InstanceType<typeof ProfileUpdateManyMutationInput>;
+}
+
+@InputType()
+export class ProfileUpdateManyWithoutProfilePictureNestedInput {
+  @Field(() => [ProfileCreateWithoutProfilePictureInput], { nullable: true })
   @Type(() => ProfileCreateWithoutProfilePictureInput)
-  create?: InstanceType<typeof ProfileCreateWithoutProfilePictureInput>;
-  @Field(() => ProfileCreateOrConnectWithoutProfilePictureInput, { nullable: true })
+  create?: Array<ProfileCreateWithoutProfilePictureInput>;
+  @Field(() => [ProfileCreateOrConnectWithoutProfilePictureInput], { nullable: true })
   @Type(() => ProfileCreateOrConnectWithoutProfilePictureInput)
-  connectOrCreate?: InstanceType<typeof ProfileCreateOrConnectWithoutProfilePictureInput>;
-  @Field(() => ProfileUpsertWithoutProfilePictureInput, { nullable: true })
-  @Type(() => ProfileUpsertWithoutProfilePictureInput)
-  upsert?: InstanceType<typeof ProfileUpsertWithoutProfilePictureInput>;
-  @Field(() => ProfileWhereUniqueInput, { nullable: true })
+  connectOrCreate?: Array<ProfileCreateOrConnectWithoutProfilePictureInput>;
+  @Field(() => [ProfileUpsertWithWhereUniqueWithoutProfilePictureInput], { nullable: true })
+  @Type(() => ProfileUpsertWithWhereUniqueWithoutProfilePictureInput)
+  upsert?: Array<ProfileUpsertWithWhereUniqueWithoutProfilePictureInput>;
+  @Field(() => ProfileCreateManyProfilePictureInputEnvelope, { nullable: true })
+  @Type(() => ProfileCreateManyProfilePictureInputEnvelope)
+  createMany?: InstanceType<typeof ProfileCreateManyProfilePictureInputEnvelope>;
+  @Field(() => [ProfileWhereUniqueInput], { nullable: true })
   @Type(() => ProfileWhereUniqueInput)
-  connect?: InstanceType<typeof ProfileWhereUniqueInput>;
-  @Field(() => ProfileUpdateWithoutProfilePictureInput, { nullable: true })
-  @Type(() => ProfileUpdateWithoutProfilePictureInput)
-  update?: InstanceType<typeof ProfileUpdateWithoutProfilePictureInput>;
+  set?: Array<ProfileWhereUniqueInput>;
+  @Field(() => [ProfileWhereUniqueInput], { nullable: true })
+  @Type(() => ProfileWhereUniqueInput)
+  disconnect?: Array<ProfileWhereUniqueInput>;
+  @Field(() => [ProfileWhereUniqueInput], { nullable: true })
+  @Type(() => ProfileWhereUniqueInput)
+  delete?: Array<ProfileWhereUniqueInput>;
+  @Field(() => [ProfileWhereUniqueInput], { nullable: true })
+  @Type(() => ProfileWhereUniqueInput)
+  connect?: Array<ProfileWhereUniqueInput>;
+  @Field(() => [ProfileUpdateWithWhereUniqueWithoutProfilePictureInput], { nullable: true })
+  @Type(() => ProfileUpdateWithWhereUniqueWithoutProfilePictureInput)
+  update?: Array<ProfileUpdateWithWhereUniqueWithoutProfilePictureInput>;
+  @Field(() => [ProfileUpdateManyWithWhereWithoutProfilePictureInput], { nullable: true })
+  @Type(() => ProfileUpdateManyWithWhereWithoutProfilePictureInput)
+  updateMany?: Array<ProfileUpdateManyWithWhereWithoutProfilePictureInput>;
+  @Field(() => [ProfileScalarWhereInput], { nullable: true })
+  @Type(() => ProfileScalarWhereInput)
+  deleteMany?: Array<ProfileScalarWhereInput>;
 }
 
 @InputType()
@@ -3191,6 +5656,16 @@ export class ProfileUpdateOneWithoutUserNestedInput {
   @Field(() => ProfileUpdateWithoutUserInput, { nullable: true })
   @Type(() => ProfileUpdateWithoutUserInput)
   update?: InstanceType<typeof ProfileUpdateWithoutUserInput>;
+}
+
+@InputType()
+export class ProfileUpdateWithWhereUniqueWithoutProfilePictureInput {
+  @Field(() => ProfileWhereUniqueInput, { nullable: false })
+  @Type(() => ProfileWhereUniqueInput)
+  where!: InstanceType<typeof ProfileWhereUniqueInput>;
+  @Field(() => ProfileUpdateWithoutProfilePictureInput, { nullable: false })
+  @Type(() => ProfileUpdateWithoutProfilePictureInput)
+  data!: InstanceType<typeof ProfileUpdateWithoutProfilePictureInput>;
 }
 
 @InputType()
@@ -3225,8 +5700,8 @@ export class ProfileUpdateWithoutUserInput {
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => FileEntityUpdateOneWithoutProfileNestedInput, { nullable: true })
-  profilePicture?: InstanceType<typeof FileEntityUpdateOneWithoutProfileNestedInput>;
+  @Field(() => FileEntityUpdateOneWithoutProfilesNestedInput, { nullable: true })
+  profilePicture?: InstanceType<typeof FileEntityUpdateOneWithoutProfilesNestedInput>;
 }
 
 @InputType()
@@ -3243,14 +5718,17 @@ export class ProfileUpdateInput {
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => FileEntityUpdateOneWithoutProfileNestedInput, { nullable: true })
-  profilePicture?: InstanceType<typeof FileEntityUpdateOneWithoutProfileNestedInput>;
+  @Field(() => FileEntityUpdateOneWithoutProfilesNestedInput, { nullable: true })
+  profilePicture?: InstanceType<typeof FileEntityUpdateOneWithoutProfilesNestedInput>;
   @Field(() => UsersUpdateOneWithoutProfileNestedInput, { nullable: true })
   user?: InstanceType<typeof UsersUpdateOneWithoutProfileNestedInput>;
 }
 
 @InputType()
-export class ProfileUpsertWithoutProfilePictureInput {
+export class ProfileUpsertWithWhereUniqueWithoutProfilePictureInput {
+  @Field(() => ProfileWhereUniqueInput, { nullable: false })
+  @Type(() => ProfileWhereUniqueInput)
+  where!: InstanceType<typeof ProfileWhereUniqueInput>;
   @Field(() => ProfileUpdateWithoutProfilePictureInput, { nullable: false })
   @Type(() => ProfileUpdateWithoutProfilePictureInput)
   update!: InstanceType<typeof ProfileUpdateWithoutProfilePictureInput>;
@@ -3273,6 +5751,8 @@ export class ProfileUpsertWithoutUserInput {
 export class ProfileWhereUniqueInput {
   @Field(() => String, { nullable: true })
   profileId?: string;
+  @Field(() => String, { nullable: true })
+  fileEntityId?: string;
   @Field(() => String, { nullable: true })
   userId?: string;
 }
@@ -3297,6 +5777,8 @@ export class ProfileWhereInput {
   createdAt?: InstanceType<typeof DateTimeFilter>;
   @Field(() => DateTimeFilter, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFilter>;
+  @Field(() => StringNullableFilter, { nullable: true })
+  fileEntityId?: InstanceType<typeof StringNullableFilter>;
   @Field(() => FileEntityRelationFilter, { nullable: true })
   profilePicture?: InstanceType<typeof FileEntityRelationFilter>;
   @Field(() => UsersRelationFilter, { nullable: true })
@@ -3319,6 +5801,8 @@ export class Profile {
   createdAt!: Date;
   @Field(() => Date, { nullable: false })
   updatedAt!: Date;
+  @Field(() => String, { nullable: true })
+  fileEntityId!: string | null;
   @Field(() => FileEntity, { nullable: true })
   profilePicture?: InstanceType<typeof FileEntity> | null;
   @Field(() => Users, { nullable: true })
@@ -3327,7 +5811,7 @@ export class Profile {
   userId!: string | null;
 }
 
-@InputType()
+@ArgsType()
 export class UpdateManyProfileArgs {
   @Field(() => ProfileUpdateManyMutationInput, { nullable: false })
   @Type(() => ProfileUpdateManyMutationInput)
@@ -3337,7 +5821,7 @@ export class UpdateManyProfileArgs {
   where?: InstanceType<typeof ProfileWhereInput>;
 }
 
-@InputType()
+@ArgsType()
 export class UpdateOneProfileArgs {
   @Field(() => ProfileUpdateInput, { nullable: false })
   @Type(() => ProfileUpdateInput)
@@ -3347,7 +5831,7 @@ export class UpdateOneProfileArgs {
   where!: InstanceType<typeof ProfileWhereUniqueInput>;
 }
 
-@InputType()
+@ArgsType()
 export class UpsertOneProfileArgs {
   @Field(() => ProfileWhereUniqueInput, { nullable: false })
   @Type(() => ProfileWhereUniqueInput)
@@ -3361,6 +5845,2690 @@ export class UpsertOneProfileArgs {
 }
 
 @ObjectType()
+export class AggregateRestauUsers {
+  @Field(() => RestauUsersCountAggregate, { nullable: true })
+  _count?: InstanceType<typeof RestauUsersCountAggregate>;
+  @Field(() => RestauUsersMinAggregate, { nullable: true })
+  _min?: InstanceType<typeof RestauUsersMinAggregate>;
+  @Field(() => RestauUsersMaxAggregate, { nullable: true })
+  _max?: InstanceType<typeof RestauUsersMaxAggregate>;
+}
+
+@ArgsType()
+export class CreateManyRestauUsersArgs {
+  @Field(() => [RestauUsersCreateManyInput], { nullable: false })
+  @Type(() => RestauUsersCreateManyInput)
+  data!: Array<RestauUsersCreateManyInput>;
+  @Field(() => Boolean, { nullable: true })
+  skipDuplicates?: boolean;
+}
+
+@ArgsType()
+export class CreateOneRestauUsersArgs {
+  @Field(() => RestauUsersCreateInput, { nullable: false })
+  @Type(() => RestauUsersCreateInput)
+  data!: InstanceType<typeof RestauUsersCreateInput>;
+}
+
+@ArgsType()
+export class DeleteManyRestauUsersArgs {
+  @Field(() => RestauUsersWhereInput, { nullable: true })
+  @Type(() => RestauUsersWhereInput)
+  where?: InstanceType<typeof RestauUsersWhereInput>;
+}
+
+@ArgsType()
+export class DeleteOneRestauUsersArgs {
+  @Field(() => RestauUsersWhereUniqueInput, { nullable: false })
+  @Type(() => RestauUsersWhereUniqueInput)
+  where!: InstanceType<typeof RestauUsersWhereUniqueInput>;
+}
+
+@ArgsType()
+export class FindFirstRestauUsersArgs {
+  @Field(() => RestauUsersWhereInput, { nullable: true })
+  @Type(() => RestauUsersWhereInput)
+  where?: InstanceType<typeof RestauUsersWhereInput>;
+  @Field(() => [RestauUsersOrderByWithRelationInput], { nullable: true })
+  orderBy?: Array<RestauUsersOrderByWithRelationInput>;
+  @Field(() => RestauUsersWhereUniqueInput, { nullable: true })
+  cursor?: InstanceType<typeof RestauUsersWhereUniqueInput>;
+  @Field(() => Int, { nullable: true })
+  take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
+  @Field(() => [RestauUsersScalarFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof RestauUsersScalarFieldEnum>;
+}
+
+@ArgsType()
+export class FindManyRestauUsersArgs {
+  @Field(() => RestauUsersWhereInput, { nullable: true })
+  @Type(() => RestauUsersWhereInput)
+  where?: InstanceType<typeof RestauUsersWhereInput>;
+  @Field(() => [RestauUsersOrderByWithRelationInput], { nullable: true })
+  orderBy?: Array<RestauUsersOrderByWithRelationInput>;
+  @Field(() => RestauUsersWhereUniqueInput, { nullable: true })
+  cursor?: InstanceType<typeof RestauUsersWhereUniqueInput>;
+  @Field(() => Int, { nullable: true })
+  take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
+  @Field(() => [RestauUsersScalarFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof RestauUsersScalarFieldEnum>;
+}
+
+@ArgsType()
+export class FindUniqueRestauUsersArgs {
+  @Field(() => RestauUsersWhereUniqueInput, { nullable: false })
+  @Type(() => RestauUsersWhereUniqueInput)
+  where!: InstanceType<typeof RestauUsersWhereUniqueInput>;
+}
+
+@ArgsType()
+export class RestauUsersAggregateArgs {
+  @Field(() => RestauUsersWhereInput, { nullable: true })
+  @Type(() => RestauUsersWhereInput)
+  where?: InstanceType<typeof RestauUsersWhereInput>;
+  @Field(() => [RestauUsersOrderByWithRelationInput], { nullable: true })
+  orderBy?: Array<RestauUsersOrderByWithRelationInput>;
+  @Field(() => RestauUsersWhereUniqueInput, { nullable: true })
+  cursor?: InstanceType<typeof RestauUsersWhereUniqueInput>;
+  @Field(() => Int, { nullable: true })
+  take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
+  @Field(() => RestauUsersCountAggregateInput, { nullable: true })
+  _count?: InstanceType<typeof RestauUsersCountAggregateInput>;
+  @Field(() => RestauUsersMinAggregateInput, { nullable: true })
+  _min?: InstanceType<typeof RestauUsersMinAggregateInput>;
+  @Field(() => RestauUsersMaxAggregateInput, { nullable: true })
+  _max?: InstanceType<typeof RestauUsersMaxAggregateInput>;
+}
+
+@InputType()
+export class RestauUsersCountAggregateInput {
+  @Field(() => Boolean, { nullable: true })
+  idRestauUser?: true;
+  @Field(() => Boolean, { nullable: true })
+  userName?: true;
+  @Field(() => Boolean, { nullable: true })
+  password?: true;
+  @Field(() => Boolean, { nullable: true })
+  refreshToken?: true;
+  @Field(() => Boolean, { nullable: true })
+  userFullName?: true;
+  @Field(() => Boolean, { nullable: true })
+  restauId?: true;
+  @Field(() => Boolean, { nullable: true })
+  createdAt?: true;
+  @Field(() => Boolean, { nullable: true })
+  updatedAt?: true;
+  @Field(() => Boolean, { nullable: true })
+  roleId?: true;
+  @Field(() => Boolean, { nullable: true })
+  _all?: true;
+}
+
+@ObjectType()
+export class RestauUsersCountAggregate {
+  @Field(() => Int, { nullable: false })
+  idRestauUser!: number;
+  @Field(() => Int, { nullable: false })
+  userName!: number;
+  @Field(() => Int, { nullable: false })
+  password!: number;
+  @Field(() => Int, { nullable: false })
+  refreshToken!: number;
+  @Field(() => Int, { nullable: false })
+  userFullName!: number;
+  @Field(() => Int, { nullable: false })
+  restauId!: number;
+  @Field(() => Int, { nullable: false })
+  createdAt!: number;
+  @Field(() => Int, { nullable: false })
+  updatedAt!: number;
+  @Field(() => Int, { nullable: false })
+  roleId!: number;
+  @Field(() => Int, { nullable: false })
+  _all!: number;
+}
+
+@InputType()
+export class RestauUsersCountOrderByAggregateInput {
+  @Field(() => SortOrder, { nullable: true })
+  idRestauUser?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  userName?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  password?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  refreshToken?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  userFullName?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  restauId?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  createdAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  updatedAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  roleId?: keyof typeof SortOrder;
+}
+
+@InputType()
+export class RestauUsersCreateManyRestaurantInputEnvelope {
+  @Field(() => [RestauUsersCreateManyRestaurantInput], { nullable: false })
+  @Type(() => RestauUsersCreateManyRestaurantInput)
+  data!: Array<RestauUsersCreateManyRestaurantInput>;
+  @Field(() => Boolean, { nullable: true })
+  skipDuplicates?: boolean;
+}
+
+@InputType()
+export class RestauUsersCreateManyRestaurantInput {
+  @Field(() => String, { nullable: true })
+  idRestauUser?: string;
+  @Field(() => String, { nullable: false })
+  userName!: string;
+  @Field(() => String, { nullable: false })
+  password!: string;
+  @Field(() => String, { nullable: false })
+  refreshToken!: string;
+  @Field(() => String, { nullable: false })
+  userFullName!: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => String, { nullable: false })
+  roleId!: string;
+}
+
+@InputType()
+export class RestauUsersCreateManyRoleInputEnvelope {
+  @Field(() => [RestauUsersCreateManyRoleInput], { nullable: false })
+  @Type(() => RestauUsersCreateManyRoleInput)
+  data!: Array<RestauUsersCreateManyRoleInput>;
+  @Field(() => Boolean, { nullable: true })
+  skipDuplicates?: boolean;
+}
+
+@InputType()
+export class RestauUsersCreateManyRoleInput {
+  @Field(() => String, { nullable: true })
+  idRestauUser?: string;
+  @Field(() => String, { nullable: false })
+  userName!: string;
+  @Field(() => String, { nullable: false })
+  password!: string;
+  @Field(() => String, { nullable: false })
+  refreshToken!: string;
+  @Field(() => String, { nullable: false })
+  userFullName!: string;
+  @Field(() => String, { nullable: false })
+  restauId!: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+}
+
+@InputType()
+export class RestauUsersCreateManyInput {
+  @Field(() => String, { nullable: true })
+  idRestauUser?: string;
+  @Field(() => String, { nullable: false })
+  userName!: string;
+  @Field(() => String, { nullable: false })
+  password!: string;
+  @Field(() => String, { nullable: false })
+  refreshToken!: string;
+  @Field(() => String, { nullable: false })
+  userFullName!: string;
+  @Field(() => String, { nullable: false })
+  restauId!: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => String, { nullable: false })
+  roleId!: string;
+}
+
+@InputType()
+export class RestauUsersCreateNestedManyWithoutRestaurantInput {
+  @Field(() => [RestauUsersCreateWithoutRestaurantInput], { nullable: true })
+  @Type(() => RestauUsersCreateWithoutRestaurantInput)
+  create?: Array<RestauUsersCreateWithoutRestaurantInput>;
+  @Field(() => [RestauUsersCreateOrConnectWithoutRestaurantInput], { nullable: true })
+  @Type(() => RestauUsersCreateOrConnectWithoutRestaurantInput)
+  connectOrCreate?: Array<RestauUsersCreateOrConnectWithoutRestaurantInput>;
+  @Field(() => RestauUsersCreateManyRestaurantInputEnvelope, { nullable: true })
+  @Type(() => RestauUsersCreateManyRestaurantInputEnvelope)
+  createMany?: InstanceType<typeof RestauUsersCreateManyRestaurantInputEnvelope>;
+  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
+  @Type(() => RestauUsersWhereUniqueInput)
+  connect?: Array<RestauUsersWhereUniqueInput>;
+}
+
+@InputType()
+export class RestauUsersCreateNestedManyWithoutRoleInput {
+  @Field(() => [RestauUsersCreateWithoutRoleInput], { nullable: true })
+  @Type(() => RestauUsersCreateWithoutRoleInput)
+  create?: Array<RestauUsersCreateWithoutRoleInput>;
+  @Field(() => [RestauUsersCreateOrConnectWithoutRoleInput], { nullable: true })
+  @Type(() => RestauUsersCreateOrConnectWithoutRoleInput)
+  connectOrCreate?: Array<RestauUsersCreateOrConnectWithoutRoleInput>;
+  @Field(() => RestauUsersCreateManyRoleInputEnvelope, { nullable: true })
+  @Type(() => RestauUsersCreateManyRoleInputEnvelope)
+  createMany?: InstanceType<typeof RestauUsersCreateManyRoleInputEnvelope>;
+  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
+  @Type(() => RestauUsersWhereUniqueInput)
+  connect?: Array<RestauUsersWhereUniqueInput>;
+}
+
+@InputType()
+export class RestauUsersCreateOrConnectWithoutRestaurantInput {
+  @Field(() => RestauUsersWhereUniqueInput, { nullable: false })
+  @Type(() => RestauUsersWhereUniqueInput)
+  where!: InstanceType<typeof RestauUsersWhereUniqueInput>;
+  @Field(() => RestauUsersCreateWithoutRestaurantInput, { nullable: false })
+  @Type(() => RestauUsersCreateWithoutRestaurantInput)
+  create!: InstanceType<typeof RestauUsersCreateWithoutRestaurantInput>;
+}
+
+@InputType()
+export class RestauUsersCreateOrConnectWithoutRoleInput {
+  @Field(() => RestauUsersWhereUniqueInput, { nullable: false })
+  @Type(() => RestauUsersWhereUniqueInput)
+  where!: InstanceType<typeof RestauUsersWhereUniqueInput>;
+  @Field(() => RestauUsersCreateWithoutRoleInput, { nullable: false })
+  @Type(() => RestauUsersCreateWithoutRoleInput)
+  create!: InstanceType<typeof RestauUsersCreateWithoutRoleInput>;
+}
+
+@InputType()
+export class RestauUsersCreateWithoutRestaurantInput {
+  @Field(() => String, { nullable: true })
+  idRestauUser?: string;
+  @Field(() => String, { nullable: false })
+  userName!: string;
+  @Field(() => String, { nullable: false })
+  password!: string;
+  @Field(() => String, { nullable: false })
+  refreshToken!: string;
+  @Field(() => String, { nullable: false })
+  userFullName!: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => RoleCreateNestedOneWithoutRestauUserInput, { nullable: false })
+  role!: InstanceType<typeof RoleCreateNestedOneWithoutRestauUserInput>;
+}
+
+@InputType()
+export class RestauUsersCreateWithoutRoleInput {
+  @Field(() => String, { nullable: true })
+  idRestauUser?: string;
+  @Field(() => String, { nullable: false })
+  userName!: string;
+  @Field(() => String, { nullable: false })
+  password!: string;
+  @Field(() => String, { nullable: false })
+  refreshToken!: string;
+  @Field(() => String, { nullable: false })
+  userFullName!: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => RestaurantsCreateNestedOneWithoutUsersInput, { nullable: false })
+  restaurant!: InstanceType<typeof RestaurantsCreateNestedOneWithoutUsersInput>;
+}
+
+@InputType()
+export class RestauUsersCreateInput {
+  @Field(() => String, { nullable: true })
+  idRestauUser?: string;
+  @Field(() => String, { nullable: false })
+  userName!: string;
+  @Field(() => String, { nullable: false })
+  password!: string;
+  @Field(() => String, { nullable: false })
+  refreshToken!: string;
+  @Field(() => String, { nullable: false })
+  userFullName!: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => RestaurantsCreateNestedOneWithoutUsersInput, { nullable: false })
+  restaurant!: InstanceType<typeof RestaurantsCreateNestedOneWithoutUsersInput>;
+  @Field(() => RoleCreateNestedOneWithoutRestauUserInput, { nullable: false })
+  role!: InstanceType<typeof RoleCreateNestedOneWithoutRestauUserInput>;
+}
+
+@ArgsType()
+export class RestauUsersGroupByArgs {
+  @Field(() => RestauUsersWhereInput, { nullable: true })
+  @Type(() => RestauUsersWhereInput)
+  where?: InstanceType<typeof RestauUsersWhereInput>;
+  @Field(() => [RestauUsersOrderByWithAggregationInput], { nullable: true })
+  orderBy?: Array<RestauUsersOrderByWithAggregationInput>;
+  @Field(() => [RestauUsersScalarFieldEnum], { nullable: false })
+  by!: Array<keyof typeof RestauUsersScalarFieldEnum>;
+  @Field(() => RestauUsersScalarWhereWithAggregatesInput, { nullable: true })
+  having?: InstanceType<typeof RestauUsersScalarWhereWithAggregatesInput>;
+  @Field(() => Int, { nullable: true })
+  take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
+  @Field(() => RestauUsersCountAggregateInput, { nullable: true })
+  _count?: InstanceType<typeof RestauUsersCountAggregateInput>;
+  @Field(() => RestauUsersMinAggregateInput, { nullable: true })
+  _min?: InstanceType<typeof RestauUsersMinAggregateInput>;
+  @Field(() => RestauUsersMaxAggregateInput, { nullable: true })
+  _max?: InstanceType<typeof RestauUsersMaxAggregateInput>;
+}
+
+@ObjectType()
+export class RestauUsersGroupBy {
+  @Field(() => String, { nullable: false })
+  idRestauUser!: string;
+  @Field(() => String, { nullable: false })
+  userName!: string;
+  @Field(() => String, { nullable: false })
+  password!: string;
+  @Field(() => String, { nullable: false })
+  refreshToken!: string;
+  @Field(() => String, { nullable: false })
+  userFullName!: string;
+  @Field(() => String, { nullable: false })
+  restauId!: string;
+  @Field(() => Date, { nullable: false })
+  createdAt!: Date | string;
+  @Field(() => Date, { nullable: false })
+  updatedAt!: Date | string;
+  @Field(() => String, { nullable: false })
+  roleId!: string;
+  @Field(() => RestauUsersCountAggregate, { nullable: true })
+  _count?: InstanceType<typeof RestauUsersCountAggregate>;
+  @Field(() => RestauUsersMinAggregate, { nullable: true })
+  _min?: InstanceType<typeof RestauUsersMinAggregate>;
+  @Field(() => RestauUsersMaxAggregate, { nullable: true })
+  _max?: InstanceType<typeof RestauUsersMaxAggregate>;
+}
+
+@InputType()
+export class RestauUsersListRelationFilter {
+  @Field(() => RestauUsersWhereInput, { nullable: true })
+  every?: InstanceType<typeof RestauUsersWhereInput>;
+  @Field(() => RestauUsersWhereInput, { nullable: true })
+  some?: InstanceType<typeof RestauUsersWhereInput>;
+  @Field(() => RestauUsersWhereInput, { nullable: true })
+  none?: InstanceType<typeof RestauUsersWhereInput>;
+}
+
+@InputType()
+export class RestauUsersMaxAggregateInput {
+  @Field(() => Boolean, { nullable: true })
+  idRestauUser?: true;
+  @Field(() => Boolean, { nullable: true })
+  userName?: true;
+  @Field(() => Boolean, { nullable: true })
+  password?: true;
+  @Field(() => Boolean, { nullable: true })
+  refreshToken?: true;
+  @Field(() => Boolean, { nullable: true })
+  userFullName?: true;
+  @Field(() => Boolean, { nullable: true })
+  restauId?: true;
+  @Field(() => Boolean, { nullable: true })
+  createdAt?: true;
+  @Field(() => Boolean, { nullable: true })
+  updatedAt?: true;
+  @Field(() => Boolean, { nullable: true })
+  roleId?: true;
+}
+
+@ObjectType()
+export class RestauUsersMaxAggregate {
+  @Field(() => String, { nullable: true })
+  idRestauUser?: string;
+  @Field(() => String, { nullable: true })
+  userName?: string;
+  @Field(() => String, { nullable: true })
+  password?: string;
+  @Field(() => String, { nullable: true })
+  refreshToken?: string;
+  @Field(() => String, { nullable: true })
+  userFullName?: string;
+  @Field(() => String, { nullable: true })
+  restauId?: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => String, { nullable: true })
+  roleId?: string;
+}
+
+@InputType()
+export class RestauUsersMaxOrderByAggregateInput {
+  @Field(() => SortOrder, { nullable: true })
+  idRestauUser?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  userName?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  password?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  refreshToken?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  userFullName?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  restauId?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  createdAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  updatedAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  roleId?: keyof typeof SortOrder;
+}
+
+@InputType()
+export class RestauUsersMinAggregateInput {
+  @Field(() => Boolean, { nullable: true })
+  idRestauUser?: true;
+  @Field(() => Boolean, { nullable: true })
+  userName?: true;
+  @Field(() => Boolean, { nullable: true })
+  password?: true;
+  @Field(() => Boolean, { nullable: true })
+  refreshToken?: true;
+  @Field(() => Boolean, { nullable: true })
+  userFullName?: true;
+  @Field(() => Boolean, { nullable: true })
+  restauId?: true;
+  @Field(() => Boolean, { nullable: true })
+  createdAt?: true;
+  @Field(() => Boolean, { nullable: true })
+  updatedAt?: true;
+  @Field(() => Boolean, { nullable: true })
+  roleId?: true;
+}
+
+@ObjectType()
+export class RestauUsersMinAggregate {
+  @Field(() => String, { nullable: true })
+  idRestauUser?: string;
+  @Field(() => String, { nullable: true })
+  userName?: string;
+  @Field(() => String, { nullable: true })
+  password?: string;
+  @Field(() => String, { nullable: true })
+  refreshToken?: string;
+  @Field(() => String, { nullable: true })
+  userFullName?: string;
+  @Field(() => String, { nullable: true })
+  restauId?: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => String, { nullable: true })
+  roleId?: string;
+}
+
+@InputType()
+export class RestauUsersMinOrderByAggregateInput {
+  @Field(() => SortOrder, { nullable: true })
+  idRestauUser?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  userName?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  password?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  refreshToken?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  userFullName?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  restauId?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  createdAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  updatedAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  roleId?: keyof typeof SortOrder;
+}
+
+@InputType()
+export class RestauUsersOrderByRelationAggregateInput {
+  @Field(() => SortOrder, { nullable: true })
+  _count?: keyof typeof SortOrder;
+}
+
+@InputType()
+export class RestauUsersOrderByWithAggregationInput {
+  @Field(() => SortOrder, { nullable: true })
+  idRestauUser?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  userName?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  password?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  refreshToken?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  userFullName?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  restauId?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  createdAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  updatedAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  roleId?: keyof typeof SortOrder;
+  @Field(() => RestauUsersCountOrderByAggregateInput, { nullable: true })
+  _count?: InstanceType<typeof RestauUsersCountOrderByAggregateInput>;
+  @Field(() => RestauUsersMaxOrderByAggregateInput, { nullable: true })
+  _max?: InstanceType<typeof RestauUsersMaxOrderByAggregateInput>;
+  @Field(() => RestauUsersMinOrderByAggregateInput, { nullable: true })
+  _min?: InstanceType<typeof RestauUsersMinOrderByAggregateInput>;
+}
+
+@InputType()
+export class RestauUsersOrderByWithRelationInput {
+  @Field(() => SortOrder, { nullable: true })
+  idRestauUser?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  userName?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  password?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  refreshToken?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  userFullName?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  restauId?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  createdAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  updatedAt?: keyof typeof SortOrder;
+  @Field(() => RestaurantsOrderByWithRelationInput, { nullable: true })
+  restaurant?: InstanceType<typeof RestaurantsOrderByWithRelationInput>;
+  @Field(() => SortOrder, { nullable: true })
+  roleId?: keyof typeof SortOrder;
+  @Field(() => RoleOrderByWithRelationInput, { nullable: true })
+  role?: InstanceType<typeof RoleOrderByWithRelationInput>;
+}
+
+@InputType()
+export class RestauUsersScalarWhereWithAggregatesInput {
+  @Field(() => [RestauUsersScalarWhereWithAggregatesInput], { nullable: true })
+  AND?: Array<RestauUsersScalarWhereWithAggregatesInput>;
+  @Field(() => [RestauUsersScalarWhereWithAggregatesInput], { nullable: true })
+  OR?: Array<RestauUsersScalarWhereWithAggregatesInput>;
+  @Field(() => [RestauUsersScalarWhereWithAggregatesInput], { nullable: true })
+  NOT?: Array<RestauUsersScalarWhereWithAggregatesInput>;
+  @Field(() => StringWithAggregatesFilter, { nullable: true })
+  idRestauUser?: InstanceType<typeof StringWithAggregatesFilter>;
+  @Field(() => StringWithAggregatesFilter, { nullable: true })
+  userName?: InstanceType<typeof StringWithAggregatesFilter>;
+  @Field(() => StringWithAggregatesFilter, { nullable: true })
+  password?: InstanceType<typeof StringWithAggregatesFilter>;
+  @Field(() => StringWithAggregatesFilter, { nullable: true })
+  refreshToken?: InstanceType<typeof StringWithAggregatesFilter>;
+  @Field(() => StringWithAggregatesFilter, { nullable: true })
+  userFullName?: InstanceType<typeof StringWithAggregatesFilter>;
+  @Field(() => StringWithAggregatesFilter, { nullable: true })
+  restauId?: InstanceType<typeof StringWithAggregatesFilter>;
+  @Field(() => DateTimeWithAggregatesFilter, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeWithAggregatesFilter>;
+  @Field(() => DateTimeWithAggregatesFilter, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeWithAggregatesFilter>;
+  @Field(() => StringWithAggregatesFilter, { nullable: true })
+  roleId?: InstanceType<typeof StringWithAggregatesFilter>;
+}
+
+@InputType()
+export class RestauUsersScalarWhereInput {
+  @Field(() => [RestauUsersScalarWhereInput], { nullable: true })
+  AND?: Array<RestauUsersScalarWhereInput>;
+  @Field(() => [RestauUsersScalarWhereInput], { nullable: true })
+  OR?: Array<RestauUsersScalarWhereInput>;
+  @Field(() => [RestauUsersScalarWhereInput], { nullable: true })
+  NOT?: Array<RestauUsersScalarWhereInput>;
+  @Field(() => StringFilter, { nullable: true })
+  idRestauUser?: InstanceType<typeof StringFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  userName?: InstanceType<typeof StringFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  password?: InstanceType<typeof StringFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  refreshToken?: InstanceType<typeof StringFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  userFullName?: InstanceType<typeof StringFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  restauId?: InstanceType<typeof StringFilter>;
+  @Field(() => DateTimeFilter, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFilter>;
+  @Field(() => DateTimeFilter, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  roleId?: InstanceType<typeof StringFilter>;
+}
+
+@InputType()
+export class RestauUsersUncheckedCreateNestedManyWithoutRestaurantInput {
+  @Field(() => [RestauUsersCreateWithoutRestaurantInput], { nullable: true })
+  @Type(() => RestauUsersCreateWithoutRestaurantInput)
+  create?: Array<RestauUsersCreateWithoutRestaurantInput>;
+  @Field(() => [RestauUsersCreateOrConnectWithoutRestaurantInput], { nullable: true })
+  @Type(() => RestauUsersCreateOrConnectWithoutRestaurantInput)
+  connectOrCreate?: Array<RestauUsersCreateOrConnectWithoutRestaurantInput>;
+  @Field(() => RestauUsersCreateManyRestaurantInputEnvelope, { nullable: true })
+  @Type(() => RestauUsersCreateManyRestaurantInputEnvelope)
+  createMany?: InstanceType<typeof RestauUsersCreateManyRestaurantInputEnvelope>;
+  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
+  @Type(() => RestauUsersWhereUniqueInput)
+  connect?: Array<RestauUsersWhereUniqueInput>;
+}
+
+@InputType()
+export class RestauUsersUncheckedCreateNestedManyWithoutRoleInput {
+  @Field(() => [RestauUsersCreateWithoutRoleInput], { nullable: true })
+  @Type(() => RestauUsersCreateWithoutRoleInput)
+  create?: Array<RestauUsersCreateWithoutRoleInput>;
+  @Field(() => [RestauUsersCreateOrConnectWithoutRoleInput], { nullable: true })
+  @Type(() => RestauUsersCreateOrConnectWithoutRoleInput)
+  connectOrCreate?: Array<RestauUsersCreateOrConnectWithoutRoleInput>;
+  @Field(() => RestauUsersCreateManyRoleInputEnvelope, { nullable: true })
+  @Type(() => RestauUsersCreateManyRoleInputEnvelope)
+  createMany?: InstanceType<typeof RestauUsersCreateManyRoleInputEnvelope>;
+  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
+  @Type(() => RestauUsersWhereUniqueInput)
+  connect?: Array<RestauUsersWhereUniqueInput>;
+}
+
+@InputType()
+export class RestauUsersUncheckedCreateWithoutRestaurantInput {
+  @Field(() => String, { nullable: true })
+  idRestauUser?: string;
+  @Field(() => String, { nullable: false })
+  userName!: string;
+  @Field(() => String, { nullable: false })
+  password!: string;
+  @Field(() => String, { nullable: false })
+  refreshToken!: string;
+  @Field(() => String, { nullable: false })
+  userFullName!: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => String, { nullable: false })
+  roleId!: string;
+}
+
+@InputType()
+export class RestauUsersUncheckedCreateWithoutRoleInput {
+  @Field(() => String, { nullable: true })
+  idRestauUser?: string;
+  @Field(() => String, { nullable: false })
+  userName!: string;
+  @Field(() => String, { nullable: false })
+  password!: string;
+  @Field(() => String, { nullable: false })
+  refreshToken!: string;
+  @Field(() => String, { nullable: false })
+  userFullName!: string;
+  @Field(() => String, { nullable: false })
+  restauId!: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+}
+
+@InputType()
+export class RestauUsersUncheckedCreateInput {
+  @Field(() => String, { nullable: true })
+  idRestauUser?: string;
+  @Field(() => String, { nullable: false })
+  userName!: string;
+  @Field(() => String, { nullable: false })
+  password!: string;
+  @Field(() => String, { nullable: false })
+  refreshToken!: string;
+  @Field(() => String, { nullable: false })
+  userFullName!: string;
+  @Field(() => String, { nullable: false })
+  restauId!: string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => String, { nullable: false })
+  roleId!: string;
+}
+
+@InputType()
+export class RestauUsersUncheckedUpdateManyWithoutRestauUserInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idRestauUser?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  userName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  refreshToken?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  userFullName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class RestauUsersUncheckedUpdateManyWithoutRestaurantNestedInput {
+  @Field(() => [RestauUsersCreateWithoutRestaurantInput], { nullable: true })
+  @Type(() => RestauUsersCreateWithoutRestaurantInput)
+  create?: Array<RestauUsersCreateWithoutRestaurantInput>;
+  @Field(() => [RestauUsersCreateOrConnectWithoutRestaurantInput], { nullable: true })
+  @Type(() => RestauUsersCreateOrConnectWithoutRestaurantInput)
+  connectOrCreate?: Array<RestauUsersCreateOrConnectWithoutRestaurantInput>;
+  @Field(() => [RestauUsersUpsertWithWhereUniqueWithoutRestaurantInput], { nullable: true })
+  @Type(() => RestauUsersUpsertWithWhereUniqueWithoutRestaurantInput)
+  upsert?: Array<RestauUsersUpsertWithWhereUniqueWithoutRestaurantInput>;
+  @Field(() => RestauUsersCreateManyRestaurantInputEnvelope, { nullable: true })
+  @Type(() => RestauUsersCreateManyRestaurantInputEnvelope)
+  createMany?: InstanceType<typeof RestauUsersCreateManyRestaurantInputEnvelope>;
+  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
+  @Type(() => RestauUsersWhereUniqueInput)
+  set?: Array<RestauUsersWhereUniqueInput>;
+  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
+  @Type(() => RestauUsersWhereUniqueInput)
+  disconnect?: Array<RestauUsersWhereUniqueInput>;
+  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
+  @Type(() => RestauUsersWhereUniqueInput)
+  delete?: Array<RestauUsersWhereUniqueInput>;
+  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
+  @Type(() => RestauUsersWhereUniqueInput)
+  connect?: Array<RestauUsersWhereUniqueInput>;
+  @Field(() => [RestauUsersUpdateWithWhereUniqueWithoutRestaurantInput], { nullable: true })
+  @Type(() => RestauUsersUpdateWithWhereUniqueWithoutRestaurantInput)
+  update?: Array<RestauUsersUpdateWithWhereUniqueWithoutRestaurantInput>;
+  @Field(() => [RestauUsersUpdateManyWithWhereWithoutRestaurantInput], { nullable: true })
+  @Type(() => RestauUsersUpdateManyWithWhereWithoutRestaurantInput)
+  updateMany?: Array<RestauUsersUpdateManyWithWhereWithoutRestaurantInput>;
+  @Field(() => [RestauUsersScalarWhereInput], { nullable: true })
+  @Type(() => RestauUsersScalarWhereInput)
+  deleteMany?: Array<RestauUsersScalarWhereInput>;
+}
+
+@InputType()
+export class RestauUsersUncheckedUpdateManyWithoutRoleNestedInput {
+  @Field(() => [RestauUsersCreateWithoutRoleInput], { nullable: true })
+  @Type(() => RestauUsersCreateWithoutRoleInput)
+  create?: Array<RestauUsersCreateWithoutRoleInput>;
+  @Field(() => [RestauUsersCreateOrConnectWithoutRoleInput], { nullable: true })
+  @Type(() => RestauUsersCreateOrConnectWithoutRoleInput)
+  connectOrCreate?: Array<RestauUsersCreateOrConnectWithoutRoleInput>;
+  @Field(() => [RestauUsersUpsertWithWhereUniqueWithoutRoleInput], { nullable: true })
+  @Type(() => RestauUsersUpsertWithWhereUniqueWithoutRoleInput)
+  upsert?: Array<RestauUsersUpsertWithWhereUniqueWithoutRoleInput>;
+  @Field(() => RestauUsersCreateManyRoleInputEnvelope, { nullable: true })
+  @Type(() => RestauUsersCreateManyRoleInputEnvelope)
+  createMany?: InstanceType<typeof RestauUsersCreateManyRoleInputEnvelope>;
+  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
+  @Type(() => RestauUsersWhereUniqueInput)
+  set?: Array<RestauUsersWhereUniqueInput>;
+  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
+  @Type(() => RestauUsersWhereUniqueInput)
+  disconnect?: Array<RestauUsersWhereUniqueInput>;
+  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
+  @Type(() => RestauUsersWhereUniqueInput)
+  delete?: Array<RestauUsersWhereUniqueInput>;
+  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
+  @Type(() => RestauUsersWhereUniqueInput)
+  connect?: Array<RestauUsersWhereUniqueInput>;
+  @Field(() => [RestauUsersUpdateWithWhereUniqueWithoutRoleInput], { nullable: true })
+  @Type(() => RestauUsersUpdateWithWhereUniqueWithoutRoleInput)
+  update?: Array<RestauUsersUpdateWithWhereUniqueWithoutRoleInput>;
+  @Field(() => [RestauUsersUpdateManyWithWhereWithoutRoleInput], { nullable: true })
+  @Type(() => RestauUsersUpdateManyWithWhereWithoutRoleInput)
+  updateMany?: Array<RestauUsersUpdateManyWithWhereWithoutRoleInput>;
+  @Field(() => [RestauUsersScalarWhereInput], { nullable: true })
+  @Type(() => RestauUsersScalarWhereInput)
+  deleteMany?: Array<RestauUsersScalarWhereInput>;
+}
+
+@InputType()
+export class RestauUsersUncheckedUpdateManyWithoutUsersInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idRestauUser?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  userName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  refreshToken?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  userFullName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  roleId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class RestauUsersUncheckedUpdateManyInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idRestauUser?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  userName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  refreshToken?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  userFullName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  roleId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class RestauUsersUncheckedUpdateWithoutRestaurantInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idRestauUser?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  userName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  refreshToken?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  userFullName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  roleId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class RestauUsersUncheckedUpdateWithoutRoleInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idRestauUser?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  userName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  refreshToken?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  userFullName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class RestauUsersUncheckedUpdateInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idRestauUser?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  userName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  refreshToken?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  userFullName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  roleId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class RestauUsersUpdateManyMutationInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idRestauUser?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  userName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  refreshToken?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  userFullName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class RestauUsersUpdateManyWithWhereWithoutRestaurantInput {
+  @Field(() => RestauUsersScalarWhereInput, { nullable: false })
+  @Type(() => RestauUsersScalarWhereInput)
+  where!: InstanceType<typeof RestauUsersScalarWhereInput>;
+  @Field(() => RestauUsersUpdateManyMutationInput, { nullable: false })
+  @Type(() => RestauUsersUpdateManyMutationInput)
+  data!: InstanceType<typeof RestauUsersUpdateManyMutationInput>;
+}
+
+@InputType()
+export class RestauUsersUpdateManyWithWhereWithoutRoleInput {
+  @Field(() => RestauUsersScalarWhereInput, { nullable: false })
+  @Type(() => RestauUsersScalarWhereInput)
+  where!: InstanceType<typeof RestauUsersScalarWhereInput>;
+  @Field(() => RestauUsersUpdateManyMutationInput, { nullable: false })
+  @Type(() => RestauUsersUpdateManyMutationInput)
+  data!: InstanceType<typeof RestauUsersUpdateManyMutationInput>;
+}
+
+@InputType()
+export class RestauUsersUpdateManyWithoutRestaurantNestedInput {
+  @Field(() => [RestauUsersCreateWithoutRestaurantInput], { nullable: true })
+  @Type(() => RestauUsersCreateWithoutRestaurantInput)
+  create?: Array<RestauUsersCreateWithoutRestaurantInput>;
+  @Field(() => [RestauUsersCreateOrConnectWithoutRestaurantInput], { nullable: true })
+  @Type(() => RestauUsersCreateOrConnectWithoutRestaurantInput)
+  connectOrCreate?: Array<RestauUsersCreateOrConnectWithoutRestaurantInput>;
+  @Field(() => [RestauUsersUpsertWithWhereUniqueWithoutRestaurantInput], { nullable: true })
+  @Type(() => RestauUsersUpsertWithWhereUniqueWithoutRestaurantInput)
+  upsert?: Array<RestauUsersUpsertWithWhereUniqueWithoutRestaurantInput>;
+  @Field(() => RestauUsersCreateManyRestaurantInputEnvelope, { nullable: true })
+  @Type(() => RestauUsersCreateManyRestaurantInputEnvelope)
+  createMany?: InstanceType<typeof RestauUsersCreateManyRestaurantInputEnvelope>;
+  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
+  @Type(() => RestauUsersWhereUniqueInput)
+  set?: Array<RestauUsersWhereUniqueInput>;
+  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
+  @Type(() => RestauUsersWhereUniqueInput)
+  disconnect?: Array<RestauUsersWhereUniqueInput>;
+  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
+  @Type(() => RestauUsersWhereUniqueInput)
+  delete?: Array<RestauUsersWhereUniqueInput>;
+  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
+  @Type(() => RestauUsersWhereUniqueInput)
+  connect?: Array<RestauUsersWhereUniqueInput>;
+  @Field(() => [RestauUsersUpdateWithWhereUniqueWithoutRestaurantInput], { nullable: true })
+  @Type(() => RestauUsersUpdateWithWhereUniqueWithoutRestaurantInput)
+  update?: Array<RestauUsersUpdateWithWhereUniqueWithoutRestaurantInput>;
+  @Field(() => [RestauUsersUpdateManyWithWhereWithoutRestaurantInput], { nullable: true })
+  @Type(() => RestauUsersUpdateManyWithWhereWithoutRestaurantInput)
+  updateMany?: Array<RestauUsersUpdateManyWithWhereWithoutRestaurantInput>;
+  @Field(() => [RestauUsersScalarWhereInput], { nullable: true })
+  @Type(() => RestauUsersScalarWhereInput)
+  deleteMany?: Array<RestauUsersScalarWhereInput>;
+}
+
+@InputType()
+export class RestauUsersUpdateManyWithoutRoleNestedInput {
+  @Field(() => [RestauUsersCreateWithoutRoleInput], { nullable: true })
+  @Type(() => RestauUsersCreateWithoutRoleInput)
+  create?: Array<RestauUsersCreateWithoutRoleInput>;
+  @Field(() => [RestauUsersCreateOrConnectWithoutRoleInput], { nullable: true })
+  @Type(() => RestauUsersCreateOrConnectWithoutRoleInput)
+  connectOrCreate?: Array<RestauUsersCreateOrConnectWithoutRoleInput>;
+  @Field(() => [RestauUsersUpsertWithWhereUniqueWithoutRoleInput], { nullable: true })
+  @Type(() => RestauUsersUpsertWithWhereUniqueWithoutRoleInput)
+  upsert?: Array<RestauUsersUpsertWithWhereUniqueWithoutRoleInput>;
+  @Field(() => RestauUsersCreateManyRoleInputEnvelope, { nullable: true })
+  @Type(() => RestauUsersCreateManyRoleInputEnvelope)
+  createMany?: InstanceType<typeof RestauUsersCreateManyRoleInputEnvelope>;
+  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
+  @Type(() => RestauUsersWhereUniqueInput)
+  set?: Array<RestauUsersWhereUniqueInput>;
+  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
+  @Type(() => RestauUsersWhereUniqueInput)
+  disconnect?: Array<RestauUsersWhereUniqueInput>;
+  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
+  @Type(() => RestauUsersWhereUniqueInput)
+  delete?: Array<RestauUsersWhereUniqueInput>;
+  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
+  @Type(() => RestauUsersWhereUniqueInput)
+  connect?: Array<RestauUsersWhereUniqueInput>;
+  @Field(() => [RestauUsersUpdateWithWhereUniqueWithoutRoleInput], { nullable: true })
+  @Type(() => RestauUsersUpdateWithWhereUniqueWithoutRoleInput)
+  update?: Array<RestauUsersUpdateWithWhereUniqueWithoutRoleInput>;
+  @Field(() => [RestauUsersUpdateManyWithWhereWithoutRoleInput], { nullable: true })
+  @Type(() => RestauUsersUpdateManyWithWhereWithoutRoleInput)
+  updateMany?: Array<RestauUsersUpdateManyWithWhereWithoutRoleInput>;
+  @Field(() => [RestauUsersScalarWhereInput], { nullable: true })
+  @Type(() => RestauUsersScalarWhereInput)
+  deleteMany?: Array<RestauUsersScalarWhereInput>;
+}
+
+@InputType()
+export class RestauUsersUpdateWithWhereUniqueWithoutRestaurantInput {
+  @Field(() => RestauUsersWhereUniqueInput, { nullable: false })
+  @Type(() => RestauUsersWhereUniqueInput)
+  where!: InstanceType<typeof RestauUsersWhereUniqueInput>;
+  @Field(() => RestauUsersUpdateWithoutRestaurantInput, { nullable: false })
+  @Type(() => RestauUsersUpdateWithoutRestaurantInput)
+  data!: InstanceType<typeof RestauUsersUpdateWithoutRestaurantInput>;
+}
+
+@InputType()
+export class RestauUsersUpdateWithWhereUniqueWithoutRoleInput {
+  @Field(() => RestauUsersWhereUniqueInput, { nullable: false })
+  @Type(() => RestauUsersWhereUniqueInput)
+  where!: InstanceType<typeof RestauUsersWhereUniqueInput>;
+  @Field(() => RestauUsersUpdateWithoutRoleInput, { nullable: false })
+  @Type(() => RestauUsersUpdateWithoutRoleInput)
+  data!: InstanceType<typeof RestauUsersUpdateWithoutRoleInput>;
+}
+
+@InputType()
+export class RestauUsersUpdateWithoutRestaurantInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idRestauUser?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  userName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  refreshToken?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  userFullName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => RoleUpdateOneRequiredWithoutRestauUserNestedInput, { nullable: true })
+  role?: InstanceType<typeof RoleUpdateOneRequiredWithoutRestauUserNestedInput>;
+}
+
+@InputType()
+export class RestauUsersUpdateWithoutRoleInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idRestauUser?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  userName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  refreshToken?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  userFullName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => RestaurantsUpdateOneRequiredWithoutUsersNestedInput, { nullable: true })
+  restaurant?: InstanceType<typeof RestaurantsUpdateOneRequiredWithoutUsersNestedInput>;
+}
+
+@InputType()
+export class RestauUsersUpdateInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idRestauUser?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  userName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  refreshToken?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  userFullName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => RestaurantsUpdateOneRequiredWithoutUsersNestedInput, { nullable: true })
+  restaurant?: InstanceType<typeof RestaurantsUpdateOneRequiredWithoutUsersNestedInput>;
+  @Field(() => RoleUpdateOneRequiredWithoutRestauUserNestedInput, { nullable: true })
+  role?: InstanceType<typeof RoleUpdateOneRequiredWithoutRestauUserNestedInput>;
+}
+
+@InputType()
+export class RestauUsersUpsertWithWhereUniqueWithoutRestaurantInput {
+  @Field(() => RestauUsersWhereUniqueInput, { nullable: false })
+  @Type(() => RestauUsersWhereUniqueInput)
+  where!: InstanceType<typeof RestauUsersWhereUniqueInput>;
+  @Field(() => RestauUsersUpdateWithoutRestaurantInput, { nullable: false })
+  @Type(() => RestauUsersUpdateWithoutRestaurantInput)
+  update!: InstanceType<typeof RestauUsersUpdateWithoutRestaurantInput>;
+  @Field(() => RestauUsersCreateWithoutRestaurantInput, { nullable: false })
+  @Type(() => RestauUsersCreateWithoutRestaurantInput)
+  create!: InstanceType<typeof RestauUsersCreateWithoutRestaurantInput>;
+}
+
+@InputType()
+export class RestauUsersUpsertWithWhereUniqueWithoutRoleInput {
+  @Field(() => RestauUsersWhereUniqueInput, { nullable: false })
+  @Type(() => RestauUsersWhereUniqueInput)
+  where!: InstanceType<typeof RestauUsersWhereUniqueInput>;
+  @Field(() => RestauUsersUpdateWithoutRoleInput, { nullable: false })
+  @Type(() => RestauUsersUpdateWithoutRoleInput)
+  update!: InstanceType<typeof RestauUsersUpdateWithoutRoleInput>;
+  @Field(() => RestauUsersCreateWithoutRoleInput, { nullable: false })
+  @Type(() => RestauUsersCreateWithoutRoleInput)
+  create!: InstanceType<typeof RestauUsersCreateWithoutRoleInput>;
+}
+
+@InputType()
+export class RestauUsersWhereUniqueInput {
+  @Field(() => String, { nullable: true })
+  idRestauUser?: string;
+}
+
+@InputType()
+export class RestauUsersWhereInput {
+  @Field(() => [RestauUsersWhereInput], { nullable: true })
+  AND?: Array<RestauUsersWhereInput>;
+  @Field(() => [RestauUsersWhereInput], { nullable: true })
+  OR?: Array<RestauUsersWhereInput>;
+  @Field(() => [RestauUsersWhereInput], { nullable: true })
+  NOT?: Array<RestauUsersWhereInput>;
+  @Field(() => StringFilter, { nullable: true })
+  idRestauUser?: InstanceType<typeof StringFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  userName?: InstanceType<typeof StringFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  password?: InstanceType<typeof StringFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  refreshToken?: InstanceType<typeof StringFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  userFullName?: InstanceType<typeof StringFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  restauId?: InstanceType<typeof StringFilter>;
+  @Field(() => DateTimeFilter, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFilter>;
+  @Field(() => DateTimeFilter, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFilter>;
+  @Field(() => RestaurantsRelationFilter, { nullable: true })
+  restaurant?: InstanceType<typeof RestaurantsRelationFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  roleId?: InstanceType<typeof StringFilter>;
+  @Field(() => RoleRelationFilter, { nullable: true })
+  role?: InstanceType<typeof RoleRelationFilter>;
+}
+
+@ObjectType()
+export class RestauUsers {
+  @Field(() => ID, { nullable: false })
+  idRestauUser!: string;
+  @Field(() => String, { nullable: false })
+  userName!: string;
+  @Field(() => String, { nullable: false })
+  password!: string;
+  @Field(() => String, { nullable: false })
+  refreshToken!: string;
+  @Field(() => String, { nullable: false })
+  userFullName!: string;
+  @Field(() => String, { nullable: false })
+  restauId!: string;
+  @Field(() => Date, { nullable: false })
+  createdAt!: Date;
+  @Field(() => Date, { nullable: false })
+  updatedAt!: Date;
+  @Field(() => Restaurants, { nullable: false })
+  restaurant?: InstanceType<typeof Restaurants>;
+  @Field(() => String, { nullable: false })
+  roleId!: string;
+  @Field(() => Role, { nullable: false })
+  role?: InstanceType<typeof Role>;
+}
+
+@ArgsType()
+export class UpdateManyRestauUsersArgs {
+  @Field(() => RestauUsersUpdateManyMutationInput, { nullable: false })
+  @Type(() => RestauUsersUpdateManyMutationInput)
+  data!: InstanceType<typeof RestauUsersUpdateManyMutationInput>;
+  @Field(() => RestauUsersWhereInput, { nullable: true })
+  @Type(() => RestauUsersWhereInput)
+  where?: InstanceType<typeof RestauUsersWhereInput>;
+}
+
+@ArgsType()
+export class UpdateOneRestauUsersArgs {
+  @Field(() => RestauUsersUpdateInput, { nullable: false })
+  @Type(() => RestauUsersUpdateInput)
+  data!: InstanceType<typeof RestauUsersUpdateInput>;
+  @Field(() => RestauUsersWhereUniqueInput, { nullable: false })
+  @Type(() => RestauUsersWhereUniqueInput)
+  where!: InstanceType<typeof RestauUsersWhereUniqueInput>;
+}
+
+@ArgsType()
+export class UpsertOneRestauUsersArgs {
+  @Field(() => RestauUsersWhereUniqueInput, { nullable: false })
+  @Type(() => RestauUsersWhereUniqueInput)
+  where!: InstanceType<typeof RestauUsersWhereUniqueInput>;
+  @Field(() => RestauUsersCreateInput, { nullable: false })
+  @Type(() => RestauUsersCreateInput)
+  create!: InstanceType<typeof RestauUsersCreateInput>;
+  @Field(() => RestauUsersUpdateInput, { nullable: false })
+  @Type(() => RestauUsersUpdateInput)
+  update!: InstanceType<typeof RestauUsersUpdateInput>;
+}
+
+@ObjectType()
+export class AggregateRestaurants {
+  @Field(() => RestaurantsCountAggregate, { nullable: true })
+  _count?: InstanceType<typeof RestaurantsCountAggregate>;
+  @Field(() => RestaurantsMinAggregate, { nullable: true })
+  _min?: InstanceType<typeof RestaurantsMinAggregate>;
+  @Field(() => RestaurantsMaxAggregate, { nullable: true })
+  _max?: InstanceType<typeof RestaurantsMaxAggregate>;
+}
+
+@ArgsType()
+export class CreateManyRestaurantsArgs {
+  @Field(() => [RestaurantsCreateManyInput], { nullable: false })
+  @Type(() => RestaurantsCreateManyInput)
+  data!: Array<RestaurantsCreateManyInput>;
+  @Field(() => Boolean, { nullable: true })
+  skipDuplicates?: boolean;
+}
+
+@ArgsType()
+export class CreateOneRestaurantsArgs {
+  @Field(() => RestaurantsCreateInput, { nullable: false })
+  @Type(() => RestaurantsCreateInput)
+  data!: InstanceType<typeof RestaurantsCreateInput>;
+}
+
+@ArgsType()
+export class DeleteManyRestaurantsArgs {
+  @Field(() => RestaurantsWhereInput, { nullable: true })
+  @Type(() => RestaurantsWhereInput)
+  where?: InstanceType<typeof RestaurantsWhereInput>;
+}
+
+@ArgsType()
+export class DeleteOneRestaurantsArgs {
+  @Field(() => RestaurantsWhereUniqueInput, { nullable: false })
+  @Type(() => RestaurantsWhereUniqueInput)
+  where!: InstanceType<typeof RestaurantsWhereUniqueInput>;
+}
+
+@ArgsType()
+export class FindFirstRestaurantsArgs {
+  @Field(() => RestaurantsWhereInput, { nullable: true })
+  @Type(() => RestaurantsWhereInput)
+  where?: InstanceType<typeof RestaurantsWhereInput>;
+  @Field(() => [RestaurantsOrderByWithRelationInput], { nullable: true })
+  orderBy?: Array<RestaurantsOrderByWithRelationInput>;
+  @Field(() => RestaurantsWhereUniqueInput, { nullable: true })
+  cursor?: InstanceType<typeof RestaurantsWhereUniqueInput>;
+  @Field(() => Int, { nullable: true })
+  take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
+  @Field(() => [RestaurantsScalarFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof RestaurantsScalarFieldEnum>;
+}
+
+@ArgsType()
+export class FindManyRestaurantsArgs {
+  @Field(() => RestaurantsWhereInput, { nullable: true })
+  @Type(() => RestaurantsWhereInput)
+  where?: InstanceType<typeof RestaurantsWhereInput>;
+  @Field(() => [RestaurantsOrderByWithRelationInput], { nullable: true })
+  orderBy?: Array<RestaurantsOrderByWithRelationInput>;
+  @Field(() => RestaurantsWhereUniqueInput, { nullable: true })
+  cursor?: InstanceType<typeof RestaurantsWhereUniqueInput>;
+  @Field(() => Int, { nullable: true })
+  take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
+  @Field(() => [RestaurantsScalarFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof RestaurantsScalarFieldEnum>;
+}
+
+@ArgsType()
+export class FindUniqueRestaurantsArgs {
+  @Field(() => RestaurantsWhereUniqueInput, { nullable: false })
+  @Type(() => RestaurantsWhereUniqueInput)
+  where!: InstanceType<typeof RestaurantsWhereUniqueInput>;
+}
+
+@ArgsType()
+export class RestaurantsAggregateArgs {
+  @Field(() => RestaurantsWhereInput, { nullable: true })
+  @Type(() => RestaurantsWhereInput)
+  where?: InstanceType<typeof RestaurantsWhereInput>;
+  @Field(() => [RestaurantsOrderByWithRelationInput], { nullable: true })
+  orderBy?: Array<RestaurantsOrderByWithRelationInput>;
+  @Field(() => RestaurantsWhereUniqueInput, { nullable: true })
+  cursor?: InstanceType<typeof RestaurantsWhereUniqueInput>;
+  @Field(() => Int, { nullable: true })
+  take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
+  @Field(() => RestaurantsCountAggregateInput, { nullable: true })
+  _count?: InstanceType<typeof RestaurantsCountAggregateInput>;
+  @Field(() => RestaurantsMinAggregateInput, { nullable: true })
+  _min?: InstanceType<typeof RestaurantsMinAggregateInput>;
+  @Field(() => RestaurantsMaxAggregateInput, { nullable: true })
+  _max?: InstanceType<typeof RestaurantsMaxAggregateInput>;
+}
+
+@InputType()
+export class RestaurantsCountAggregateInput {
+  @Field(() => Boolean, { nullable: true })
+  idRestaurant?: true;
+  @Field(() => Boolean, { nullable: true })
+  restauDescription?: true;
+  @Field(() => Boolean, { nullable: true })
+  restauName?: true;
+  @Field(() => Boolean, { nullable: true })
+  creationDate?: true;
+  @Field(() => Boolean, { nullable: true })
+  createdAt?: true;
+  @Field(() => Boolean, { nullable: true })
+  updatedAt?: true;
+  @Field(() => Boolean, { nullable: true })
+  fileEntityId?: true;
+  @Field(() => Boolean, { nullable: true })
+  _all?: true;
+}
+
+@ObjectType()
+export class RestaurantsCountAggregate {
+  @Field(() => Int, { nullable: false })
+  idRestaurant!: number;
+  @Field(() => Int, { nullable: false })
+  restauDescription!: number;
+  @Field(() => Int, { nullable: false })
+  restauName!: number;
+  @Field(() => Int, { nullable: false })
+  creationDate!: number;
+  @Field(() => Int, { nullable: false })
+  createdAt!: number;
+  @Field(() => Int, { nullable: false })
+  updatedAt!: number;
+  @Field(() => Int, { nullable: false })
+  fileEntityId!: number;
+  @Field(() => Int, { nullable: false })
+  _all!: number;
+}
+
+@InputType()
+export class RestaurantsCountOrderByAggregateInput {
+  @Field(() => SortOrder, { nullable: true })
+  idRestaurant?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  restauDescription?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  restauName?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  creationDate?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  createdAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  updatedAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  fileEntityId?: keyof typeof SortOrder;
+}
+
+@ObjectType()
+export class RestaurantsCount {
+  @Field(() => Int, { nullable: false })
+  adresses?: number;
+  @Field(() => Int, { nullable: false })
+  users?: number;
+  @Field(() => Int, { nullable: false })
+  otherImages?: number;
+}
+
+@InputType()
+export class RestaurantsCreateManyRestauMainImageInputEnvelope {
+  @Field(() => [RestaurantsCreateManyRestauMainImageInput], { nullable: false })
+  @Type(() => RestaurantsCreateManyRestauMainImageInput)
+  data!: Array<RestaurantsCreateManyRestauMainImageInput>;
+  @Field(() => Boolean, { nullable: true })
+  skipDuplicates?: boolean;
+}
+
+@InputType()
+export class RestaurantsCreateManyRestauMainImageInput {
+  @Field(() => String, { nullable: true })
+  idRestaurant?: string;
+  @Field(() => String, { nullable: false })
+  restauDescription!: string;
+  @Field(() => String, { nullable: false })
+  restauName!: string;
+  @Field(() => Date, { nullable: true })
+  creationDate?: Date | string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+}
+
+@InputType()
+export class RestaurantsCreateManyInput {
+  @Field(() => String, { nullable: true })
+  idRestaurant?: string;
+  @Field(() => String, { nullable: false })
+  restauDescription!: string;
+  @Field(() => String, { nullable: false })
+  restauName!: string;
+  @Field(() => Date, { nullable: true })
+  creationDate?: Date | string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => String, { nullable: false })
+  fileEntityId!: string;
+}
+
+@InputType()
+export class RestaurantsCreateNestedManyWithoutRestauMainImageInput {
+  @Field(() => [RestaurantsCreateWithoutRestauMainImageInput], { nullable: true })
+  @Type(() => RestaurantsCreateWithoutRestauMainImageInput)
+  create?: Array<RestaurantsCreateWithoutRestauMainImageInput>;
+  @Field(() => [RestaurantsCreateOrConnectWithoutRestauMainImageInput], { nullable: true })
+  @Type(() => RestaurantsCreateOrConnectWithoutRestauMainImageInput)
+  connectOrCreate?: Array<RestaurantsCreateOrConnectWithoutRestauMainImageInput>;
+  @Field(() => RestaurantsCreateManyRestauMainImageInputEnvelope, { nullable: true })
+  @Type(() => RestaurantsCreateManyRestauMainImageInputEnvelope)
+  createMany?: InstanceType<typeof RestaurantsCreateManyRestauMainImageInputEnvelope>;
+  @Field(() => [RestaurantsWhereUniqueInput], { nullable: true })
+  @Type(() => RestaurantsWhereUniqueInput)
+  connect?: Array<RestaurantsWhereUniqueInput>;
+}
+
+@InputType()
+export class RestaurantsCreateNestedOneWithoutAdressesInput {
+  @Field(() => RestaurantsCreateWithoutAdressesInput, { nullable: true })
+  @Type(() => RestaurantsCreateWithoutAdressesInput)
+  create?: InstanceType<typeof RestaurantsCreateWithoutAdressesInput>;
+  @Field(() => RestaurantsCreateOrConnectWithoutAdressesInput, { nullable: true })
+  @Type(() => RestaurantsCreateOrConnectWithoutAdressesInput)
+  connectOrCreate?: InstanceType<typeof RestaurantsCreateOrConnectWithoutAdressesInput>;
+  @Field(() => RestaurantsWhereUniqueInput, { nullable: true })
+  @Type(() => RestaurantsWhereUniqueInput)
+  connect?: InstanceType<typeof RestaurantsWhereUniqueInput>;
+}
+
+@InputType()
+export class RestaurantsCreateNestedOneWithoutOtherImagesInput {
+  @Field(() => RestaurantsCreateWithoutOtherImagesInput, { nullable: true })
+  @Type(() => RestaurantsCreateWithoutOtherImagesInput)
+  create?: InstanceType<typeof RestaurantsCreateWithoutOtherImagesInput>;
+  @Field(() => RestaurantsCreateOrConnectWithoutOtherImagesInput, { nullable: true })
+  @Type(() => RestaurantsCreateOrConnectWithoutOtherImagesInput)
+  connectOrCreate?: InstanceType<typeof RestaurantsCreateOrConnectWithoutOtherImagesInput>;
+  @Field(() => RestaurantsWhereUniqueInput, { nullable: true })
+  @Type(() => RestaurantsWhereUniqueInput)
+  connect?: InstanceType<typeof RestaurantsWhereUniqueInput>;
+}
+
+@InputType()
+export class RestaurantsCreateNestedOneWithoutUsersInput {
+  @Field(() => RestaurantsCreateWithoutUsersInput, { nullable: true })
+  @Type(() => RestaurantsCreateWithoutUsersInput)
+  create?: InstanceType<typeof RestaurantsCreateWithoutUsersInput>;
+  @Field(() => RestaurantsCreateOrConnectWithoutUsersInput, { nullable: true })
+  @Type(() => RestaurantsCreateOrConnectWithoutUsersInput)
+  connectOrCreate?: InstanceType<typeof RestaurantsCreateOrConnectWithoutUsersInput>;
+  @Field(() => RestaurantsWhereUniqueInput, { nullable: true })
+  @Type(() => RestaurantsWhereUniqueInput)
+  connect?: InstanceType<typeof RestaurantsWhereUniqueInput>;
+}
+
+@InputType()
+export class RestaurantsCreateOrConnectWithoutAdressesInput {
+  @Field(() => RestaurantsWhereUniqueInput, { nullable: false })
+  @Type(() => RestaurantsWhereUniqueInput)
+  where!: InstanceType<typeof RestaurantsWhereUniqueInput>;
+  @Field(() => RestaurantsCreateWithoutAdressesInput, { nullable: false })
+  @Type(() => RestaurantsCreateWithoutAdressesInput)
+  create!: InstanceType<typeof RestaurantsCreateWithoutAdressesInput>;
+}
+
+@InputType()
+export class RestaurantsCreateOrConnectWithoutOtherImagesInput {
+  @Field(() => RestaurantsWhereUniqueInput, { nullable: false })
+  @Type(() => RestaurantsWhereUniqueInput)
+  where!: InstanceType<typeof RestaurantsWhereUniqueInput>;
+  @Field(() => RestaurantsCreateWithoutOtherImagesInput, { nullable: false })
+  @Type(() => RestaurantsCreateWithoutOtherImagesInput)
+  create!: InstanceType<typeof RestaurantsCreateWithoutOtherImagesInput>;
+}
+
+@InputType()
+export class RestaurantsCreateOrConnectWithoutRestauMainImageInput {
+  @Field(() => RestaurantsWhereUniqueInput, { nullable: false })
+  @Type(() => RestaurantsWhereUniqueInput)
+  where!: InstanceType<typeof RestaurantsWhereUniqueInput>;
+  @Field(() => RestaurantsCreateWithoutRestauMainImageInput, { nullable: false })
+  @Type(() => RestaurantsCreateWithoutRestauMainImageInput)
+  create!: InstanceType<typeof RestaurantsCreateWithoutRestauMainImageInput>;
+}
+
+@InputType()
+export class RestaurantsCreateOrConnectWithoutUsersInput {
+  @Field(() => RestaurantsWhereUniqueInput, { nullable: false })
+  @Type(() => RestaurantsWhereUniqueInput)
+  where!: InstanceType<typeof RestaurantsWhereUniqueInput>;
+  @Field(() => RestaurantsCreateWithoutUsersInput, { nullable: false })
+  @Type(() => RestaurantsCreateWithoutUsersInput)
+  create!: InstanceType<typeof RestaurantsCreateWithoutUsersInput>;
+}
+
+@InputType()
+export class RestaurantsCreateWithoutAdressesInput {
+  @Field(() => String, { nullable: true })
+  idRestaurant?: string;
+  @Field(() => String, { nullable: false })
+  restauDescription!: string;
+  @Field(() => String, { nullable: false })
+  restauName!: string;
+  @Field(() => FileEntityCreateNestedOneWithoutRestaurantsInput, { nullable: false })
+  restauMainImage!: InstanceType<typeof FileEntityCreateNestedOneWithoutRestaurantsInput>;
+  @Field(() => Date, { nullable: true })
+  creationDate?: Date | string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => RestauUsersCreateNestedManyWithoutRestaurantInput, { nullable: true })
+  users?: InstanceType<typeof RestauUsersCreateNestedManyWithoutRestaurantInput>;
+  @Field(() => ImagesSecondaryCreateNestedManyWithoutRestaurantsInput, { nullable: true })
+  otherImages?: InstanceType<typeof ImagesSecondaryCreateNestedManyWithoutRestaurantsInput>;
+}
+
+@InputType()
+export class RestaurantsCreateWithoutOtherImagesInput {
+  @Field(() => String, { nullable: true })
+  idRestaurant?: string;
+  @Field(() => String, { nullable: false })
+  restauDescription!: string;
+  @Field(() => String, { nullable: false })
+  restauName!: string;
+  @Field(() => FileEntityCreateNestedOneWithoutRestaurantsInput, { nullable: false })
+  restauMainImage!: InstanceType<typeof FileEntityCreateNestedOneWithoutRestaurantsInput>;
+  @Field(() => Date, { nullable: true })
+  creationDate?: Date | string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => AdressesCreateNestedManyWithoutRestaurantInput, { nullable: true })
+  adresses?: InstanceType<typeof AdressesCreateNestedManyWithoutRestaurantInput>;
+  @Field(() => RestauUsersCreateNestedManyWithoutRestaurantInput, { nullable: true })
+  users?: InstanceType<typeof RestauUsersCreateNestedManyWithoutRestaurantInput>;
+}
+
+@InputType()
+export class RestaurantsCreateWithoutRestauMainImageInput {
+  @Field(() => String, { nullable: true })
+  idRestaurant?: string;
+  @Field(() => String, { nullable: false })
+  restauDescription!: string;
+  @Field(() => String, { nullable: false })
+  restauName!: string;
+  @Field(() => Date, { nullable: true })
+  creationDate?: Date | string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => AdressesCreateNestedManyWithoutRestaurantInput, { nullable: true })
+  adresses?: InstanceType<typeof AdressesCreateNestedManyWithoutRestaurantInput>;
+  @Field(() => RestauUsersCreateNestedManyWithoutRestaurantInput, { nullable: true })
+  users?: InstanceType<typeof RestauUsersCreateNestedManyWithoutRestaurantInput>;
+  @Field(() => ImagesSecondaryCreateNestedManyWithoutRestaurantsInput, { nullable: true })
+  otherImages?: InstanceType<typeof ImagesSecondaryCreateNestedManyWithoutRestaurantsInput>;
+}
+
+@InputType()
+export class RestaurantsCreateWithoutUsersInput {
+  @Field(() => String, { nullable: true })
+  idRestaurant?: string;
+  @Field(() => String, { nullable: false })
+  restauDescription!: string;
+  @Field(() => String, { nullable: false })
+  restauName!: string;
+  @Field(() => FileEntityCreateNestedOneWithoutRestaurantsInput, { nullable: false })
+  restauMainImage!: InstanceType<typeof FileEntityCreateNestedOneWithoutRestaurantsInput>;
+  @Field(() => Date, { nullable: true })
+  creationDate?: Date | string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => AdressesCreateNestedManyWithoutRestaurantInput, { nullable: true })
+  adresses?: InstanceType<typeof AdressesCreateNestedManyWithoutRestaurantInput>;
+  @Field(() => ImagesSecondaryCreateNestedManyWithoutRestaurantsInput, { nullable: true })
+  otherImages?: InstanceType<typeof ImagesSecondaryCreateNestedManyWithoutRestaurantsInput>;
+}
+
+@InputType()
+export class RestaurantsCreateInput {
+  @Field(() => String, { nullable: true })
+  idRestaurant?: string;
+  @Field(() => String, { nullable: false })
+  restauDescription!: string;
+  @Field(() => String, { nullable: false })
+  restauName!: string;
+  @Field(() => FileEntityCreateNestedOneWithoutRestaurantsInput, { nullable: false })
+  restauMainImage!: InstanceType<typeof FileEntityCreateNestedOneWithoutRestaurantsInput>;
+  @Field(() => Date, { nullable: true })
+  creationDate?: Date | string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => AdressesCreateNestedManyWithoutRestaurantInput, { nullable: true })
+  adresses?: InstanceType<typeof AdressesCreateNestedManyWithoutRestaurantInput>;
+  @Field(() => RestauUsersCreateNestedManyWithoutRestaurantInput, { nullable: true })
+  users?: InstanceType<typeof RestauUsersCreateNestedManyWithoutRestaurantInput>;
+  @Field(() => ImagesSecondaryCreateNestedManyWithoutRestaurantsInput, { nullable: true })
+  otherImages?: InstanceType<typeof ImagesSecondaryCreateNestedManyWithoutRestaurantsInput>;
+}
+
+@ArgsType()
+export class RestaurantsGroupByArgs {
+  @Field(() => RestaurantsWhereInput, { nullable: true })
+  @Type(() => RestaurantsWhereInput)
+  where?: InstanceType<typeof RestaurantsWhereInput>;
+  @Field(() => [RestaurantsOrderByWithAggregationInput], { nullable: true })
+  orderBy?: Array<RestaurantsOrderByWithAggregationInput>;
+  @Field(() => [RestaurantsScalarFieldEnum], { nullable: false })
+  by!: Array<keyof typeof RestaurantsScalarFieldEnum>;
+  @Field(() => RestaurantsScalarWhereWithAggregatesInput, { nullable: true })
+  having?: InstanceType<typeof RestaurantsScalarWhereWithAggregatesInput>;
+  @Field(() => Int, { nullable: true })
+  take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
+  @Field(() => RestaurantsCountAggregateInput, { nullable: true })
+  _count?: InstanceType<typeof RestaurantsCountAggregateInput>;
+  @Field(() => RestaurantsMinAggregateInput, { nullable: true })
+  _min?: InstanceType<typeof RestaurantsMinAggregateInput>;
+  @Field(() => RestaurantsMaxAggregateInput, { nullable: true })
+  _max?: InstanceType<typeof RestaurantsMaxAggregateInput>;
+}
+
+@ObjectType()
+export class RestaurantsGroupBy {
+  @Field(() => String, { nullable: false })
+  idRestaurant!: string;
+  @Field(() => String, { nullable: false })
+  restauDescription!: string;
+  @Field(() => String, { nullable: false })
+  restauName!: string;
+  @Field(() => Date, { nullable: false })
+  creationDate!: Date | string;
+  @Field(() => Date, { nullable: false })
+  createdAt!: Date | string;
+  @Field(() => Date, { nullable: false })
+  updatedAt!: Date | string;
+  @Field(() => String, { nullable: false })
+  fileEntityId!: string;
+  @Field(() => RestaurantsCountAggregate, { nullable: true })
+  _count?: InstanceType<typeof RestaurantsCountAggregate>;
+  @Field(() => RestaurantsMinAggregate, { nullable: true })
+  _min?: InstanceType<typeof RestaurantsMinAggregate>;
+  @Field(() => RestaurantsMaxAggregate, { nullable: true })
+  _max?: InstanceType<typeof RestaurantsMaxAggregate>;
+}
+
+@InputType()
+export class RestaurantsListRelationFilter {
+  @Field(() => RestaurantsWhereInput, { nullable: true })
+  every?: InstanceType<typeof RestaurantsWhereInput>;
+  @Field(() => RestaurantsWhereInput, { nullable: true })
+  some?: InstanceType<typeof RestaurantsWhereInput>;
+  @Field(() => RestaurantsWhereInput, { nullable: true })
+  none?: InstanceType<typeof RestaurantsWhereInput>;
+}
+
+@InputType()
+export class RestaurantsMaxAggregateInput {
+  @Field(() => Boolean, { nullable: true })
+  idRestaurant?: true;
+  @Field(() => Boolean, { nullable: true })
+  restauDescription?: true;
+  @Field(() => Boolean, { nullable: true })
+  restauName?: true;
+  @Field(() => Boolean, { nullable: true })
+  creationDate?: true;
+  @Field(() => Boolean, { nullable: true })
+  createdAt?: true;
+  @Field(() => Boolean, { nullable: true })
+  updatedAt?: true;
+  @Field(() => Boolean, { nullable: true })
+  fileEntityId?: true;
+}
+
+@ObjectType()
+export class RestaurantsMaxAggregate {
+  @Field(() => String, { nullable: true })
+  idRestaurant?: string;
+  @Field(() => String, { nullable: true })
+  restauDescription?: string;
+  @Field(() => String, { nullable: true })
+  restauName?: string;
+  @Field(() => Date, { nullable: true })
+  creationDate?: Date | string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => String, { nullable: true })
+  fileEntityId?: string;
+}
+
+@InputType()
+export class RestaurantsMaxOrderByAggregateInput {
+  @Field(() => SortOrder, { nullable: true })
+  idRestaurant?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  restauDescription?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  restauName?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  creationDate?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  createdAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  updatedAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  fileEntityId?: keyof typeof SortOrder;
+}
+
+@InputType()
+export class RestaurantsMinAggregateInput {
+  @Field(() => Boolean, { nullable: true })
+  idRestaurant?: true;
+  @Field(() => Boolean, { nullable: true })
+  restauDescription?: true;
+  @Field(() => Boolean, { nullable: true })
+  restauName?: true;
+  @Field(() => Boolean, { nullable: true })
+  creationDate?: true;
+  @Field(() => Boolean, { nullable: true })
+  createdAt?: true;
+  @Field(() => Boolean, { nullable: true })
+  updatedAt?: true;
+  @Field(() => Boolean, { nullable: true })
+  fileEntityId?: true;
+}
+
+@ObjectType()
+export class RestaurantsMinAggregate {
+  @Field(() => String, { nullable: true })
+  idRestaurant?: string;
+  @Field(() => String, { nullable: true })
+  restauDescription?: string;
+  @Field(() => String, { nullable: true })
+  restauName?: string;
+  @Field(() => Date, { nullable: true })
+  creationDate?: Date | string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => String, { nullable: true })
+  fileEntityId?: string;
+}
+
+@InputType()
+export class RestaurantsMinOrderByAggregateInput {
+  @Field(() => SortOrder, { nullable: true })
+  idRestaurant?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  restauDescription?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  restauName?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  creationDate?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  createdAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  updatedAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  fileEntityId?: keyof typeof SortOrder;
+}
+
+@InputType()
+export class RestaurantsOrderByRelationAggregateInput {
+  @Field(() => SortOrder, { nullable: true })
+  _count?: keyof typeof SortOrder;
+}
+
+@InputType()
+export class RestaurantsOrderByWithAggregationInput {
+  @Field(() => SortOrder, { nullable: true })
+  idRestaurant?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  restauDescription?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  restauName?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  creationDate?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  createdAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  updatedAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  fileEntityId?: keyof typeof SortOrder;
+  @Field(() => RestaurantsCountOrderByAggregateInput, { nullable: true })
+  _count?: InstanceType<typeof RestaurantsCountOrderByAggregateInput>;
+  @Field(() => RestaurantsMaxOrderByAggregateInput, { nullable: true })
+  _max?: InstanceType<typeof RestaurantsMaxOrderByAggregateInput>;
+  @Field(() => RestaurantsMinOrderByAggregateInput, { nullable: true })
+  _min?: InstanceType<typeof RestaurantsMinOrderByAggregateInput>;
+}
+
+@InputType()
+export class RestaurantsOrderByWithRelationInput {
+  @Field(() => SortOrder, { nullable: true })
+  idRestaurant?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  restauDescription?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  restauName?: keyof typeof SortOrder;
+  @Field(() => FileEntityOrderByWithRelationInput, { nullable: true })
+  restauMainImage?: InstanceType<typeof FileEntityOrderByWithRelationInput>;
+  @Field(() => SortOrder, { nullable: true })
+  creationDate?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  createdAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  updatedAt?: keyof typeof SortOrder;
+  @Field(() => AdressesOrderByRelationAggregateInput, { nullable: true })
+  adresses?: InstanceType<typeof AdressesOrderByRelationAggregateInput>;
+  @Field(() => RestauUsersOrderByRelationAggregateInput, { nullable: true })
+  users?: InstanceType<typeof RestauUsersOrderByRelationAggregateInput>;
+  @Field(() => ImagesSecondaryOrderByRelationAggregateInput, { nullable: true })
+  otherImages?: InstanceType<typeof ImagesSecondaryOrderByRelationAggregateInput>;
+  @Field(() => SortOrder, { nullable: true })
+  fileEntityId?: keyof typeof SortOrder;
+}
+
+@InputType()
+export class RestaurantsRelationFilter {
+  @Field(() => RestaurantsWhereInput, { nullable: true })
+  is?: InstanceType<typeof RestaurantsWhereInput>;
+  @Field(() => RestaurantsWhereInput, { nullable: true })
+  isNot?: InstanceType<typeof RestaurantsWhereInput>;
+}
+
+@InputType()
+export class RestaurantsScalarWhereWithAggregatesInput {
+  @Field(() => [RestaurantsScalarWhereWithAggregatesInput], { nullable: true })
+  AND?: Array<RestaurantsScalarWhereWithAggregatesInput>;
+  @Field(() => [RestaurantsScalarWhereWithAggregatesInput], { nullable: true })
+  OR?: Array<RestaurantsScalarWhereWithAggregatesInput>;
+  @Field(() => [RestaurantsScalarWhereWithAggregatesInput], { nullable: true })
+  NOT?: Array<RestaurantsScalarWhereWithAggregatesInput>;
+  @Field(() => StringWithAggregatesFilter, { nullable: true })
+  idRestaurant?: InstanceType<typeof StringWithAggregatesFilter>;
+  @Field(() => StringWithAggregatesFilter, { nullable: true })
+  restauDescription?: InstanceType<typeof StringWithAggregatesFilter>;
+  @Field(() => StringWithAggregatesFilter, { nullable: true })
+  restauName?: InstanceType<typeof StringWithAggregatesFilter>;
+  @Field(() => DateTimeWithAggregatesFilter, { nullable: true })
+  creationDate?: InstanceType<typeof DateTimeWithAggregatesFilter>;
+  @Field(() => DateTimeWithAggregatesFilter, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeWithAggregatesFilter>;
+  @Field(() => DateTimeWithAggregatesFilter, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeWithAggregatesFilter>;
+  @Field(() => StringWithAggregatesFilter, { nullable: true })
+  fileEntityId?: InstanceType<typeof StringWithAggregatesFilter>;
+}
+
+@InputType()
+export class RestaurantsScalarWhereInput {
+  @Field(() => [RestaurantsScalarWhereInput], { nullable: true })
+  AND?: Array<RestaurantsScalarWhereInput>;
+  @Field(() => [RestaurantsScalarWhereInput], { nullable: true })
+  OR?: Array<RestaurantsScalarWhereInput>;
+  @Field(() => [RestaurantsScalarWhereInput], { nullable: true })
+  NOT?: Array<RestaurantsScalarWhereInput>;
+  @Field(() => StringFilter, { nullable: true })
+  idRestaurant?: InstanceType<typeof StringFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  restauDescription?: InstanceType<typeof StringFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  restauName?: InstanceType<typeof StringFilter>;
+  @Field(() => DateTimeFilter, { nullable: true })
+  creationDate?: InstanceType<typeof DateTimeFilter>;
+  @Field(() => DateTimeFilter, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFilter>;
+  @Field(() => DateTimeFilter, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  fileEntityId?: InstanceType<typeof StringFilter>;
+}
+
+@InputType()
+export class RestaurantsUncheckedCreateNestedManyWithoutRestauMainImageInput {
+  @Field(() => [RestaurantsCreateWithoutRestauMainImageInput], { nullable: true })
+  @Type(() => RestaurantsCreateWithoutRestauMainImageInput)
+  create?: Array<RestaurantsCreateWithoutRestauMainImageInput>;
+  @Field(() => [RestaurantsCreateOrConnectWithoutRestauMainImageInput], { nullable: true })
+  @Type(() => RestaurantsCreateOrConnectWithoutRestauMainImageInput)
+  connectOrCreate?: Array<RestaurantsCreateOrConnectWithoutRestauMainImageInput>;
+  @Field(() => RestaurantsCreateManyRestauMainImageInputEnvelope, { nullable: true })
+  @Type(() => RestaurantsCreateManyRestauMainImageInputEnvelope)
+  createMany?: InstanceType<typeof RestaurantsCreateManyRestauMainImageInputEnvelope>;
+  @Field(() => [RestaurantsWhereUniqueInput], { nullable: true })
+  @Type(() => RestaurantsWhereUniqueInput)
+  connect?: Array<RestaurantsWhereUniqueInput>;
+}
+
+@InputType()
+export class RestaurantsUncheckedCreateWithoutAdressesInput {
+  @Field(() => String, { nullable: true })
+  idRestaurant?: string;
+  @Field(() => String, { nullable: false })
+  restauDescription!: string;
+  @Field(() => String, { nullable: false })
+  restauName!: string;
+  @Field(() => Date, { nullable: true })
+  creationDate?: Date | string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => RestauUsersUncheckedCreateNestedManyWithoutRestaurantInput, { nullable: true })
+  users?: InstanceType<typeof RestauUsersUncheckedCreateNestedManyWithoutRestaurantInput>;
+  @Field(() => ImagesSecondaryUncheckedCreateNestedManyWithoutRestaurantsInput, { nullable: true })
+  otherImages?: InstanceType<typeof ImagesSecondaryUncheckedCreateNestedManyWithoutRestaurantsInput>;
+  @Field(() => String, { nullable: false })
+  fileEntityId!: string;
+}
+
+@InputType()
+export class RestaurantsUncheckedCreateWithoutOtherImagesInput {
+  @Field(() => String, { nullable: true })
+  idRestaurant?: string;
+  @Field(() => String, { nullable: false })
+  restauDescription!: string;
+  @Field(() => String, { nullable: false })
+  restauName!: string;
+  @Field(() => Date, { nullable: true })
+  creationDate?: Date | string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => AdressesUncheckedCreateNestedManyWithoutRestaurantInput, { nullable: true })
+  adresses?: InstanceType<typeof AdressesUncheckedCreateNestedManyWithoutRestaurantInput>;
+  @Field(() => RestauUsersUncheckedCreateNestedManyWithoutRestaurantInput, { nullable: true })
+  users?: InstanceType<typeof RestauUsersUncheckedCreateNestedManyWithoutRestaurantInput>;
+  @Field(() => String, { nullable: false })
+  fileEntityId!: string;
+}
+
+@InputType()
+export class RestaurantsUncheckedCreateWithoutRestauMainImageInput {
+  @Field(() => String, { nullable: true })
+  idRestaurant?: string;
+  @Field(() => String, { nullable: false })
+  restauDescription!: string;
+  @Field(() => String, { nullable: false })
+  restauName!: string;
+  @Field(() => Date, { nullable: true })
+  creationDate?: Date | string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => AdressesUncheckedCreateNestedManyWithoutRestaurantInput, { nullable: true })
+  adresses?: InstanceType<typeof AdressesUncheckedCreateNestedManyWithoutRestaurantInput>;
+  @Field(() => RestauUsersUncheckedCreateNestedManyWithoutRestaurantInput, { nullable: true })
+  users?: InstanceType<typeof RestauUsersUncheckedCreateNestedManyWithoutRestaurantInput>;
+  @Field(() => ImagesSecondaryUncheckedCreateNestedManyWithoutRestaurantsInput, { nullable: true })
+  otherImages?: InstanceType<typeof ImagesSecondaryUncheckedCreateNestedManyWithoutRestaurantsInput>;
+}
+
+@InputType()
+export class RestaurantsUncheckedCreateWithoutUsersInput {
+  @Field(() => String, { nullable: true })
+  idRestaurant?: string;
+  @Field(() => String, { nullable: false })
+  restauDescription!: string;
+  @Field(() => String, { nullable: false })
+  restauName!: string;
+  @Field(() => Date, { nullable: true })
+  creationDate?: Date | string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => AdressesUncheckedCreateNestedManyWithoutRestaurantInput, { nullable: true })
+  adresses?: InstanceType<typeof AdressesUncheckedCreateNestedManyWithoutRestaurantInput>;
+  @Field(() => ImagesSecondaryUncheckedCreateNestedManyWithoutRestaurantsInput, { nullable: true })
+  otherImages?: InstanceType<typeof ImagesSecondaryUncheckedCreateNestedManyWithoutRestaurantsInput>;
+  @Field(() => String, { nullable: false })
+  fileEntityId!: string;
+}
+
+@InputType()
+export class RestaurantsUncheckedCreateInput {
+  @Field(() => String, { nullable: true })
+  idRestaurant?: string;
+  @Field(() => String, { nullable: false })
+  restauDescription!: string;
+  @Field(() => String, { nullable: false })
+  restauName!: string;
+  @Field(() => Date, { nullable: true })
+  creationDate?: Date | string;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+  @Field(() => AdressesUncheckedCreateNestedManyWithoutRestaurantInput, { nullable: true })
+  adresses?: InstanceType<typeof AdressesUncheckedCreateNestedManyWithoutRestaurantInput>;
+  @Field(() => RestauUsersUncheckedCreateNestedManyWithoutRestaurantInput, { nullable: true })
+  users?: InstanceType<typeof RestauUsersUncheckedCreateNestedManyWithoutRestaurantInput>;
+  @Field(() => ImagesSecondaryUncheckedCreateNestedManyWithoutRestaurantsInput, { nullable: true })
+  otherImages?: InstanceType<typeof ImagesSecondaryUncheckedCreateNestedManyWithoutRestaurantsInput>;
+  @Field(() => String, { nullable: false })
+  fileEntityId!: string;
+}
+
+@InputType()
+export class RestaurantsUncheckedUpdateManyWithoutRestauMainImageNestedInput {
+  @Field(() => [RestaurantsCreateWithoutRestauMainImageInput], { nullable: true })
+  @Type(() => RestaurantsCreateWithoutRestauMainImageInput)
+  create?: Array<RestaurantsCreateWithoutRestauMainImageInput>;
+  @Field(() => [RestaurantsCreateOrConnectWithoutRestauMainImageInput], { nullable: true })
+  @Type(() => RestaurantsCreateOrConnectWithoutRestauMainImageInput)
+  connectOrCreate?: Array<RestaurantsCreateOrConnectWithoutRestauMainImageInput>;
+  @Field(() => [RestaurantsUpsertWithWhereUniqueWithoutRestauMainImageInput], { nullable: true })
+  @Type(() => RestaurantsUpsertWithWhereUniqueWithoutRestauMainImageInput)
+  upsert?: Array<RestaurantsUpsertWithWhereUniqueWithoutRestauMainImageInput>;
+  @Field(() => RestaurantsCreateManyRestauMainImageInputEnvelope, { nullable: true })
+  @Type(() => RestaurantsCreateManyRestauMainImageInputEnvelope)
+  createMany?: InstanceType<typeof RestaurantsCreateManyRestauMainImageInputEnvelope>;
+  @Field(() => [RestaurantsWhereUniqueInput], { nullable: true })
+  @Type(() => RestaurantsWhereUniqueInput)
+  set?: Array<RestaurantsWhereUniqueInput>;
+  @Field(() => [RestaurantsWhereUniqueInput], { nullable: true })
+  @Type(() => RestaurantsWhereUniqueInput)
+  disconnect?: Array<RestaurantsWhereUniqueInput>;
+  @Field(() => [RestaurantsWhereUniqueInput], { nullable: true })
+  @Type(() => RestaurantsWhereUniqueInput)
+  delete?: Array<RestaurantsWhereUniqueInput>;
+  @Field(() => [RestaurantsWhereUniqueInput], { nullable: true })
+  @Type(() => RestaurantsWhereUniqueInput)
+  connect?: Array<RestaurantsWhereUniqueInput>;
+  @Field(() => [RestaurantsUpdateWithWhereUniqueWithoutRestauMainImageInput], { nullable: true })
+  @Type(() => RestaurantsUpdateWithWhereUniqueWithoutRestauMainImageInput)
+  update?: Array<RestaurantsUpdateWithWhereUniqueWithoutRestauMainImageInput>;
+  @Field(() => [RestaurantsUpdateManyWithWhereWithoutRestauMainImageInput], { nullable: true })
+  @Type(() => RestaurantsUpdateManyWithWhereWithoutRestauMainImageInput)
+  updateMany?: Array<RestaurantsUpdateManyWithWhereWithoutRestauMainImageInput>;
+  @Field(() => [RestaurantsScalarWhereInput], { nullable: true })
+  @Type(() => RestaurantsScalarWhereInput)
+  deleteMany?: Array<RestaurantsScalarWhereInput>;
+}
+
+@InputType()
+export class RestaurantsUncheckedUpdateManyWithoutRestaurantsInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idRestaurant?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauDescription?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  creationDate?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class RestaurantsUncheckedUpdateManyInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idRestaurant?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauDescription?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  creationDate?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  fileEntityId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class RestaurantsUncheckedUpdateWithoutAdressesInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idRestaurant?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauDescription?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  creationDate?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => RestauUsersUncheckedUpdateManyWithoutRestaurantNestedInput, { nullable: true })
+  users?: InstanceType<typeof RestauUsersUncheckedUpdateManyWithoutRestaurantNestedInput>;
+  @Field(() => ImagesSecondaryUncheckedUpdateManyWithoutRestaurantsNestedInput, { nullable: true })
+  otherImages?: InstanceType<typeof ImagesSecondaryUncheckedUpdateManyWithoutRestaurantsNestedInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  fileEntityId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class RestaurantsUncheckedUpdateWithoutOtherImagesInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idRestaurant?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauDescription?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  creationDate?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => AdressesUncheckedUpdateManyWithoutRestaurantNestedInput, { nullable: true })
+  adresses?: InstanceType<typeof AdressesUncheckedUpdateManyWithoutRestaurantNestedInput>;
+  @Field(() => RestauUsersUncheckedUpdateManyWithoutRestaurantNestedInput, { nullable: true })
+  users?: InstanceType<typeof RestauUsersUncheckedUpdateManyWithoutRestaurantNestedInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  fileEntityId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class RestaurantsUncheckedUpdateWithoutRestauMainImageInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idRestaurant?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauDescription?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  creationDate?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => AdressesUncheckedUpdateManyWithoutRestaurantNestedInput, { nullable: true })
+  adresses?: InstanceType<typeof AdressesUncheckedUpdateManyWithoutRestaurantNestedInput>;
+  @Field(() => RestauUsersUncheckedUpdateManyWithoutRestaurantNestedInput, { nullable: true })
+  users?: InstanceType<typeof RestauUsersUncheckedUpdateManyWithoutRestaurantNestedInput>;
+  @Field(() => ImagesSecondaryUncheckedUpdateManyWithoutRestaurantsNestedInput, { nullable: true })
+  otherImages?: InstanceType<typeof ImagesSecondaryUncheckedUpdateManyWithoutRestaurantsNestedInput>;
+}
+
+@InputType()
+export class RestaurantsUncheckedUpdateWithoutUsersInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idRestaurant?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauDescription?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  creationDate?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => AdressesUncheckedUpdateManyWithoutRestaurantNestedInput, { nullable: true })
+  adresses?: InstanceType<typeof AdressesUncheckedUpdateManyWithoutRestaurantNestedInput>;
+  @Field(() => ImagesSecondaryUncheckedUpdateManyWithoutRestaurantsNestedInput, { nullable: true })
+  otherImages?: InstanceType<typeof ImagesSecondaryUncheckedUpdateManyWithoutRestaurantsNestedInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  fileEntityId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class RestaurantsUncheckedUpdateInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idRestaurant?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauDescription?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  creationDate?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => AdressesUncheckedUpdateManyWithoutRestaurantNestedInput, { nullable: true })
+  adresses?: InstanceType<typeof AdressesUncheckedUpdateManyWithoutRestaurantNestedInput>;
+  @Field(() => RestauUsersUncheckedUpdateManyWithoutRestaurantNestedInput, { nullable: true })
+  users?: InstanceType<typeof RestauUsersUncheckedUpdateManyWithoutRestaurantNestedInput>;
+  @Field(() => ImagesSecondaryUncheckedUpdateManyWithoutRestaurantsNestedInput, { nullable: true })
+  otherImages?: InstanceType<typeof ImagesSecondaryUncheckedUpdateManyWithoutRestaurantsNestedInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  fileEntityId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class RestaurantsUpdateManyMutationInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idRestaurant?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauDescription?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  creationDate?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class RestaurantsUpdateManyWithWhereWithoutRestauMainImageInput {
+  @Field(() => RestaurantsScalarWhereInput, { nullable: false })
+  @Type(() => RestaurantsScalarWhereInput)
+  where!: InstanceType<typeof RestaurantsScalarWhereInput>;
+  @Field(() => RestaurantsUpdateManyMutationInput, { nullable: false })
+  @Type(() => RestaurantsUpdateManyMutationInput)
+  data!: InstanceType<typeof RestaurantsUpdateManyMutationInput>;
+}
+
+@InputType()
+export class RestaurantsUpdateManyWithoutRestauMainImageNestedInput {
+  @Field(() => [RestaurantsCreateWithoutRestauMainImageInput], { nullable: true })
+  @Type(() => RestaurantsCreateWithoutRestauMainImageInput)
+  create?: Array<RestaurantsCreateWithoutRestauMainImageInput>;
+  @Field(() => [RestaurantsCreateOrConnectWithoutRestauMainImageInput], { nullable: true })
+  @Type(() => RestaurantsCreateOrConnectWithoutRestauMainImageInput)
+  connectOrCreate?: Array<RestaurantsCreateOrConnectWithoutRestauMainImageInput>;
+  @Field(() => [RestaurantsUpsertWithWhereUniqueWithoutRestauMainImageInput], { nullable: true })
+  @Type(() => RestaurantsUpsertWithWhereUniqueWithoutRestauMainImageInput)
+  upsert?: Array<RestaurantsUpsertWithWhereUniqueWithoutRestauMainImageInput>;
+  @Field(() => RestaurantsCreateManyRestauMainImageInputEnvelope, { nullable: true })
+  @Type(() => RestaurantsCreateManyRestauMainImageInputEnvelope)
+  createMany?: InstanceType<typeof RestaurantsCreateManyRestauMainImageInputEnvelope>;
+  @Field(() => [RestaurantsWhereUniqueInput], { nullable: true })
+  @Type(() => RestaurantsWhereUniqueInput)
+  set?: Array<RestaurantsWhereUniqueInput>;
+  @Field(() => [RestaurantsWhereUniqueInput], { nullable: true })
+  @Type(() => RestaurantsWhereUniqueInput)
+  disconnect?: Array<RestaurantsWhereUniqueInput>;
+  @Field(() => [RestaurantsWhereUniqueInput], { nullable: true })
+  @Type(() => RestaurantsWhereUniqueInput)
+  delete?: Array<RestaurantsWhereUniqueInput>;
+  @Field(() => [RestaurantsWhereUniqueInput], { nullable: true })
+  @Type(() => RestaurantsWhereUniqueInput)
+  connect?: Array<RestaurantsWhereUniqueInput>;
+  @Field(() => [RestaurantsUpdateWithWhereUniqueWithoutRestauMainImageInput], { nullable: true })
+  @Type(() => RestaurantsUpdateWithWhereUniqueWithoutRestauMainImageInput)
+  update?: Array<RestaurantsUpdateWithWhereUniqueWithoutRestauMainImageInput>;
+  @Field(() => [RestaurantsUpdateManyWithWhereWithoutRestauMainImageInput], { nullable: true })
+  @Type(() => RestaurantsUpdateManyWithWhereWithoutRestauMainImageInput)
+  updateMany?: Array<RestaurantsUpdateManyWithWhereWithoutRestauMainImageInput>;
+  @Field(() => [RestaurantsScalarWhereInput], { nullable: true })
+  @Type(() => RestaurantsScalarWhereInput)
+  deleteMany?: Array<RestaurantsScalarWhereInput>;
+}
+
+@InputType()
+export class RestaurantsUpdateOneRequiredWithoutUsersNestedInput {
+  @Field(() => RestaurantsCreateWithoutUsersInput, { nullable: true })
+  @Type(() => RestaurantsCreateWithoutUsersInput)
+  create?: InstanceType<typeof RestaurantsCreateWithoutUsersInput>;
+  @Field(() => RestaurantsCreateOrConnectWithoutUsersInput, { nullable: true })
+  @Type(() => RestaurantsCreateOrConnectWithoutUsersInput)
+  connectOrCreate?: InstanceType<typeof RestaurantsCreateOrConnectWithoutUsersInput>;
+  @Field(() => RestaurantsUpsertWithoutUsersInput, { nullable: true })
+  @Type(() => RestaurantsUpsertWithoutUsersInput)
+  upsert?: InstanceType<typeof RestaurantsUpsertWithoutUsersInput>;
+  @Field(() => RestaurantsWhereUniqueInput, { nullable: true })
+  @Type(() => RestaurantsWhereUniqueInput)
+  connect?: InstanceType<typeof RestaurantsWhereUniqueInput>;
+  @Field(() => RestaurantsUpdateWithoutUsersInput, { nullable: true })
+  @Type(() => RestaurantsUpdateWithoutUsersInput)
+  update?: InstanceType<typeof RestaurantsUpdateWithoutUsersInput>;
+}
+
+@InputType()
+export class RestaurantsUpdateOneWithoutAdressesNestedInput {
+  @Field(() => RestaurantsCreateWithoutAdressesInput, { nullable: true })
+  @Type(() => RestaurantsCreateWithoutAdressesInput)
+  create?: InstanceType<typeof RestaurantsCreateWithoutAdressesInput>;
+  @Field(() => RestaurantsCreateOrConnectWithoutAdressesInput, { nullable: true })
+  @Type(() => RestaurantsCreateOrConnectWithoutAdressesInput)
+  connectOrCreate?: InstanceType<typeof RestaurantsCreateOrConnectWithoutAdressesInput>;
+  @Field(() => RestaurantsUpsertWithoutAdressesInput, { nullable: true })
+  @Type(() => RestaurantsUpsertWithoutAdressesInput)
+  upsert?: InstanceType<typeof RestaurantsUpsertWithoutAdressesInput>;
+  @Field(() => Boolean, { nullable: true })
+  disconnect?: boolean;
+  @Field(() => Boolean, { nullable: true })
+  delete?: boolean;
+  @Field(() => RestaurantsWhereUniqueInput, { nullable: true })
+  @Type(() => RestaurantsWhereUniqueInput)
+  connect?: InstanceType<typeof RestaurantsWhereUniqueInput>;
+  @Field(() => RestaurantsUpdateWithoutAdressesInput, { nullable: true })
+  @Type(() => RestaurantsUpdateWithoutAdressesInput)
+  update?: InstanceType<typeof RestaurantsUpdateWithoutAdressesInput>;
+}
+
+@InputType()
+export class RestaurantsUpdateOneWithoutOtherImagesNestedInput {
+  @Field(() => RestaurantsCreateWithoutOtherImagesInput, { nullable: true })
+  @Type(() => RestaurantsCreateWithoutOtherImagesInput)
+  create?: InstanceType<typeof RestaurantsCreateWithoutOtherImagesInput>;
+  @Field(() => RestaurantsCreateOrConnectWithoutOtherImagesInput, { nullable: true })
+  @Type(() => RestaurantsCreateOrConnectWithoutOtherImagesInput)
+  connectOrCreate?: InstanceType<typeof RestaurantsCreateOrConnectWithoutOtherImagesInput>;
+  @Field(() => RestaurantsUpsertWithoutOtherImagesInput, { nullable: true })
+  @Type(() => RestaurantsUpsertWithoutOtherImagesInput)
+  upsert?: InstanceType<typeof RestaurantsUpsertWithoutOtherImagesInput>;
+  @Field(() => Boolean, { nullable: true })
+  disconnect?: boolean;
+  @Field(() => Boolean, { nullable: true })
+  delete?: boolean;
+  @Field(() => RestaurantsWhereUniqueInput, { nullable: true })
+  @Type(() => RestaurantsWhereUniqueInput)
+  connect?: InstanceType<typeof RestaurantsWhereUniqueInput>;
+  @Field(() => RestaurantsUpdateWithoutOtherImagesInput, { nullable: true })
+  @Type(() => RestaurantsUpdateWithoutOtherImagesInput)
+  update?: InstanceType<typeof RestaurantsUpdateWithoutOtherImagesInput>;
+}
+
+@InputType()
+export class RestaurantsUpdateWithWhereUniqueWithoutRestauMainImageInput {
+  @Field(() => RestaurantsWhereUniqueInput, { nullable: false })
+  @Type(() => RestaurantsWhereUniqueInput)
+  where!: InstanceType<typeof RestaurantsWhereUniqueInput>;
+  @Field(() => RestaurantsUpdateWithoutRestauMainImageInput, { nullable: false })
+  @Type(() => RestaurantsUpdateWithoutRestauMainImageInput)
+  data!: InstanceType<typeof RestaurantsUpdateWithoutRestauMainImageInput>;
+}
+
+@InputType()
+export class RestaurantsUpdateWithoutAdressesInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idRestaurant?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauDescription?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => FileEntityUpdateOneRequiredWithoutRestaurantsNestedInput, { nullable: true })
+  restauMainImage?: InstanceType<typeof FileEntityUpdateOneRequiredWithoutRestaurantsNestedInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  creationDate?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => RestauUsersUpdateManyWithoutRestaurantNestedInput, { nullable: true })
+  users?: InstanceType<typeof RestauUsersUpdateManyWithoutRestaurantNestedInput>;
+  @Field(() => ImagesSecondaryUpdateManyWithoutRestaurantsNestedInput, { nullable: true })
+  otherImages?: InstanceType<typeof ImagesSecondaryUpdateManyWithoutRestaurantsNestedInput>;
+}
+
+@InputType()
+export class RestaurantsUpdateWithoutOtherImagesInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idRestaurant?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauDescription?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => FileEntityUpdateOneRequiredWithoutRestaurantsNestedInput, { nullable: true })
+  restauMainImage?: InstanceType<typeof FileEntityUpdateOneRequiredWithoutRestaurantsNestedInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  creationDate?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => AdressesUpdateManyWithoutRestaurantNestedInput, { nullable: true })
+  adresses?: InstanceType<typeof AdressesUpdateManyWithoutRestaurantNestedInput>;
+  @Field(() => RestauUsersUpdateManyWithoutRestaurantNestedInput, { nullable: true })
+  users?: InstanceType<typeof RestauUsersUpdateManyWithoutRestaurantNestedInput>;
+}
+
+@InputType()
+export class RestaurantsUpdateWithoutRestauMainImageInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idRestaurant?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauDescription?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  creationDate?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => AdressesUpdateManyWithoutRestaurantNestedInput, { nullable: true })
+  adresses?: InstanceType<typeof AdressesUpdateManyWithoutRestaurantNestedInput>;
+  @Field(() => RestauUsersUpdateManyWithoutRestaurantNestedInput, { nullable: true })
+  users?: InstanceType<typeof RestauUsersUpdateManyWithoutRestaurantNestedInput>;
+  @Field(() => ImagesSecondaryUpdateManyWithoutRestaurantsNestedInput, { nullable: true })
+  otherImages?: InstanceType<typeof ImagesSecondaryUpdateManyWithoutRestaurantsNestedInput>;
+}
+
+@InputType()
+export class RestaurantsUpdateWithoutUsersInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idRestaurant?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauDescription?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => FileEntityUpdateOneRequiredWithoutRestaurantsNestedInput, { nullable: true })
+  restauMainImage?: InstanceType<typeof FileEntityUpdateOneRequiredWithoutRestaurantsNestedInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  creationDate?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => AdressesUpdateManyWithoutRestaurantNestedInput, { nullable: true })
+  adresses?: InstanceType<typeof AdressesUpdateManyWithoutRestaurantNestedInput>;
+  @Field(() => ImagesSecondaryUpdateManyWithoutRestaurantsNestedInput, { nullable: true })
+  otherImages?: InstanceType<typeof ImagesSecondaryUpdateManyWithoutRestaurantsNestedInput>;
+}
+
+@InputType()
+export class RestaurantsUpdateInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  idRestaurant?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauDescription?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  restauName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => FileEntityUpdateOneRequiredWithoutRestaurantsNestedInput, { nullable: true })
+  restauMainImage?: InstanceType<typeof FileEntityUpdateOneRequiredWithoutRestaurantsNestedInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  creationDate?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => AdressesUpdateManyWithoutRestaurantNestedInput, { nullable: true })
+  adresses?: InstanceType<typeof AdressesUpdateManyWithoutRestaurantNestedInput>;
+  @Field(() => RestauUsersUpdateManyWithoutRestaurantNestedInput, { nullable: true })
+  users?: InstanceType<typeof RestauUsersUpdateManyWithoutRestaurantNestedInput>;
+  @Field(() => ImagesSecondaryUpdateManyWithoutRestaurantsNestedInput, { nullable: true })
+  otherImages?: InstanceType<typeof ImagesSecondaryUpdateManyWithoutRestaurantsNestedInput>;
+}
+
+@InputType()
+export class RestaurantsUpsertWithWhereUniqueWithoutRestauMainImageInput {
+  @Field(() => RestaurantsWhereUniqueInput, { nullable: false })
+  @Type(() => RestaurantsWhereUniqueInput)
+  where!: InstanceType<typeof RestaurantsWhereUniqueInput>;
+  @Field(() => RestaurantsUpdateWithoutRestauMainImageInput, { nullable: false })
+  @Type(() => RestaurantsUpdateWithoutRestauMainImageInput)
+  update!: InstanceType<typeof RestaurantsUpdateWithoutRestauMainImageInput>;
+  @Field(() => RestaurantsCreateWithoutRestauMainImageInput, { nullable: false })
+  @Type(() => RestaurantsCreateWithoutRestauMainImageInput)
+  create!: InstanceType<typeof RestaurantsCreateWithoutRestauMainImageInput>;
+}
+
+@InputType()
+export class RestaurantsUpsertWithoutAdressesInput {
+  @Field(() => RestaurantsUpdateWithoutAdressesInput, { nullable: false })
+  @Type(() => RestaurantsUpdateWithoutAdressesInput)
+  update!: InstanceType<typeof RestaurantsUpdateWithoutAdressesInput>;
+  @Field(() => RestaurantsCreateWithoutAdressesInput, { nullable: false })
+  @Type(() => RestaurantsCreateWithoutAdressesInput)
+  create!: InstanceType<typeof RestaurantsCreateWithoutAdressesInput>;
+}
+
+@InputType()
+export class RestaurantsUpsertWithoutOtherImagesInput {
+  @Field(() => RestaurantsUpdateWithoutOtherImagesInput, { nullable: false })
+  @Type(() => RestaurantsUpdateWithoutOtherImagesInput)
+  update!: InstanceType<typeof RestaurantsUpdateWithoutOtherImagesInput>;
+  @Field(() => RestaurantsCreateWithoutOtherImagesInput, { nullable: false })
+  @Type(() => RestaurantsCreateWithoutOtherImagesInput)
+  create!: InstanceType<typeof RestaurantsCreateWithoutOtherImagesInput>;
+}
+
+@InputType()
+export class RestaurantsUpsertWithoutUsersInput {
+  @Field(() => RestaurantsUpdateWithoutUsersInput, { nullable: false })
+  @Type(() => RestaurantsUpdateWithoutUsersInput)
+  update!: InstanceType<typeof RestaurantsUpdateWithoutUsersInput>;
+  @Field(() => RestaurantsCreateWithoutUsersInput, { nullable: false })
+  @Type(() => RestaurantsCreateWithoutUsersInput)
+  create!: InstanceType<typeof RestaurantsCreateWithoutUsersInput>;
+}
+
+@InputType()
+export class RestaurantsWhereUniqueInput {
+  @Field(() => String, { nullable: true })
+  idRestaurant?: string;
+}
+
+@InputType()
+export class RestaurantsWhereInput {
+  @Field(() => [RestaurantsWhereInput], { nullable: true })
+  AND?: Array<RestaurantsWhereInput>;
+  @Field(() => [RestaurantsWhereInput], { nullable: true })
+  OR?: Array<RestaurantsWhereInput>;
+  @Field(() => [RestaurantsWhereInput], { nullable: true })
+  NOT?: Array<RestaurantsWhereInput>;
+  @Field(() => StringFilter, { nullable: true })
+  idRestaurant?: InstanceType<typeof StringFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  restauDescription?: InstanceType<typeof StringFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  restauName?: InstanceType<typeof StringFilter>;
+  @Field(() => FileEntityRelationFilter, { nullable: true })
+  restauMainImage?: InstanceType<typeof FileEntityRelationFilter>;
+  @Field(() => DateTimeFilter, { nullable: true })
+  creationDate?: InstanceType<typeof DateTimeFilter>;
+  @Field(() => DateTimeFilter, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFilter>;
+  @Field(() => DateTimeFilter, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFilter>;
+  @Field(() => AdressesListRelationFilter, { nullable: true })
+  adresses?: InstanceType<typeof AdressesListRelationFilter>;
+  @Field(() => RestauUsersListRelationFilter, { nullable: true })
+  users?: InstanceType<typeof RestauUsersListRelationFilter>;
+  @Field(() => ImagesSecondaryListRelationFilter, { nullable: true })
+  otherImages?: InstanceType<typeof ImagesSecondaryListRelationFilter>;
+  @Field(() => StringFilter, { nullable: true })
+  fileEntityId?: InstanceType<typeof StringFilter>;
+}
+
+@ObjectType()
+export class Restaurants {
+  @Field(() => ID, { nullable: false })
+  idRestaurant!: string;
+  @Field(() => String, { nullable: false })
+  restauDescription!: string;
+  @Field(() => String, { nullable: false })
+  restauName!: string;
+  @Field(() => FileEntity, { nullable: false })
+  restauMainImage?: InstanceType<typeof FileEntity>;
+  @Field(() => Date, { nullable: false })
+  creationDate!: Date;
+  @Field(() => Date, { nullable: false })
+  createdAt!: Date;
+  @Field(() => Date, { nullable: false })
+  updatedAt!: Date;
+  @Field(() => [Adresses], { nullable: true })
+  adresses?: Array<Adresses>;
+  @Field(() => [RestauUsers], { nullable: true })
+  users?: Array<RestauUsers>;
+  @Field(() => [ImagesSecondary], { nullable: true })
+  otherImages?: Array<ImagesSecondary>;
+  @Field(() => String, { nullable: false })
+  fileEntityId!: string;
+  @Field(() => RestaurantsCount, { nullable: false })
+  _count?: InstanceType<typeof RestaurantsCount>;
+}
+
+@ArgsType()
+export class UpdateManyRestaurantsArgs {
+  @Field(() => RestaurantsUpdateManyMutationInput, { nullable: false })
+  @Type(() => RestaurantsUpdateManyMutationInput)
+  data!: InstanceType<typeof RestaurantsUpdateManyMutationInput>;
+  @Field(() => RestaurantsWhereInput, { nullable: true })
+  @Type(() => RestaurantsWhereInput)
+  where?: InstanceType<typeof RestaurantsWhereInput>;
+}
+
+@ArgsType()
+export class UpdateOneRestaurantsArgs {
+  @Field(() => RestaurantsUpdateInput, { nullable: false })
+  @Type(() => RestaurantsUpdateInput)
+  data!: InstanceType<typeof RestaurantsUpdateInput>;
+  @Field(() => RestaurantsWhereUniqueInput, { nullable: false })
+  @Type(() => RestaurantsWhereUniqueInput)
+  where!: InstanceType<typeof RestaurantsWhereUniqueInput>;
+}
+
+@ArgsType()
+export class UpsertOneRestaurantsArgs {
+  @Field(() => RestaurantsWhereUniqueInput, { nullable: false })
+  @Type(() => RestaurantsWhereUniqueInput)
+  where!: InstanceType<typeof RestaurantsWhereUniqueInput>;
+  @Field(() => RestaurantsCreateInput, { nullable: false })
+  @Type(() => RestaurantsCreateInput)
+  create!: InstanceType<typeof RestaurantsCreateInput>;
+  @Field(() => RestaurantsUpdateInput, { nullable: false })
+  @Type(() => RestaurantsUpdateInput)
+  update!: InstanceType<typeof RestaurantsUpdateInput>;
+}
+
+@ObjectType()
 export class AggregateRole {
   @Field(() => RoleCountAggregate, { nullable: true })
   _count?: InstanceType<typeof RoleCountAggregate>;
@@ -3370,7 +8538,7 @@ export class AggregateRole {
   _max?: InstanceType<typeof RoleMaxAggregate>;
 }
 
-@InputType()
+@ArgsType()
 export class CreateManyRoleArgs {
   @Field(() => [RoleCreateManyInput], { nullable: false })
   @Type(() => RoleCreateManyInput)
@@ -3379,28 +8547,28 @@ export class CreateManyRoleArgs {
   skipDuplicates?: boolean;
 }
 
-@InputType()
+@ArgsType()
 export class CreateOneRoleArgs {
   @Field(() => RoleCreateInput, { nullable: false })
   @Type(() => RoleCreateInput)
   data!: InstanceType<typeof RoleCreateInput>;
 }
 
-@InputType()
+@ArgsType()
 export class DeleteManyRoleArgs {
   @Field(() => RoleWhereInput, { nullable: true })
   @Type(() => RoleWhereInput)
   where?: InstanceType<typeof RoleWhereInput>;
 }
 
-@InputType()
+@ArgsType()
 export class DeleteOneRoleArgs {
   @Field(() => RoleWhereUniqueInput, { nullable: false })
   @Type(() => RoleWhereUniqueInput)
   where!: InstanceType<typeof RoleWhereUniqueInput>;
 }
 
-@InputType()
+@ArgsType()
 export class FindFirstRoleArgs {
   @Field(() => RoleWhereInput, { nullable: true })
   @Type(() => RoleWhereInput)
@@ -3417,7 +8585,7 @@ export class FindFirstRoleArgs {
   distinct?: Array<keyof typeof RoleScalarFieldEnum>;
 }
 
-@InputType()
+@ArgsType()
 export class FindManyRoleArgs {
   @Field(() => RoleWhereInput, { nullable: true })
   @Type(() => RoleWhereInput)
@@ -3434,14 +8602,14 @@ export class FindManyRoleArgs {
   distinct?: Array<keyof typeof RoleScalarFieldEnum>;
 }
 
-@InputType()
+@ArgsType()
 export class FindUniqueRoleArgs {
   @Field(() => RoleWhereUniqueInput, { nullable: false })
   @Type(() => RoleWhereUniqueInput)
   where!: InstanceType<typeof RoleWhereUniqueInput>;
 }
 
-@InputType()
+@ArgsType()
 export class RoleAggregateArgs {
   @Field(() => RoleWhereInput, { nullable: true })
   @Type(() => RoleWhereInput)
@@ -3506,6 +8674,8 @@ export class RoleCountOrderByAggregateInput {
 export class RoleCount {
   @Field(() => Int, { nullable: false })
   AuthUser?: number;
+  @Field(() => Int, { nullable: false })
+  RestauUser?: number;
 }
 
 @InputType()
@@ -3534,6 +8704,19 @@ export class RoleCreateNestedOneWithoutAuthUserInput {
 }
 
 @InputType()
+export class RoleCreateNestedOneWithoutRestauUserInput {
+  @Field(() => RoleCreateWithoutRestauUserInput, { nullable: true })
+  @Type(() => RoleCreateWithoutRestauUserInput)
+  create?: InstanceType<typeof RoleCreateWithoutRestauUserInput>;
+  @Field(() => RoleCreateOrConnectWithoutRestauUserInput, { nullable: true })
+  @Type(() => RoleCreateOrConnectWithoutRestauUserInput)
+  connectOrCreate?: InstanceType<typeof RoleCreateOrConnectWithoutRestauUserInput>;
+  @Field(() => RoleWhereUniqueInput, { nullable: true })
+  @Type(() => RoleWhereUniqueInput)
+  connect?: InstanceType<typeof RoleWhereUniqueInput>;
+}
+
+@InputType()
 export class RoleCreateOrConnectWithoutAuthUserInput {
   @Field(() => RoleWhereUniqueInput, { nullable: false })
   @Type(() => RoleWhereUniqueInput)
@@ -3544,11 +8727,37 @@ export class RoleCreateOrConnectWithoutAuthUserInput {
 }
 
 @InputType()
+export class RoleCreateOrConnectWithoutRestauUserInput {
+  @Field(() => RoleWhereUniqueInput, { nullable: false })
+  @Type(() => RoleWhereUniqueInput)
+  where!: InstanceType<typeof RoleWhereUniqueInput>;
+  @Field(() => RoleCreateWithoutRestauUserInput, { nullable: false })
+  @Type(() => RoleCreateWithoutRestauUserInput)
+  create!: InstanceType<typeof RoleCreateWithoutRestauUserInput>;
+}
+
+@InputType()
 export class RoleCreateWithoutAuthUserInput {
   @Field(() => String, { nullable: true })
   roleId?: string;
   @Field(() => String, { nullable: false })
   userRole!: string;
+  @Field(() => RestauUsersCreateNestedManyWithoutRoleInput, { nullable: true })
+  RestauUser?: InstanceType<typeof RestauUsersCreateNestedManyWithoutRoleInput>;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+}
+
+@InputType()
+export class RoleCreateWithoutRestauUserInput {
+  @Field(() => String, { nullable: true })
+  roleId?: string;
+  @Field(() => String, { nullable: false })
+  userRole!: string;
+  @Field(() => AuthUserCreateNestedManyWithoutRoleInput, { nullable: true })
+  AuthUser?: InstanceType<typeof AuthUserCreateNestedManyWithoutRoleInput>;
   @Field(() => Date, { nullable: true })
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
@@ -3563,13 +8772,15 @@ export class RoleCreateInput {
   userRole!: string;
   @Field(() => AuthUserCreateNestedManyWithoutRoleInput, { nullable: true })
   AuthUser?: InstanceType<typeof AuthUserCreateNestedManyWithoutRoleInput>;
+  @Field(() => RestauUsersCreateNestedManyWithoutRoleInput, { nullable: true })
+  RestauUser?: InstanceType<typeof RestauUsersCreateNestedManyWithoutRoleInput>;
   @Field(() => Date, { nullable: true })
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
 }
 
-@InputType()
+@ArgsType()
 export class RoleGroupByArgs {
   @Field(() => RoleWhereInput, { nullable: true })
   @Type(() => RoleWhereInput)
@@ -3708,6 +8919,8 @@ export class RoleOrderByWithRelationInput {
   userRole?: keyof typeof SortOrder;
   @Field(() => AuthUserOrderByRelationAggregateInput, { nullable: true })
   AuthUser?: InstanceType<typeof AuthUserOrderByRelationAggregateInput>;
+  @Field(() => RestauUsersOrderByRelationAggregateInput, { nullable: true })
+  RestauUser?: InstanceType<typeof RestauUsersOrderByRelationAggregateInput>;
   @Field(() => SortOrder, { nullable: true })
   createdAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
@@ -3746,6 +8959,22 @@ export class RoleUncheckedCreateWithoutAuthUserInput {
   roleId?: string;
   @Field(() => String, { nullable: false })
   userRole!: string;
+  @Field(() => RestauUsersUncheckedCreateNestedManyWithoutRoleInput, { nullable: true })
+  RestauUser?: InstanceType<typeof RestauUsersUncheckedCreateNestedManyWithoutRoleInput>;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+}
+
+@InputType()
+export class RoleUncheckedCreateWithoutRestauUserInput {
+  @Field(() => String, { nullable: true })
+  roleId?: string;
+  @Field(() => String, { nullable: false })
+  userRole!: string;
+  @Field(() => AuthUserUncheckedCreateNestedManyWithoutRoleInput, { nullable: true })
+  AuthUser?: InstanceType<typeof AuthUserUncheckedCreateNestedManyWithoutRoleInput>;
   @Field(() => Date, { nullable: true })
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
@@ -3760,6 +8989,8 @@ export class RoleUncheckedCreateInput {
   userRole!: string;
   @Field(() => AuthUserUncheckedCreateNestedManyWithoutRoleInput, { nullable: true })
   AuthUser?: InstanceType<typeof AuthUserUncheckedCreateNestedManyWithoutRoleInput>;
+  @Field(() => RestauUsersUncheckedCreateNestedManyWithoutRoleInput, { nullable: true })
+  RestauUser?: InstanceType<typeof RestauUsersUncheckedCreateNestedManyWithoutRoleInput>;
   @Field(() => Date, { nullable: true })
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
@@ -3784,6 +9015,22 @@ export class RoleUncheckedUpdateWithoutAuthUserInput {
   roleId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   userRole?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => RestauUsersUncheckedUpdateManyWithoutRoleNestedInput, { nullable: true })
+  RestauUser?: InstanceType<typeof RestauUsersUncheckedUpdateManyWithoutRoleNestedInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class RoleUncheckedUpdateWithoutRestauUserInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  roleId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  userRole?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => AuthUserUncheckedUpdateManyWithoutRoleNestedInput, { nullable: true })
+  AuthUser?: InstanceType<typeof AuthUserUncheckedUpdateManyWithoutRoleNestedInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
@@ -3798,6 +9045,8 @@ export class RoleUncheckedUpdateInput {
   userRole?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => AuthUserUncheckedUpdateManyWithoutRoleNestedInput, { nullable: true })
   AuthUser?: InstanceType<typeof AuthUserUncheckedUpdateManyWithoutRoleNestedInput>;
+  @Field(() => RestauUsersUncheckedUpdateManyWithoutRoleNestedInput, { nullable: true })
+  RestauUser?: InstanceType<typeof RestauUsersUncheckedUpdateManyWithoutRoleNestedInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
@@ -3814,6 +9063,25 @@ export class RoleUpdateManyMutationInput {
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class RoleUpdateOneRequiredWithoutRestauUserNestedInput {
+  @Field(() => RoleCreateWithoutRestauUserInput, { nullable: true })
+  @Type(() => RoleCreateWithoutRestauUserInput)
+  create?: InstanceType<typeof RoleCreateWithoutRestauUserInput>;
+  @Field(() => RoleCreateOrConnectWithoutRestauUserInput, { nullable: true })
+  @Type(() => RoleCreateOrConnectWithoutRestauUserInput)
+  connectOrCreate?: InstanceType<typeof RoleCreateOrConnectWithoutRestauUserInput>;
+  @Field(() => RoleUpsertWithoutRestauUserInput, { nullable: true })
+  @Type(() => RoleUpsertWithoutRestauUserInput)
+  upsert?: InstanceType<typeof RoleUpsertWithoutRestauUserInput>;
+  @Field(() => RoleWhereUniqueInput, { nullable: true })
+  @Type(() => RoleWhereUniqueInput)
+  connect?: InstanceType<typeof RoleWhereUniqueInput>;
+  @Field(() => RoleUpdateWithoutRestauUserInput, { nullable: true })
+  @Type(() => RoleUpdateWithoutRestauUserInput)
+  update?: InstanceType<typeof RoleUpdateWithoutRestauUserInput>;
 }
 
 @InputType()
@@ -3845,6 +9113,22 @@ export class RoleUpdateWithoutAuthUserInput {
   roleId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   userRole?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => RestauUsersUpdateManyWithoutRoleNestedInput, { nullable: true })
+  RestauUser?: InstanceType<typeof RestauUsersUpdateManyWithoutRoleNestedInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+}
+
+@InputType()
+export class RoleUpdateWithoutRestauUserInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  roleId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  userRole?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => AuthUserUpdateManyWithoutRoleNestedInput, { nullable: true })
+  AuthUser?: InstanceType<typeof AuthUserUpdateManyWithoutRoleNestedInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
@@ -3859,6 +9143,8 @@ export class RoleUpdateInput {
   userRole?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => AuthUserUpdateManyWithoutRoleNestedInput, { nullable: true })
   AuthUser?: InstanceType<typeof AuthUserUpdateManyWithoutRoleNestedInput>;
+  @Field(() => RestauUsersUpdateManyWithoutRoleNestedInput, { nullable: true })
+  RestauUser?: InstanceType<typeof RestauUsersUpdateManyWithoutRoleNestedInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
@@ -3873,6 +9159,16 @@ export class RoleUpsertWithoutAuthUserInput {
   @Field(() => RoleCreateWithoutAuthUserInput, { nullable: false })
   @Type(() => RoleCreateWithoutAuthUserInput)
   create!: InstanceType<typeof RoleCreateWithoutAuthUserInput>;
+}
+
+@InputType()
+export class RoleUpsertWithoutRestauUserInput {
+  @Field(() => RoleUpdateWithoutRestauUserInput, { nullable: false })
+  @Type(() => RoleUpdateWithoutRestauUserInput)
+  update!: InstanceType<typeof RoleUpdateWithoutRestauUserInput>;
+  @Field(() => RoleCreateWithoutRestauUserInput, { nullable: false })
+  @Type(() => RoleCreateWithoutRestauUserInput)
+  create!: InstanceType<typeof RoleCreateWithoutRestauUserInput>;
 }
 
 @InputType()
@@ -3895,6 +9191,8 @@ export class RoleWhereInput {
   userRole?: InstanceType<typeof StringFilter>;
   @Field(() => AuthUserListRelationFilter, { nullable: true })
   AuthUser?: InstanceType<typeof AuthUserListRelationFilter>;
+  @Field(() => RestauUsersListRelationFilter, { nullable: true })
+  RestauUser?: InstanceType<typeof RestauUsersListRelationFilter>;
   @Field(() => DateTimeFilter, { nullable: true })
   createdAt?: InstanceType<typeof DateTimeFilter>;
   @Field(() => DateTimeFilter, { nullable: true })
@@ -3909,6 +9207,8 @@ export class Role {
   userRole!: string;
   @Field(() => [AuthUser], { nullable: true })
   AuthUser?: Array<AuthUser>;
+  @Field(() => [RestauUsers], { nullable: true })
+  RestauUser?: Array<RestauUsers>;
   @Field(() => Date, { nullable: false })
   createdAt!: Date;
   @Field(() => Date, { nullable: false })
@@ -3917,7 +9217,7 @@ export class Role {
   _count?: InstanceType<typeof RoleCount>;
 }
 
-@InputType()
+@ArgsType()
 export class UpdateManyRoleArgs {
   @Field(() => RoleUpdateManyMutationInput, { nullable: false })
   @Type(() => RoleUpdateManyMutationInput)
@@ -3927,7 +9227,7 @@ export class UpdateManyRoleArgs {
   where?: InstanceType<typeof RoleWhereInput>;
 }
 
-@InputType()
+@ArgsType()
 export class UpdateOneRoleArgs {
   @Field(() => RoleUpdateInput, { nullable: false })
   @Type(() => RoleUpdateInput)
@@ -3937,7 +9237,7 @@ export class UpdateOneRoleArgs {
   where!: InstanceType<typeof RoleWhereUniqueInput>;
 }
 
-@InputType()
+@ArgsType()
 export class UpsertOneRoleArgs {
   @Field(() => RoleWhereUniqueInput, { nullable: false })
   @Type(() => RoleWhereUniqueInput)
@@ -3951,950 +9251,6 @@ export class UpsertOneRoleArgs {
 }
 
 @ObjectType()
-export class AggregateUserAdresses {
-  @Field(() => UserAdressesCountAggregate, { nullable: true })
-  _count?: InstanceType<typeof UserAdressesCountAggregate>;
-  @Field(() => UserAdressesMinAggregate, { nullable: true })
-  _min?: InstanceType<typeof UserAdressesMinAggregate>;
-  @Field(() => UserAdressesMaxAggregate, { nullable: true })
-  _max?: InstanceType<typeof UserAdressesMaxAggregate>;
-}
-
-@InputType()
-export class CreateManyUserAdressesArgs {
-  @Field(() => [UserAdressesCreateManyInput], { nullable: false })
-  @Type(() => UserAdressesCreateManyInput)
-  data!: Array<UserAdressesCreateManyInput>;
-  @Field(() => Boolean, { nullable: true })
-  skipDuplicates?: boolean;
-}
-
-@InputType()
-export class CreateOneUserAdressesArgs {
-  @Field(() => UserAdressesCreateInput, { nullable: false })
-  @Type(() => UserAdressesCreateInput)
-  data!: InstanceType<typeof UserAdressesCreateInput>;
-}
-
-@InputType()
-export class DeleteManyUserAdressesArgs {
-  @Field(() => UserAdressesWhereInput, { nullable: true })
-  @Type(() => UserAdressesWhereInput)
-  where?: InstanceType<typeof UserAdressesWhereInput>;
-}
-
-@InputType()
-export class DeleteOneUserAdressesArgs {
-  @Field(() => UserAdressesWhereUniqueInput, { nullable: false })
-  @Type(() => UserAdressesWhereUniqueInput)
-  where!: InstanceType<typeof UserAdressesWhereUniqueInput>;
-}
-
-@InputType()
-export class FindFirstUserAdressesArgs {
-  @Field(() => UserAdressesWhereInput, { nullable: true })
-  @Type(() => UserAdressesWhereInput)
-  where?: InstanceType<typeof UserAdressesWhereInput>;
-  @Field(() => [UserAdressesOrderByWithRelationInput], { nullable: true })
-  orderBy?: Array<UserAdressesOrderByWithRelationInput>;
-  @Field(() => UserAdressesWhereUniqueInput, { nullable: true })
-  cursor?: InstanceType<typeof UserAdressesWhereUniqueInput>;
-  @Field(() => Int, { nullable: true })
-  take?: number;
-  @Field(() => Int, { nullable: true })
-  skip?: number;
-  @Field(() => [UserAdressesScalarFieldEnum], { nullable: true })
-  distinct?: Array<keyof typeof UserAdressesScalarFieldEnum>;
-}
-
-@InputType()
-export class FindManyUserAdressesArgs {
-  @Field(() => UserAdressesWhereInput, { nullable: true })
-  @Type(() => UserAdressesWhereInput)
-  where?: InstanceType<typeof UserAdressesWhereInput>;
-  @Field(() => [UserAdressesOrderByWithRelationInput], { nullable: true })
-  orderBy?: Array<UserAdressesOrderByWithRelationInput>;
-  @Field(() => UserAdressesWhereUniqueInput, { nullable: true })
-  cursor?: InstanceType<typeof UserAdressesWhereUniqueInput>;
-  @Field(() => Int, { nullable: true })
-  take?: number;
-  @Field(() => Int, { nullable: true })
-  skip?: number;
-  @Field(() => [UserAdressesScalarFieldEnum], { nullable: true })
-  distinct?: Array<keyof typeof UserAdressesScalarFieldEnum>;
-}
-
-@InputType()
-export class FindUniqueUserAdressesArgs {
-  @Field(() => UserAdressesWhereUniqueInput, { nullable: false })
-  @Type(() => UserAdressesWhereUniqueInput)
-  where!: InstanceType<typeof UserAdressesWhereUniqueInput>;
-}
-
-@InputType()
-export class UpdateManyUserAdressesArgs {
-  @Field(() => UserAdressesUpdateManyMutationInput, { nullable: false })
-  @Type(() => UserAdressesUpdateManyMutationInput)
-  data!: InstanceType<typeof UserAdressesUpdateManyMutationInput>;
-  @Field(() => UserAdressesWhereInput, { nullable: true })
-  @Type(() => UserAdressesWhereInput)
-  where?: InstanceType<typeof UserAdressesWhereInput>;
-}
-
-@InputType()
-export class UpdateOneUserAdressesArgs {
-  @Field(() => UserAdressesUpdateInput, { nullable: false })
-  @Type(() => UserAdressesUpdateInput)
-  data!: InstanceType<typeof UserAdressesUpdateInput>;
-  @Field(() => UserAdressesWhereUniqueInput, { nullable: false })
-  @Type(() => UserAdressesWhereUniqueInput)
-  where!: InstanceType<typeof UserAdressesWhereUniqueInput>;
-}
-
-@InputType()
-export class UpsertOneUserAdressesArgs {
-  @Field(() => UserAdressesWhereUniqueInput, { nullable: false })
-  @Type(() => UserAdressesWhereUniqueInput)
-  where!: InstanceType<typeof UserAdressesWhereUniqueInput>;
-  @Field(() => UserAdressesCreateInput, { nullable: false })
-  @Type(() => UserAdressesCreateInput)
-  create!: InstanceType<typeof UserAdressesCreateInput>;
-  @Field(() => UserAdressesUpdateInput, { nullable: false })
-  @Type(() => UserAdressesUpdateInput)
-  update!: InstanceType<typeof UserAdressesUpdateInput>;
-}
-
-@InputType()
-export class UserAdressesAggregateArgs {
-  @Field(() => UserAdressesWhereInput, { nullable: true })
-  @Type(() => UserAdressesWhereInput)
-  where?: InstanceType<typeof UserAdressesWhereInput>;
-  @Field(() => [UserAdressesOrderByWithRelationInput], { nullable: true })
-  orderBy?: Array<UserAdressesOrderByWithRelationInput>;
-  @Field(() => UserAdressesWhereUniqueInput, { nullable: true })
-  cursor?: InstanceType<typeof UserAdressesWhereUniqueInput>;
-  @Field(() => Int, { nullable: true })
-  take?: number;
-  @Field(() => Int, { nullable: true })
-  skip?: number;
-  @Field(() => UserAdressesCountAggregateInput, { nullable: true })
-  _count?: InstanceType<typeof UserAdressesCountAggregateInput>;
-  @Field(() => UserAdressesMinAggregateInput, { nullable: true })
-  _min?: InstanceType<typeof UserAdressesMinAggregateInput>;
-  @Field(() => UserAdressesMaxAggregateInput, { nullable: true })
-  _max?: InstanceType<typeof UserAdressesMaxAggregateInput>;
-}
-
-@InputType()
-export class UserAdressesCountAggregateInput {
-  @Field(() => Boolean, { nullable: true })
-  idAdresse?: true;
-  @Field(() => Boolean, { nullable: true })
-  userId?: true;
-  @Field(() => Boolean, { nullable: true })
-  adressName?: true;
-  @Field(() => Boolean, { nullable: true })
-  longitude?: true;
-  @Field(() => Boolean, { nullable: true })
-  latitude?: true;
-  @Field(() => Boolean, { nullable: true })
-  elevation?: true;
-  @Field(() => Boolean, { nullable: true })
-  createdAt?: true;
-  @Field(() => Boolean, { nullable: true })
-  updatedAt?: true;
-  @Field(() => Boolean, { nullable: true })
-  _all?: true;
-}
-
-@ObjectType()
-export class UserAdressesCountAggregate {
-  @Field(() => Int, { nullable: false })
-  idAdresse!: number;
-  @Field(() => Int, { nullable: false })
-  userId!: number;
-  @Field(() => Int, { nullable: false })
-  adressName!: number;
-  @Field(() => Int, { nullable: false })
-  longitude!: number;
-  @Field(() => Int, { nullable: false })
-  latitude!: number;
-  @Field(() => Int, { nullable: false })
-  elevation!: number;
-  @Field(() => Int, { nullable: false })
-  createdAt!: number;
-  @Field(() => Int, { nullable: false })
-  updatedAt!: number;
-  @Field(() => Int, { nullable: false })
-  _all!: number;
-}
-
-@InputType()
-export class UserAdressesCountOrderByAggregateInput {
-  @Field(() => SortOrder, { nullable: true })
-  idAdresse?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  userId?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  adressName?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  longitude?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  latitude?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  elevation?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  createdAt?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  updatedAt?: keyof typeof SortOrder;
-}
-
-@InputType()
-export class UserAdressesCreateManyUserInputEnvelope {
-  @Field(() => [UserAdressesCreateManyUserInput], { nullable: false })
-  @Type(() => UserAdressesCreateManyUserInput)
-  data!: Array<UserAdressesCreateManyUserInput>;
-  @Field(() => Boolean, { nullable: true })
-  skipDuplicates?: boolean;
-}
-
-@InputType()
-export class UserAdressesCreateManyUserInput {
-  @Field(() => String, { nullable: true })
-  idAdresse?: string;
-  @Field(() => String, { nullable: false })
-  adressName!: string;
-  @Field(() => String, { nullable: false })
-  longitude!: string;
-  @Field(() => String, { nullable: false })
-  latitude!: string;
-  @Field(() => String, { nullable: true })
-  elevation?: string;
-  @Field(() => Date, { nullable: true })
-  createdAt?: Date | string;
-  @Field(() => Date, { nullable: true })
-  updatedAt?: Date | string;
-}
-
-@InputType()
-export class UserAdressesCreateManyInput {
-  @Field(() => String, { nullable: true })
-  idAdresse?: string;
-  @Field(() => String, { nullable: false })
-  userId!: string;
-  @Field(() => String, { nullable: false })
-  adressName!: string;
-  @Field(() => String, { nullable: false })
-  longitude!: string;
-  @Field(() => String, { nullable: false })
-  latitude!: string;
-  @Field(() => String, { nullable: true })
-  elevation?: string;
-  @Field(() => Date, { nullable: true })
-  createdAt?: Date | string;
-  @Field(() => Date, { nullable: true })
-  updatedAt?: Date | string;
-}
-
-@InputType()
-export class UserAdressesCreateNestedManyWithoutUserInput {
-  @Field(() => [UserAdressesCreateWithoutUserInput], { nullable: true })
-  @Type(() => UserAdressesCreateWithoutUserInput)
-  create?: Array<UserAdressesCreateWithoutUserInput>;
-  @Field(() => [UserAdressesCreateOrConnectWithoutUserInput], { nullable: true })
-  @Type(() => UserAdressesCreateOrConnectWithoutUserInput)
-  connectOrCreate?: Array<UserAdressesCreateOrConnectWithoutUserInput>;
-  @Field(() => UserAdressesCreateManyUserInputEnvelope, { nullable: true })
-  @Type(() => UserAdressesCreateManyUserInputEnvelope)
-  createMany?: InstanceType<typeof UserAdressesCreateManyUserInputEnvelope>;
-  @Field(() => [UserAdressesWhereUniqueInput], { nullable: true })
-  @Type(() => UserAdressesWhereUniqueInput)
-  connect?: Array<UserAdressesWhereUniqueInput>;
-}
-
-@InputType()
-export class UserAdressesCreateOrConnectWithoutUserInput {
-  @Field(() => UserAdressesWhereUniqueInput, { nullable: false })
-  @Type(() => UserAdressesWhereUniqueInput)
-  where!: InstanceType<typeof UserAdressesWhereUniqueInput>;
-  @Field(() => UserAdressesCreateWithoutUserInput, { nullable: false })
-  @Type(() => UserAdressesCreateWithoutUserInput)
-  create!: InstanceType<typeof UserAdressesCreateWithoutUserInput>;
-}
-
-@InputType()
-export class UserAdressesCreateWithoutUserInput {
-  @Field(() => String, { nullable: true })
-  idAdresse?: string;
-  @Field(() => String, { nullable: false })
-  adressName!: string;
-  @Field(() => String, { nullable: false })
-  longitude!: string;
-  @Field(() => String, { nullable: false })
-  latitude!: string;
-  @Field(() => String, { nullable: true })
-  elevation?: string;
-  @Field(() => Date, { nullable: true })
-  createdAt?: Date | string;
-  @Field(() => Date, { nullable: true })
-  updatedAt?: Date | string;
-}
-
-@InputType()
-export class UserAdressesCreateInput {
-  @Field(() => String, { nullable: true })
-  idAdresse?: string;
-  @Field(() => String, { nullable: false })
-  adressName!: string;
-  @Field(() => String, { nullable: false })
-  longitude!: string;
-  @Field(() => String, { nullable: false })
-  latitude!: string;
-  @Field(() => String, { nullable: true })
-  elevation?: string;
-  @Field(() => Date, { nullable: true })
-  createdAt?: Date | string;
-  @Field(() => Date, { nullable: true })
-  updatedAt?: Date | string;
-  @Field(() => UsersCreateNestedOneWithoutAdressesInput, { nullable: false })
-  user!: InstanceType<typeof UsersCreateNestedOneWithoutAdressesInput>;
-}
-
-@InputType()
-export class UserAdressesGroupByArgs {
-  @Field(() => UserAdressesWhereInput, { nullable: true })
-  @Type(() => UserAdressesWhereInput)
-  where?: InstanceType<typeof UserAdressesWhereInput>;
-  @Field(() => [UserAdressesOrderByWithAggregationInput], { nullable: true })
-  orderBy?: Array<UserAdressesOrderByWithAggregationInput>;
-  @Field(() => [UserAdressesScalarFieldEnum], { nullable: false })
-  by!: Array<keyof typeof UserAdressesScalarFieldEnum>;
-  @Field(() => UserAdressesScalarWhereWithAggregatesInput, { nullable: true })
-  having?: InstanceType<typeof UserAdressesScalarWhereWithAggregatesInput>;
-  @Field(() => Int, { nullable: true })
-  take?: number;
-  @Field(() => Int, { nullable: true })
-  skip?: number;
-  @Field(() => UserAdressesCountAggregateInput, { nullable: true })
-  _count?: InstanceType<typeof UserAdressesCountAggregateInput>;
-  @Field(() => UserAdressesMinAggregateInput, { nullable: true })
-  _min?: InstanceType<typeof UserAdressesMinAggregateInput>;
-  @Field(() => UserAdressesMaxAggregateInput, { nullable: true })
-  _max?: InstanceType<typeof UserAdressesMaxAggregateInput>;
-}
-
-@ObjectType()
-export class UserAdressesGroupBy {
-  @Field(() => String, { nullable: false })
-  idAdresse!: string;
-  @Field(() => String, { nullable: false })
-  userId!: string;
-  @Field(() => String, { nullable: false })
-  adressName!: string;
-  @Field(() => String, { nullable: false })
-  longitude!: string;
-  @Field(() => String, { nullable: false })
-  latitude!: string;
-  @Field(() => String, { nullable: true })
-  elevation?: string;
-  @Field(() => Date, { nullable: false })
-  createdAt!: Date | string;
-  @Field(() => Date, { nullable: false })
-  updatedAt!: Date | string;
-  @Field(() => UserAdressesCountAggregate, { nullable: true })
-  _count?: InstanceType<typeof UserAdressesCountAggregate>;
-  @Field(() => UserAdressesMinAggregate, { nullable: true })
-  _min?: InstanceType<typeof UserAdressesMinAggregate>;
-  @Field(() => UserAdressesMaxAggregate, { nullable: true })
-  _max?: InstanceType<typeof UserAdressesMaxAggregate>;
-}
-
-@InputType()
-export class UserAdressesListRelationFilter {
-  @Field(() => UserAdressesWhereInput, { nullable: true })
-  every?: InstanceType<typeof UserAdressesWhereInput>;
-  @Field(() => UserAdressesWhereInput, { nullable: true })
-  some?: InstanceType<typeof UserAdressesWhereInput>;
-  @Field(() => UserAdressesWhereInput, { nullable: true })
-  none?: InstanceType<typeof UserAdressesWhereInput>;
-}
-
-@InputType()
-export class UserAdressesMaxAggregateInput {
-  @Field(() => Boolean, { nullable: true })
-  idAdresse?: true;
-  @Field(() => Boolean, { nullable: true })
-  userId?: true;
-  @Field(() => Boolean, { nullable: true })
-  adressName?: true;
-  @Field(() => Boolean, { nullable: true })
-  longitude?: true;
-  @Field(() => Boolean, { nullable: true })
-  latitude?: true;
-  @Field(() => Boolean, { nullable: true })
-  elevation?: true;
-  @Field(() => Boolean, { nullable: true })
-  createdAt?: true;
-  @Field(() => Boolean, { nullable: true })
-  updatedAt?: true;
-}
-
-@ObjectType()
-export class UserAdressesMaxAggregate {
-  @Field(() => String, { nullable: true })
-  idAdresse?: string;
-  @Field(() => String, { nullable: true })
-  userId?: string;
-  @Field(() => String, { nullable: true })
-  adressName?: string;
-  @Field(() => String, { nullable: true })
-  longitude?: string;
-  @Field(() => String, { nullable: true })
-  latitude?: string;
-  @Field(() => String, { nullable: true })
-  elevation?: string;
-  @Field(() => Date, { nullable: true })
-  createdAt?: Date | string;
-  @Field(() => Date, { nullable: true })
-  updatedAt?: Date | string;
-}
-
-@InputType()
-export class UserAdressesMaxOrderByAggregateInput {
-  @Field(() => SortOrder, { nullable: true })
-  idAdresse?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  userId?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  adressName?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  longitude?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  latitude?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  elevation?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  createdAt?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  updatedAt?: keyof typeof SortOrder;
-}
-
-@InputType()
-export class UserAdressesMinAggregateInput {
-  @Field(() => Boolean, { nullable: true })
-  idAdresse?: true;
-  @Field(() => Boolean, { nullable: true })
-  userId?: true;
-  @Field(() => Boolean, { nullable: true })
-  adressName?: true;
-  @Field(() => Boolean, { nullable: true })
-  longitude?: true;
-  @Field(() => Boolean, { nullable: true })
-  latitude?: true;
-  @Field(() => Boolean, { nullable: true })
-  elevation?: true;
-  @Field(() => Boolean, { nullable: true })
-  createdAt?: true;
-  @Field(() => Boolean, { nullable: true })
-  updatedAt?: true;
-}
-
-@ObjectType()
-export class UserAdressesMinAggregate {
-  @Field(() => String, { nullable: true })
-  idAdresse?: string;
-  @Field(() => String, { nullable: true })
-  userId?: string;
-  @Field(() => String, { nullable: true })
-  adressName?: string;
-  @Field(() => String, { nullable: true })
-  longitude?: string;
-  @Field(() => String, { nullable: true })
-  latitude?: string;
-  @Field(() => String, { nullable: true })
-  elevation?: string;
-  @Field(() => Date, { nullable: true })
-  createdAt?: Date | string;
-  @Field(() => Date, { nullable: true })
-  updatedAt?: Date | string;
-}
-
-@InputType()
-export class UserAdressesMinOrderByAggregateInput {
-  @Field(() => SortOrder, { nullable: true })
-  idAdresse?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  userId?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  adressName?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  longitude?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  latitude?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  elevation?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  createdAt?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  updatedAt?: keyof typeof SortOrder;
-}
-
-@InputType()
-export class UserAdressesOrderByRelationAggregateInput {
-  @Field(() => SortOrder, { nullable: true })
-  _count?: keyof typeof SortOrder;
-}
-
-@InputType()
-export class UserAdressesOrderByWithAggregationInput {
-  @Field(() => SortOrder, { nullable: true })
-  idAdresse?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  userId?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  adressName?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  longitude?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  latitude?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  elevation?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  createdAt?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  updatedAt?: keyof typeof SortOrder;
-  @Field(() => UserAdressesCountOrderByAggregateInput, { nullable: true })
-  _count?: InstanceType<typeof UserAdressesCountOrderByAggregateInput>;
-  @Field(() => UserAdressesMaxOrderByAggregateInput, { nullable: true })
-  _max?: InstanceType<typeof UserAdressesMaxOrderByAggregateInput>;
-  @Field(() => UserAdressesMinOrderByAggregateInput, { nullable: true })
-  _min?: InstanceType<typeof UserAdressesMinOrderByAggregateInput>;
-}
-
-@InputType()
-export class UserAdressesOrderByWithRelationInput {
-  @Field(() => SortOrder, { nullable: true })
-  idAdresse?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  userId?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  adressName?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  longitude?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  latitude?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  elevation?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  createdAt?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  updatedAt?: keyof typeof SortOrder;
-  @Field(() => UsersOrderByWithRelationInput, { nullable: true })
-  user?: InstanceType<typeof UsersOrderByWithRelationInput>;
-}
-
-@InputType()
-export class UserAdressesScalarWhereWithAggregatesInput {
-  @Field(() => [UserAdressesScalarWhereWithAggregatesInput], { nullable: true })
-  AND?: Array<UserAdressesScalarWhereWithAggregatesInput>;
-  @Field(() => [UserAdressesScalarWhereWithAggregatesInput], { nullable: true })
-  OR?: Array<UserAdressesScalarWhereWithAggregatesInput>;
-  @Field(() => [UserAdressesScalarWhereWithAggregatesInput], { nullable: true })
-  NOT?: Array<UserAdressesScalarWhereWithAggregatesInput>;
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  idAdresse?: InstanceType<typeof StringWithAggregatesFilter>;
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  userId?: InstanceType<typeof StringWithAggregatesFilter>;
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  adressName?: InstanceType<typeof StringWithAggregatesFilter>;
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  longitude?: InstanceType<typeof StringWithAggregatesFilter>;
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  latitude?: InstanceType<typeof StringWithAggregatesFilter>;
-  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
-  elevation?: InstanceType<typeof StringNullableWithAggregatesFilter>;
-  @Field(() => DateTimeWithAggregatesFilter, { nullable: true })
-  createdAt?: InstanceType<typeof DateTimeWithAggregatesFilter>;
-  @Field(() => DateTimeWithAggregatesFilter, { nullable: true })
-  updatedAt?: InstanceType<typeof DateTimeWithAggregatesFilter>;
-}
-
-@InputType()
-export class UserAdressesScalarWhereInput {
-  @Field(() => [UserAdressesScalarWhereInput], { nullable: true })
-  AND?: Array<UserAdressesScalarWhereInput>;
-  @Field(() => [UserAdressesScalarWhereInput], { nullable: true })
-  OR?: Array<UserAdressesScalarWhereInput>;
-  @Field(() => [UserAdressesScalarWhereInput], { nullable: true })
-  NOT?: Array<UserAdressesScalarWhereInput>;
-  @Field(() => StringFilter, { nullable: true })
-  idAdresse?: InstanceType<typeof StringFilter>;
-  @Field(() => StringFilter, { nullable: true })
-  userId?: InstanceType<typeof StringFilter>;
-  @Field(() => StringFilter, { nullable: true })
-  adressName?: InstanceType<typeof StringFilter>;
-  @Field(() => StringFilter, { nullable: true })
-  longitude?: InstanceType<typeof StringFilter>;
-  @Field(() => StringFilter, { nullable: true })
-  latitude?: InstanceType<typeof StringFilter>;
-  @Field(() => StringNullableFilter, { nullable: true })
-  elevation?: InstanceType<typeof StringNullableFilter>;
-  @Field(() => DateTimeFilter, { nullable: true })
-  createdAt?: InstanceType<typeof DateTimeFilter>;
-  @Field(() => DateTimeFilter, { nullable: true })
-  updatedAt?: InstanceType<typeof DateTimeFilter>;
-}
-
-@InputType()
-export class UserAdressesUncheckedCreateNestedManyWithoutUserInput {
-  @Field(() => [UserAdressesCreateWithoutUserInput], { nullable: true })
-  @Type(() => UserAdressesCreateWithoutUserInput)
-  create?: Array<UserAdressesCreateWithoutUserInput>;
-  @Field(() => [UserAdressesCreateOrConnectWithoutUserInput], { nullable: true })
-  @Type(() => UserAdressesCreateOrConnectWithoutUserInput)
-  connectOrCreate?: Array<UserAdressesCreateOrConnectWithoutUserInput>;
-  @Field(() => UserAdressesCreateManyUserInputEnvelope, { nullable: true })
-  @Type(() => UserAdressesCreateManyUserInputEnvelope)
-  createMany?: InstanceType<typeof UserAdressesCreateManyUserInputEnvelope>;
-  @Field(() => [UserAdressesWhereUniqueInput], { nullable: true })
-  @Type(() => UserAdressesWhereUniqueInput)
-  connect?: Array<UserAdressesWhereUniqueInput>;
-}
-
-@InputType()
-export class UserAdressesUncheckedCreateWithoutUserInput {
-  @Field(() => String, { nullable: true })
-  idAdresse?: string;
-  @Field(() => String, { nullable: false })
-  adressName!: string;
-  @Field(() => String, { nullable: false })
-  longitude!: string;
-  @Field(() => String, { nullable: false })
-  latitude!: string;
-  @Field(() => String, { nullable: true })
-  elevation?: string;
-  @Field(() => Date, { nullable: true })
-  createdAt?: Date | string;
-  @Field(() => Date, { nullable: true })
-  updatedAt?: Date | string;
-}
-
-@InputType()
-export class UserAdressesUncheckedCreateInput {
-  @Field(() => String, { nullable: true })
-  idAdresse?: string;
-  @Field(() => String, { nullable: false })
-  userId!: string;
-  @Field(() => String, { nullable: false })
-  adressName!: string;
-  @Field(() => String, { nullable: false })
-  longitude!: string;
-  @Field(() => String, { nullable: false })
-  latitude!: string;
-  @Field(() => String, { nullable: true })
-  elevation?: string;
-  @Field(() => Date, { nullable: true })
-  createdAt?: Date | string;
-  @Field(() => Date, { nullable: true })
-  updatedAt?: Date | string;
-}
-
-@InputType()
-export class UserAdressesUncheckedUpdateManyWithoutAdressesInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  idAdresse?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  adressName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  longitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  latitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  elevation?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-}
-
-@InputType()
-export class UserAdressesUncheckedUpdateManyWithoutUserNestedInput {
-  @Field(() => [UserAdressesCreateWithoutUserInput], { nullable: true })
-  @Type(() => UserAdressesCreateWithoutUserInput)
-  create?: Array<UserAdressesCreateWithoutUserInput>;
-  @Field(() => [UserAdressesCreateOrConnectWithoutUserInput], { nullable: true })
-  @Type(() => UserAdressesCreateOrConnectWithoutUserInput)
-  connectOrCreate?: Array<UserAdressesCreateOrConnectWithoutUserInput>;
-  @Field(() => [UserAdressesUpsertWithWhereUniqueWithoutUserInput], { nullable: true })
-  @Type(() => UserAdressesUpsertWithWhereUniqueWithoutUserInput)
-  upsert?: Array<UserAdressesUpsertWithWhereUniqueWithoutUserInput>;
-  @Field(() => UserAdressesCreateManyUserInputEnvelope, { nullable: true })
-  @Type(() => UserAdressesCreateManyUserInputEnvelope)
-  createMany?: InstanceType<typeof UserAdressesCreateManyUserInputEnvelope>;
-  @Field(() => [UserAdressesWhereUniqueInput], { nullable: true })
-  @Type(() => UserAdressesWhereUniqueInput)
-  set?: Array<UserAdressesWhereUniqueInput>;
-  @Field(() => [UserAdressesWhereUniqueInput], { nullable: true })
-  @Type(() => UserAdressesWhereUniqueInput)
-  disconnect?: Array<UserAdressesWhereUniqueInput>;
-  @Field(() => [UserAdressesWhereUniqueInput], { nullable: true })
-  @Type(() => UserAdressesWhereUniqueInput)
-  delete?: Array<UserAdressesWhereUniqueInput>;
-  @Field(() => [UserAdressesWhereUniqueInput], { nullable: true })
-  @Type(() => UserAdressesWhereUniqueInput)
-  connect?: Array<UserAdressesWhereUniqueInput>;
-  @Field(() => [UserAdressesUpdateWithWhereUniqueWithoutUserInput], { nullable: true })
-  @Type(() => UserAdressesUpdateWithWhereUniqueWithoutUserInput)
-  update?: Array<UserAdressesUpdateWithWhereUniqueWithoutUserInput>;
-  @Field(() => [UserAdressesUpdateManyWithWhereWithoutUserInput], { nullable: true })
-  @Type(() => UserAdressesUpdateManyWithWhereWithoutUserInput)
-  updateMany?: Array<UserAdressesUpdateManyWithWhereWithoutUserInput>;
-  @Field(() => [UserAdressesScalarWhereInput], { nullable: true })
-  @Type(() => UserAdressesScalarWhereInput)
-  deleteMany?: Array<UserAdressesScalarWhereInput>;
-}
-
-@InputType()
-export class UserAdressesUncheckedUpdateManyInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  idAdresse?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  userId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  adressName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  longitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  latitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  elevation?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-}
-
-@InputType()
-export class UserAdressesUncheckedUpdateWithoutUserInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  idAdresse?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  adressName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  longitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  latitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  elevation?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-}
-
-@InputType()
-export class UserAdressesUncheckedUpdateInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  idAdresse?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  userId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  adressName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  longitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  latitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  elevation?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-}
-
-@InputType()
-export class UserAdressesUpdateManyMutationInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  idAdresse?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  adressName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  longitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  latitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  elevation?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-}
-
-@InputType()
-export class UserAdressesUpdateManyWithWhereWithoutUserInput {
-  @Field(() => UserAdressesScalarWhereInput, { nullable: false })
-  @Type(() => UserAdressesScalarWhereInput)
-  where!: InstanceType<typeof UserAdressesScalarWhereInput>;
-  @Field(() => UserAdressesUpdateManyMutationInput, { nullable: false })
-  @Type(() => UserAdressesUpdateManyMutationInput)
-  data!: InstanceType<typeof UserAdressesUpdateManyMutationInput>;
-}
-
-@InputType()
-export class UserAdressesUpdateManyWithoutUserNestedInput {
-  @Field(() => [UserAdressesCreateWithoutUserInput], { nullable: true })
-  @Type(() => UserAdressesCreateWithoutUserInput)
-  create?: Array<UserAdressesCreateWithoutUserInput>;
-  @Field(() => [UserAdressesCreateOrConnectWithoutUserInput], { nullable: true })
-  @Type(() => UserAdressesCreateOrConnectWithoutUserInput)
-  connectOrCreate?: Array<UserAdressesCreateOrConnectWithoutUserInput>;
-  @Field(() => [UserAdressesUpsertWithWhereUniqueWithoutUserInput], { nullable: true })
-  @Type(() => UserAdressesUpsertWithWhereUniqueWithoutUserInput)
-  upsert?: Array<UserAdressesUpsertWithWhereUniqueWithoutUserInput>;
-  @Field(() => UserAdressesCreateManyUserInputEnvelope, { nullable: true })
-  @Type(() => UserAdressesCreateManyUserInputEnvelope)
-  createMany?: InstanceType<typeof UserAdressesCreateManyUserInputEnvelope>;
-  @Field(() => [UserAdressesWhereUniqueInput], { nullable: true })
-  @Type(() => UserAdressesWhereUniqueInput)
-  set?: Array<UserAdressesWhereUniqueInput>;
-  @Field(() => [UserAdressesWhereUniqueInput], { nullable: true })
-  @Type(() => UserAdressesWhereUniqueInput)
-  disconnect?: Array<UserAdressesWhereUniqueInput>;
-  @Field(() => [UserAdressesWhereUniqueInput], { nullable: true })
-  @Type(() => UserAdressesWhereUniqueInput)
-  delete?: Array<UserAdressesWhereUniqueInput>;
-  @Field(() => [UserAdressesWhereUniqueInput], { nullable: true })
-  @Type(() => UserAdressesWhereUniqueInput)
-  connect?: Array<UserAdressesWhereUniqueInput>;
-  @Field(() => [UserAdressesUpdateWithWhereUniqueWithoutUserInput], { nullable: true })
-  @Type(() => UserAdressesUpdateWithWhereUniqueWithoutUserInput)
-  update?: Array<UserAdressesUpdateWithWhereUniqueWithoutUserInput>;
-  @Field(() => [UserAdressesUpdateManyWithWhereWithoutUserInput], { nullable: true })
-  @Type(() => UserAdressesUpdateManyWithWhereWithoutUserInput)
-  updateMany?: Array<UserAdressesUpdateManyWithWhereWithoutUserInput>;
-  @Field(() => [UserAdressesScalarWhereInput], { nullable: true })
-  @Type(() => UserAdressesScalarWhereInput)
-  deleteMany?: Array<UserAdressesScalarWhereInput>;
-}
-
-@InputType()
-export class UserAdressesUpdateWithWhereUniqueWithoutUserInput {
-  @Field(() => UserAdressesWhereUniqueInput, { nullable: false })
-  @Type(() => UserAdressesWhereUniqueInput)
-  where!: InstanceType<typeof UserAdressesWhereUniqueInput>;
-  @Field(() => UserAdressesUpdateWithoutUserInput, { nullable: false })
-  @Type(() => UserAdressesUpdateWithoutUserInput)
-  data!: InstanceType<typeof UserAdressesUpdateWithoutUserInput>;
-}
-
-@InputType()
-export class UserAdressesUpdateWithoutUserInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  idAdresse?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  adressName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  longitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  latitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  elevation?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-}
-
-@InputType()
-export class UserAdressesUpdateInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  idAdresse?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  adressName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  longitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  latitude?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  elevation?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => UsersUpdateOneRequiredWithoutAdressesNestedInput, { nullable: true })
-  user?: InstanceType<typeof UsersUpdateOneRequiredWithoutAdressesNestedInput>;
-}
-
-@InputType()
-export class UserAdressesUpsertWithWhereUniqueWithoutUserInput {
-  @Field(() => UserAdressesWhereUniqueInput, { nullable: false })
-  @Type(() => UserAdressesWhereUniqueInput)
-  where!: InstanceType<typeof UserAdressesWhereUniqueInput>;
-  @Field(() => UserAdressesUpdateWithoutUserInput, { nullable: false })
-  @Type(() => UserAdressesUpdateWithoutUserInput)
-  update!: InstanceType<typeof UserAdressesUpdateWithoutUserInput>;
-  @Field(() => UserAdressesCreateWithoutUserInput, { nullable: false })
-  @Type(() => UserAdressesCreateWithoutUserInput)
-  create!: InstanceType<typeof UserAdressesCreateWithoutUserInput>;
-}
-
-@InputType()
-export class UserAdressesWhereUniqueInput {
-  @Field(() => String, { nullable: true })
-  idAdresse?: string;
-}
-
-@InputType()
-export class UserAdressesWhereInput {
-  @Field(() => [UserAdressesWhereInput], { nullable: true })
-  AND?: Array<UserAdressesWhereInput>;
-  @Field(() => [UserAdressesWhereInput], { nullable: true })
-  OR?: Array<UserAdressesWhereInput>;
-  @Field(() => [UserAdressesWhereInput], { nullable: true })
-  NOT?: Array<UserAdressesWhereInput>;
-  @Field(() => StringFilter, { nullable: true })
-  idAdresse?: InstanceType<typeof StringFilter>;
-  @Field(() => StringFilter, { nullable: true })
-  userId?: InstanceType<typeof StringFilter>;
-  @Field(() => StringFilter, { nullable: true })
-  adressName?: InstanceType<typeof StringFilter>;
-  @Field(() => StringFilter, { nullable: true })
-  longitude?: InstanceType<typeof StringFilter>;
-  @Field(() => StringFilter, { nullable: true })
-  latitude?: InstanceType<typeof StringFilter>;
-  @Field(() => StringNullableFilter, { nullable: true })
-  elevation?: InstanceType<typeof StringNullableFilter>;
-  @Field(() => DateTimeFilter, { nullable: true })
-  createdAt?: InstanceType<typeof DateTimeFilter>;
-  @Field(() => DateTimeFilter, { nullable: true })
-  updatedAt?: InstanceType<typeof DateTimeFilter>;
-  @Field(() => UsersRelationFilter, { nullable: true })
-  user?: InstanceType<typeof UsersRelationFilter>;
-}
-
-@ObjectType()
-export class UserAdresses {
-  @Field(() => ID, { nullable: false })
-  idAdresse!: string;
-  @Field(() => String, { nullable: false })
-  userId!: string;
-  @Field(() => String, { nullable: false })
-  adressName!: string;
-  @Field(() => String, { nullable: false })
-  longitude!: string;
-  @Field(() => String, { nullable: false })
-  latitude!: string;
-  @Field(() => String, { nullable: true })
-  elevation!: string | null;
-  @Field(() => Date, { nullable: false })
-  createdAt!: Date;
-  @Field(() => Date, { nullable: false })
-  updatedAt!: Date;
-  @Field(() => Users, { nullable: false })
-  user?: InstanceType<typeof Users>;
-}
-
-@ObjectType()
 export class AggregateUsers {
   @Field(() => UsersCountAggregate, { nullable: true })
   _count?: InstanceType<typeof UsersCountAggregate>;
@@ -4904,7 +9260,7 @@ export class AggregateUsers {
   _max?: InstanceType<typeof UsersMaxAggregate>;
 }
 
-@InputType()
+@ArgsType()
 export class CreateManyUsersArgs {
   @Field(() => [UsersCreateManyInput], { nullable: false })
   @Type(() => UsersCreateManyInput)
@@ -4913,28 +9269,28 @@ export class CreateManyUsersArgs {
   skipDuplicates?: boolean;
 }
 
-@InputType()
+@ArgsType()
 export class CreateOneUsersArgs {
   @Field(() => UsersCreateInput, { nullable: false })
   @Type(() => UsersCreateInput)
   data!: InstanceType<typeof UsersCreateInput>;
 }
 
-@InputType()
+@ArgsType()
 export class DeleteManyUsersArgs {
   @Field(() => UsersWhereInput, { nullable: true })
   @Type(() => UsersWhereInput)
   where?: InstanceType<typeof UsersWhereInput>;
 }
 
-@InputType()
+@ArgsType()
 export class DeleteOneUsersArgs {
   @Field(() => UsersWhereUniqueInput, { nullable: false })
   @Type(() => UsersWhereUniqueInput)
   where!: InstanceType<typeof UsersWhereUniqueInput>;
 }
 
-@InputType()
+@ArgsType()
 export class FindFirstUsersArgs {
   @Field(() => UsersWhereInput, { nullable: true })
   @Type(() => UsersWhereInput)
@@ -4951,7 +9307,7 @@ export class FindFirstUsersArgs {
   distinct?: Array<keyof typeof UsersScalarFieldEnum>;
 }
 
-@InputType()
+@ArgsType()
 export class FindManyUsersArgs {
   @Field(() => UsersWhereInput, { nullable: true })
   @Type(() => UsersWhereInput)
@@ -4968,14 +9324,14 @@ export class FindManyUsersArgs {
   distinct?: Array<keyof typeof UsersScalarFieldEnum>;
 }
 
-@InputType()
+@ArgsType()
 export class FindUniqueUsersArgs {
   @Field(() => UsersWhereUniqueInput, { nullable: false })
   @Type(() => UsersWhereUniqueInput)
   where!: InstanceType<typeof UsersWhereUniqueInput>;
 }
 
-@InputType()
+@ArgsType()
 export class UpdateManyUsersArgs {
   @Field(() => UsersUpdateManyMutationInput, { nullable: false })
   @Type(() => UsersUpdateManyMutationInput)
@@ -4985,7 +9341,7 @@ export class UpdateManyUsersArgs {
   where?: InstanceType<typeof UsersWhereInput>;
 }
 
-@InputType()
+@ArgsType()
 export class UpdateOneUsersArgs {
   @Field(() => UsersUpdateInput, { nullable: false })
   @Type(() => UsersUpdateInput)
@@ -4995,7 +9351,7 @@ export class UpdateOneUsersArgs {
   where!: InstanceType<typeof UsersWhereUniqueInput>;
 }
 
-@InputType()
+@ArgsType()
 export class UpsertOneUsersArgs {
   @Field(() => UsersWhereUniqueInput, { nullable: false })
   @Type(() => UsersWhereUniqueInput)
@@ -5008,7 +9364,7 @@ export class UpsertOneUsersArgs {
   update!: InstanceType<typeof UsersUpdateInput>;
 }
 
-@InputType()
+@ArgsType()
 export class UsersAggregateArgs {
   @Field(() => UsersWhereInput, { nullable: true })
   @Type(() => UsersWhereInput)
@@ -5181,8 +9537,8 @@ export class UsersCreateWithoutProfileInput {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
-  @Field(() => UserAdressesCreateNestedManyWithoutUserInput, { nullable: true })
-  adresses?: InstanceType<typeof UserAdressesCreateNestedManyWithoutUserInput>;
+  @Field(() => AdressesCreateNestedManyWithoutUserInput, { nullable: true })
+  adresses?: InstanceType<typeof AdressesCreateNestedManyWithoutUserInput>;
 }
 
 @InputType()
@@ -5201,11 +9557,11 @@ export class UsersCreateInput {
   updatedAt?: Date | string;
   @Field(() => ProfileCreateNestedOneWithoutUserInput, { nullable: true })
   profile?: InstanceType<typeof ProfileCreateNestedOneWithoutUserInput>;
-  @Field(() => UserAdressesCreateNestedManyWithoutUserInput, { nullable: true })
-  adresses?: InstanceType<typeof UserAdressesCreateNestedManyWithoutUserInput>;
+  @Field(() => AdressesCreateNestedManyWithoutUserInput, { nullable: true })
+  adresses?: InstanceType<typeof AdressesCreateNestedManyWithoutUserInput>;
 }
 
-@InputType()
+@ArgsType()
 export class UsersGroupByArgs {
   @Field(() => UsersWhereInput, { nullable: true })
   @Type(() => UsersWhereInput)
@@ -5384,8 +9740,8 @@ export class UsersOrderByWithRelationInput {
   updatedAt?: keyof typeof SortOrder;
   @Field(() => ProfileOrderByWithRelationInput, { nullable: true })
   profile?: InstanceType<typeof ProfileOrderByWithRelationInput>;
-  @Field(() => UserAdressesOrderByRelationAggregateInput, { nullable: true })
-  adresses?: InstanceType<typeof UserAdressesOrderByRelationAggregateInput>;
+  @Field(() => AdressesOrderByRelationAggregateInput, { nullable: true })
+  adresses?: InstanceType<typeof AdressesOrderByRelationAggregateInput>;
 }
 
 @InputType()
@@ -5450,8 +9806,8 @@ export class UsersUncheckedCreateWithoutProfileInput {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
-  @Field(() => UserAdressesUncheckedCreateNestedManyWithoutUserInput, { nullable: true })
-  adresses?: InstanceType<typeof UserAdressesUncheckedCreateNestedManyWithoutUserInput>;
+  @Field(() => AdressesUncheckedCreateNestedManyWithoutUserInput, { nullable: true })
+  adresses?: InstanceType<typeof AdressesUncheckedCreateNestedManyWithoutUserInput>;
 }
 
 @InputType()
@@ -5470,8 +9826,8 @@ export class UsersUncheckedCreateInput {
   updatedAt?: Date | string;
   @Field(() => ProfileUncheckedCreateNestedOneWithoutUserInput, { nullable: true })
   profile?: InstanceType<typeof ProfileUncheckedCreateNestedOneWithoutUserInput>;
-  @Field(() => UserAdressesUncheckedCreateNestedManyWithoutUserInput, { nullable: true })
-  adresses?: InstanceType<typeof UserAdressesUncheckedCreateNestedManyWithoutUserInput>;
+  @Field(() => AdressesUncheckedCreateNestedManyWithoutUserInput, { nullable: true })
+  adresses?: InstanceType<typeof AdressesUncheckedCreateNestedManyWithoutUserInput>;
 }
 
 @InputType()
@@ -5522,8 +9878,8 @@ export class UsersUncheckedUpdateWithoutProfileInput {
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => UserAdressesUncheckedUpdateManyWithoutUserNestedInput, { nullable: true })
-  adresses?: InstanceType<typeof UserAdressesUncheckedUpdateManyWithoutUserNestedInput>;
+  @Field(() => AdressesUncheckedUpdateManyWithoutUserNestedInput, { nullable: true })
+  adresses?: InstanceType<typeof AdressesUncheckedUpdateManyWithoutUserNestedInput>;
 }
 
 @InputType()
@@ -5542,8 +9898,8 @@ export class UsersUncheckedUpdateInput {
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => ProfileUncheckedUpdateOneWithoutUserNestedInput, { nullable: true })
   profile?: InstanceType<typeof ProfileUncheckedUpdateOneWithoutUserNestedInput>;
-  @Field(() => UserAdressesUncheckedUpdateManyWithoutUserNestedInput, { nullable: true })
-  adresses?: InstanceType<typeof UserAdressesUncheckedUpdateManyWithoutUserNestedInput>;
+  @Field(() => AdressesUncheckedUpdateManyWithoutUserNestedInput, { nullable: true })
+  adresses?: InstanceType<typeof AdressesUncheckedUpdateManyWithoutUserNestedInput>;
 }
 
 @InputType()
@@ -5563,7 +9919,7 @@ export class UsersUpdateManyMutationInput {
 }
 
 @InputType()
-export class UsersUpdateOneRequiredWithoutAdressesNestedInput {
+export class UsersUpdateOneWithoutAdressesNestedInput {
   @Field(() => UsersCreateWithoutAdressesInput, { nullable: true })
   @Type(() => UsersCreateWithoutAdressesInput)
   create?: InstanceType<typeof UsersCreateWithoutAdressesInput>;
@@ -5573,6 +9929,10 @@ export class UsersUpdateOneRequiredWithoutAdressesNestedInput {
   @Field(() => UsersUpsertWithoutAdressesInput, { nullable: true })
   @Type(() => UsersUpsertWithoutAdressesInput)
   upsert?: InstanceType<typeof UsersUpsertWithoutAdressesInput>;
+  @Field(() => Boolean, { nullable: true })
+  disconnect?: boolean;
+  @Field(() => Boolean, { nullable: true })
+  delete?: boolean;
   @Field(() => UsersWhereUniqueInput, { nullable: true })
   @Type(() => UsersWhereUniqueInput)
   connect?: InstanceType<typeof UsersWhereUniqueInput>;
@@ -5636,8 +9996,8 @@ export class UsersUpdateWithoutProfileInput {
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => UserAdressesUpdateManyWithoutUserNestedInput, { nullable: true })
-  adresses?: InstanceType<typeof UserAdressesUpdateManyWithoutUserNestedInput>;
+  @Field(() => AdressesUpdateManyWithoutUserNestedInput, { nullable: true })
+  adresses?: InstanceType<typeof AdressesUpdateManyWithoutUserNestedInput>;
 }
 
 @InputType()
@@ -5656,8 +10016,8 @@ export class UsersUpdateInput {
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => ProfileUpdateOneWithoutUserNestedInput, { nullable: true })
   profile?: InstanceType<typeof ProfileUpdateOneWithoutUserNestedInput>;
-  @Field(() => UserAdressesUpdateManyWithoutUserNestedInput, { nullable: true })
-  adresses?: InstanceType<typeof UserAdressesUpdateManyWithoutUserNestedInput>;
+  @Field(() => AdressesUpdateManyWithoutUserNestedInput, { nullable: true })
+  adresses?: InstanceType<typeof AdressesUpdateManyWithoutUserNestedInput>;
 }
 
 @InputType()
@@ -5708,8 +10068,8 @@ export class UsersWhereInput {
   updatedAt?: InstanceType<typeof DateTimeFilter>;
   @Field(() => ProfileRelationFilter, { nullable: true })
   profile?: InstanceType<typeof ProfileRelationFilter>;
-  @Field(() => UserAdressesListRelationFilter, { nullable: true })
-  adresses?: InstanceType<typeof UserAdressesListRelationFilter>;
+  @Field(() => AdressesListRelationFilter, { nullable: true })
+  adresses?: InstanceType<typeof AdressesListRelationFilter>;
 }
 
 @ObjectType()
@@ -5728,8 +10088,8 @@ export class Users {
   updatedAt!: Date;
   @Field(() => Profile, { nullable: true })
   profile?: InstanceType<typeof Profile> | null;
-  @Field(() => [UserAdresses], { nullable: true })
-  adresses?: Array<UserAdresses>;
+  @Field(() => [Adresses], { nullable: true })
+  adresses?: Array<Adresses>;
   @Field(() => UsersCount, { nullable: false })
   _count?: InstanceType<typeof UsersCount>;
 }

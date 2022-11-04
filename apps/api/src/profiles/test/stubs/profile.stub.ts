@@ -9,5 +9,6 @@ export const profileStub = (): Profile => {
     userId: '1',
     dateOfBirth: new Date(2022, 9, 30),
     placeOfBirth: new Date(2022, 9, 30),
+    fileEntityId: '',
   };
 };

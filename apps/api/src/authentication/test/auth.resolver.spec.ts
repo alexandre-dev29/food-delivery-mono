@@ -3,7 +3,6 @@ import { Test } from '@nestjs/testing';
 import { authUserStub } from './stubs/auth-user.stub';
 import { LoginResponseStub } from './stubs/login-response.stub';
 import { jest } from '@jest/globals';
-import { rolesStub } from '../../roles/test/stubs/roles.stub';
 import { GraphQLError } from 'graphql/error';
 import { AuthenticationResolver } from '../authentication.resolver';
 import { AuthenticationService } from '../authentication.service';
@@ -14,20 +13,7 @@ jest.mock('../authentication.service.ts');
 describe('AuthResolver', () => {
   let authResolver: AuthenticationResolver;
   let authService: AuthenticationService;
-  const prismaMocking = {
-    authUser: {
-      findMany: () => Promise.resolve([authUserStub()]),
-      findFirst: () => Promise.resolve(authUserStub()),
-      update: () => Promise.resolve(authUserStub()),
-      delete: () => Promise.resolve(authUserStub()),
-    },
-    role: {
-      findMany: () => Promise.resolve([rolesStub()]),
-      findFirst: () => Promise.resolve(rolesStub()),
-      update: () => Promise.resolve(rolesStub()),
-      delete: () => Promise.resolve(rolesStub()),
-    },
-  };
+
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [],

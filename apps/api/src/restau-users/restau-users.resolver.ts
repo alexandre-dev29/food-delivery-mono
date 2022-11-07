@@ -5,9 +5,10 @@ import {
   FindFirstRestauUsersArgs,
   FindManyRestauUsersArgs,
   RestauUsers,
+  Role,
   UpdateOneRestauUsersArgs,
 } from '@food-delivery-mono/data-access';
-import { CurrentRestauUser } from '../../../../libs/app-security/src/lib/restauUser.decorator';
+import { CurrentRestauUser } from '@food-delivery-mono/app-security';
 
 @Resolver(() => RestauUsers)
 export class RestauUsersResolver {
@@ -18,10 +19,10 @@ export class RestauUsersResolver {
     @Args('userName', { type: () => String }) userName: string,
     @Args('password', { type: () => String }) password: string,
     @Args('userFullName', { type: () => String }) userFullName: string,
-    @Args('roleId', { type: () => String }) roleId: string,
+    @Args('role', { type: () => Role }) role: Role,
     @CurrentRestauUser() restauUser
   ) {
-    return this.restauUsersService.create(userName, password, userFullName, roleId, restauUser.restauId);
+    return this.restauUsersService.create(userName, password, userFullName, role, restauUser.restauId);
   }
 
   @Query(() => [RestauUsers], { name: 'FindAllRestauUsers' })

@@ -28,9 +28,9 @@ model AuthUser {
   /// @HideField()
   password         String   @db.VarChar(100)
   username         String   @db.VarChar(100)
-  Role             Role?    @relation(fields: [roleRoleId], references: [roleId])
-  roleRoleId       String?
   isPhoneConfirmed Boolean  @default(false)
+  role         Role        @default(User)
+
 }
 
 model Users {
@@ -82,13 +82,11 @@ model Adresses {
   restaurant   Restaurants? @relation(fields: [restaurantId], references: [idRestaurant])
 }
 
-model Role {
-  roleId     String        @id @default(cuid())
-  userRole   String
-  AuthUser   AuthUser[]
-  RestauUser RestauUsers[]
-  createdAt  DateTime      @default(now())
-  updatedAt  DateTime      @updatedAt
+enum Role {
+  SuperAdmin
+  User
+  RestaurantUser
+  RestaurantAdmin
 }
 
 model Restaurants {
@@ -117,8 +115,7 @@ model RestauUsers {
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
   restaurant   Restaurants @relation(fields: [restauId], references: [idRestaurant])
-  roleId       String
-  role         Role        @relation(fields: [roleId], references: [roleId])
+  role         Role        @default(RestaurantUser)
 }
 
 model ImagesSecondary {

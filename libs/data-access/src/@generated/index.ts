@@ -1,4 +1,4 @@
-import { ArgsType, Field, HideField, ID, InputType, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
+import { Field, registerEnumType, ArgsType, Int, InputType, ObjectType, ID, HideField } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
 
 export enum UsersScalarFieldEnum {
@@ -6,13 +6,6 @@ export enum UsersScalarFieldEnum {
   firstName = 'firstName',
   lastName = 'lastName',
   userName = 'userName',
-  createdAt = 'createdAt',
-  updatedAt = 'updatedAt',
-}
-
-export enum RoleScalarFieldEnum {
-  roleId = 'roleId',
-  userRole = 'userRole',
   createdAt = 'createdAt',
   updatedAt = 'updatedAt',
 }
@@ -36,7 +29,7 @@ export enum RestauUsersScalarFieldEnum {
   restauId = 'restauId',
   createdAt = 'createdAt',
   updatedAt = 'updatedAt',
-  roleId = 'roleId',
+  role = 'role',
 }
 
 export enum ProfileScalarFieldEnum {
@@ -60,6 +53,13 @@ export enum TransactionIsolationLevel {
 export enum SortOrder {
   asc = 'asc',
   desc = 'desc',
+}
+
+export enum Role {
+  SuperAdmin = 'SuperAdmin',
+  User = 'User',
+  RestaurantUser = 'RestaurantUser',
+  RestaurantAdmin = 'RestaurantAdmin',
 }
 
 export enum QueryMode {
@@ -95,8 +95,8 @@ export enum AuthUserScalarFieldEnum {
   phoneNumber = 'phoneNumber',
   password = 'password',
   username = 'username',
-  roleRoleId = 'roleRoleId',
   isPhoneConfirmed = 'isPhoneConfirmed',
+  role = 'role',
 }
 
 export enum AdressesScalarFieldEnum {
@@ -116,12 +116,12 @@ registerEnumType(AuthUserScalarFieldEnum, { name: 'AuthUserScalarFieldEnum', des
 registerEnumType(FileEntityScalarFieldEnum, { name: 'FileEntityScalarFieldEnum', description: undefined });
 registerEnumType(ImagesSecondaryScalarFieldEnum, { name: 'ImagesSecondaryScalarFieldEnum', description: undefined });
 registerEnumType(QueryMode, { name: 'QueryMode', description: undefined });
+registerEnumType(Role, { name: 'Role', description: undefined });
 registerEnumType(SortOrder, { name: 'SortOrder', description: undefined });
 registerEnumType(TransactionIsolationLevel, { name: 'TransactionIsolationLevel', description: undefined });
 registerEnumType(ProfileScalarFieldEnum, { name: 'ProfileScalarFieldEnum', description: undefined });
 registerEnumType(RestauUsersScalarFieldEnum, { name: 'RestauUsersScalarFieldEnum', description: undefined });
 registerEnumType(RestaurantsScalarFieldEnum, { name: 'RestaurantsScalarFieldEnum', description: undefined });
-registerEnumType(RoleScalarFieldEnum, { name: 'RoleScalarFieldEnum', description: undefined });
 registerEnumType(UsersScalarFieldEnum, { name: 'UsersScalarFieldEnum', description: undefined });
 
 @ArgsType()
@@ -1438,9 +1438,9 @@ export class AuthUserCountAggregateInput {
   @Field(() => Boolean, { nullable: true })
   username?: true;
   @Field(() => Boolean, { nullable: true })
-  roleRoleId?: true;
-  @Field(() => Boolean, { nullable: true })
   isPhoneConfirmed?: true;
+  @Field(() => Boolean, { nullable: true })
+  role?: true;
   @Field(() => Boolean, { nullable: true })
   _all?: true;
 }
@@ -1464,9 +1464,9 @@ export class AuthUserCountAggregate {
   @Field(() => Int, { nullable: false })
   username!: number;
   @Field(() => Int, { nullable: false })
-  roleRoleId!: number;
-  @Field(() => Int, { nullable: false })
   isPhoneConfirmed!: number;
+  @Field(() => Int, { nullable: false })
+  role!: number;
   @Field(() => Int, { nullable: false })
   _all!: number;
 }
@@ -1490,40 +1490,9 @@ export class AuthUserCountOrderByAggregateInput {
   @Field(() => SortOrder, { nullable: true })
   username?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
-  roleRoleId?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
   isPhoneConfirmed?: keyof typeof SortOrder;
-}
-
-@InputType()
-export class AuthUserCreateManyRoleInputEnvelope {
-  @Field(() => [AuthUserCreateManyRoleInput], { nullable: false })
-  @Type(() => AuthUserCreateManyRoleInput)
-  data!: Array<AuthUserCreateManyRoleInput>;
-  @Field(() => Boolean, { nullable: true })
-  skipDuplicates?: boolean;
-}
-
-@InputType()
-export class AuthUserCreateManyRoleInput {
-  @Field(() => String, { nullable: true })
-  id?: string;
-  @Field(() => Date, { nullable: true })
-  createdAt?: Date | string;
-  @Field(() => Date, { nullable: true })
-  updatedAt?: Date | string;
-  @Field(() => String, { nullable: false })
-  userId!: string;
-  @HideField()
-  refreshToken?: string;
-  @Field(() => String, { nullable: false })
-  phoneNumber!: string;
-  @Field(() => String, { nullable: false })
-  password!: string;
-  @Field(() => String, { nullable: false })
-  username!: string;
-  @Field(() => Boolean, { nullable: true })
-  isPhoneConfirmed?: boolean;
+  @Field(() => SortOrder, { nullable: true })
+  role?: keyof typeof SortOrder;
 }
 
 @InputType()
@@ -1544,58 +1513,10 @@ export class AuthUserCreateManyInput {
   password!: string;
   @Field(() => String, { nullable: false })
   username!: string;
-  @Field(() => String, { nullable: true })
-  roleRoleId?: string;
   @Field(() => Boolean, { nullable: true })
   isPhoneConfirmed?: boolean;
-}
-
-@InputType()
-export class AuthUserCreateNestedManyWithoutRoleInput {
-  @Field(() => [AuthUserCreateWithoutRoleInput], { nullable: true })
-  @Type(() => AuthUserCreateWithoutRoleInput)
-  create?: Array<AuthUserCreateWithoutRoleInput>;
-  @Field(() => [AuthUserCreateOrConnectWithoutRoleInput], { nullable: true })
-  @Type(() => AuthUserCreateOrConnectWithoutRoleInput)
-  connectOrCreate?: Array<AuthUserCreateOrConnectWithoutRoleInput>;
-  @Field(() => AuthUserCreateManyRoleInputEnvelope, { nullable: true })
-  @Type(() => AuthUserCreateManyRoleInputEnvelope)
-  createMany?: InstanceType<typeof AuthUserCreateManyRoleInputEnvelope>;
-  @Field(() => [AuthUserWhereUniqueInput], { nullable: true })
-  @Type(() => AuthUserWhereUniqueInput)
-  connect?: Array<AuthUserWhereUniqueInput>;
-}
-
-@InputType()
-export class AuthUserCreateOrConnectWithoutRoleInput {
-  @Field(() => AuthUserWhereUniqueInput, { nullable: false })
-  @Type(() => AuthUserWhereUniqueInput)
-  where!: InstanceType<typeof AuthUserWhereUniqueInput>;
-  @Field(() => AuthUserCreateWithoutRoleInput, { nullable: false })
-  @Type(() => AuthUserCreateWithoutRoleInput)
-  create!: InstanceType<typeof AuthUserCreateWithoutRoleInput>;
-}
-
-@InputType()
-export class AuthUserCreateWithoutRoleInput {
-  @Field(() => String, { nullable: true })
-  id?: string;
-  @Field(() => Date, { nullable: true })
-  createdAt?: Date | string;
-  @Field(() => Date, { nullable: true })
-  updatedAt?: Date | string;
-  @Field(() => String, { nullable: false })
-  userId!: string;
-  @HideField()
-  refreshToken?: string;
-  @Field(() => String, { nullable: false })
-  phoneNumber!: string;
-  @Field(() => String, { nullable: false })
-  password!: string;
-  @Field(() => String, { nullable: false })
-  username!: string;
-  @Field(() => Boolean, { nullable: true })
-  isPhoneConfirmed?: boolean;
+  @Field(() => Role, { nullable: true })
+  role?: keyof typeof Role;
 }
 
 @InputType()
@@ -1616,10 +1537,10 @@ export class AuthUserCreateInput {
   password!: string;
   @Field(() => String, { nullable: false })
   username!: string;
-  @Field(() => RoleCreateNestedOneWithoutAuthUserInput, { nullable: true })
-  Role?: InstanceType<typeof RoleCreateNestedOneWithoutAuthUserInput>;
   @Field(() => Boolean, { nullable: true })
   isPhoneConfirmed?: boolean;
+  @Field(() => Role, { nullable: true })
+  role?: keyof typeof Role;
 }
 
 @ArgsType()
@@ -1663,26 +1584,16 @@ export class AuthUserGroupBy {
   password!: string;
   @Field(() => String, { nullable: false })
   username!: string;
-  @Field(() => String, { nullable: true })
-  roleRoleId?: string;
   @Field(() => Boolean, { nullable: false })
   isPhoneConfirmed!: boolean;
+  @Field(() => Role, { nullable: false })
+  role!: keyof typeof Role;
   @Field(() => AuthUserCountAggregate, { nullable: true })
   _count?: InstanceType<typeof AuthUserCountAggregate>;
   @Field(() => AuthUserMinAggregate, { nullable: true })
   _min?: InstanceType<typeof AuthUserMinAggregate>;
   @Field(() => AuthUserMaxAggregate, { nullable: true })
   _max?: InstanceType<typeof AuthUserMaxAggregate>;
-}
-
-@InputType()
-export class AuthUserListRelationFilter {
-  @Field(() => AuthUserWhereInput, { nullable: true })
-  every?: InstanceType<typeof AuthUserWhereInput>;
-  @Field(() => AuthUserWhereInput, { nullable: true })
-  some?: InstanceType<typeof AuthUserWhereInput>;
-  @Field(() => AuthUserWhereInput, { nullable: true })
-  none?: InstanceType<typeof AuthUserWhereInput>;
 }
 
 @InputType()
@@ -1704,9 +1615,9 @@ export class AuthUserMaxAggregateInput {
   @Field(() => Boolean, { nullable: true })
   username?: true;
   @Field(() => Boolean, { nullable: true })
-  roleRoleId?: true;
-  @Field(() => Boolean, { nullable: true })
   isPhoneConfirmed?: true;
+  @Field(() => Boolean, { nullable: true })
+  role?: true;
 }
 
 @ObjectType()
@@ -1727,10 +1638,10 @@ export class AuthUserMaxAggregate {
   password?: string;
   @Field(() => String, { nullable: true })
   username?: string;
-  @Field(() => String, { nullable: true })
-  roleRoleId?: string;
   @Field(() => Boolean, { nullable: true })
   isPhoneConfirmed?: boolean;
+  @Field(() => Role, { nullable: true })
+  role?: keyof typeof Role;
 }
 
 @InputType()
@@ -1752,9 +1663,9 @@ export class AuthUserMaxOrderByAggregateInput {
   @Field(() => SortOrder, { nullable: true })
   username?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
-  roleRoleId?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
   isPhoneConfirmed?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  role?: keyof typeof SortOrder;
 }
 
 @InputType()
@@ -1776,9 +1687,9 @@ export class AuthUserMinAggregateInput {
   @Field(() => Boolean, { nullable: true })
   username?: true;
   @Field(() => Boolean, { nullable: true })
-  roleRoleId?: true;
-  @Field(() => Boolean, { nullable: true })
   isPhoneConfirmed?: true;
+  @Field(() => Boolean, { nullable: true })
+  role?: true;
 }
 
 @ObjectType()
@@ -1799,10 +1710,10 @@ export class AuthUserMinAggregate {
   password?: string;
   @Field(() => String, { nullable: true })
   username?: string;
-  @Field(() => String, { nullable: true })
-  roleRoleId?: string;
   @Field(() => Boolean, { nullable: true })
   isPhoneConfirmed?: boolean;
+  @Field(() => Role, { nullable: true })
+  role?: keyof typeof Role;
 }
 
 @InputType()
@@ -1824,15 +1735,9 @@ export class AuthUserMinOrderByAggregateInput {
   @Field(() => SortOrder, { nullable: true })
   username?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
-  roleRoleId?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
   isPhoneConfirmed?: keyof typeof SortOrder;
-}
-
-@InputType()
-export class AuthUserOrderByRelationAggregateInput {
   @Field(() => SortOrder, { nullable: true })
-  _count?: keyof typeof SortOrder;
+  role?: keyof typeof SortOrder;
 }
 
 @InputType()
@@ -1854,9 +1759,9 @@ export class AuthUserOrderByWithAggregationInput {
   @Field(() => SortOrder, { nullable: true })
   username?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
-  roleRoleId?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
   isPhoneConfirmed?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  role?: keyof typeof SortOrder;
   @Field(() => AuthUserCountOrderByAggregateInput, { nullable: true })
   _count?: InstanceType<typeof AuthUserCountOrderByAggregateInput>;
   @Field(() => AuthUserMaxOrderByAggregateInput, { nullable: true })
@@ -1883,12 +1788,10 @@ export class AuthUserOrderByWithRelationInput {
   password?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   username?: keyof typeof SortOrder;
-  @Field(() => RoleOrderByWithRelationInput, { nullable: true })
-  Role?: InstanceType<typeof RoleOrderByWithRelationInput>;
-  @Field(() => SortOrder, { nullable: true })
-  roleRoleId?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
   isPhoneConfirmed?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  role?: keyof typeof SortOrder;
 }
 
 @InputType()
@@ -1915,78 +1818,10 @@ export class AuthUserScalarWhereWithAggregatesInput {
   password?: InstanceType<typeof StringWithAggregatesFilter>;
   @Field(() => StringWithAggregatesFilter, { nullable: true })
   username?: InstanceType<typeof StringWithAggregatesFilter>;
-  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
-  roleRoleId?: InstanceType<typeof StringNullableWithAggregatesFilter>;
   @Field(() => BoolWithAggregatesFilter, { nullable: true })
   isPhoneConfirmed?: InstanceType<typeof BoolWithAggregatesFilter>;
-}
-
-@InputType()
-export class AuthUserScalarWhereInput {
-  @Field(() => [AuthUserScalarWhereInput], { nullable: true })
-  AND?: Array<AuthUserScalarWhereInput>;
-  @Field(() => [AuthUserScalarWhereInput], { nullable: true })
-  OR?: Array<AuthUserScalarWhereInput>;
-  @Field(() => [AuthUserScalarWhereInput], { nullable: true })
-  NOT?: Array<AuthUserScalarWhereInput>;
-  @Field(() => StringFilter, { nullable: true })
-  id?: InstanceType<typeof StringFilter>;
-  @Field(() => DateTimeFilter, { nullable: true })
-  createdAt?: InstanceType<typeof DateTimeFilter>;
-  @Field(() => DateTimeFilter, { nullable: true })
-  updatedAt?: InstanceType<typeof DateTimeFilter>;
-  @Field(() => StringFilter, { nullable: true })
-  userId?: InstanceType<typeof StringFilter>;
-  @HideField()
-  refreshToken?: InstanceType<typeof StringNullableFilter>;
-  @Field(() => StringFilter, { nullable: true })
-  phoneNumber?: InstanceType<typeof StringFilter>;
-  @Field(() => StringFilter, { nullable: true })
-  password?: InstanceType<typeof StringFilter>;
-  @Field(() => StringFilter, { nullable: true })
-  username?: InstanceType<typeof StringFilter>;
-  @Field(() => StringNullableFilter, { nullable: true })
-  roleRoleId?: InstanceType<typeof StringNullableFilter>;
-  @Field(() => BoolFilter, { nullable: true })
-  isPhoneConfirmed?: InstanceType<typeof BoolFilter>;
-}
-
-@InputType()
-export class AuthUserUncheckedCreateNestedManyWithoutRoleInput {
-  @Field(() => [AuthUserCreateWithoutRoleInput], { nullable: true })
-  @Type(() => AuthUserCreateWithoutRoleInput)
-  create?: Array<AuthUserCreateWithoutRoleInput>;
-  @Field(() => [AuthUserCreateOrConnectWithoutRoleInput], { nullable: true })
-  @Type(() => AuthUserCreateOrConnectWithoutRoleInput)
-  connectOrCreate?: Array<AuthUserCreateOrConnectWithoutRoleInput>;
-  @Field(() => AuthUserCreateManyRoleInputEnvelope, { nullable: true })
-  @Type(() => AuthUserCreateManyRoleInputEnvelope)
-  createMany?: InstanceType<typeof AuthUserCreateManyRoleInputEnvelope>;
-  @Field(() => [AuthUserWhereUniqueInput], { nullable: true })
-  @Type(() => AuthUserWhereUniqueInput)
-  connect?: Array<AuthUserWhereUniqueInput>;
-}
-
-@InputType()
-export class AuthUserUncheckedCreateWithoutRoleInput {
-  @Field(() => String, { nullable: true })
-  id?: string;
-  @Field(() => Date, { nullable: true })
-  createdAt?: Date | string;
-  @Field(() => Date, { nullable: true })
-  updatedAt?: Date | string;
-  @Field(() => String, { nullable: false })
-  userId!: string;
-  @HideField()
-  refreshToken?: string;
-  @Field(() => String, { nullable: false })
-  phoneNumber!: string;
-  @Field(() => String, { nullable: false })
-  password!: string;
-  @Field(() => String, { nullable: false })
-  username!: string;
-  @Field(() => Boolean, { nullable: true })
-  isPhoneConfirmed?: boolean;
+  @Field(() => EnumRoleWithAggregatesFilter, { nullable: true })
+  role?: InstanceType<typeof EnumRoleWithAggregatesFilter>;
 }
 
 @InputType()
@@ -2007,69 +1842,10 @@ export class AuthUserUncheckedCreateInput {
   password!: string;
   @Field(() => String, { nullable: false })
   username!: string;
-  @Field(() => String, { nullable: true })
-  roleRoleId?: string;
   @Field(() => Boolean, { nullable: true })
   isPhoneConfirmed?: boolean;
-}
-
-@InputType()
-export class AuthUserUncheckedUpdateManyWithoutAuthUserInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  id?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  userId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @HideField()
-  refreshToken?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  phoneNumber?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  username?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
-  isPhoneConfirmed?: InstanceType<typeof BoolFieldUpdateOperationsInput>;
-}
-
-@InputType()
-export class AuthUserUncheckedUpdateManyWithoutRoleNestedInput {
-  @Field(() => [AuthUserCreateWithoutRoleInput], { nullable: true })
-  @Type(() => AuthUserCreateWithoutRoleInput)
-  create?: Array<AuthUserCreateWithoutRoleInput>;
-  @Field(() => [AuthUserCreateOrConnectWithoutRoleInput], { nullable: true })
-  @Type(() => AuthUserCreateOrConnectWithoutRoleInput)
-  connectOrCreate?: Array<AuthUserCreateOrConnectWithoutRoleInput>;
-  @Field(() => [AuthUserUpsertWithWhereUniqueWithoutRoleInput], { nullable: true })
-  @Type(() => AuthUserUpsertWithWhereUniqueWithoutRoleInput)
-  upsert?: Array<AuthUserUpsertWithWhereUniqueWithoutRoleInput>;
-  @Field(() => AuthUserCreateManyRoleInputEnvelope, { nullable: true })
-  @Type(() => AuthUserCreateManyRoleInputEnvelope)
-  createMany?: InstanceType<typeof AuthUserCreateManyRoleInputEnvelope>;
-  @Field(() => [AuthUserWhereUniqueInput], { nullable: true })
-  @Type(() => AuthUserWhereUniqueInput)
-  set?: Array<AuthUserWhereUniqueInput>;
-  @Field(() => [AuthUserWhereUniqueInput], { nullable: true })
-  @Type(() => AuthUserWhereUniqueInput)
-  disconnect?: Array<AuthUserWhereUniqueInput>;
-  @Field(() => [AuthUserWhereUniqueInput], { nullable: true })
-  @Type(() => AuthUserWhereUniqueInput)
-  delete?: Array<AuthUserWhereUniqueInput>;
-  @Field(() => [AuthUserWhereUniqueInput], { nullable: true })
-  @Type(() => AuthUserWhereUniqueInput)
-  connect?: Array<AuthUserWhereUniqueInput>;
-  @Field(() => [AuthUserUpdateWithWhereUniqueWithoutRoleInput], { nullable: true })
-  @Type(() => AuthUserUpdateWithWhereUniqueWithoutRoleInput)
-  update?: Array<AuthUserUpdateWithWhereUniqueWithoutRoleInput>;
-  @Field(() => [AuthUserUpdateManyWithWhereWithoutRoleInput], { nullable: true })
-  @Type(() => AuthUserUpdateManyWithWhereWithoutRoleInput)
-  updateMany?: Array<AuthUserUpdateManyWithWhereWithoutRoleInput>;
-  @Field(() => [AuthUserScalarWhereInput], { nullable: true })
-  @Type(() => AuthUserScalarWhereInput)
-  deleteMany?: Array<AuthUserScalarWhereInput>;
+  @Field(() => Role, { nullable: true })
+  role?: keyof typeof Role;
 }
 
 @InputType()
@@ -2090,32 +1866,10 @@ export class AuthUserUncheckedUpdateManyInput {
   password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   username?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  roleRoleId?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
   @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
   isPhoneConfirmed?: InstanceType<typeof BoolFieldUpdateOperationsInput>;
-}
-
-@InputType()
-export class AuthUserUncheckedUpdateWithoutRoleInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  id?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  userId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @HideField()
-  refreshToken?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  phoneNumber?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  username?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
-  isPhoneConfirmed?: InstanceType<typeof BoolFieldUpdateOperationsInput>;
+  @Field(() => EnumRoleFieldUpdateOperationsInput, { nullable: true })
+  role?: InstanceType<typeof EnumRoleFieldUpdateOperationsInput>;
 }
 
 @InputType()
@@ -2136,10 +1890,10 @@ export class AuthUserUncheckedUpdateInput {
   password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   username?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  roleRoleId?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
   @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
   isPhoneConfirmed?: InstanceType<typeof BoolFieldUpdateOperationsInput>;
+  @Field(() => EnumRoleFieldUpdateOperationsInput, { nullable: true })
+  role?: InstanceType<typeof EnumRoleFieldUpdateOperationsInput>;
 }
 
 @InputType()
@@ -2162,85 +1916,8 @@ export class AuthUserUpdateManyMutationInput {
   username?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
   isPhoneConfirmed?: InstanceType<typeof BoolFieldUpdateOperationsInput>;
-}
-
-@InputType()
-export class AuthUserUpdateManyWithWhereWithoutRoleInput {
-  @Field(() => AuthUserScalarWhereInput, { nullable: false })
-  @Type(() => AuthUserScalarWhereInput)
-  where!: InstanceType<typeof AuthUserScalarWhereInput>;
-  @Field(() => AuthUserUpdateManyMutationInput, { nullable: false })
-  @Type(() => AuthUserUpdateManyMutationInput)
-  data!: InstanceType<typeof AuthUserUpdateManyMutationInput>;
-}
-
-@InputType()
-export class AuthUserUpdateManyWithoutRoleNestedInput {
-  @Field(() => [AuthUserCreateWithoutRoleInput], { nullable: true })
-  @Type(() => AuthUserCreateWithoutRoleInput)
-  create?: Array<AuthUserCreateWithoutRoleInput>;
-  @Field(() => [AuthUserCreateOrConnectWithoutRoleInput], { nullable: true })
-  @Type(() => AuthUserCreateOrConnectWithoutRoleInput)
-  connectOrCreate?: Array<AuthUserCreateOrConnectWithoutRoleInput>;
-  @Field(() => [AuthUserUpsertWithWhereUniqueWithoutRoleInput], { nullable: true })
-  @Type(() => AuthUserUpsertWithWhereUniqueWithoutRoleInput)
-  upsert?: Array<AuthUserUpsertWithWhereUniqueWithoutRoleInput>;
-  @Field(() => AuthUserCreateManyRoleInputEnvelope, { nullable: true })
-  @Type(() => AuthUserCreateManyRoleInputEnvelope)
-  createMany?: InstanceType<typeof AuthUserCreateManyRoleInputEnvelope>;
-  @Field(() => [AuthUserWhereUniqueInput], { nullable: true })
-  @Type(() => AuthUserWhereUniqueInput)
-  set?: Array<AuthUserWhereUniqueInput>;
-  @Field(() => [AuthUserWhereUniqueInput], { nullable: true })
-  @Type(() => AuthUserWhereUniqueInput)
-  disconnect?: Array<AuthUserWhereUniqueInput>;
-  @Field(() => [AuthUserWhereUniqueInput], { nullable: true })
-  @Type(() => AuthUserWhereUniqueInput)
-  delete?: Array<AuthUserWhereUniqueInput>;
-  @Field(() => [AuthUserWhereUniqueInput], { nullable: true })
-  @Type(() => AuthUserWhereUniqueInput)
-  connect?: Array<AuthUserWhereUniqueInput>;
-  @Field(() => [AuthUserUpdateWithWhereUniqueWithoutRoleInput], { nullable: true })
-  @Type(() => AuthUserUpdateWithWhereUniqueWithoutRoleInput)
-  update?: Array<AuthUserUpdateWithWhereUniqueWithoutRoleInput>;
-  @Field(() => [AuthUserUpdateManyWithWhereWithoutRoleInput], { nullable: true })
-  @Type(() => AuthUserUpdateManyWithWhereWithoutRoleInput)
-  updateMany?: Array<AuthUserUpdateManyWithWhereWithoutRoleInput>;
-  @Field(() => [AuthUserScalarWhereInput], { nullable: true })
-  @Type(() => AuthUserScalarWhereInput)
-  deleteMany?: Array<AuthUserScalarWhereInput>;
-}
-
-@InputType()
-export class AuthUserUpdateWithWhereUniqueWithoutRoleInput {
-  @Field(() => AuthUserWhereUniqueInput, { nullable: false })
-  @Type(() => AuthUserWhereUniqueInput)
-  where!: InstanceType<typeof AuthUserWhereUniqueInput>;
-  @Field(() => AuthUserUpdateWithoutRoleInput, { nullable: false })
-  @Type(() => AuthUserUpdateWithoutRoleInput)
-  data!: InstanceType<typeof AuthUserUpdateWithoutRoleInput>;
-}
-
-@InputType()
-export class AuthUserUpdateWithoutRoleInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  id?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  userId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @HideField()
-  refreshToken?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  phoneNumber?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  username?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
-  isPhoneConfirmed?: InstanceType<typeof BoolFieldUpdateOperationsInput>;
+  @Field(() => EnumRoleFieldUpdateOperationsInput, { nullable: true })
+  role?: InstanceType<typeof EnumRoleFieldUpdateOperationsInput>;
 }
 
 @InputType()
@@ -2261,23 +1938,10 @@ export class AuthUserUpdateInput {
   password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   username?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => RoleUpdateOneWithoutAuthUserNestedInput, { nullable: true })
-  Role?: InstanceType<typeof RoleUpdateOneWithoutAuthUserNestedInput>;
   @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
   isPhoneConfirmed?: InstanceType<typeof BoolFieldUpdateOperationsInput>;
-}
-
-@InputType()
-export class AuthUserUpsertWithWhereUniqueWithoutRoleInput {
-  @Field(() => AuthUserWhereUniqueInput, { nullable: false })
-  @Type(() => AuthUserWhereUniqueInput)
-  where!: InstanceType<typeof AuthUserWhereUniqueInput>;
-  @Field(() => AuthUserUpdateWithoutRoleInput, { nullable: false })
-  @Type(() => AuthUserUpdateWithoutRoleInput)
-  update!: InstanceType<typeof AuthUserUpdateWithoutRoleInput>;
-  @Field(() => AuthUserCreateWithoutRoleInput, { nullable: false })
-  @Type(() => AuthUserCreateWithoutRoleInput)
-  create!: InstanceType<typeof AuthUserCreateWithoutRoleInput>;
+  @Field(() => EnumRoleFieldUpdateOperationsInput, { nullable: true })
+  role?: InstanceType<typeof EnumRoleFieldUpdateOperationsInput>;
 }
 
 @InputType()
@@ -2310,12 +1974,10 @@ export class AuthUserWhereInput {
   password?: InstanceType<typeof StringFilter>;
   @Field(() => StringFilter, { nullable: true })
   username?: InstanceType<typeof StringFilter>;
-  @Field(() => RoleRelationFilter, { nullable: true })
-  Role?: InstanceType<typeof RoleRelationFilter>;
-  @Field(() => StringNullableFilter, { nullable: true })
-  roleRoleId?: InstanceType<typeof StringNullableFilter>;
   @Field(() => BoolFilter, { nullable: true })
   isPhoneConfirmed?: InstanceType<typeof BoolFilter>;
+  @Field(() => EnumRoleFilter, { nullable: true })
+  role?: InstanceType<typeof EnumRoleFilter>;
 }
 
 @ObjectType()
@@ -2336,12 +1998,10 @@ export class AuthUser {
   password!: string;
   @Field(() => String, { nullable: false })
   username!: string;
-  @Field(() => Role, { nullable: true })
-  Role?: InstanceType<typeof Role> | null;
-  @Field(() => String, { nullable: true })
-  roleRoleId!: string | null;
   @Field(() => Boolean, { nullable: false, defaultValue: false })
   isPhoneConfirmed!: boolean;
+  @Field(() => Role, { nullable: false, defaultValue: 'User' })
+  role!: keyof typeof Role;
 }
 
 @ArgsType()
@@ -4309,6 +3969,42 @@ export class DateTimeWithAggregatesFilter {
 }
 
 @InputType()
+export class EnumRoleFieldUpdateOperationsInput {
+  @Field(() => Role, { nullable: true })
+  set?: keyof typeof Role;
+}
+
+@InputType()
+export class EnumRoleFilter {
+  @Field(() => Role, { nullable: true })
+  equals?: keyof typeof Role;
+  @Field(() => [Role], { nullable: true })
+  in?: Array<keyof typeof Role>;
+  @Field(() => [Role], { nullable: true })
+  notIn?: Array<keyof typeof Role>;
+  @Field(() => NestedEnumRoleFilter, { nullable: true })
+  not?: InstanceType<typeof NestedEnumRoleFilter>;
+}
+
+@InputType()
+export class EnumRoleWithAggregatesFilter {
+  @Field(() => Role, { nullable: true })
+  equals?: keyof typeof Role;
+  @Field(() => [Role], { nullable: true })
+  in?: Array<keyof typeof Role>;
+  @Field(() => [Role], { nullable: true })
+  notIn?: Array<keyof typeof Role>;
+  @Field(() => NestedEnumRoleWithAggregatesFilter, { nullable: true })
+  not?: InstanceType<typeof NestedEnumRoleWithAggregatesFilter>;
+  @Field(() => NestedIntFilter, { nullable: true })
+  _count?: InstanceType<typeof NestedIntFilter>;
+  @Field(() => NestedEnumRoleFilter, { nullable: true })
+  _min?: InstanceType<typeof NestedEnumRoleFilter>;
+  @Field(() => NestedEnumRoleFilter, { nullable: true })
+  _max?: InstanceType<typeof NestedEnumRoleFilter>;
+}
+
+@InputType()
 export class NestedBoolFilter {
   @Field(() => Boolean, { nullable: true })
   equals?: boolean;
@@ -4420,6 +4116,36 @@ export class NestedDateTimeWithAggregatesFilter {
   _min?: InstanceType<typeof NestedDateTimeFilter>;
   @Field(() => NestedDateTimeFilter, { nullable: true })
   _max?: InstanceType<typeof NestedDateTimeFilter>;
+}
+
+@InputType()
+export class NestedEnumRoleFilter {
+  @Field(() => Role, { nullable: true })
+  equals?: keyof typeof Role;
+  @Field(() => [Role], { nullable: true })
+  in?: Array<keyof typeof Role>;
+  @Field(() => [Role], { nullable: true })
+  notIn?: Array<keyof typeof Role>;
+  @Field(() => NestedEnumRoleFilter, { nullable: true })
+  not?: InstanceType<typeof NestedEnumRoleFilter>;
+}
+
+@InputType()
+export class NestedEnumRoleWithAggregatesFilter {
+  @Field(() => Role, { nullable: true })
+  equals?: keyof typeof Role;
+  @Field(() => [Role], { nullable: true })
+  in?: Array<keyof typeof Role>;
+  @Field(() => [Role], { nullable: true })
+  notIn?: Array<keyof typeof Role>;
+  @Field(() => NestedEnumRoleWithAggregatesFilter, { nullable: true })
+  not?: InstanceType<typeof NestedEnumRoleWithAggregatesFilter>;
+  @Field(() => NestedIntFilter, { nullable: true })
+  _count?: InstanceType<typeof NestedIntFilter>;
+  @Field(() => NestedEnumRoleFilter, { nullable: true })
+  _min?: InstanceType<typeof NestedEnumRoleFilter>;
+  @Field(() => NestedEnumRoleFilter, { nullable: true })
+  _max?: InstanceType<typeof NestedEnumRoleFilter>;
 }
 
 @InputType()
@@ -5965,7 +5691,7 @@ export class RestauUsersCountAggregateInput {
   @Field(() => Boolean, { nullable: true })
   updatedAt?: true;
   @Field(() => Boolean, { nullable: true })
-  roleId?: true;
+  role?: true;
   @Field(() => Boolean, { nullable: true })
   _all?: true;
 }
@@ -5989,7 +5715,7 @@ export class RestauUsersCountAggregate {
   @Field(() => Int, { nullable: false })
   updatedAt!: number;
   @Field(() => Int, { nullable: false })
-  roleId!: number;
+  role!: number;
   @Field(() => Int, { nullable: false })
   _all!: number;
 }
@@ -6013,7 +5739,7 @@ export class RestauUsersCountOrderByAggregateInput {
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
-  roleId?: keyof typeof SortOrder;
+  role?: keyof typeof SortOrder;
 }
 
 @InputType()
@@ -6041,37 +5767,8 @@ export class RestauUsersCreateManyRestaurantInput {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
-  @Field(() => String, { nullable: false })
-  roleId!: string;
-}
-
-@InputType()
-export class RestauUsersCreateManyRoleInputEnvelope {
-  @Field(() => [RestauUsersCreateManyRoleInput], { nullable: false })
-  @Type(() => RestauUsersCreateManyRoleInput)
-  data!: Array<RestauUsersCreateManyRoleInput>;
-  @Field(() => Boolean, { nullable: true })
-  skipDuplicates?: boolean;
-}
-
-@InputType()
-export class RestauUsersCreateManyRoleInput {
-  @Field(() => String, { nullable: true })
-  idRestauUser?: string;
-  @Field(() => String, { nullable: false })
-  userName!: string;
-  @Field(() => String, { nullable: false })
-  password!: string;
-  @HideField()
-  refreshToken?: string;
-  @Field(() => String, { nullable: false })
-  userFullName!: string;
-  @Field(() => String, { nullable: false })
-  restauId!: string;
-  @Field(() => Date, { nullable: true })
-  createdAt?: Date | string;
-  @Field(() => Date, { nullable: true })
-  updatedAt?: Date | string;
+  @Field(() => Role, { nullable: true })
+  role?: keyof typeof Role;
 }
 
 @InputType()
@@ -6092,8 +5789,8 @@ export class RestauUsersCreateManyInput {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
-  @Field(() => String, { nullable: false })
-  roleId!: string;
+  @Field(() => Role, { nullable: true })
+  role?: keyof typeof Role;
 }
 
 @InputType()
@@ -6113,22 +5810,6 @@ export class RestauUsersCreateNestedManyWithoutRestaurantInput {
 }
 
 @InputType()
-export class RestauUsersCreateNestedManyWithoutRoleInput {
-  @Field(() => [RestauUsersCreateWithoutRoleInput], { nullable: true })
-  @Type(() => RestauUsersCreateWithoutRoleInput)
-  create?: Array<RestauUsersCreateWithoutRoleInput>;
-  @Field(() => [RestauUsersCreateOrConnectWithoutRoleInput], { nullable: true })
-  @Type(() => RestauUsersCreateOrConnectWithoutRoleInput)
-  connectOrCreate?: Array<RestauUsersCreateOrConnectWithoutRoleInput>;
-  @Field(() => RestauUsersCreateManyRoleInputEnvelope, { nullable: true })
-  @Type(() => RestauUsersCreateManyRoleInputEnvelope)
-  createMany?: InstanceType<typeof RestauUsersCreateManyRoleInputEnvelope>;
-  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
-  @Type(() => RestauUsersWhereUniqueInput)
-  connect?: Array<RestauUsersWhereUniqueInput>;
-}
-
-@InputType()
 export class RestauUsersCreateOrConnectWithoutRestaurantInput {
   @Field(() => RestauUsersWhereUniqueInput, { nullable: false })
   @Type(() => RestauUsersWhereUniqueInput)
@@ -6136,16 +5817,6 @@ export class RestauUsersCreateOrConnectWithoutRestaurantInput {
   @Field(() => RestauUsersCreateWithoutRestaurantInput, { nullable: false })
   @Type(() => RestauUsersCreateWithoutRestaurantInput)
   create!: InstanceType<typeof RestauUsersCreateWithoutRestaurantInput>;
-}
-
-@InputType()
-export class RestauUsersCreateOrConnectWithoutRoleInput {
-  @Field(() => RestauUsersWhereUniqueInput, { nullable: false })
-  @Type(() => RestauUsersWhereUniqueInput)
-  where!: InstanceType<typeof RestauUsersWhereUniqueInput>;
-  @Field(() => RestauUsersCreateWithoutRoleInput, { nullable: false })
-  @Type(() => RestauUsersCreateWithoutRoleInput)
-  create!: InstanceType<typeof RestauUsersCreateWithoutRoleInput>;
 }
 
 @InputType()
@@ -6164,28 +5835,8 @@ export class RestauUsersCreateWithoutRestaurantInput {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
-  @Field(() => RoleCreateNestedOneWithoutRestauUserInput, { nullable: false })
-  role!: InstanceType<typeof RoleCreateNestedOneWithoutRestauUserInput>;
-}
-
-@InputType()
-export class RestauUsersCreateWithoutRoleInput {
-  @Field(() => String, { nullable: true })
-  idRestauUser?: string;
-  @Field(() => String, { nullable: false })
-  userName!: string;
-  @Field(() => String, { nullable: false })
-  password!: string;
-  @HideField()
-  refreshToken?: string;
-  @Field(() => String, { nullable: false })
-  userFullName!: string;
-  @Field(() => Date, { nullable: true })
-  createdAt?: Date | string;
-  @Field(() => Date, { nullable: true })
-  updatedAt?: Date | string;
-  @Field(() => RestaurantsCreateNestedOneWithoutUsersInput, { nullable: false })
-  restaurant!: InstanceType<typeof RestaurantsCreateNestedOneWithoutUsersInput>;
+  @Field(() => Role, { nullable: true })
+  role?: keyof typeof Role;
 }
 
 @InputType()
@@ -6206,8 +5857,8 @@ export class RestauUsersCreateInput {
   updatedAt?: Date | string;
   @Field(() => RestaurantsCreateNestedOneWithoutUsersInput, { nullable: false })
   restaurant!: InstanceType<typeof RestaurantsCreateNestedOneWithoutUsersInput>;
-  @Field(() => RoleCreateNestedOneWithoutRestauUserInput, { nullable: false })
-  role!: InstanceType<typeof RoleCreateNestedOneWithoutRestauUserInput>;
+  @Field(() => Role, { nullable: true })
+  role?: keyof typeof Role;
 }
 
 @ArgsType()
@@ -6251,8 +5902,8 @@ export class RestauUsersGroupBy {
   createdAt!: Date | string;
   @Field(() => Date, { nullable: false })
   updatedAt!: Date | string;
-  @Field(() => String, { nullable: false })
-  roleId!: string;
+  @Field(() => Role, { nullable: false })
+  role!: keyof typeof Role;
   @Field(() => RestauUsersCountAggregate, { nullable: true })
   _count?: InstanceType<typeof RestauUsersCountAggregate>;
   @Field(() => RestauUsersMinAggregate, { nullable: true })
@@ -6290,7 +5941,7 @@ export class RestauUsersMaxAggregateInput {
   @Field(() => Boolean, { nullable: true })
   updatedAt?: true;
   @Field(() => Boolean, { nullable: true })
-  roleId?: true;
+  role?: true;
 }
 
 @ObjectType()
@@ -6311,8 +5962,8 @@ export class RestauUsersMaxAggregate {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
-  @Field(() => String, { nullable: true })
-  roleId?: string;
+  @Field(() => Role, { nullable: true })
+  role?: keyof typeof Role;
 }
 
 @InputType()
@@ -6334,7 +5985,7 @@ export class RestauUsersMaxOrderByAggregateInput {
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
-  roleId?: keyof typeof SortOrder;
+  role?: keyof typeof SortOrder;
 }
 
 @InputType()
@@ -6356,7 +6007,7 @@ export class RestauUsersMinAggregateInput {
   @Field(() => Boolean, { nullable: true })
   updatedAt?: true;
   @Field(() => Boolean, { nullable: true })
-  roleId?: true;
+  role?: true;
 }
 
 @ObjectType()
@@ -6377,8 +6028,8 @@ export class RestauUsersMinAggregate {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
-  @Field(() => String, { nullable: true })
-  roleId?: string;
+  @Field(() => Role, { nullable: true })
+  role?: keyof typeof Role;
 }
 
 @InputType()
@@ -6400,7 +6051,7 @@ export class RestauUsersMinOrderByAggregateInput {
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
-  roleId?: keyof typeof SortOrder;
+  role?: keyof typeof SortOrder;
 }
 
 @InputType()
@@ -6428,7 +6079,7 @@ export class RestauUsersOrderByWithAggregationInput {
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
   @Field(() => SortOrder, { nullable: true })
-  roleId?: keyof typeof SortOrder;
+  role?: keyof typeof SortOrder;
   @Field(() => RestauUsersCountOrderByAggregateInput, { nullable: true })
   _count?: InstanceType<typeof RestauUsersCountOrderByAggregateInput>;
   @Field(() => RestauUsersMaxOrderByAggregateInput, { nullable: true })
@@ -6458,9 +6109,7 @@ export class RestauUsersOrderByWithRelationInput {
   @Field(() => RestaurantsOrderByWithRelationInput, { nullable: true })
   restaurant?: InstanceType<typeof RestaurantsOrderByWithRelationInput>;
   @Field(() => SortOrder, { nullable: true })
-  roleId?: keyof typeof SortOrder;
-  @Field(() => RoleOrderByWithRelationInput, { nullable: true })
-  role?: InstanceType<typeof RoleOrderByWithRelationInput>;
+  role?: keyof typeof SortOrder;
 }
 
 @InputType()
@@ -6487,8 +6136,8 @@ export class RestauUsersScalarWhereWithAggregatesInput {
   createdAt?: InstanceType<typeof DateTimeWithAggregatesFilter>;
   @Field(() => DateTimeWithAggregatesFilter, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeWithAggregatesFilter>;
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  roleId?: InstanceType<typeof StringWithAggregatesFilter>;
+  @Field(() => EnumRoleWithAggregatesFilter, { nullable: true })
+  role?: InstanceType<typeof EnumRoleWithAggregatesFilter>;
 }
 
 @InputType()
@@ -6515,8 +6164,8 @@ export class RestauUsersScalarWhereInput {
   createdAt?: InstanceType<typeof DateTimeFilter>;
   @Field(() => DateTimeFilter, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFilter>;
-  @Field(() => StringFilter, { nullable: true })
-  roleId?: InstanceType<typeof StringFilter>;
+  @Field(() => EnumRoleFilter, { nullable: true })
+  role?: InstanceType<typeof EnumRoleFilter>;
 }
 
 @InputType()
@@ -6530,22 +6179,6 @@ export class RestauUsersUncheckedCreateNestedManyWithoutRestaurantInput {
   @Field(() => RestauUsersCreateManyRestaurantInputEnvelope, { nullable: true })
   @Type(() => RestauUsersCreateManyRestaurantInputEnvelope)
   createMany?: InstanceType<typeof RestauUsersCreateManyRestaurantInputEnvelope>;
-  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
-  @Type(() => RestauUsersWhereUniqueInput)
-  connect?: Array<RestauUsersWhereUniqueInput>;
-}
-
-@InputType()
-export class RestauUsersUncheckedCreateNestedManyWithoutRoleInput {
-  @Field(() => [RestauUsersCreateWithoutRoleInput], { nullable: true })
-  @Type(() => RestauUsersCreateWithoutRoleInput)
-  create?: Array<RestauUsersCreateWithoutRoleInput>;
-  @Field(() => [RestauUsersCreateOrConnectWithoutRoleInput], { nullable: true })
-  @Type(() => RestauUsersCreateOrConnectWithoutRoleInput)
-  connectOrCreate?: Array<RestauUsersCreateOrConnectWithoutRoleInput>;
-  @Field(() => RestauUsersCreateManyRoleInputEnvelope, { nullable: true })
-  @Type(() => RestauUsersCreateManyRoleInputEnvelope)
-  createMany?: InstanceType<typeof RestauUsersCreateManyRoleInputEnvelope>;
   @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
   @Type(() => RestauUsersWhereUniqueInput)
   connect?: Array<RestauUsersWhereUniqueInput>;
@@ -6567,28 +6200,8 @@ export class RestauUsersUncheckedCreateWithoutRestaurantInput {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
-  @Field(() => String, { nullable: false })
-  roleId!: string;
-}
-
-@InputType()
-export class RestauUsersUncheckedCreateWithoutRoleInput {
-  @Field(() => String, { nullable: true })
-  idRestauUser?: string;
-  @Field(() => String, { nullable: false })
-  userName!: string;
-  @Field(() => String, { nullable: false })
-  password!: string;
-  @HideField()
-  refreshToken?: string;
-  @Field(() => String, { nullable: false })
-  userFullName!: string;
-  @Field(() => String, { nullable: false })
-  restauId!: string;
-  @Field(() => Date, { nullable: true })
-  createdAt?: Date | string;
-  @Field(() => Date, { nullable: true })
-  updatedAt?: Date | string;
+  @Field(() => Role, { nullable: true })
+  role?: keyof typeof Role;
 }
 
 @InputType()
@@ -6609,28 +6222,8 @@ export class RestauUsersUncheckedCreateInput {
   createdAt?: Date | string;
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
-  @Field(() => String, { nullable: false })
-  roleId!: string;
-}
-
-@InputType()
-export class RestauUsersUncheckedUpdateManyWithoutRestauUserInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  idRestauUser?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  userName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @HideField()
-  refreshToken?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  userFullName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  restauId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => Role, { nullable: true })
+  role?: keyof typeof Role;
 }
 
 @InputType()
@@ -6671,43 +6264,6 @@ export class RestauUsersUncheckedUpdateManyWithoutRestaurantNestedInput {
 }
 
 @InputType()
-export class RestauUsersUncheckedUpdateManyWithoutRoleNestedInput {
-  @Field(() => [RestauUsersCreateWithoutRoleInput], { nullable: true })
-  @Type(() => RestauUsersCreateWithoutRoleInput)
-  create?: Array<RestauUsersCreateWithoutRoleInput>;
-  @Field(() => [RestauUsersCreateOrConnectWithoutRoleInput], { nullable: true })
-  @Type(() => RestauUsersCreateOrConnectWithoutRoleInput)
-  connectOrCreate?: Array<RestauUsersCreateOrConnectWithoutRoleInput>;
-  @Field(() => [RestauUsersUpsertWithWhereUniqueWithoutRoleInput], { nullable: true })
-  @Type(() => RestauUsersUpsertWithWhereUniqueWithoutRoleInput)
-  upsert?: Array<RestauUsersUpsertWithWhereUniqueWithoutRoleInput>;
-  @Field(() => RestauUsersCreateManyRoleInputEnvelope, { nullable: true })
-  @Type(() => RestauUsersCreateManyRoleInputEnvelope)
-  createMany?: InstanceType<typeof RestauUsersCreateManyRoleInputEnvelope>;
-  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
-  @Type(() => RestauUsersWhereUniqueInput)
-  set?: Array<RestauUsersWhereUniqueInput>;
-  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
-  @Type(() => RestauUsersWhereUniqueInput)
-  disconnect?: Array<RestauUsersWhereUniqueInput>;
-  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
-  @Type(() => RestauUsersWhereUniqueInput)
-  delete?: Array<RestauUsersWhereUniqueInput>;
-  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
-  @Type(() => RestauUsersWhereUniqueInput)
-  connect?: Array<RestauUsersWhereUniqueInput>;
-  @Field(() => [RestauUsersUpdateWithWhereUniqueWithoutRoleInput], { nullable: true })
-  @Type(() => RestauUsersUpdateWithWhereUniqueWithoutRoleInput)
-  update?: Array<RestauUsersUpdateWithWhereUniqueWithoutRoleInput>;
-  @Field(() => [RestauUsersUpdateManyWithWhereWithoutRoleInput], { nullable: true })
-  @Type(() => RestauUsersUpdateManyWithWhereWithoutRoleInput)
-  updateMany?: Array<RestauUsersUpdateManyWithWhereWithoutRoleInput>;
-  @Field(() => [RestauUsersScalarWhereInput], { nullable: true })
-  @Type(() => RestauUsersScalarWhereInput)
-  deleteMany?: Array<RestauUsersScalarWhereInput>;
-}
-
-@InputType()
 export class RestauUsersUncheckedUpdateManyWithoutUsersInput {
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   idRestauUser?: InstanceType<typeof StringFieldUpdateOperationsInput>;
@@ -6723,8 +6279,8 @@ export class RestauUsersUncheckedUpdateManyWithoutUsersInput {
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  roleId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => EnumRoleFieldUpdateOperationsInput, { nullable: true })
+  role?: InstanceType<typeof EnumRoleFieldUpdateOperationsInput>;
 }
 
 @InputType()
@@ -6745,8 +6301,8 @@ export class RestauUsersUncheckedUpdateManyInput {
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  roleId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => EnumRoleFieldUpdateOperationsInput, { nullable: true })
+  role?: InstanceType<typeof EnumRoleFieldUpdateOperationsInput>;
 }
 
 @InputType()
@@ -6765,28 +6321,8 @@ export class RestauUsersUncheckedUpdateWithoutRestaurantInput {
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  roleId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-}
-
-@InputType()
-export class RestauUsersUncheckedUpdateWithoutRoleInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  idRestauUser?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  userName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @HideField()
-  refreshToken?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  userFullName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  restauId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => EnumRoleFieldUpdateOperationsInput, { nullable: true })
+  role?: InstanceType<typeof EnumRoleFieldUpdateOperationsInput>;
 }
 
 @InputType()
@@ -6807,8 +6343,8 @@ export class RestauUsersUncheckedUpdateInput {
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  roleId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
+  @Field(() => EnumRoleFieldUpdateOperationsInput, { nullable: true })
+  role?: InstanceType<typeof EnumRoleFieldUpdateOperationsInput>;
 }
 
 @InputType()
@@ -6827,20 +6363,12 @@ export class RestauUsersUpdateManyMutationInput {
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
+  @Field(() => EnumRoleFieldUpdateOperationsInput, { nullable: true })
+  role?: InstanceType<typeof EnumRoleFieldUpdateOperationsInput>;
 }
 
 @InputType()
 export class RestauUsersUpdateManyWithWhereWithoutRestaurantInput {
-  @Field(() => RestauUsersScalarWhereInput, { nullable: false })
-  @Type(() => RestauUsersScalarWhereInput)
-  where!: InstanceType<typeof RestauUsersScalarWhereInput>;
-  @Field(() => RestauUsersUpdateManyMutationInput, { nullable: false })
-  @Type(() => RestauUsersUpdateManyMutationInput)
-  data!: InstanceType<typeof RestauUsersUpdateManyMutationInput>;
-}
-
-@InputType()
-export class RestauUsersUpdateManyWithWhereWithoutRoleInput {
   @Field(() => RestauUsersScalarWhereInput, { nullable: false })
   @Type(() => RestauUsersScalarWhereInput)
   where!: InstanceType<typeof RestauUsersScalarWhereInput>;
@@ -6887,43 +6415,6 @@ export class RestauUsersUpdateManyWithoutRestaurantNestedInput {
 }
 
 @InputType()
-export class RestauUsersUpdateManyWithoutRoleNestedInput {
-  @Field(() => [RestauUsersCreateWithoutRoleInput], { nullable: true })
-  @Type(() => RestauUsersCreateWithoutRoleInput)
-  create?: Array<RestauUsersCreateWithoutRoleInput>;
-  @Field(() => [RestauUsersCreateOrConnectWithoutRoleInput], { nullable: true })
-  @Type(() => RestauUsersCreateOrConnectWithoutRoleInput)
-  connectOrCreate?: Array<RestauUsersCreateOrConnectWithoutRoleInput>;
-  @Field(() => [RestauUsersUpsertWithWhereUniqueWithoutRoleInput], { nullable: true })
-  @Type(() => RestauUsersUpsertWithWhereUniqueWithoutRoleInput)
-  upsert?: Array<RestauUsersUpsertWithWhereUniqueWithoutRoleInput>;
-  @Field(() => RestauUsersCreateManyRoleInputEnvelope, { nullable: true })
-  @Type(() => RestauUsersCreateManyRoleInputEnvelope)
-  createMany?: InstanceType<typeof RestauUsersCreateManyRoleInputEnvelope>;
-  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
-  @Type(() => RestauUsersWhereUniqueInput)
-  set?: Array<RestauUsersWhereUniqueInput>;
-  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
-  @Type(() => RestauUsersWhereUniqueInput)
-  disconnect?: Array<RestauUsersWhereUniqueInput>;
-  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
-  @Type(() => RestauUsersWhereUniqueInput)
-  delete?: Array<RestauUsersWhereUniqueInput>;
-  @Field(() => [RestauUsersWhereUniqueInput], { nullable: true })
-  @Type(() => RestauUsersWhereUniqueInput)
-  connect?: Array<RestauUsersWhereUniqueInput>;
-  @Field(() => [RestauUsersUpdateWithWhereUniqueWithoutRoleInput], { nullable: true })
-  @Type(() => RestauUsersUpdateWithWhereUniqueWithoutRoleInput)
-  update?: Array<RestauUsersUpdateWithWhereUniqueWithoutRoleInput>;
-  @Field(() => [RestauUsersUpdateManyWithWhereWithoutRoleInput], { nullable: true })
-  @Type(() => RestauUsersUpdateManyWithWhereWithoutRoleInput)
-  updateMany?: Array<RestauUsersUpdateManyWithWhereWithoutRoleInput>;
-  @Field(() => [RestauUsersScalarWhereInput], { nullable: true })
-  @Type(() => RestauUsersScalarWhereInput)
-  deleteMany?: Array<RestauUsersScalarWhereInput>;
-}
-
-@InputType()
 export class RestauUsersUpdateWithWhereUniqueWithoutRestaurantInput {
   @Field(() => RestauUsersWhereUniqueInput, { nullable: false })
   @Type(() => RestauUsersWhereUniqueInput)
@@ -6931,16 +6422,6 @@ export class RestauUsersUpdateWithWhereUniqueWithoutRestaurantInput {
   @Field(() => RestauUsersUpdateWithoutRestaurantInput, { nullable: false })
   @Type(() => RestauUsersUpdateWithoutRestaurantInput)
   data!: InstanceType<typeof RestauUsersUpdateWithoutRestaurantInput>;
-}
-
-@InputType()
-export class RestauUsersUpdateWithWhereUniqueWithoutRoleInput {
-  @Field(() => RestauUsersWhereUniqueInput, { nullable: false })
-  @Type(() => RestauUsersWhereUniqueInput)
-  where!: InstanceType<typeof RestauUsersWhereUniqueInput>;
-  @Field(() => RestauUsersUpdateWithoutRoleInput, { nullable: false })
-  @Type(() => RestauUsersUpdateWithoutRoleInput)
-  data!: InstanceType<typeof RestauUsersUpdateWithoutRoleInput>;
 }
 
 @InputType()
@@ -6959,28 +6440,8 @@ export class RestauUsersUpdateWithoutRestaurantInput {
   createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => RoleUpdateOneRequiredWithoutRestauUserNestedInput, { nullable: true })
-  role?: InstanceType<typeof RoleUpdateOneRequiredWithoutRestauUserNestedInput>;
-}
-
-@InputType()
-export class RestauUsersUpdateWithoutRoleInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  idRestauUser?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  userName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  password?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @HideField()
-  refreshToken?: InstanceType<typeof NullableStringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  userFullName?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => RestaurantsUpdateOneRequiredWithoutUsersNestedInput, { nullable: true })
-  restaurant?: InstanceType<typeof RestaurantsUpdateOneRequiredWithoutUsersNestedInput>;
+  @Field(() => EnumRoleFieldUpdateOperationsInput, { nullable: true })
+  role?: InstanceType<typeof EnumRoleFieldUpdateOperationsInput>;
 }
 
 @InputType()
@@ -7001,8 +6462,8 @@ export class RestauUsersUpdateInput {
   updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
   @Field(() => RestaurantsUpdateOneRequiredWithoutUsersNestedInput, { nullable: true })
   restaurant?: InstanceType<typeof RestaurantsUpdateOneRequiredWithoutUsersNestedInput>;
-  @Field(() => RoleUpdateOneRequiredWithoutRestauUserNestedInput, { nullable: true })
-  role?: InstanceType<typeof RoleUpdateOneRequiredWithoutRestauUserNestedInput>;
+  @Field(() => EnumRoleFieldUpdateOperationsInput, { nullable: true })
+  role?: InstanceType<typeof EnumRoleFieldUpdateOperationsInput>;
 }
 
 @InputType()
@@ -7016,19 +6477,6 @@ export class RestauUsersUpsertWithWhereUniqueWithoutRestaurantInput {
   @Field(() => RestauUsersCreateWithoutRestaurantInput, { nullable: false })
   @Type(() => RestauUsersCreateWithoutRestaurantInput)
   create!: InstanceType<typeof RestauUsersCreateWithoutRestaurantInput>;
-}
-
-@InputType()
-export class RestauUsersUpsertWithWhereUniqueWithoutRoleInput {
-  @Field(() => RestauUsersWhereUniqueInput, { nullable: false })
-  @Type(() => RestauUsersWhereUniqueInput)
-  where!: InstanceType<typeof RestauUsersWhereUniqueInput>;
-  @Field(() => RestauUsersUpdateWithoutRoleInput, { nullable: false })
-  @Type(() => RestauUsersUpdateWithoutRoleInput)
-  update!: InstanceType<typeof RestauUsersUpdateWithoutRoleInput>;
-  @Field(() => RestauUsersCreateWithoutRoleInput, { nullable: false })
-  @Type(() => RestauUsersCreateWithoutRoleInput)
-  create!: InstanceType<typeof RestauUsersCreateWithoutRoleInput>;
 }
 
 @InputType()
@@ -7063,10 +6511,8 @@ export class RestauUsersWhereInput {
   updatedAt?: InstanceType<typeof DateTimeFilter>;
   @Field(() => RestaurantsRelationFilter, { nullable: true })
   restaurant?: InstanceType<typeof RestaurantsRelationFilter>;
-  @Field(() => StringFilter, { nullable: true })
-  roleId?: InstanceType<typeof StringFilter>;
-  @Field(() => RoleRelationFilter, { nullable: true })
-  role?: InstanceType<typeof RoleRelationFilter>;
+  @Field(() => EnumRoleFilter, { nullable: true })
+  role?: InstanceType<typeof EnumRoleFilter>;
 }
 
 @ObjectType()
@@ -7089,10 +6535,8 @@ export class RestauUsers {
   updatedAt!: Date;
   @Field(() => Restaurants, { nullable: false })
   restaurant?: InstanceType<typeof Restaurants>;
-  @Field(() => String, { nullable: false })
-  roleId!: string;
-  @Field(() => Role, { nullable: false })
-  role?: InstanceType<typeof Role>;
+  @Field(() => Role, { nullable: false, defaultValue: 'RestaurantUser' })
+  role!: keyof typeof Role;
 }
 
 @ArgsType()
@@ -8526,728 +7970,6 @@ export class UpsertOneRestaurantsArgs {
   @Field(() => RestaurantsUpdateInput, { nullable: false })
   @Type(() => RestaurantsUpdateInput)
   update!: InstanceType<typeof RestaurantsUpdateInput>;
-}
-
-@ObjectType()
-export class AggregateRole {
-  @Field(() => RoleCountAggregate, { nullable: true })
-  _count?: InstanceType<typeof RoleCountAggregate>;
-  @Field(() => RoleMinAggregate, { nullable: true })
-  _min?: InstanceType<typeof RoleMinAggregate>;
-  @Field(() => RoleMaxAggregate, { nullable: true })
-  _max?: InstanceType<typeof RoleMaxAggregate>;
-}
-
-@ArgsType()
-export class CreateManyRoleArgs {
-  @Field(() => [RoleCreateManyInput], { nullable: false })
-  @Type(() => RoleCreateManyInput)
-  data!: Array<RoleCreateManyInput>;
-  @Field(() => Boolean, { nullable: true })
-  skipDuplicates?: boolean;
-}
-
-@ArgsType()
-export class CreateOneRoleArgs {
-  @Field(() => RoleCreateInput, { nullable: false })
-  @Type(() => RoleCreateInput)
-  data!: InstanceType<typeof RoleCreateInput>;
-}
-
-@ArgsType()
-export class DeleteManyRoleArgs {
-  @Field(() => RoleWhereInput, { nullable: true })
-  @Type(() => RoleWhereInput)
-  where?: InstanceType<typeof RoleWhereInput>;
-}
-
-@ArgsType()
-export class DeleteOneRoleArgs {
-  @Field(() => RoleWhereUniqueInput, { nullable: false })
-  @Type(() => RoleWhereUniqueInput)
-  where!: InstanceType<typeof RoleWhereUniqueInput>;
-}
-
-@ArgsType()
-export class FindFirstRoleArgs {
-  @Field(() => RoleWhereInput, { nullable: true })
-  @Type(() => RoleWhereInput)
-  where?: InstanceType<typeof RoleWhereInput>;
-  @Field(() => [RoleOrderByWithRelationInput], { nullable: true })
-  orderBy?: Array<RoleOrderByWithRelationInput>;
-  @Field(() => RoleWhereUniqueInput, { nullable: true })
-  cursor?: InstanceType<typeof RoleWhereUniqueInput>;
-  @Field(() => Int, { nullable: true })
-  take?: number;
-  @Field(() => Int, { nullable: true })
-  skip?: number;
-  @Field(() => [RoleScalarFieldEnum], { nullable: true })
-  distinct?: Array<keyof typeof RoleScalarFieldEnum>;
-}
-
-@ArgsType()
-export class FindManyRoleArgs {
-  @Field(() => RoleWhereInput, { nullable: true })
-  @Type(() => RoleWhereInput)
-  where?: InstanceType<typeof RoleWhereInput>;
-  @Field(() => [RoleOrderByWithRelationInput], { nullable: true })
-  orderBy?: Array<RoleOrderByWithRelationInput>;
-  @Field(() => RoleWhereUniqueInput, { nullable: true })
-  cursor?: InstanceType<typeof RoleWhereUniqueInput>;
-  @Field(() => Int, { nullable: true })
-  take?: number;
-  @Field(() => Int, { nullable: true })
-  skip?: number;
-  @Field(() => [RoleScalarFieldEnum], { nullable: true })
-  distinct?: Array<keyof typeof RoleScalarFieldEnum>;
-}
-
-@ArgsType()
-export class FindUniqueRoleArgs {
-  @Field(() => RoleWhereUniqueInput, { nullable: false })
-  @Type(() => RoleWhereUniqueInput)
-  where!: InstanceType<typeof RoleWhereUniqueInput>;
-}
-
-@ArgsType()
-export class RoleAggregateArgs {
-  @Field(() => RoleWhereInput, { nullable: true })
-  @Type(() => RoleWhereInput)
-  where?: InstanceType<typeof RoleWhereInput>;
-  @Field(() => [RoleOrderByWithRelationInput], { nullable: true })
-  orderBy?: Array<RoleOrderByWithRelationInput>;
-  @Field(() => RoleWhereUniqueInput, { nullable: true })
-  cursor?: InstanceType<typeof RoleWhereUniqueInput>;
-  @Field(() => Int, { nullable: true })
-  take?: number;
-  @Field(() => Int, { nullable: true })
-  skip?: number;
-  @Field(() => RoleCountAggregateInput, { nullable: true })
-  _count?: InstanceType<typeof RoleCountAggregateInput>;
-  @Field(() => RoleMinAggregateInput, { nullable: true })
-  _min?: InstanceType<typeof RoleMinAggregateInput>;
-  @Field(() => RoleMaxAggregateInput, { nullable: true })
-  _max?: InstanceType<typeof RoleMaxAggregateInput>;
-}
-
-@InputType()
-export class RoleCountAggregateInput {
-  @Field(() => Boolean, { nullable: true })
-  roleId?: true;
-  @Field(() => Boolean, { nullable: true })
-  userRole?: true;
-  @Field(() => Boolean, { nullable: true })
-  createdAt?: true;
-  @Field(() => Boolean, { nullable: true })
-  updatedAt?: true;
-  @Field(() => Boolean, { nullable: true })
-  _all?: true;
-}
-
-@ObjectType()
-export class RoleCountAggregate {
-  @Field(() => Int, { nullable: false })
-  roleId!: number;
-  @Field(() => Int, { nullable: false })
-  userRole!: number;
-  @Field(() => Int, { nullable: false })
-  createdAt!: number;
-  @Field(() => Int, { nullable: false })
-  updatedAt!: number;
-  @Field(() => Int, { nullable: false })
-  _all!: number;
-}
-
-@InputType()
-export class RoleCountOrderByAggregateInput {
-  @Field(() => SortOrder, { nullable: true })
-  roleId?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  userRole?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  createdAt?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  updatedAt?: keyof typeof SortOrder;
-}
-
-@ObjectType()
-export class RoleCount {
-  @Field(() => Int, { nullable: false })
-  AuthUser?: number;
-  @Field(() => Int, { nullable: false })
-  RestauUser?: number;
-}
-
-@InputType()
-export class RoleCreateManyInput {
-  @Field(() => String, { nullable: true })
-  roleId?: string;
-  @Field(() => String, { nullable: false })
-  userRole!: string;
-  @Field(() => Date, { nullable: true })
-  createdAt?: Date | string;
-  @Field(() => Date, { nullable: true })
-  updatedAt?: Date | string;
-}
-
-@InputType()
-export class RoleCreateNestedOneWithoutAuthUserInput {
-  @Field(() => RoleCreateWithoutAuthUserInput, { nullable: true })
-  @Type(() => RoleCreateWithoutAuthUserInput)
-  create?: InstanceType<typeof RoleCreateWithoutAuthUserInput>;
-  @Field(() => RoleCreateOrConnectWithoutAuthUserInput, { nullable: true })
-  @Type(() => RoleCreateOrConnectWithoutAuthUserInput)
-  connectOrCreate?: InstanceType<typeof RoleCreateOrConnectWithoutAuthUserInput>;
-  @Field(() => RoleWhereUniqueInput, { nullable: true })
-  @Type(() => RoleWhereUniqueInput)
-  connect?: InstanceType<typeof RoleWhereUniqueInput>;
-}
-
-@InputType()
-export class RoleCreateNestedOneWithoutRestauUserInput {
-  @Field(() => RoleCreateWithoutRestauUserInput, { nullable: true })
-  @Type(() => RoleCreateWithoutRestauUserInput)
-  create?: InstanceType<typeof RoleCreateWithoutRestauUserInput>;
-  @Field(() => RoleCreateOrConnectWithoutRestauUserInput, { nullable: true })
-  @Type(() => RoleCreateOrConnectWithoutRestauUserInput)
-  connectOrCreate?: InstanceType<typeof RoleCreateOrConnectWithoutRestauUserInput>;
-  @Field(() => RoleWhereUniqueInput, { nullable: true })
-  @Type(() => RoleWhereUniqueInput)
-  connect?: InstanceType<typeof RoleWhereUniqueInput>;
-}
-
-@InputType()
-export class RoleCreateOrConnectWithoutAuthUserInput {
-  @Field(() => RoleWhereUniqueInput, { nullable: false })
-  @Type(() => RoleWhereUniqueInput)
-  where!: InstanceType<typeof RoleWhereUniqueInput>;
-  @Field(() => RoleCreateWithoutAuthUserInput, { nullable: false })
-  @Type(() => RoleCreateWithoutAuthUserInput)
-  create!: InstanceType<typeof RoleCreateWithoutAuthUserInput>;
-}
-
-@InputType()
-export class RoleCreateOrConnectWithoutRestauUserInput {
-  @Field(() => RoleWhereUniqueInput, { nullable: false })
-  @Type(() => RoleWhereUniqueInput)
-  where!: InstanceType<typeof RoleWhereUniqueInput>;
-  @Field(() => RoleCreateWithoutRestauUserInput, { nullable: false })
-  @Type(() => RoleCreateWithoutRestauUserInput)
-  create!: InstanceType<typeof RoleCreateWithoutRestauUserInput>;
-}
-
-@InputType()
-export class RoleCreateWithoutAuthUserInput {
-  @Field(() => String, { nullable: true })
-  roleId?: string;
-  @Field(() => String, { nullable: false })
-  userRole!: string;
-  @Field(() => RestauUsersCreateNestedManyWithoutRoleInput, { nullable: true })
-  RestauUser?: InstanceType<typeof RestauUsersCreateNestedManyWithoutRoleInput>;
-  @Field(() => Date, { nullable: true })
-  createdAt?: Date | string;
-  @Field(() => Date, { nullable: true })
-  updatedAt?: Date | string;
-}
-
-@InputType()
-export class RoleCreateWithoutRestauUserInput {
-  @Field(() => String, { nullable: true })
-  roleId?: string;
-  @Field(() => String, { nullable: false })
-  userRole!: string;
-  @Field(() => AuthUserCreateNestedManyWithoutRoleInput, { nullable: true })
-  AuthUser?: InstanceType<typeof AuthUserCreateNestedManyWithoutRoleInput>;
-  @Field(() => Date, { nullable: true })
-  createdAt?: Date | string;
-  @Field(() => Date, { nullable: true })
-  updatedAt?: Date | string;
-}
-
-@InputType()
-export class RoleCreateInput {
-  @Field(() => String, { nullable: true })
-  roleId?: string;
-  @Field(() => String, { nullable: false })
-  userRole!: string;
-  @Field(() => AuthUserCreateNestedManyWithoutRoleInput, { nullable: true })
-  AuthUser?: InstanceType<typeof AuthUserCreateNestedManyWithoutRoleInput>;
-  @Field(() => RestauUsersCreateNestedManyWithoutRoleInput, { nullable: true })
-  RestauUser?: InstanceType<typeof RestauUsersCreateNestedManyWithoutRoleInput>;
-  @Field(() => Date, { nullable: true })
-  createdAt?: Date | string;
-  @Field(() => Date, { nullable: true })
-  updatedAt?: Date | string;
-}
-
-@ArgsType()
-export class RoleGroupByArgs {
-  @Field(() => RoleWhereInput, { nullable: true })
-  @Type(() => RoleWhereInput)
-  where?: InstanceType<typeof RoleWhereInput>;
-  @Field(() => [RoleOrderByWithAggregationInput], { nullable: true })
-  orderBy?: Array<RoleOrderByWithAggregationInput>;
-  @Field(() => [RoleScalarFieldEnum], { nullable: false })
-  by!: Array<keyof typeof RoleScalarFieldEnum>;
-  @Field(() => RoleScalarWhereWithAggregatesInput, { nullable: true })
-  having?: InstanceType<typeof RoleScalarWhereWithAggregatesInput>;
-  @Field(() => Int, { nullable: true })
-  take?: number;
-  @Field(() => Int, { nullable: true })
-  skip?: number;
-  @Field(() => RoleCountAggregateInput, { nullable: true })
-  _count?: InstanceType<typeof RoleCountAggregateInput>;
-  @Field(() => RoleMinAggregateInput, { nullable: true })
-  _min?: InstanceType<typeof RoleMinAggregateInput>;
-  @Field(() => RoleMaxAggregateInput, { nullable: true })
-  _max?: InstanceType<typeof RoleMaxAggregateInput>;
-}
-
-@ObjectType()
-export class RoleGroupBy {
-  @Field(() => String, { nullable: false })
-  roleId!: string;
-  @Field(() => String, { nullable: false })
-  userRole!: string;
-  @Field(() => Date, { nullable: false })
-  createdAt!: Date | string;
-  @Field(() => Date, { nullable: false })
-  updatedAt!: Date | string;
-  @Field(() => RoleCountAggregate, { nullable: true })
-  _count?: InstanceType<typeof RoleCountAggregate>;
-  @Field(() => RoleMinAggregate, { nullable: true })
-  _min?: InstanceType<typeof RoleMinAggregate>;
-  @Field(() => RoleMaxAggregate, { nullable: true })
-  _max?: InstanceType<typeof RoleMaxAggregate>;
-}
-
-@InputType()
-export class RoleMaxAggregateInput {
-  @Field(() => Boolean, { nullable: true })
-  roleId?: true;
-  @Field(() => Boolean, { nullable: true })
-  userRole?: true;
-  @Field(() => Boolean, { nullable: true })
-  createdAt?: true;
-  @Field(() => Boolean, { nullable: true })
-  updatedAt?: true;
-}
-
-@ObjectType()
-export class RoleMaxAggregate {
-  @Field(() => String, { nullable: true })
-  roleId?: string;
-  @Field(() => String, { nullable: true })
-  userRole?: string;
-  @Field(() => Date, { nullable: true })
-  createdAt?: Date | string;
-  @Field(() => Date, { nullable: true })
-  updatedAt?: Date | string;
-}
-
-@InputType()
-export class RoleMaxOrderByAggregateInput {
-  @Field(() => SortOrder, { nullable: true })
-  roleId?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  userRole?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  createdAt?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  updatedAt?: keyof typeof SortOrder;
-}
-
-@InputType()
-export class RoleMinAggregateInput {
-  @Field(() => Boolean, { nullable: true })
-  roleId?: true;
-  @Field(() => Boolean, { nullable: true })
-  userRole?: true;
-  @Field(() => Boolean, { nullable: true })
-  createdAt?: true;
-  @Field(() => Boolean, { nullable: true })
-  updatedAt?: true;
-}
-
-@ObjectType()
-export class RoleMinAggregate {
-  @Field(() => String, { nullable: true })
-  roleId?: string;
-  @Field(() => String, { nullable: true })
-  userRole?: string;
-  @Field(() => Date, { nullable: true })
-  createdAt?: Date | string;
-  @Field(() => Date, { nullable: true })
-  updatedAt?: Date | string;
-}
-
-@InputType()
-export class RoleMinOrderByAggregateInput {
-  @Field(() => SortOrder, { nullable: true })
-  roleId?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  userRole?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  createdAt?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  updatedAt?: keyof typeof SortOrder;
-}
-
-@InputType()
-export class RoleOrderByWithAggregationInput {
-  @Field(() => SortOrder, { nullable: true })
-  roleId?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  userRole?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  createdAt?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  updatedAt?: keyof typeof SortOrder;
-  @Field(() => RoleCountOrderByAggregateInput, { nullable: true })
-  _count?: InstanceType<typeof RoleCountOrderByAggregateInput>;
-  @Field(() => RoleMaxOrderByAggregateInput, { nullable: true })
-  _max?: InstanceType<typeof RoleMaxOrderByAggregateInput>;
-  @Field(() => RoleMinOrderByAggregateInput, { nullable: true })
-  _min?: InstanceType<typeof RoleMinOrderByAggregateInput>;
-}
-
-@InputType()
-export class RoleOrderByWithRelationInput {
-  @Field(() => SortOrder, { nullable: true })
-  roleId?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  userRole?: keyof typeof SortOrder;
-  @Field(() => AuthUserOrderByRelationAggregateInput, { nullable: true })
-  AuthUser?: InstanceType<typeof AuthUserOrderByRelationAggregateInput>;
-  @Field(() => RestauUsersOrderByRelationAggregateInput, { nullable: true })
-  RestauUser?: InstanceType<typeof RestauUsersOrderByRelationAggregateInput>;
-  @Field(() => SortOrder, { nullable: true })
-  createdAt?: keyof typeof SortOrder;
-  @Field(() => SortOrder, { nullable: true })
-  updatedAt?: keyof typeof SortOrder;
-}
-
-@InputType()
-export class RoleRelationFilter {
-  @Field(() => RoleWhereInput, { nullable: true })
-  is?: InstanceType<typeof RoleWhereInput>;
-  @Field(() => RoleWhereInput, { nullable: true })
-  isNot?: InstanceType<typeof RoleWhereInput>;
-}
-
-@InputType()
-export class RoleScalarWhereWithAggregatesInput {
-  @Field(() => [RoleScalarWhereWithAggregatesInput], { nullable: true })
-  AND?: Array<RoleScalarWhereWithAggregatesInput>;
-  @Field(() => [RoleScalarWhereWithAggregatesInput], { nullable: true })
-  OR?: Array<RoleScalarWhereWithAggregatesInput>;
-  @Field(() => [RoleScalarWhereWithAggregatesInput], { nullable: true })
-  NOT?: Array<RoleScalarWhereWithAggregatesInput>;
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  roleId?: InstanceType<typeof StringWithAggregatesFilter>;
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  userRole?: InstanceType<typeof StringWithAggregatesFilter>;
-  @Field(() => DateTimeWithAggregatesFilter, { nullable: true })
-  createdAt?: InstanceType<typeof DateTimeWithAggregatesFilter>;
-  @Field(() => DateTimeWithAggregatesFilter, { nullable: true })
-  updatedAt?: InstanceType<typeof DateTimeWithAggregatesFilter>;
-}
-
-@InputType()
-export class RoleUncheckedCreateWithoutAuthUserInput {
-  @Field(() => String, { nullable: true })
-  roleId?: string;
-  @Field(() => String, { nullable: false })
-  userRole!: string;
-  @Field(() => RestauUsersUncheckedCreateNestedManyWithoutRoleInput, { nullable: true })
-  RestauUser?: InstanceType<typeof RestauUsersUncheckedCreateNestedManyWithoutRoleInput>;
-  @Field(() => Date, { nullable: true })
-  createdAt?: Date | string;
-  @Field(() => Date, { nullable: true })
-  updatedAt?: Date | string;
-}
-
-@InputType()
-export class RoleUncheckedCreateWithoutRestauUserInput {
-  @Field(() => String, { nullable: true })
-  roleId?: string;
-  @Field(() => String, { nullable: false })
-  userRole!: string;
-  @Field(() => AuthUserUncheckedCreateNestedManyWithoutRoleInput, { nullable: true })
-  AuthUser?: InstanceType<typeof AuthUserUncheckedCreateNestedManyWithoutRoleInput>;
-  @Field(() => Date, { nullable: true })
-  createdAt?: Date | string;
-  @Field(() => Date, { nullable: true })
-  updatedAt?: Date | string;
-}
-
-@InputType()
-export class RoleUncheckedCreateInput {
-  @Field(() => String, { nullable: true })
-  roleId?: string;
-  @Field(() => String, { nullable: false })
-  userRole!: string;
-  @Field(() => AuthUserUncheckedCreateNestedManyWithoutRoleInput, { nullable: true })
-  AuthUser?: InstanceType<typeof AuthUserUncheckedCreateNestedManyWithoutRoleInput>;
-  @Field(() => RestauUsersUncheckedCreateNestedManyWithoutRoleInput, { nullable: true })
-  RestauUser?: InstanceType<typeof RestauUsersUncheckedCreateNestedManyWithoutRoleInput>;
-  @Field(() => Date, { nullable: true })
-  createdAt?: Date | string;
-  @Field(() => Date, { nullable: true })
-  updatedAt?: Date | string;
-}
-
-@InputType()
-export class RoleUncheckedUpdateManyInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  roleId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  userRole?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-}
-
-@InputType()
-export class RoleUncheckedUpdateWithoutAuthUserInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  roleId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  userRole?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => RestauUsersUncheckedUpdateManyWithoutRoleNestedInput, { nullable: true })
-  RestauUser?: InstanceType<typeof RestauUsersUncheckedUpdateManyWithoutRoleNestedInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-}
-
-@InputType()
-export class RoleUncheckedUpdateWithoutRestauUserInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  roleId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  userRole?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => AuthUserUncheckedUpdateManyWithoutRoleNestedInput, { nullable: true })
-  AuthUser?: InstanceType<typeof AuthUserUncheckedUpdateManyWithoutRoleNestedInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-}
-
-@InputType()
-export class RoleUncheckedUpdateInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  roleId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  userRole?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => AuthUserUncheckedUpdateManyWithoutRoleNestedInput, { nullable: true })
-  AuthUser?: InstanceType<typeof AuthUserUncheckedUpdateManyWithoutRoleNestedInput>;
-  @Field(() => RestauUsersUncheckedUpdateManyWithoutRoleNestedInput, { nullable: true })
-  RestauUser?: InstanceType<typeof RestauUsersUncheckedUpdateManyWithoutRoleNestedInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-}
-
-@InputType()
-export class RoleUpdateManyMutationInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  roleId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  userRole?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-}
-
-@InputType()
-export class RoleUpdateOneRequiredWithoutRestauUserNestedInput {
-  @Field(() => RoleCreateWithoutRestauUserInput, { nullable: true })
-  @Type(() => RoleCreateWithoutRestauUserInput)
-  create?: InstanceType<typeof RoleCreateWithoutRestauUserInput>;
-  @Field(() => RoleCreateOrConnectWithoutRestauUserInput, { nullable: true })
-  @Type(() => RoleCreateOrConnectWithoutRestauUserInput)
-  connectOrCreate?: InstanceType<typeof RoleCreateOrConnectWithoutRestauUserInput>;
-  @Field(() => RoleUpsertWithoutRestauUserInput, { nullable: true })
-  @Type(() => RoleUpsertWithoutRestauUserInput)
-  upsert?: InstanceType<typeof RoleUpsertWithoutRestauUserInput>;
-  @Field(() => RoleWhereUniqueInput, { nullable: true })
-  @Type(() => RoleWhereUniqueInput)
-  connect?: InstanceType<typeof RoleWhereUniqueInput>;
-  @Field(() => RoleUpdateWithoutRestauUserInput, { nullable: true })
-  @Type(() => RoleUpdateWithoutRestauUserInput)
-  update?: InstanceType<typeof RoleUpdateWithoutRestauUserInput>;
-}
-
-@InputType()
-export class RoleUpdateOneWithoutAuthUserNestedInput {
-  @Field(() => RoleCreateWithoutAuthUserInput, { nullable: true })
-  @Type(() => RoleCreateWithoutAuthUserInput)
-  create?: InstanceType<typeof RoleCreateWithoutAuthUserInput>;
-  @Field(() => RoleCreateOrConnectWithoutAuthUserInput, { nullable: true })
-  @Type(() => RoleCreateOrConnectWithoutAuthUserInput)
-  connectOrCreate?: InstanceType<typeof RoleCreateOrConnectWithoutAuthUserInput>;
-  @Field(() => RoleUpsertWithoutAuthUserInput, { nullable: true })
-  @Type(() => RoleUpsertWithoutAuthUserInput)
-  upsert?: InstanceType<typeof RoleUpsertWithoutAuthUserInput>;
-  @Field(() => Boolean, { nullable: true })
-  disconnect?: boolean;
-  @Field(() => Boolean, { nullable: true })
-  delete?: boolean;
-  @Field(() => RoleWhereUniqueInput, { nullable: true })
-  @Type(() => RoleWhereUniqueInput)
-  connect?: InstanceType<typeof RoleWhereUniqueInput>;
-  @Field(() => RoleUpdateWithoutAuthUserInput, { nullable: true })
-  @Type(() => RoleUpdateWithoutAuthUserInput)
-  update?: InstanceType<typeof RoleUpdateWithoutAuthUserInput>;
-}
-
-@InputType()
-export class RoleUpdateWithoutAuthUserInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  roleId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  userRole?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => RestauUsersUpdateManyWithoutRoleNestedInput, { nullable: true })
-  RestauUser?: InstanceType<typeof RestauUsersUpdateManyWithoutRoleNestedInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-}
-
-@InputType()
-export class RoleUpdateWithoutRestauUserInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  roleId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  userRole?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => AuthUserUpdateManyWithoutRoleNestedInput, { nullable: true })
-  AuthUser?: InstanceType<typeof AuthUserUpdateManyWithoutRoleNestedInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-}
-
-@InputType()
-export class RoleUpdateInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  roleId?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  userRole?: InstanceType<typeof StringFieldUpdateOperationsInput>;
-  @Field(() => AuthUserUpdateManyWithoutRoleNestedInput, { nullable: true })
-  AuthUser?: InstanceType<typeof AuthUserUpdateManyWithoutRoleNestedInput>;
-  @Field(() => RestauUsersUpdateManyWithoutRoleNestedInput, { nullable: true })
-  RestauUser?: InstanceType<typeof RestauUsersUpdateManyWithoutRoleNestedInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  createdAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  updatedAt?: InstanceType<typeof DateTimeFieldUpdateOperationsInput>;
-}
-
-@InputType()
-export class RoleUpsertWithoutAuthUserInput {
-  @Field(() => RoleUpdateWithoutAuthUserInput, { nullable: false })
-  @Type(() => RoleUpdateWithoutAuthUserInput)
-  update!: InstanceType<typeof RoleUpdateWithoutAuthUserInput>;
-  @Field(() => RoleCreateWithoutAuthUserInput, { nullable: false })
-  @Type(() => RoleCreateWithoutAuthUserInput)
-  create!: InstanceType<typeof RoleCreateWithoutAuthUserInput>;
-}
-
-@InputType()
-export class RoleUpsertWithoutRestauUserInput {
-  @Field(() => RoleUpdateWithoutRestauUserInput, { nullable: false })
-  @Type(() => RoleUpdateWithoutRestauUserInput)
-  update!: InstanceType<typeof RoleUpdateWithoutRestauUserInput>;
-  @Field(() => RoleCreateWithoutRestauUserInput, { nullable: false })
-  @Type(() => RoleCreateWithoutRestauUserInput)
-  create!: InstanceType<typeof RoleCreateWithoutRestauUserInput>;
-}
-
-@InputType()
-export class RoleWhereUniqueInput {
-  @Field(() => String, { nullable: true })
-  roleId?: string;
-}
-
-@InputType()
-export class RoleWhereInput {
-  @Field(() => [RoleWhereInput], { nullable: true })
-  AND?: Array<RoleWhereInput>;
-  @Field(() => [RoleWhereInput], { nullable: true })
-  OR?: Array<RoleWhereInput>;
-  @Field(() => [RoleWhereInput], { nullable: true })
-  NOT?: Array<RoleWhereInput>;
-  @Field(() => StringFilter, { nullable: true })
-  roleId?: InstanceType<typeof StringFilter>;
-  @Field(() => StringFilter, { nullable: true })
-  userRole?: InstanceType<typeof StringFilter>;
-  @Field(() => AuthUserListRelationFilter, { nullable: true })
-  AuthUser?: InstanceType<typeof AuthUserListRelationFilter>;
-  @Field(() => RestauUsersListRelationFilter, { nullable: true })
-  RestauUser?: InstanceType<typeof RestauUsersListRelationFilter>;
-  @Field(() => DateTimeFilter, { nullable: true })
-  createdAt?: InstanceType<typeof DateTimeFilter>;
-  @Field(() => DateTimeFilter, { nullable: true })
-  updatedAt?: InstanceType<typeof DateTimeFilter>;
-}
-
-@ObjectType()
-export class Role {
-  @Field(() => ID, { nullable: false })
-  roleId!: string;
-  @Field(() => String, { nullable: false })
-  userRole!: string;
-  @Field(() => [AuthUser], { nullable: true })
-  AuthUser?: Array<AuthUser>;
-  @Field(() => [RestauUsers], { nullable: true })
-  RestauUser?: Array<RestauUsers>;
-  @Field(() => Date, { nullable: false })
-  createdAt!: Date;
-  @Field(() => Date, { nullable: false })
-  updatedAt!: Date;
-  @Field(() => RoleCount, { nullable: false })
-  _count?: InstanceType<typeof RoleCount>;
-}
-
-@ArgsType()
-export class UpdateManyRoleArgs {
-  @Field(() => RoleUpdateManyMutationInput, { nullable: false })
-  @Type(() => RoleUpdateManyMutationInput)
-  data!: InstanceType<typeof RoleUpdateManyMutationInput>;
-  @Field(() => RoleWhereInput, { nullable: true })
-  @Type(() => RoleWhereInput)
-  where?: InstanceType<typeof RoleWhereInput>;
-}
-
-@ArgsType()
-export class UpdateOneRoleArgs {
-  @Field(() => RoleUpdateInput, { nullable: false })
-  @Type(() => RoleUpdateInput)
-  data!: InstanceType<typeof RoleUpdateInput>;
-  @Field(() => RoleWhereUniqueInput, { nullable: false })
-  @Type(() => RoleWhereUniqueInput)
-  where!: InstanceType<typeof RoleWhereUniqueInput>;
-}
-
-@ArgsType()
-export class UpsertOneRoleArgs {
-  @Field(() => RoleWhereUniqueInput, { nullable: false })
-  @Type(() => RoleWhereUniqueInput)
-  where!: InstanceType<typeof RoleWhereUniqueInput>;
-  @Field(() => RoleCreateInput, { nullable: false })
-  @Type(() => RoleCreateInput)
-  create!: InstanceType<typeof RoleCreateInput>;
-  @Field(() => RoleUpdateInput, { nullable: false })
-  @Type(() => RoleUpdateInput)
-  update!: InstanceType<typeof RoleUpdateInput>;
 }
 
 @ObjectType()

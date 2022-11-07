@@ -1,28 +1,59 @@
-/*
-  Warnings:
+-- CreateEnum
+CREATE TYPE "Role" AS ENUM ('SuperAdmin', 'User', 'RestaurantUser', 'RestaurantAdmin');
 
-  - You are about to drop the column `profileId` on the `FileEntity` table. All the data in the column will be lost.
-  - You are about to drop the `UserAdresses` table. If the table is not empty, all the data it contains will be lost.
-  - A unique constraint covering the columns `[fileEntityId]` on the table `Profile` will be added. If there are existing duplicate values, this will fail.
+-- CreateTable
+CREATE TABLE "AuthUser" (
+    "id" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "userId" VARCHAR(60) NOT NULL,
+    "refreshToken" TEXT,
+    "phoneNumber" VARCHAR(20) NOT NULL,
+    "password" VARCHAR(100) NOT NULL,
+    "username" VARCHAR(100) NOT NULL,
+    "isPhoneConfirmed" BOOLEAN NOT NULL DEFAULT false,
+    "role" "Role" NOT NULL DEFAULT 'User',
 
-*/
--- DropForeignKey
-ALTER TABLE "FileEntity" DROP CONSTRAINT "FileEntity_profileId_fkey";
+    CONSTRAINT "AuthUser_pkey" PRIMARY KEY ("id")
+);
 
--- DropForeignKey
-ALTER TABLE "UserAdresses" DROP CONSTRAINT "UserAdresses_userId_fkey";
+-- CreateTable
+CREATE TABLE "Users" (
+    "idUser" TEXT NOT NULL,
+    "firstName" TEXT,
+    "lastName" TEXT,
+    "userName" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
--- DropIndex
-DROP INDEX "FileEntity_profileId_key";
+    CONSTRAINT "Users_pkey" PRIMARY KEY ("idUser")
+);
 
--- AlterTable
-ALTER TABLE "FileEntity" DROP COLUMN "profileId";
+-- CreateTable
+CREATE TABLE "Profile" (
+    "profileId" TEXT NOT NULL,
+    "bio" TEXT NOT NULL,
+    "dateOfBirth" TIMESTAMP(3),
+    "placeOfBirth" TIMESTAMP(3),
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "fileEntityId" TEXT,
+    "userId" TEXT,
 
--- AlterTable
-ALTER TABLE "Profile" ADD COLUMN     "fileEntityId" TEXT;
+    CONSTRAINT "Profile_pkey" PRIMARY KEY ("profileId")
+);
 
--- DropTable
-DROP TABLE "UserAdresses";
+-- CreateTable
+CREATE TABLE "FileEntity" (
+    "id" TEXT NOT NULL,
+    "fileName" TEXT NOT NULL,
+    "fileUrl" TEXT NOT NULL,
+    "key" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "FileEntity_pkey" PRIMARY KEY ("id")
+);
 
 -- CreateTable
 CREATE TABLE "Adresses" (
@@ -57,12 +88,12 @@ CREATE TABLE "RestauUsers" (
     "idRestauUser" TEXT NOT NULL,
     "userName" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "refreshToken" TEXT NOT NULL,
+    "refreshToken" TEXT,
     "userFullName" TEXT NOT NULL,
     "restauId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "roleId" TEXT NOT NULL,
+    "role" "Role" NOT NULL DEFAULT 'RestaurantUser',
 
     CONSTRAINT "RestauUsers_pkey" PRIMARY KEY ("idRestauUser")
 );
@@ -83,8 +114,14 @@ CREATE TABLE "ImagesSecondary" (
 -- CreateIndex
 CREATE UNIQUE INDEX "Profile_fileEntityId_key" ON "Profile"("fileEntityId");
 
+-- CreateIndex
+CREATE UNIQUE INDEX "Profile_userId_key" ON "Profile"("userId");
+
 -- AddForeignKey
 ALTER TABLE "Profile" ADD CONSTRAINT "Profile_fileEntityId_fkey" FOREIGN KEY ("fileEntityId") REFERENCES "FileEntity"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Profile" ADD CONSTRAINT "Profile_userId_fkey" FOREIGN KEY ("userId") REFERENCES "Users"("idUser") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Adresses" ADD CONSTRAINT "Adresses_userId_fkey" FOREIGN KEY ("userId") REFERENCES "Users"("idUser") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -97,9 +134,6 @@ ALTER TABLE "Restaurants" ADD CONSTRAINT "Restaurants_fileEntityId_fkey" FOREIGN
 
 -- AddForeignKey
 ALTER TABLE "RestauUsers" ADD CONSTRAINT "RestauUsers_restauId_fkey" FOREIGN KEY ("restauId") REFERENCES "Restaurants"("idRestaurant") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "RestauUsers" ADD CONSTRAINT "RestauUsers_roleId_fkey" FOREIGN KEY ("roleId") REFERENCES "Role"("roleId") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ImagesSecondary" ADD CONSTRAINT "ImagesSecondary_restaurantsId_fkey" FOREIGN KEY ("restaurantsId") REFERENCES "Restaurants"("idRestaurant") ON DELETE SET NULL ON UPDATE CASCADE;

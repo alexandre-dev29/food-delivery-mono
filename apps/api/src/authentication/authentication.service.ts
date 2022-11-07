@@ -3,13 +3,13 @@ import { GraphQLError } from 'graphql/error';
 import { JwtService } from '@nestjs/jwt';
 import { TwilioOperationService } from '@food-delivery-mono/twilio-operations';
 import { UtilityService } from '@food-delivery-mono/utilities';
-import { RolesService } from '../roles/roles.service';
 import * as bcrypt from 'bcrypt';
 
 import {
   AuthUser,
   CreateOneAuthUserArgs,
   DataAccessPrismaService,
+  Role,
   UpdateOneAuthUserArgs,
 } from '@food-delivery-mono/data-access';
 import { LoginResponse } from '@food-delivery-mono/shared-types';
@@ -20,8 +20,7 @@ export class AuthenticationService {
     private authPrismaService: DataAccessPrismaService,
     private jwtService: JwtService,
     private twilioService: TwilioOperationService,
-    private utilityService: UtilityService,
-    private roleService: RolesService
+    private utilityService: UtilityService
   ) {}
 
   create(createAuthInput: CreateOneAuthUserArgs): Promise<AuthUser> {
@@ -29,11 +28,7 @@ export class AuthenticationService {
   }
 
   async findAll(): Promise<AuthUser[]> {
-    return (
-      await this.authPrismaService.authUser.findMany({
-        include: { Role: true },
-      })
-    ).map((element) => ({ ...element, password: '' }));
+    return (await this.authPrismaService.authUser.findMany({})).map((element) => ({ ...element, password: '' }));
   }
 
   findOne(id: string): Promise<AuthUser> {
@@ -59,13 +54,6 @@ export class AuthenticationService {
       return new GraphQLError('This user already exist in the system');
     }
 
-    const roleRecup = await this.roleService.findOneOrCreate(
-      {
-        where: { userRole: { equals: 'User' } },
-      },
-      'User'
-    );
-
     const encryptedPassword = await bcrypt.hash(password, 10).then((value) => value);
 
     try {
@@ -76,10 +64,10 @@ export class AuthenticationService {
         const responseInsert = await this.authPrismaService.authUser.create({
           data: {
             phoneNumber: phoneNumber,
-            roleRoleId: roleRecup.roleId,
             password: encryptedPassword,
             username: username,
             userId: userCreated.idUser,
+            role: Role.User,
           },
         });
 
@@ -133,15 +121,17 @@ export class AuthenticationService {
   async loginUser(phoneNumber: string, password: string): Promise<LoginResponse | any> {
     const user = await this.authPrismaService.authUser.findFirst({
       where: { phoneNumber: phoneNumber },
-      include: { Role: true },
     });
     if (user && (await bcrypt.compare(password, user.password))) {
-      const { refresh_token, access_token } = await this.utilityService.getTokens(
-        user.id,
-        user.userId,
-        phoneNumber,
-        user.Role.userRole
-      );
+      const { refresh_token, access_token } = await this.utilityService.getTokens({
+        id: user.id,
+        restaurantId: '',
+        isSuperAdmin: user.role == Role.SuperAdmin,
+        phoneNumber: phoneNumber,
+        roles: user.role as Role,
+        userId: user.userId,
+        isRestaurant: false,
+      });
       await this.authPrismaService.authUser.update({
         data: {
           refreshToken: refresh_token,
@@ -201,16 +191,18 @@ export class AuthenticationService {
   async refreshUserRefreshToken(refreshToken: string) {
     const userByToken = await this.authPrismaService.authUser.findFirst({
       where: { refreshToken },
-      include: { Role: true },
     });
     if (!userByToken) return new GraphQLError('Impossible to refresh the token please login again');
 
-    const { refresh_token } = await this.utilityService.getTokens(
-      userByToken.id,
-      userByToken.userId,
-      userByToken.phoneNumber,
-      userByToken.Role.userRole
-    );
+    const { refresh_token } = await this.utilityService.getTokens({
+      id: userByToken.id,
+      restaurantId: '',
+      isSuperAdmin: false,
+      phoneNumber: '',
+      roles: Role.User,
+      userId: '',
+      isRestaurant: false,
+    });
     this.authPrismaService.authUser.update({
       where: { id: userByToken.id },
       data: {

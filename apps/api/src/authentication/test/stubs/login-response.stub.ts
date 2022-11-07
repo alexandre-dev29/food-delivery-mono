@@ -1,4 +1,5 @@
 import { LoginResponse } from '@food-delivery-mono/shared-types';
+import { Role } from '@food-delivery-mono/data-access';
 
 export const LoginResponseStub = (): LoginResponse => {
   return {
@@ -9,7 +10,7 @@ export const LoginResponseStub = (): LoginResponse => {
       password: '123456',
       username: 'alexandre',
       userId: '',
-      roleRoleId: 'User',
+      role: Role.User,
       createdAt: new Date(2022, 9, 30),
       refreshToken: '',
       id: '1',

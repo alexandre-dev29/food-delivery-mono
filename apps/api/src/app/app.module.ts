@@ -11,6 +11,9 @@ import { ProfilesModule } from '../profiles/profiles.module';
 import { useGraphQlJit } from '@envelop/graphql-jit';
 import { GraphQLLiveDirective, useLiveQuery } from '@envelop/live-query';
 import { GetInMemoryStore } from '@food-delivery-mono/utilities';
+import { CaslModule } from 'nest-casl';
+import { Role } from '@food-delivery-mono/data-access';
+import UserSecurity from '../../../../libs/app-security/src/lib/user.security';
 
 const redis = new Redis({});
 
@@ -30,6 +33,10 @@ const redis = new Redis({});
         useGraphQlJit(),
         useLiveQuery({ liveQueryStore: GetInMemoryStore() }),
       ],
+    }),
+    CaslModule.forRoot<Role, UserSecurity>({
+      superuserRole: Role.SuperAdmin,
+      getUserFromRequest: (request) => request.user,
     }),
     TwilioOperationsModule,
     AuthenticationModule,

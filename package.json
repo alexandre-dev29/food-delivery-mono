@@ -37,6 +37,7 @@
     "graphql-subscriptions": "2.0.0",
     "ioredis": "^5.2.3",
     "jest-mock": "^29.2.2",
+    "nest-casl": "^1.6.16",
     "nestjs-twilio": "^3.1.0",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",

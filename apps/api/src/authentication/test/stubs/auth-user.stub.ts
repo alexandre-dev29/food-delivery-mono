@@ -1,4 +1,4 @@
-import { AuthUser } from '@food-delivery-mono/data-access';
+import { AuthUser, Role } from '@food-delivery-mono/data-access';
 
 export const authUserStub = (): AuthUser => {
   return {
@@ -6,7 +6,7 @@ export const authUserStub = (): AuthUser => {
     password: '123456',
     username: 'alexandre',
     userId: '',
-    roleRoleId: 'User',
+    role: Role.User,
     createdAt: new Date(2022, 9, 30),
     refreshToken: '',
     id: '1',

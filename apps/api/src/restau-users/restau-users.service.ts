@@ -64,7 +64,7 @@ export class RestauUsersService {
         userId: user.idRestauUser,
         restaurantId: user.restauId,
         userName: user.userName,
-        roles: user.role as Role,
+        roles: [user.role] as Array<Role>,
         isRestaurant: true,
         isSuperAdmin: false,
       });

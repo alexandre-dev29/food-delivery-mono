@@ -128,7 +128,7 @@ export class AuthenticationService {
         restaurantId: '',
         isSuperAdmin: user.role == Role.SuperAdmin,
         phoneNumber: phoneNumber,
-        roles: user.role as Role,
+        roles: [user.role] as Array<Role>,
         userId: user.userId,
         isRestaurant: false,
       });
@@ -199,7 +199,7 @@ export class AuthenticationService {
       restaurantId: '',
       isSuperAdmin: false,
       phoneNumber: '',
-      roles: Role.User,
+      roles: [Role.User],
       userId: '',
       isRestaurant: false,
     });

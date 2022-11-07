@@ -7,9 +7,11 @@ import { ConfigService } from '@nestjs/config';
 import { LoginResponse } from '@food-delivery-mono/shared-types';
 import { JwtService } from '@nestjs/jwt';
 import { DataAccessPrismaService } from '@food-delivery-mono/data-access';
-import { JwtStrategy } from '@food-delivery-mono/app-security';
+import { authUserPermissions, JwtStrategy } from '@food-delivery-mono/app-security';
+import { CaslModule } from 'nest-casl';
 
 @Module({
+  imports: [CaslModule.forFeature({ permissions: authUserPermissions })],
   providers: [
     AuthenticationResolver,
     AuthenticationService,

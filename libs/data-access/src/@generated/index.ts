@@ -1,4 +1,4 @@
-import { Field, registerEnumType, ArgsType, Int, InputType, ObjectType, ID, HideField } from '@nestjs/graphql';
+import { Field, registerEnumType, Int, InputType, ObjectType, ID, HideField } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
 
 export enum UsersScalarFieldEnum {
@@ -124,7 +124,7 @@ registerEnumType(RestauUsersScalarFieldEnum, { name: 'RestauUsersScalarFieldEnum
 registerEnumType(RestaurantsScalarFieldEnum, { name: 'RestaurantsScalarFieldEnum', description: undefined });
 registerEnumType(UsersScalarFieldEnum, { name: 'UsersScalarFieldEnum', description: undefined });
 
-@ArgsType()
+@InputType()
 export class AdressesAggregateArgs {
   @Field(() => AdressesWhereInput, { nullable: true })
   @Type(() => AdressesWhereInput)
@@ -409,7 +409,7 @@ export class AdressesCreateInput {
   restaurant?: InstanceType<typeof RestaurantsCreateNestedOneWithoutAdressesInput>;
 }
 
-@ArgsType()
+@InputType()
 export class AdressesGroupByArgs {
   @Field(() => AdressesWhereInput, { nullable: true })
   @Type(() => AdressesWhereInput)
@@ -1284,7 +1284,7 @@ export class AggregateAdresses {
   _max?: InstanceType<typeof AdressesMaxAggregate>;
 }
 
-@ArgsType()
+@InputType()
 export class CreateManyAdressesArgs {
   @Field(() => [AdressesCreateManyInput], { nullable: false })
   @Type(() => AdressesCreateManyInput)
@@ -1293,28 +1293,28 @@ export class CreateManyAdressesArgs {
   skipDuplicates?: boolean;
 }
 
-@ArgsType()
+@InputType()
 export class CreateOneAdressesArgs {
   @Field(() => AdressesCreateInput, { nullable: false })
   @Type(() => AdressesCreateInput)
   data!: InstanceType<typeof AdressesCreateInput>;
 }
 
-@ArgsType()
+@InputType()
 export class DeleteManyAdressesArgs {
   @Field(() => AdressesWhereInput, { nullable: true })
   @Type(() => AdressesWhereInput)
   where?: InstanceType<typeof AdressesWhereInput>;
 }
 
-@ArgsType()
+@InputType()
 export class DeleteOneAdressesArgs {
   @Field(() => AdressesWhereUniqueInput, { nullable: false })
   @Type(() => AdressesWhereUniqueInput)
   where!: InstanceType<typeof AdressesWhereUniqueInput>;
 }
 
-@ArgsType()
+@InputType()
 export class FindFirstAdressesArgs {
   @Field(() => AdressesWhereInput, { nullable: true })
   @Type(() => AdressesWhereInput)
@@ -1331,7 +1331,7 @@ export class FindFirstAdressesArgs {
   distinct?: Array<keyof typeof AdressesScalarFieldEnum>;
 }
 
-@ArgsType()
+@InputType()
 export class FindManyAdressesArgs {
   @Field(() => AdressesWhereInput, { nullable: true })
   @Type(() => AdressesWhereInput)
@@ -1348,14 +1348,14 @@ export class FindManyAdressesArgs {
   distinct?: Array<keyof typeof AdressesScalarFieldEnum>;
 }
 
-@ArgsType()
+@InputType()
 export class FindUniqueAdressesArgs {
   @Field(() => AdressesWhereUniqueInput, { nullable: false })
   @Type(() => AdressesWhereUniqueInput)
   where!: InstanceType<typeof AdressesWhereUniqueInput>;
 }
 
-@ArgsType()
+@InputType()
 export class UpdateManyAdressesArgs {
   @Field(() => AdressesUpdateManyMutationInput, { nullable: false })
   @Type(() => AdressesUpdateManyMutationInput)
@@ -1365,7 +1365,7 @@ export class UpdateManyAdressesArgs {
   where?: InstanceType<typeof AdressesWhereInput>;
 }
 
-@ArgsType()
+@InputType()
 export class UpdateOneAdressesArgs {
   @Field(() => AdressesUpdateInput, { nullable: false })
   @Type(() => AdressesUpdateInput)
@@ -1375,7 +1375,7 @@ export class UpdateOneAdressesArgs {
   where!: InstanceType<typeof AdressesWhereUniqueInput>;
 }
 
-@ArgsType()
+@InputType()
 export class UpsertOneAdressesArgs {
   @Field(() => AdressesWhereUniqueInput, { nullable: false })
   @Type(() => AdressesWhereUniqueInput)
@@ -1398,7 +1398,7 @@ export class AggregateAuthUser {
   _max?: InstanceType<typeof AuthUserMaxAggregate>;
 }
 
-@ArgsType()
+@InputType()
 export class AuthUserAggregateArgs {
   @Field(() => AuthUserWhereInput, { nullable: true })
   @Type(() => AuthUserWhereInput)
@@ -1543,7 +1543,7 @@ export class AuthUserCreateInput {
   role?: keyof typeof Role;
 }
 
-@ArgsType()
+@InputType()
 export class AuthUserGroupByArgs {
   @Field(() => AuthUserWhereInput, { nullable: true })
   @Type(() => AuthUserWhereInput)
@@ -2004,7 +2004,7 @@ export class AuthUser {
   role!: keyof typeof Role;
 }
 
-@ArgsType()
+@InputType()
 export class CreateManyAuthUserArgs {
   @Field(() => [AuthUserCreateManyInput], { nullable: false })
   @Type(() => AuthUserCreateManyInput)
@@ -2013,28 +2013,28 @@ export class CreateManyAuthUserArgs {
   skipDuplicates?: boolean;
 }
 
-@ArgsType()
+@InputType()
 export class CreateOneAuthUserArgs {
   @Field(() => AuthUserCreateInput, { nullable: false })
   @Type(() => AuthUserCreateInput)
   data!: InstanceType<typeof AuthUserCreateInput>;
 }
 
-@ArgsType()
+@InputType()
 export class DeleteManyAuthUserArgs {
   @Field(() => AuthUserWhereInput, { nullable: true })
   @Type(() => AuthUserWhereInput)
   where?: InstanceType<typeof AuthUserWhereInput>;
 }
 
-@ArgsType()
+@InputType()
 export class DeleteOneAuthUserArgs {
   @Field(() => AuthUserWhereUniqueInput, { nullable: false })
   @Type(() => AuthUserWhereUniqueInput)
   where!: InstanceType<typeof AuthUserWhereUniqueInput>;
 }
 
-@ArgsType()
+@InputType()
 export class FindFirstAuthUserArgs {
   @Field(() => AuthUserWhereInput, { nullable: true })
   @Type(() => AuthUserWhereInput)
@@ -2051,7 +2051,7 @@ export class FindFirstAuthUserArgs {
   distinct?: Array<keyof typeof AuthUserScalarFieldEnum>;
 }
 
-@ArgsType()
+@InputType()
 export class FindManyAuthUserArgs {
   @Field(() => AuthUserWhereInput, { nullable: true })
   @Type(() => AuthUserWhereInput)
@@ -2068,14 +2068,14 @@ export class FindManyAuthUserArgs {
   distinct?: Array<keyof typeof AuthUserScalarFieldEnum>;
 }
 
-@ArgsType()
+@InputType()
 export class FindUniqueAuthUserArgs {
   @Field(() => AuthUserWhereUniqueInput, { nullable: false })
   @Type(() => AuthUserWhereUniqueInput)
   where!: InstanceType<typeof AuthUserWhereUniqueInput>;
 }
 
-@ArgsType()
+@InputType()
 export class UpdateManyAuthUserArgs {
   @Field(() => AuthUserUpdateManyMutationInput, { nullable: false })
   @Type(() => AuthUserUpdateManyMutationInput)
@@ -2085,7 +2085,7 @@ export class UpdateManyAuthUserArgs {
   where?: InstanceType<typeof AuthUserWhereInput>;
 }
 
-@ArgsType()
+@InputType()
 export class UpdateOneAuthUserArgs {
   @Field(() => AuthUserUpdateInput, { nullable: false })
   @Type(() => AuthUserUpdateInput)
@@ -2095,7 +2095,7 @@ export class UpdateOneAuthUserArgs {
   where!: InstanceType<typeof AuthUserWhereUniqueInput>;
 }
 
-@ArgsType()
+@InputType()
 export class UpsertOneAuthUserArgs {
   @Field(() => AuthUserWhereUniqueInput, { nullable: false })
   @Type(() => AuthUserWhereUniqueInput)
@@ -2118,7 +2118,7 @@ export class AggregateFileEntity {
   _max?: InstanceType<typeof FileEntityMaxAggregate>;
 }
 
-@ArgsType()
+@InputType()
 export class CreateManyFileEntityArgs {
   @Field(() => [FileEntityCreateManyInput], { nullable: false })
   @Type(() => FileEntityCreateManyInput)
@@ -2127,28 +2127,28 @@ export class CreateManyFileEntityArgs {
   skipDuplicates?: boolean;
 }
 
-@ArgsType()
+@InputType()
 export class CreateOneFileEntityArgs {
   @Field(() => FileEntityCreateInput, { nullable: false })
   @Type(() => FileEntityCreateInput)
   data!: InstanceType<typeof FileEntityCreateInput>;
 }
 
-@ArgsType()
+@InputType()
 export class DeleteManyFileEntityArgs {
   @Field(() => FileEntityWhereInput, { nullable: true })
   @Type(() => FileEntityWhereInput)
   where?: InstanceType<typeof FileEntityWhereInput>;
 }
 
-@ArgsType()
+@InputType()
 export class DeleteOneFileEntityArgs {
   @Field(() => FileEntityWhereUniqueInput, { nullable: false })
   @Type(() => FileEntityWhereUniqueInput)
   where!: InstanceType<typeof FileEntityWhereUniqueInput>;
 }
 
-@ArgsType()
+@InputType()
 export class FileEntityAggregateArgs {
   @Field(() => FileEntityWhereInput, { nullable: true })
   @Type(() => FileEntityWhereInput)
@@ -2347,7 +2347,7 @@ export class FileEntityCreateInput {
   Profiles?: InstanceType<typeof ProfileCreateNestedManyWithoutProfilePictureInput>;
 }
 
-@ArgsType()
+@InputType()
 export class FileEntityGroupByArgs {
   @Field(() => FileEntityWhereInput, { nullable: true })
   @Type(() => FileEntityWhereInput)
@@ -2876,7 +2876,7 @@ export class FileEntity {
   _count?: InstanceType<typeof FileEntityCount>;
 }
 
-@ArgsType()
+@InputType()
 export class FindFirstFileEntityArgs {
   @Field(() => FileEntityWhereInput, { nullable: true })
   @Type(() => FileEntityWhereInput)
@@ -2893,7 +2893,7 @@ export class FindFirstFileEntityArgs {
   distinct?: Array<keyof typeof FileEntityScalarFieldEnum>;
 }
 
-@ArgsType()
+@InputType()
 export class FindManyFileEntityArgs {
   @Field(() => FileEntityWhereInput, { nullable: true })
   @Type(() => FileEntityWhereInput)
@@ -2910,14 +2910,14 @@ export class FindManyFileEntityArgs {
   distinct?: Array<keyof typeof FileEntityScalarFieldEnum>;
 }
 
-@ArgsType()
+@InputType()
 export class FindUniqueFileEntityArgs {
   @Field(() => FileEntityWhereUniqueInput, { nullable: false })
   @Type(() => FileEntityWhereUniqueInput)
   where!: InstanceType<typeof FileEntityWhereUniqueInput>;
 }
 
-@ArgsType()
+@InputType()
 export class UpdateManyFileEntityArgs {
   @Field(() => FileEntityUpdateManyMutationInput, { nullable: false })
   @Type(() => FileEntityUpdateManyMutationInput)
@@ -2927,7 +2927,7 @@ export class UpdateManyFileEntityArgs {
   where?: InstanceType<typeof FileEntityWhereInput>;
 }
 
-@ArgsType()
+@InputType()
 export class UpdateOneFileEntityArgs {
   @Field(() => FileEntityUpdateInput, { nullable: false })
   @Type(() => FileEntityUpdateInput)
@@ -2937,7 +2937,7 @@ export class UpdateOneFileEntityArgs {
   where!: InstanceType<typeof FileEntityWhereUniqueInput>;
 }
 
-@ArgsType()
+@InputType()
 export class UpsertOneFileEntityArgs {
   @Field(() => FileEntityWhereUniqueInput, { nullable: false })
   @Type(() => FileEntityWhereUniqueInput)
@@ -2960,7 +2960,7 @@ export class AggregateImagesSecondary {
   _max?: InstanceType<typeof ImagesSecondaryMaxAggregate>;
 }
 
-@ArgsType()
+@InputType()
 export class CreateManyImagesSecondaryArgs {
   @Field(() => [ImagesSecondaryCreateManyInput], { nullable: false })
   @Type(() => ImagesSecondaryCreateManyInput)
@@ -2969,28 +2969,28 @@ export class CreateManyImagesSecondaryArgs {
   skipDuplicates?: boolean;
 }
 
-@ArgsType()
+@InputType()
 export class CreateOneImagesSecondaryArgs {
   @Field(() => ImagesSecondaryCreateInput, { nullable: false })
   @Type(() => ImagesSecondaryCreateInput)
   data!: InstanceType<typeof ImagesSecondaryCreateInput>;
 }
 
-@ArgsType()
+@InputType()
 export class DeleteManyImagesSecondaryArgs {
   @Field(() => ImagesSecondaryWhereInput, { nullable: true })
   @Type(() => ImagesSecondaryWhereInput)
   where?: InstanceType<typeof ImagesSecondaryWhereInput>;
 }
 
-@ArgsType()
+@InputType()
 export class DeleteOneImagesSecondaryArgs {
   @Field(() => ImagesSecondaryWhereUniqueInput, { nullable: false })
   @Type(() => ImagesSecondaryWhereUniqueInput)
   where!: InstanceType<typeof ImagesSecondaryWhereUniqueInput>;
 }
 
-@ArgsType()
+@InputType()
 export class FindFirstImagesSecondaryArgs {
   @Field(() => ImagesSecondaryWhereInput, { nullable: true })
   @Type(() => ImagesSecondaryWhereInput)
@@ -3007,7 +3007,7 @@ export class FindFirstImagesSecondaryArgs {
   distinct?: Array<keyof typeof ImagesSecondaryScalarFieldEnum>;
 }
 
-@ArgsType()
+@InputType()
 export class FindManyImagesSecondaryArgs {
   @Field(() => ImagesSecondaryWhereInput, { nullable: true })
   @Type(() => ImagesSecondaryWhereInput)
@@ -3024,14 +3024,14 @@ export class FindManyImagesSecondaryArgs {
   distinct?: Array<keyof typeof ImagesSecondaryScalarFieldEnum>;
 }
 
-@ArgsType()
+@InputType()
 export class FindUniqueImagesSecondaryArgs {
   @Field(() => ImagesSecondaryWhereUniqueInput, { nullable: false })
   @Type(() => ImagesSecondaryWhereUniqueInput)
   where!: InstanceType<typeof ImagesSecondaryWhereUniqueInput>;
 }
 
-@ArgsType()
+@InputType()
 export class ImagesSecondaryAggregateArgs {
   @Field(() => ImagesSecondaryWhereInput, { nullable: true })
   @Type(() => ImagesSecondaryWhereInput)
@@ -3213,7 +3213,7 @@ export class ImagesSecondaryCreateInput {
   Restaurants?: InstanceType<typeof RestaurantsCreateNestedOneWithoutOtherImagesInput>;
 }
 
-@ArgsType()
+@InputType()
 export class ImagesSecondaryGroupByArgs {
   @Field(() => ImagesSecondaryWhereInput, { nullable: true })
   @Type(() => ImagesSecondaryWhereInput)
@@ -3803,7 +3803,7 @@ export class ImagesSecondary {
   restaurantsId!: string | null;
 }
 
-@ArgsType()
+@InputType()
 export class UpdateManyImagesSecondaryArgs {
   @Field(() => ImagesSecondaryUpdateManyMutationInput, { nullable: false })
   @Type(() => ImagesSecondaryUpdateManyMutationInput)
@@ -3813,7 +3813,7 @@ export class UpdateManyImagesSecondaryArgs {
   where?: InstanceType<typeof ImagesSecondaryWhereInput>;
 }
 
-@ArgsType()
+@InputType()
 export class UpdateOneImagesSecondaryArgs {
   @Field(() => ImagesSecondaryUpdateInput, { nullable: false })
   @Type(() => ImagesSecondaryUpdateInput)
@@ -3823,7 +3823,7 @@ export class UpdateOneImagesSecondaryArgs {
   where!: InstanceType<typeof ImagesSecondaryWhereUniqueInput>;
 }
 
-@ArgsType()
+@InputType()
 export class UpsertOneImagesSecondaryArgs {
   @Field(() => ImagesSecondaryWhereUniqueInput, { nullable: false })
   @Type(() => ImagesSecondaryWhereUniqueInput)
@@ -4456,7 +4456,7 @@ export class AggregateProfile {
   _max?: InstanceType<typeof ProfileMaxAggregate>;
 }
 
-@ArgsType()
+@InputType()
 export class CreateManyProfileArgs {
   @Field(() => [ProfileCreateManyInput], { nullable: false })
   @Type(() => ProfileCreateManyInput)
@@ -4465,28 +4465,28 @@ export class CreateManyProfileArgs {
   skipDuplicates?: boolean;
 }
 
-@ArgsType()
+@InputType()
 export class CreateOneProfileArgs {
   @Field(() => ProfileCreateInput, { nullable: false })
   @Type(() => ProfileCreateInput)
   data!: InstanceType<typeof ProfileCreateInput>;
 }
 
-@ArgsType()
+@InputType()
 export class DeleteManyProfileArgs {
   @Field(() => ProfileWhereInput, { nullable: true })
   @Type(() => ProfileWhereInput)
   where?: InstanceType<typeof ProfileWhereInput>;
 }
 
-@ArgsType()
+@InputType()
 export class DeleteOneProfileArgs {
   @Field(() => ProfileWhereUniqueInput, { nullable: false })
   @Type(() => ProfileWhereUniqueInput)
   where!: InstanceType<typeof ProfileWhereUniqueInput>;
 }
 
-@ArgsType()
+@InputType()
 export class FindFirstProfileArgs {
   @Field(() => ProfileWhereInput, { nullable: true })
   @Type(() => ProfileWhereInput)
@@ -4503,7 +4503,7 @@ export class FindFirstProfileArgs {
   distinct?: Array<keyof typeof ProfileScalarFieldEnum>;
 }
 
-@ArgsType()
+@InputType()
 export class FindManyProfileArgs {
   @Field(() => ProfileWhereInput, { nullable: true })
   @Type(() => ProfileWhereInput)
@@ -4520,14 +4520,14 @@ export class FindManyProfileArgs {
   distinct?: Array<keyof typeof ProfileScalarFieldEnum>;
 }
 
-@ArgsType()
+@InputType()
 export class FindUniqueProfileArgs {
   @Field(() => ProfileWhereUniqueInput, { nullable: false })
   @Type(() => ProfileWhereUniqueInput)
   where!: InstanceType<typeof ProfileWhereUniqueInput>;
 }
 
-@ArgsType()
+@InputType()
 export class ProfileAggregateArgs {
   @Field(() => ProfileWhereInput, { nullable: true })
   @Type(() => ProfileWhereInput)
@@ -4764,7 +4764,7 @@ export class ProfileCreateInput {
   user?: InstanceType<typeof UsersCreateNestedOneWithoutProfileInput>;
 }
 
-@ArgsType()
+@InputType()
 export class ProfileGroupByArgs {
   @Field(() => ProfileWhereInput, { nullable: true })
   @Type(() => ProfileWhereInput)
@@ -5537,7 +5537,7 @@ export class Profile {
   userId!: string | null;
 }
 
-@ArgsType()
+@InputType()
 export class UpdateManyProfileArgs {
   @Field(() => ProfileUpdateManyMutationInput, { nullable: false })
   @Type(() => ProfileUpdateManyMutationInput)
@@ -5547,7 +5547,7 @@ export class UpdateManyProfileArgs {
   where?: InstanceType<typeof ProfileWhereInput>;
 }
 
-@ArgsType()
+@InputType()
 export class UpdateOneProfileArgs {
   @Field(() => ProfileUpdateInput, { nullable: false })
   @Type(() => ProfileUpdateInput)
@@ -5557,7 +5557,7 @@ export class UpdateOneProfileArgs {
   where!: InstanceType<typeof ProfileWhereUniqueInput>;
 }
 
-@ArgsType()
+@InputType()
 export class UpsertOneProfileArgs {
   @Field(() => ProfileWhereUniqueInput, { nullable: false })
   @Type(() => ProfileWhereUniqueInput)
@@ -5580,7 +5580,7 @@ export class AggregateRestauUsers {
   _max?: InstanceType<typeof RestauUsersMaxAggregate>;
 }
 
-@ArgsType()
+@InputType()
 export class CreateManyRestauUsersArgs {
   @Field(() => [RestauUsersCreateManyInput], { nullable: false })
   @Type(() => RestauUsersCreateManyInput)
@@ -5589,28 +5589,28 @@ export class CreateManyRestauUsersArgs {
   skipDuplicates?: boolean;
 }
 
-@ArgsType()
+@InputType()
 export class CreateOneRestauUsersArgs {
   @Field(() => RestauUsersCreateInput, { nullable: false })
   @Type(() => RestauUsersCreateInput)
   data!: InstanceType<typeof RestauUsersCreateInput>;
 }
 
-@ArgsType()
+@InputType()
 export class DeleteManyRestauUsersArgs {
   @Field(() => RestauUsersWhereInput, { nullable: true })
   @Type(() => RestauUsersWhereInput)
   where?: InstanceType<typeof RestauUsersWhereInput>;
 }
 
-@ArgsType()
+@InputType()
 export class DeleteOneRestauUsersArgs {
   @Field(() => RestauUsersWhereUniqueInput, { nullable: false })
   @Type(() => RestauUsersWhereUniqueInput)
   where!: InstanceType<typeof RestauUsersWhereUniqueInput>;
 }
 
-@ArgsType()
+@InputType()
 export class FindFirstRestauUsersArgs {
   @Field(() => RestauUsersWhereInput, { nullable: true })
   @Type(() => RestauUsersWhereInput)
@@ -5627,7 +5627,7 @@ export class FindFirstRestauUsersArgs {
   distinct?: Array<keyof typeof RestauUsersScalarFieldEnum>;
 }
 
-@ArgsType()
+@InputType()
 export class FindManyRestauUsersArgs {
   @Field(() => RestauUsersWhereInput, { nullable: true })
   @Type(() => RestauUsersWhereInput)
@@ -5644,14 +5644,14 @@ export class FindManyRestauUsersArgs {
   distinct?: Array<keyof typeof RestauUsersScalarFieldEnum>;
 }
 
-@ArgsType()
+@InputType()
 export class FindUniqueRestauUsersArgs {
   @Field(() => RestauUsersWhereUniqueInput, { nullable: false })
   @Type(() => RestauUsersWhereUniqueInput)
   where!: InstanceType<typeof RestauUsersWhereUniqueInput>;
 }
 
-@ArgsType()
+@InputType()
 export class RestauUsersAggregateArgs {
   @Field(() => RestauUsersWhereInput, { nullable: true })
   @Type(() => RestauUsersWhereInput)
@@ -5861,7 +5861,7 @@ export class RestauUsersCreateInput {
   role?: keyof typeof Role;
 }
 
-@ArgsType()
+@InputType()
 export class RestauUsersGroupByArgs {
   @Field(() => RestauUsersWhereInput, { nullable: true })
   @Type(() => RestauUsersWhereInput)
@@ -6539,7 +6539,7 @@ export class RestauUsers {
   role!: keyof typeof Role;
 }
 
-@ArgsType()
+@InputType()
 export class UpdateManyRestauUsersArgs {
   @Field(() => RestauUsersUpdateManyMutationInput, { nullable: false })
   @Type(() => RestauUsersUpdateManyMutationInput)
@@ -6549,7 +6549,7 @@ export class UpdateManyRestauUsersArgs {
   where?: InstanceType<typeof RestauUsersWhereInput>;
 }
 
-@ArgsType()
+@InputType()
 export class UpdateOneRestauUsersArgs {
   @Field(() => RestauUsersUpdateInput, { nullable: false })
   @Type(() => RestauUsersUpdateInput)
@@ -6559,7 +6559,7 @@ export class UpdateOneRestauUsersArgs {
   where!: InstanceType<typeof RestauUsersWhereUniqueInput>;
 }
 
-@ArgsType()
+@InputType()
 export class UpsertOneRestauUsersArgs {
   @Field(() => RestauUsersWhereUniqueInput, { nullable: false })
   @Type(() => RestauUsersWhereUniqueInput)
@@ -6582,7 +6582,7 @@ export class AggregateRestaurants {
   _max?: InstanceType<typeof RestaurantsMaxAggregate>;
 }
 
-@ArgsType()
+@InputType()
 export class CreateManyRestaurantsArgs {
   @Field(() => [RestaurantsCreateManyInput], { nullable: false })
   @Type(() => RestaurantsCreateManyInput)
@@ -6591,28 +6591,28 @@ export class CreateManyRestaurantsArgs {
   skipDuplicates?: boolean;
 }
 
-@ArgsType()
+@InputType()
 export class CreateOneRestaurantsArgs {
   @Field(() => RestaurantsCreateInput, { nullable: false })
   @Type(() => RestaurantsCreateInput)
   data!: InstanceType<typeof RestaurantsCreateInput>;
 }
 
-@ArgsType()
+@InputType()
 export class DeleteManyRestaurantsArgs {
   @Field(() => RestaurantsWhereInput, { nullable: true })
   @Type(() => RestaurantsWhereInput)
   where?: InstanceType<typeof RestaurantsWhereInput>;
 }
 
-@ArgsType()
+@InputType()
 export class DeleteOneRestaurantsArgs {
   @Field(() => RestaurantsWhereUniqueInput, { nullable: false })
   @Type(() => RestaurantsWhereUniqueInput)
   where!: InstanceType<typeof RestaurantsWhereUniqueInput>;
 }
 
-@ArgsType()
+@InputType()
 export class FindFirstRestaurantsArgs {
   @Field(() => RestaurantsWhereInput, { nullable: true })
   @Type(() => RestaurantsWhereInput)
@@ -6629,7 +6629,7 @@ export class FindFirstRestaurantsArgs {
   distinct?: Array<keyof typeof RestaurantsScalarFieldEnum>;
 }
 
-@ArgsType()
+@InputType()
 export class FindManyRestaurantsArgs {
   @Field(() => RestaurantsWhereInput, { nullable: true })
   @Type(() => RestaurantsWhereInput)
@@ -6646,14 +6646,14 @@ export class FindManyRestaurantsArgs {
   distinct?: Array<keyof typeof RestaurantsScalarFieldEnum>;
 }
 
-@ArgsType()
+@InputType()
 export class FindUniqueRestaurantsArgs {
   @Field(() => RestaurantsWhereUniqueInput, { nullable: false })
   @Type(() => RestaurantsWhereUniqueInput)
   where!: InstanceType<typeof RestaurantsWhereUniqueInput>;
 }
 
-@ArgsType()
+@InputType()
 export class RestaurantsAggregateArgs {
   @Field(() => RestaurantsWhereInput, { nullable: true })
   @Type(() => RestaurantsWhereInput)
@@ -6992,7 +6992,7 @@ export class RestaurantsCreateInput {
   otherImages?: InstanceType<typeof ImagesSecondaryCreateNestedManyWithoutRestaurantsInput>;
 }
 
-@ArgsType()
+@InputType()
 export class RestaurantsGroupByArgs {
   @Field(() => RestaurantsWhereInput, { nullable: true })
   @Type(() => RestaurantsWhereInput)
@@ -7939,7 +7939,7 @@ export class Restaurants {
   _count?: InstanceType<typeof RestaurantsCount>;
 }
 
-@ArgsType()
+@InputType()
 export class UpdateManyRestaurantsArgs {
   @Field(() => RestaurantsUpdateManyMutationInput, { nullable: false })
   @Type(() => RestaurantsUpdateManyMutationInput)
@@ -7949,7 +7949,7 @@ export class UpdateManyRestaurantsArgs {
   where?: InstanceType<typeof RestaurantsWhereInput>;
 }
 
-@ArgsType()
+@InputType()
 export class UpdateOneRestaurantsArgs {
   @Field(() => RestaurantsUpdateInput, { nullable: false })
   @Type(() => RestaurantsUpdateInput)
@@ -7959,7 +7959,7 @@ export class UpdateOneRestaurantsArgs {
   where!: InstanceType<typeof RestaurantsWhereUniqueInput>;
 }
 
-@ArgsType()
+@InputType()
 export class UpsertOneRestaurantsArgs {
   @Field(() => RestaurantsWhereUniqueInput, { nullable: false })
   @Type(() => RestaurantsWhereUniqueInput)
@@ -7982,7 +7982,7 @@ export class AggregateUsers {
   _max?: InstanceType<typeof UsersMaxAggregate>;
 }
 
-@ArgsType()
+@InputType()
 export class CreateManyUsersArgs {
   @Field(() => [UsersCreateManyInput], { nullable: false })
   @Type(() => UsersCreateManyInput)
@@ -7991,28 +7991,28 @@ export class CreateManyUsersArgs {
   skipDuplicates?: boolean;
 }
 
-@ArgsType()
+@InputType()
 export class CreateOneUsersArgs {
   @Field(() => UsersCreateInput, { nullable: false })
   @Type(() => UsersCreateInput)
   data!: InstanceType<typeof UsersCreateInput>;
 }
 
-@ArgsType()
+@InputType()
 export class DeleteManyUsersArgs {
   @Field(() => UsersWhereInput, { nullable: true })
   @Type(() => UsersWhereInput)
   where?: InstanceType<typeof UsersWhereInput>;
 }
 
-@ArgsType()
+@InputType()
 export class DeleteOneUsersArgs {
   @Field(() => UsersWhereUniqueInput, { nullable: false })
   @Type(() => UsersWhereUniqueInput)
   where!: InstanceType<typeof UsersWhereUniqueInput>;
 }
 
-@ArgsType()
+@InputType()
 export class FindFirstUsersArgs {
   @Field(() => UsersWhereInput, { nullable: true })
   @Type(() => UsersWhereInput)
@@ -8029,7 +8029,7 @@ export class FindFirstUsersArgs {
   distinct?: Array<keyof typeof UsersScalarFieldEnum>;
 }
 
-@ArgsType()
+@InputType()
 export class FindManyUsersArgs {
   @Field(() => UsersWhereInput, { nullable: true })
   @Type(() => UsersWhereInput)
@@ -8046,14 +8046,14 @@ export class FindManyUsersArgs {
   distinct?: Array<keyof typeof UsersScalarFieldEnum>;
 }
 
-@ArgsType()
+@InputType()
 export class FindUniqueUsersArgs {
   @Field(() => UsersWhereUniqueInput, { nullable: false })
   @Type(() => UsersWhereUniqueInput)
   where!: InstanceType<typeof UsersWhereUniqueInput>;
 }
 
-@ArgsType()
+@InputType()
 export class UpdateManyUsersArgs {
   @Field(() => UsersUpdateManyMutationInput, { nullable: false })
   @Type(() => UsersUpdateManyMutationInput)
@@ -8063,7 +8063,7 @@ export class UpdateManyUsersArgs {
   where?: InstanceType<typeof UsersWhereInput>;
 }
 
-@ArgsType()
+@InputType()
 export class UpdateOneUsersArgs {
   @Field(() => UsersUpdateInput, { nullable: false })
   @Type(() => UsersUpdateInput)
@@ -8073,7 +8073,7 @@ export class UpdateOneUsersArgs {
   where!: InstanceType<typeof UsersWhereUniqueInput>;
 }
 
-@ArgsType()
+@InputType()
 export class UpsertOneUsersArgs {
   @Field(() => UsersWhereUniqueInput, { nullable: false })
   @Type(() => UsersWhereUniqueInput)
@@ -8086,7 +8086,7 @@ export class UpsertOneUsersArgs {
   update!: InstanceType<typeof UsersUpdateInput>;
 }
 
-@ArgsType()
+@InputType()
 export class UsersAggregateArgs {
   @Field(() => UsersWhereInput, { nullable: true })
   @Type(() => UsersWhereInput)
@@ -8283,7 +8283,7 @@ export class UsersCreateInput {
   adresses?: InstanceType<typeof AdressesCreateNestedManyWithoutUserInput>;
 }
 
-@ArgsType()
+@InputType()
 export class UsersGroupByArgs {
   @Field(() => UsersWhereInput, { nullable: true })
   @Type(() => UsersWhereInput)

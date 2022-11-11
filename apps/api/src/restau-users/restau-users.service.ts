@@ -7,14 +7,19 @@ import {
   Role,
   UpdateOneRestauUsersArgs,
 } from '@food-delivery-mono/data-access';
-import { LoginResponse } from '@food-delivery-mono/shared-types';
+import { cookieOption, LoginResponse } from '@food-delivery-mono/shared-types';
 import { GraphQLError } from 'graphql/error';
 import * as bcrypt from 'bcrypt';
 import { UtilityService } from '@food-delivery-mono/utilities';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class RestauUsersService {
-  constructor(private prismaService: DataAccessPrismaService, private utilityService: UtilityService) {}
+  constructor(
+    private prismaService: DataAccessPrismaService,
+    private utilityService: UtilityService,
+    private configService: ConfigService
+  ) {}
 
   async create(userName: string, password: string, userFullName: string, role: Role, restaurantId: string) {
     const userFounded = await this.prismaService.restauUsers.findFirst({
@@ -54,10 +59,11 @@ export class RestauUsersService {
     return this.prismaService.restauUsers.delete(deleteOneRestauUsersArgs);
   }
 
-  async loginRestauUser(userName: string, password: string) {
+  async loginRestauUser(userName: string, password: string, context: any) {
     const user = await this.prismaService.restauUsers.findFirst({
       where: { userName: userName },
     });
+
     if (user && (await bcrypt.compare(password, user.password))) {
       const { refresh_token, access_token } = await this.utilityService.getTokensForRestauUsers({
         id: user.idRestauUser,
@@ -77,8 +83,11 @@ export class RestauUsersService {
         },
       });
 
+      const tokenString = `token=${access_token};HttpOnly;Path=/;Max-Age=${this.configService.get(
+        'JWT_ACCESS_EXPIRATION'
+      )};samesite=Strict;`;
+      context.cookie(tokenString, cookieOption);
       return {
-        access_token,
         refresh_token,
         user: {
           userId: user.idRestauUser,

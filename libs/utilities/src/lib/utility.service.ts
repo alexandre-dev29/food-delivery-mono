@@ -26,7 +26,7 @@ export class UtilityService {
       this.jwtService.signAsync(
         { sub: id, roles, phoneNumber, userId, id, isRestaurant, restaurantId, isSuperAdmin },
         {
-          expiresIn: 60 * 15,
+          expiresIn: this.configService.get<number>('JWT_ACCESS_EXPIRATION'),
           secret: this.configService.get<string>('ACCESS_TOKEN_SECRET'),
         }
       ),

@@ -14,6 +14,7 @@ import { GetInMemoryStore } from '@food-delivery-mono/utilities';
 import { CaslModule } from 'nest-casl';
 import { Role } from '@food-delivery-mono/data-access';
 import UserSecurity from '../../../../libs/app-security/src/lib/user.security';
+import { RestauUsersModule } from '../restau-users/restau-users.module';
 
 const redis = new Redis({});
 
@@ -42,6 +43,7 @@ const redis = new Redis({});
     AuthenticationModule,
     UsersModule,
     ProfilesModule,
+    RestauUsersModule,
   ],
   controllers: [],
   providers: [],

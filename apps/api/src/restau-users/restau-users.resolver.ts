@@ -1,4 +1,4 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { RestauUsersService } from './restau-users.service';
 import {
   DeleteOneRestauUsersArgs,
@@ -8,13 +8,16 @@ import {
   Role,
   UpdateOneRestauUsersArgs,
 } from '@food-delivery-mono/data-access';
-import { CurrentRestauUser } from '@food-delivery-mono/app-security';
+import { CurrentRestauUser, MainAuthGuardGuard } from '@food-delivery-mono/app-security';
+import { LoginResponse } from '@food-delivery-mono/shared-types';
+import { UseGuards } from '@nestjs/common';
 
 @Resolver(() => RestauUsers)
 export class RestauUsersResolver {
   constructor(private readonly restauUsersService: RestauUsersService) {}
 
   @Mutation(() => RestauUsers)
+  @UseGuards(MainAuthGuardGuard)
   createRestauUser(
     @Args('userName', { type: () => String }) userName: string,
     @Args('password', { type: () => String }) password: string,
@@ -42,12 +45,13 @@ export class RestauUsersResolver {
     return this.restauUsersService.update(updateRestauUserInput);
   }
 
-  @Mutation(() => RestauUsers)
+  @Mutation(() => LoginResponse)
   loginRestauUser(
     @Args('userName', { type: () => String }) userName: string,
-    @Args('password', { type: () => String }) password: string
+    @Args('password', { type: () => String }) password: string,
+    @Context() context: any
   ) {
-    return this.restauUsersService.loginRestauUser(userName, password);
+    return this.restauUsersService.loginRestauUser(userName, password, context.reply);
   }
 
   @Mutation(() => RestauUsers)

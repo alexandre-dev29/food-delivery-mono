@@ -1,0 +1,1887 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+"Instruction for establishing a live connection that is updated once the underlying data changes."
+directive @live(
+  "Whether the query should be live or not."
+  if: Boolean = true,
+  "Propose a desired throttle interval ot the server in order to receive updates to at most once per \"throttle\" milliseconds. The server must not accept this value."
+  throttle: Int
+) on QUERY
+
+type Adresses {
+  adressName: String!
+  createdAt: DateTime!
+  elevation: String
+  idAdresse: ID!
+  latitude: String!
+  longitude: String!
+  restaurant: Restaurants
+  restaurantId: String
+  updatedAt: DateTime!
+  user: Users
+  userId: String
+}
+
+type AdressesCountAggregate {
+  _all: Int!
+  adressName: Int!
+  createdAt: Int!
+  elevation: Int!
+  idAdresse: Int!
+  latitude: Int!
+  longitude: Int!
+  restaurantId: Int!
+  updatedAt: Int!
+  userId: Int!
+}
+
+type AdressesMaxAggregate {
+  adressName: String
+  createdAt: DateTime
+  elevation: String
+  idAdresse: String
+  latitude: String
+  longitude: String
+  restaurantId: String
+  updatedAt: DateTime
+  userId: String
+}
+
+type AdressesMinAggregate {
+  adressName: String
+  createdAt: DateTime
+  elevation: String
+  idAdresse: String
+  latitude: String
+  longitude: String
+  restaurantId: String
+  updatedAt: DateTime
+  userId: String
+}
+
+type AuthUser {
+  createdAt: DateTime!
+  id: ID!
+  isPhoneConfirmed: Boolean!
+  phoneNumber: String!
+  role: Role!
+  updatedAt: DateTime!
+  userId: String!
+  username: String!
+}
+
+type AuthUserCountAggregate {
+  _all: Int!
+  createdAt: Int!
+  id: Int!
+  isPhoneConfirmed: Int!
+  phoneNumber: Int!
+  role: Int!
+  updatedAt: Int!
+  userId: Int!
+  username: Int!
+}
+
+type AuthUserMaxAggregate {
+  createdAt: DateTime
+  id: String
+  isPhoneConfirmed: Boolean
+  phoneNumber: String
+  role: Role
+  updatedAt: DateTime
+  userId: String
+  username: String
+}
+
+type AuthUserMinAggregate {
+  createdAt: DateTime
+  id: String
+  isPhoneConfirmed: Boolean
+  phoneNumber: String
+  role: Role
+  updatedAt: DateTime
+  userId: String
+  username: String
+}
+
+type FileEntity {
+  Profiles: [Profile!]
+  Restaurants: [Restaurants!]
+  _count: FileEntityCount!
+  createdAt: DateTime!
+  fileName: String!
+  fileUrl: String!
+  id: ID!
+  key: String!
+  updatedAt: DateTime!
+}
+
+type FileEntityCount {
+  Profiles: Int!
+  Restaurants: Int!
+}
+
+type FileEntityCountAggregate {
+  _all: Int!
+  createdAt: Int!
+  fileName: Int!
+  fileUrl: Int!
+  id: Int!
+  key: Int!
+  updatedAt: Int!
+}
+
+type FileEntityMaxAggregate {
+  createdAt: DateTime
+  fileName: String
+  fileUrl: String
+  id: String
+  key: String
+  updatedAt: DateTime
+}
+
+type FileEntityMinAggregate {
+  createdAt: DateTime
+  fileName: String
+  fileUrl: String
+  id: String
+  key: String
+  updatedAt: DateTime
+}
+
+type ImagesSecondary {
+  Restaurants: Restaurants
+  createdAt: DateTime!
+  fileName: String!
+  fileUrl: String!
+  id: ID!
+  key: String!
+  restaurantsId: String
+  updatedAt: DateTime!
+}
+
+type ImagesSecondaryCountAggregate {
+  _all: Int!
+  createdAt: Int!
+  fileName: Int!
+  fileUrl: Int!
+  id: Int!
+  key: Int!
+  restaurantsId: Int!
+  updatedAt: Int!
+}
+
+type ImagesSecondaryMaxAggregate {
+  createdAt: DateTime
+  fileName: String
+  fileUrl: String
+  id: String
+  key: String
+  restaurantsId: String
+  updatedAt: DateTime
+}
+
+type ImagesSecondaryMinAggregate {
+  createdAt: DateTime
+  fileName: String
+  fileUrl: String
+  id: String
+  key: String
+  restaurantsId: String
+  updatedAt: DateTime
+}
+
+type Mutation {
+  askingForOtpCode(phoneNumber: String!): Boolean!
+  changePassword(newPassword: String!, phoneNumber: String!): Boolean!
+  changeRestauUserPassword(newPassword: String!, userName: String!): RestauUsers!
+  confirmOtpForForgot(otpCode: String!, phoneNumber: String!): Boolean!
+  confirmPhoneNumber(otpCode: String!, phoneNumber: String!): Boolean!
+  createAuth(createAuthInput: CreateOneAuthUserArgs!): AuthUser!
+  createProfile(createProfileInput: CreateOneProfileArgs!): Profile!
+  createRestauUser(password: String!, role: Role!, userFullName: String!, userName: String!): RestauUsers!
+  createUser(createUserInput: CreateOneUsersArgs!): Users!
+  loginRestauUser(password: String!, userName: String!): LoginResponse!
+  loginUser(password: String!, phoneNumber: String!): LoginResponse!
+  refreshToken(oldRefreshToken: String!): Boolean!
+  removeAuth(id: String!): AuthUser!
+  removeProfile(profileId: String!): Profile!
+  removeRestauUser(deleteArgs: DeleteOneRestauUsersArgs!): RestauUsers!
+  removeUser(userId: String!): Users!
+  signUp(registerUserInputs: CreateUserInput!): AuthUser!
+  startForgotPassword(phoneNumber: String!): Boolean!
+  updateAuth(updateAuthInput: UpdateOneAuthUserArgs!): AuthUser!
+  updatePhotoProfile(myFile: Upload!): Boolean!
+  updateProfile(updateProfileInput: UpdateOneProfileArgs!): Profile!
+  updateRestauUser(updateRestauUserInput: UpdateOneRestauUsersArgs!): RestauUsers!
+  updateUser(updateUserInput: UpdateOneUsersArgs!): Users!
+}
+
+type Profile {
+  bio: String!
+  createdAt: DateTime!
+  dateOfBirth: DateTime
+  fileEntityId: String
+  placeOfBirth: DateTime
+  profileId: ID!
+  profilePicture: FileEntity
+  updatedAt: DateTime!
+  user: Users
+  userId: String
+}
+
+type ProfileCountAggregate {
+  _all: Int!
+  bio: Int!
+  createdAt: Int!
+  dateOfBirth: Int!
+  fileEntityId: Int!
+  placeOfBirth: Int!
+  profileId: Int!
+  updatedAt: Int!
+  userId: Int!
+}
+
+type ProfileMaxAggregate {
+  bio: String
+  createdAt: DateTime
+  dateOfBirth: DateTime
+  fileEntityId: String
+  placeOfBirth: DateTime
+  profileId: String
+  updatedAt: DateTime
+  userId: String
+}
+
+type ProfileMinAggregate {
+  bio: String
+  createdAt: DateTime
+  dateOfBirth: DateTime
+  fileEntityId: String
+  placeOfBirth: DateTime
+  profileId: String
+  updatedAt: DateTime
+  userId: String
+}
+
+type Query {
+  FindAllRestauUsers(findAllArgs: FindManyRestauUsersArgs!): [RestauUsers!]!
+  FindOneRestauUser(findOneArgs: FindFirstRestauUsersArgs!): RestauUsers!
+  getAllAuths: [AuthUser!]!
+  getOneAuth(id: String!): AuthUser!
+  profile(profileId: String!): Profile!
+  profiles: [Profile!]!
+  user(userId: String!): Users!
+  users: [Users!]!
+}
+
+type RestauUsers {
+  createdAt: DateTime!
+  idRestauUser: ID!
+  restauId: String!
+  restaurant: Restaurants!
+  role: Role!
+  updatedAt: DateTime!
+  userFullName: String!
+  userName: String!
+}
+
+type RestauUsersCountAggregate {
+  _all: Int!
+  createdAt: Int!
+  idRestauUser: Int!
+  restauId: Int!
+  role: Int!
+  updatedAt: Int!
+  userFullName: Int!
+  userName: Int!
+}
+
+type RestauUsersMaxAggregate {
+  createdAt: DateTime
+  idRestauUser: String
+  restauId: String
+  role: Role
+  updatedAt: DateTime
+  userFullName: String
+  userName: String
+}
+
+type RestauUsersMinAggregate {
+  createdAt: DateTime
+  idRestauUser: String
+  restauId: String
+  role: Role
+  updatedAt: DateTime
+  userFullName: String
+  userName: String
+}
+
+type Restaurants {
+  _count: RestaurantsCount!
+  adresses: [Adresses!]
+  createdAt: DateTime!
+  creationDate: DateTime!
+  fileEntityId: String!
+  idRestaurant: ID!
+  otherImages: [ImagesSecondary!]
+  restauDescription: String!
+  restauMainImage: FileEntity!
+  restauName: String!
+  updatedAt: DateTime!
+  users: [RestauUsers!]
+}
+
+type RestaurantsCount {
+  adresses: Int!
+  otherImages: Int!
+  users: Int!
+}
+
+type RestaurantsCountAggregate {
+  _all: Int!
+  createdAt: Int!
+  creationDate: Int!
+  fileEntityId: Int!
+  idRestaurant: Int!
+  restauDescription: Int!
+  restauName: Int!
+  updatedAt: Int!
+}
+
+type RestaurantsMaxAggregate {
+  createdAt: DateTime
+  creationDate: DateTime
+  fileEntityId: String
+  idRestaurant: String
+  restauDescription: String
+  restauName: String
+  updatedAt: DateTime
+}
+
+type RestaurantsMinAggregate {
+  createdAt: DateTime
+  creationDate: DateTime
+  fileEntityId: String
+  idRestaurant: String
+  restauDescription: String
+  restauName: String
+  updatedAt: DateTime
+}
+
+type Users {
+  _count: UsersCount!
+  adresses: [Adresses!]
+  createdAt: DateTime!
+  firstName: String
+  idUser: ID!
+  lastName: String
+  profile: Profile
+  updatedAt: DateTime!
+  userName: String!
+}
+
+type UsersCount {
+  adresses: Int!
+}
+
+type UsersCountAggregate {
+  _all: Int!
+  createdAt: Int!
+  firstName: Int!
+  idUser: Int!
+  lastName: Int!
+  updatedAt: Int!
+  userName: Int!
+}
+
+type UsersMaxAggregate {
+  createdAt: DateTime
+  firstName: String
+  idUser: String
+  lastName: String
+  updatedAt: DateTime
+  userName: String
+}
+
+type UsersMinAggregate {
+  createdAt: DateTime
+  firstName: String
+  idUser: String
+  lastName: String
+  updatedAt: DateTime
+  userName: String
+}
+
+enum QueryMode {
+  default
+  insensitive
+}
+
+enum RestauUsersScalarFieldEnum {
+  createdAt
+  idRestauUser
+  password
+  refreshToken
+  restauId
+  role
+  updatedAt
+  userFullName
+  userName
+}
+
+enum Role {
+  RestaurantAdmin
+  RestaurantUser
+  SuperAdmin
+  User
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+"A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format."
+scalar DateTime
+
+scalar LoginResponse
+
+"The `Upload` scalar type represents a file upload."
+scalar Upload
+
+input AdressesCreateManyRestaurantInput {
+  adressName: String!
+  createdAt: DateTime
+  elevation: String
+  idAdresse: String
+  latitude: String!
+  longitude: String!
+  updatedAt: DateTime
+  userId: String
+}
+
+input AdressesCreateManyRestaurantInputEnvelope {
+  data: [AdressesCreateManyRestaurantInput!]!
+  skipDuplicates: Boolean
+}
+
+input AdressesCreateManyUserInput {
+  adressName: String!
+  createdAt: DateTime
+  elevation: String
+  idAdresse: String
+  latitude: String!
+  longitude: String!
+  restaurantId: String
+  updatedAt: DateTime
+}
+
+input AdressesCreateManyUserInputEnvelope {
+  data: [AdressesCreateManyUserInput!]!
+  skipDuplicates: Boolean
+}
+
+input AdressesCreateNestedManyWithoutRestaurantInput {
+  connect: [AdressesWhereUniqueInput!]
+  connectOrCreate: [AdressesCreateOrConnectWithoutRestaurantInput!]
+  create: [AdressesCreateWithoutRestaurantInput!]
+  createMany: AdressesCreateManyRestaurantInputEnvelope
+}
+
+input AdressesCreateNestedManyWithoutUserInput {
+  connect: [AdressesWhereUniqueInput!]
+  connectOrCreate: [AdressesCreateOrConnectWithoutUserInput!]
+  create: [AdressesCreateWithoutUserInput!]
+  createMany: AdressesCreateManyUserInputEnvelope
+}
+
+input AdressesCreateOrConnectWithoutRestaurantInput {
+  create: AdressesCreateWithoutRestaurantInput!
+  where: AdressesWhereUniqueInput!
+}
+
+input AdressesCreateOrConnectWithoutUserInput {
+  create: AdressesCreateWithoutUserInput!
+  where: AdressesWhereUniqueInput!
+}
+
+input AdressesCreateWithoutRestaurantInput {
+  adressName: String!
+  createdAt: DateTime
+  elevation: String
+  idAdresse: String
+  latitude: String!
+  longitude: String!
+  updatedAt: DateTime
+  user: UsersCreateNestedOneWithoutAdressesInput
+}
+
+input AdressesCreateWithoutUserInput {
+  adressName: String!
+  createdAt: DateTime
+  elevation: String
+  idAdresse: String
+  latitude: String!
+  longitude: String!
+  restaurant: RestaurantsCreateNestedOneWithoutAdressesInput
+  updatedAt: DateTime
+}
+
+input AdressesListRelationFilter {
+  every: AdressesWhereInput
+  none: AdressesWhereInput
+  some: AdressesWhereInput
+}
+
+input AdressesOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input AdressesScalarWhereInput {
+  AND: [AdressesScalarWhereInput!]
+  NOT: [AdressesScalarWhereInput!]
+  OR: [AdressesScalarWhereInput!]
+  adressName: StringFilter
+  createdAt: DateTimeFilter
+  elevation: StringNullableFilter
+  idAdresse: StringFilter
+  latitude: StringFilter
+  longitude: StringFilter
+  restaurantId: StringNullableFilter
+  updatedAt: DateTimeFilter
+  userId: StringNullableFilter
+}
+
+input AdressesUpdateManyMutationInput {
+  adressName: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  elevation: NullableStringFieldUpdateOperationsInput
+  idAdresse: StringFieldUpdateOperationsInput
+  latitude: StringFieldUpdateOperationsInput
+  longitude: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input AdressesUpdateManyWithWhereWithoutRestaurantInput {
+  data: AdressesUpdateManyMutationInput!
+  where: AdressesScalarWhereInput!
+}
+
+input AdressesUpdateManyWithWhereWithoutUserInput {
+  data: AdressesUpdateManyMutationInput!
+  where: AdressesScalarWhereInput!
+}
+
+input AdressesUpdateManyWithoutRestaurantNestedInput {
+  connect: [AdressesWhereUniqueInput!]
+  connectOrCreate: [AdressesCreateOrConnectWithoutRestaurantInput!]
+  create: [AdressesCreateWithoutRestaurantInput!]
+  createMany: AdressesCreateManyRestaurantInputEnvelope
+  delete: [AdressesWhereUniqueInput!]
+  deleteMany: [AdressesScalarWhereInput!]
+  disconnect: [AdressesWhereUniqueInput!]
+  set: [AdressesWhereUniqueInput!]
+  update: [AdressesUpdateWithWhereUniqueWithoutRestaurantInput!]
+  updateMany: [AdressesUpdateManyWithWhereWithoutRestaurantInput!]
+  upsert: [AdressesUpsertWithWhereUniqueWithoutRestaurantInput!]
+}
+
+input AdressesUpdateManyWithoutUserNestedInput {
+  connect: [AdressesWhereUniqueInput!]
+  connectOrCreate: [AdressesCreateOrConnectWithoutUserInput!]
+  create: [AdressesCreateWithoutUserInput!]
+  createMany: AdressesCreateManyUserInputEnvelope
+  delete: [AdressesWhereUniqueInput!]
+  deleteMany: [AdressesScalarWhereInput!]
+  disconnect: [AdressesWhereUniqueInput!]
+  set: [AdressesWhereUniqueInput!]
+  update: [AdressesUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [AdressesUpdateManyWithWhereWithoutUserInput!]
+  upsert: [AdressesUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input AdressesUpdateWithWhereUniqueWithoutRestaurantInput {
+  data: AdressesUpdateWithoutRestaurantInput!
+  where: AdressesWhereUniqueInput!
+}
+
+input AdressesUpdateWithWhereUniqueWithoutUserInput {
+  data: AdressesUpdateWithoutUserInput!
+  where: AdressesWhereUniqueInput!
+}
+
+input AdressesUpdateWithoutRestaurantInput {
+  adressName: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  elevation: NullableStringFieldUpdateOperationsInput
+  idAdresse: StringFieldUpdateOperationsInput
+  latitude: StringFieldUpdateOperationsInput
+  longitude: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  user: UsersUpdateOneWithoutAdressesNestedInput
+}
+
+input AdressesUpdateWithoutUserInput {
+  adressName: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  elevation: NullableStringFieldUpdateOperationsInput
+  idAdresse: StringFieldUpdateOperationsInput
+  latitude: StringFieldUpdateOperationsInput
+  longitude: StringFieldUpdateOperationsInput
+  restaurant: RestaurantsUpdateOneWithoutAdressesNestedInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input AdressesUpsertWithWhereUniqueWithoutRestaurantInput {
+  create: AdressesCreateWithoutRestaurantInput!
+  update: AdressesUpdateWithoutRestaurantInput!
+  where: AdressesWhereUniqueInput!
+}
+
+input AdressesUpsertWithWhereUniqueWithoutUserInput {
+  create: AdressesCreateWithoutUserInput!
+  update: AdressesUpdateWithoutUserInput!
+  where: AdressesWhereUniqueInput!
+}
+
+input AdressesWhereInput {
+  AND: [AdressesWhereInput!]
+  NOT: [AdressesWhereInput!]
+  OR: [AdressesWhereInput!]
+  adressName: StringFilter
+  createdAt: DateTimeFilter
+  elevation: StringNullableFilter
+  idAdresse: StringFilter
+  latitude: StringFilter
+  longitude: StringFilter
+  restaurant: RestaurantsRelationFilter
+  restaurantId: StringNullableFilter
+  updatedAt: DateTimeFilter
+  user: UsersRelationFilter
+  userId: StringNullableFilter
+}
+
+input AdressesWhereUniqueInput {
+  idAdresse: String
+}
+
+input AuthUserCreateInput {
+  createdAt: DateTime
+  id: String
+  isPhoneConfirmed: Boolean
+  password: String!
+  phoneNumber: String!
+  role: Role
+  updatedAt: DateTime
+  userId: String!
+  username: String!
+}
+
+input AuthUserUpdateInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  isPhoneConfirmed: BoolFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  phoneNumber: StringFieldUpdateOperationsInput
+  role: EnumRoleFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  userId: StringFieldUpdateOperationsInput
+  username: StringFieldUpdateOperationsInput
+}
+
+input AuthUserWhereUniqueInput {
+  id: String
+}
+
+input BoolFieldUpdateOperationsInput {
+  set: Boolean
+}
+
+input CreateOneAuthUserArgs {
+  data: AuthUserCreateInput!
+}
+
+input CreateOneProfileArgs {
+  data: ProfileCreateInput!
+}
+
+input CreateOneUsersArgs {
+  data: UsersCreateInput!
+}
+
+input CreateUserInput {
+  password: String!
+  phoneNumber: String!
+  username: String!
+}
+
+input DateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
+input DateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeFilter
+  notIn: [DateTime!]
+}
+
+input DateTimeNullableFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeNullableFilter
+  notIn: [DateTime!]
+}
+
+input DeleteOneRestauUsersArgs {
+  where: RestauUsersWhereUniqueInput!
+}
+
+input EnumRoleFieldUpdateOperationsInput {
+  set: Role
+}
+
+input EnumRoleFilter {
+  equals: Role
+  in: [Role!]
+  not: NestedEnumRoleFilter
+  notIn: [Role!]
+}
+
+input FileEntityCreateNestedOneWithoutProfilesInput {
+  connect: FileEntityWhereUniqueInput
+  connectOrCreate: FileEntityCreateOrConnectWithoutProfilesInput
+  create: FileEntityCreateWithoutProfilesInput
+}
+
+input FileEntityCreateNestedOneWithoutRestaurantsInput {
+  connect: FileEntityWhereUniqueInput
+  connectOrCreate: FileEntityCreateOrConnectWithoutRestaurantsInput
+  create: FileEntityCreateWithoutRestaurantsInput
+}
+
+input FileEntityCreateOrConnectWithoutProfilesInput {
+  create: FileEntityCreateWithoutProfilesInput!
+  where: FileEntityWhereUniqueInput!
+}
+
+input FileEntityCreateOrConnectWithoutRestaurantsInput {
+  create: FileEntityCreateWithoutRestaurantsInput!
+  where: FileEntityWhereUniqueInput!
+}
+
+input FileEntityCreateWithoutProfilesInput {
+  Restaurants: RestaurantsCreateNestedManyWithoutRestauMainImageInput
+  createdAt: DateTime
+  fileName: String!
+  fileUrl: String!
+  id: String
+  key: String!
+  updatedAt: DateTime
+}
+
+input FileEntityCreateWithoutRestaurantsInput {
+  Profiles: ProfileCreateNestedManyWithoutProfilePictureInput
+  createdAt: DateTime
+  fileName: String!
+  fileUrl: String!
+  id: String
+  key: String!
+  updatedAt: DateTime
+}
+
+input FileEntityOrderByWithRelationInput {
+  Profiles: ProfileOrderByRelationAggregateInput
+  Restaurants: RestaurantsOrderByRelationAggregateInput
+  createdAt: SortOrder
+  fileName: SortOrder
+  fileUrl: SortOrder
+  id: SortOrder
+  key: SortOrder
+  updatedAt: SortOrder
+}
+
+input FileEntityRelationFilter {
+  is: FileEntityWhereInput
+  isNot: FileEntityWhereInput
+}
+
+input FileEntityUpdateOneRequiredWithoutRestaurantsNestedInput {
+  connect: FileEntityWhereUniqueInput
+  connectOrCreate: FileEntityCreateOrConnectWithoutRestaurantsInput
+  create: FileEntityCreateWithoutRestaurantsInput
+  update: FileEntityUpdateWithoutRestaurantsInput
+  upsert: FileEntityUpsertWithoutRestaurantsInput
+}
+
+input FileEntityUpdateOneWithoutProfilesNestedInput {
+  connect: FileEntityWhereUniqueInput
+  connectOrCreate: FileEntityCreateOrConnectWithoutProfilesInput
+  create: FileEntityCreateWithoutProfilesInput
+  delete: Boolean
+  disconnect: Boolean
+  update: FileEntityUpdateWithoutProfilesInput
+  upsert: FileEntityUpsertWithoutProfilesInput
+}
+
+input FileEntityUpdateWithoutProfilesInput {
+  Restaurants: RestaurantsUpdateManyWithoutRestauMainImageNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  fileName: StringFieldUpdateOperationsInput
+  fileUrl: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  key: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input FileEntityUpdateWithoutRestaurantsInput {
+  Profiles: ProfileUpdateManyWithoutProfilePictureNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  fileName: StringFieldUpdateOperationsInput
+  fileUrl: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  key: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input FileEntityUpsertWithoutProfilesInput {
+  create: FileEntityCreateWithoutProfilesInput!
+  update: FileEntityUpdateWithoutProfilesInput!
+}
+
+input FileEntityUpsertWithoutRestaurantsInput {
+  create: FileEntityCreateWithoutRestaurantsInput!
+  update: FileEntityUpdateWithoutRestaurantsInput!
+}
+
+input FileEntityWhereInput {
+  AND: [FileEntityWhereInput!]
+  NOT: [FileEntityWhereInput!]
+  OR: [FileEntityWhereInput!]
+  Profiles: ProfileListRelationFilter
+  Restaurants: RestaurantsListRelationFilter
+  createdAt: DateTimeFilter
+  fileName: StringFilter
+  fileUrl: StringFilter
+  id: StringFilter
+  key: StringFilter
+  updatedAt: DateTimeFilter
+}
+
+input FileEntityWhereUniqueInput {
+  id: String
+}
+
+input FindFirstRestauUsersArgs {
+  cursor: RestauUsersWhereUniqueInput
+  distinct: [RestauUsersScalarFieldEnum!]
+  orderBy: [RestauUsersOrderByWithRelationInput!]
+  skip: Int
+  take: Int
+  where: RestauUsersWhereInput
+}
+
+input FindManyRestauUsersArgs {
+  cursor: RestauUsersWhereUniqueInput
+  distinct: [RestauUsersScalarFieldEnum!]
+  orderBy: [RestauUsersOrderByWithRelationInput!]
+  skip: Int
+  take: Int
+  where: RestauUsersWhereInput
+}
+
+input ImagesSecondaryCreateManyRestaurantsInput {
+  createdAt: DateTime
+  fileName: String!
+  fileUrl: String!
+  id: String
+  key: String!
+  updatedAt: DateTime
+}
+
+input ImagesSecondaryCreateManyRestaurantsInputEnvelope {
+  data: [ImagesSecondaryCreateManyRestaurantsInput!]!
+  skipDuplicates: Boolean
+}
+
+input ImagesSecondaryCreateNestedManyWithoutRestaurantsInput {
+  connect: [ImagesSecondaryWhereUniqueInput!]
+  connectOrCreate: [ImagesSecondaryCreateOrConnectWithoutRestaurantsInput!]
+  create: [ImagesSecondaryCreateWithoutRestaurantsInput!]
+  createMany: ImagesSecondaryCreateManyRestaurantsInputEnvelope
+}
+
+input ImagesSecondaryCreateOrConnectWithoutRestaurantsInput {
+  create: ImagesSecondaryCreateWithoutRestaurantsInput!
+  where: ImagesSecondaryWhereUniqueInput!
+}
+
+input ImagesSecondaryCreateWithoutRestaurantsInput {
+  createdAt: DateTime
+  fileName: String!
+  fileUrl: String!
+  id: String
+  key: String!
+  updatedAt: DateTime
+}
+
+input ImagesSecondaryListRelationFilter {
+  every: ImagesSecondaryWhereInput
+  none: ImagesSecondaryWhereInput
+  some: ImagesSecondaryWhereInput
+}
+
+input ImagesSecondaryOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input ImagesSecondaryScalarWhereInput {
+  AND: [ImagesSecondaryScalarWhereInput!]
+  NOT: [ImagesSecondaryScalarWhereInput!]
+  OR: [ImagesSecondaryScalarWhereInput!]
+  createdAt: DateTimeFilter
+  fileName: StringFilter
+  fileUrl: StringFilter
+  id: StringFilter
+  key: StringFilter
+  restaurantsId: StringNullableFilter
+  updatedAt: DateTimeFilter
+}
+
+input ImagesSecondaryUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  fileName: StringFieldUpdateOperationsInput
+  fileUrl: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  key: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ImagesSecondaryUpdateManyWithWhereWithoutRestaurantsInput {
+  data: ImagesSecondaryUpdateManyMutationInput!
+  where: ImagesSecondaryScalarWhereInput!
+}
+
+input ImagesSecondaryUpdateManyWithoutRestaurantsNestedInput {
+  connect: [ImagesSecondaryWhereUniqueInput!]
+  connectOrCreate: [ImagesSecondaryCreateOrConnectWithoutRestaurantsInput!]
+  create: [ImagesSecondaryCreateWithoutRestaurantsInput!]
+  createMany: ImagesSecondaryCreateManyRestaurantsInputEnvelope
+  delete: [ImagesSecondaryWhereUniqueInput!]
+  deleteMany: [ImagesSecondaryScalarWhereInput!]
+  disconnect: [ImagesSecondaryWhereUniqueInput!]
+  set: [ImagesSecondaryWhereUniqueInput!]
+  update: [ImagesSecondaryUpdateWithWhereUniqueWithoutRestaurantsInput!]
+  updateMany: [ImagesSecondaryUpdateManyWithWhereWithoutRestaurantsInput!]
+  upsert: [ImagesSecondaryUpsertWithWhereUniqueWithoutRestaurantsInput!]
+}
+
+input ImagesSecondaryUpdateWithWhereUniqueWithoutRestaurantsInput {
+  data: ImagesSecondaryUpdateWithoutRestaurantsInput!
+  where: ImagesSecondaryWhereUniqueInput!
+}
+
+input ImagesSecondaryUpdateWithoutRestaurantsInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  fileName: StringFieldUpdateOperationsInput
+  fileUrl: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  key: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ImagesSecondaryUpsertWithWhereUniqueWithoutRestaurantsInput {
+  create: ImagesSecondaryCreateWithoutRestaurantsInput!
+  update: ImagesSecondaryUpdateWithoutRestaurantsInput!
+  where: ImagesSecondaryWhereUniqueInput!
+}
+
+input ImagesSecondaryWhereInput {
+  AND: [ImagesSecondaryWhereInput!]
+  NOT: [ImagesSecondaryWhereInput!]
+  OR: [ImagesSecondaryWhereInput!]
+  Restaurants: RestaurantsRelationFilter
+  createdAt: DateTimeFilter
+  fileName: StringFilter
+  fileUrl: StringFilter
+  id: StringFilter
+  key: StringFilter
+  restaurantsId: StringNullableFilter
+  updatedAt: DateTimeFilter
+}
+
+input ImagesSecondaryWhereUniqueInput {
+  id: String
+}
+
+input NestedDateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeFilter
+  notIn: [DateTime!]
+}
+
+input NestedDateTimeNullableFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeNullableFilter
+  notIn: [DateTime!]
+}
+
+input NestedEnumRoleFilter {
+  equals: Role
+  in: [Role!]
+  not: NestedEnumRoleFilter
+  notIn: [Role!]
+}
+
+input NestedStringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input NestedStringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringNullableFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input NullableDateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
+input NullableStringFieldUpdateOperationsInput {
+  set: String
+}
+
+input ProfileCreateInput {
+  bio: String!
+  createdAt: DateTime
+  dateOfBirth: DateTime
+  placeOfBirth: DateTime
+  profileId: String
+  profilePicture: FileEntityCreateNestedOneWithoutProfilesInput
+  updatedAt: DateTime
+  user: UsersCreateNestedOneWithoutProfileInput
+}
+
+input ProfileCreateManyProfilePictureInput {
+  bio: String!
+  createdAt: DateTime
+  dateOfBirth: DateTime
+  placeOfBirth: DateTime
+  profileId: String
+  updatedAt: DateTime
+  userId: String
+}
+
+input ProfileCreateManyProfilePictureInputEnvelope {
+  data: [ProfileCreateManyProfilePictureInput!]!
+  skipDuplicates: Boolean
+}
+
+input ProfileCreateNestedManyWithoutProfilePictureInput {
+  connect: [ProfileWhereUniqueInput!]
+  connectOrCreate: [ProfileCreateOrConnectWithoutProfilePictureInput!]
+  create: [ProfileCreateWithoutProfilePictureInput!]
+  createMany: ProfileCreateManyProfilePictureInputEnvelope
+}
+
+input ProfileCreateNestedOneWithoutUserInput {
+  connect: ProfileWhereUniqueInput
+  connectOrCreate: ProfileCreateOrConnectWithoutUserInput
+  create: ProfileCreateWithoutUserInput
+}
+
+input ProfileCreateOrConnectWithoutProfilePictureInput {
+  create: ProfileCreateWithoutProfilePictureInput!
+  where: ProfileWhereUniqueInput!
+}
+
+input ProfileCreateOrConnectWithoutUserInput {
+  create: ProfileCreateWithoutUserInput!
+  where: ProfileWhereUniqueInput!
+}
+
+input ProfileCreateWithoutProfilePictureInput {
+  bio: String!
+  createdAt: DateTime
+  dateOfBirth: DateTime
+  placeOfBirth: DateTime
+  profileId: String
+  updatedAt: DateTime
+  user: UsersCreateNestedOneWithoutProfileInput
+}
+
+input ProfileCreateWithoutUserInput {
+  bio: String!
+  createdAt: DateTime
+  dateOfBirth: DateTime
+  placeOfBirth: DateTime
+  profileId: String
+  profilePicture: FileEntityCreateNestedOneWithoutProfilesInput
+  updatedAt: DateTime
+}
+
+input ProfileListRelationFilter {
+  every: ProfileWhereInput
+  none: ProfileWhereInput
+  some: ProfileWhereInput
+}
+
+input ProfileOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input ProfileRelationFilter {
+  is: ProfileWhereInput
+  isNot: ProfileWhereInput
+}
+
+input ProfileScalarWhereInput {
+  AND: [ProfileScalarWhereInput!]
+  NOT: [ProfileScalarWhereInput!]
+  OR: [ProfileScalarWhereInput!]
+  bio: StringFilter
+  createdAt: DateTimeFilter
+  dateOfBirth: DateTimeNullableFilter
+  fileEntityId: StringNullableFilter
+  placeOfBirth: DateTimeNullableFilter
+  profileId: StringFilter
+  updatedAt: DateTimeFilter
+  userId: StringNullableFilter
+}
+
+input ProfileUpdateInput {
+  bio: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
+  placeOfBirth: NullableDateTimeFieldUpdateOperationsInput
+  profileId: StringFieldUpdateOperationsInput
+  profilePicture: FileEntityUpdateOneWithoutProfilesNestedInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  user: UsersUpdateOneWithoutProfileNestedInput
+}
+
+input ProfileUpdateManyMutationInput {
+  bio: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
+  placeOfBirth: NullableDateTimeFieldUpdateOperationsInput
+  profileId: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ProfileUpdateManyWithWhereWithoutProfilePictureInput {
+  data: ProfileUpdateManyMutationInput!
+  where: ProfileScalarWhereInput!
+}
+
+input ProfileUpdateManyWithoutProfilePictureNestedInput {
+  connect: [ProfileWhereUniqueInput!]
+  connectOrCreate: [ProfileCreateOrConnectWithoutProfilePictureInput!]
+  create: [ProfileCreateWithoutProfilePictureInput!]
+  createMany: ProfileCreateManyProfilePictureInputEnvelope
+  delete: [ProfileWhereUniqueInput!]
+  deleteMany: [ProfileScalarWhereInput!]
+  disconnect: [ProfileWhereUniqueInput!]
+  set: [ProfileWhereUniqueInput!]
+  update: [ProfileUpdateWithWhereUniqueWithoutProfilePictureInput!]
+  updateMany: [ProfileUpdateManyWithWhereWithoutProfilePictureInput!]
+  upsert: [ProfileUpsertWithWhereUniqueWithoutProfilePictureInput!]
+}
+
+input ProfileUpdateOneWithoutUserNestedInput {
+  connect: ProfileWhereUniqueInput
+  connectOrCreate: ProfileCreateOrConnectWithoutUserInput
+  create: ProfileCreateWithoutUserInput
+  delete: Boolean
+  disconnect: Boolean
+  update: ProfileUpdateWithoutUserInput
+  upsert: ProfileUpsertWithoutUserInput
+}
+
+input ProfileUpdateWithWhereUniqueWithoutProfilePictureInput {
+  data: ProfileUpdateWithoutProfilePictureInput!
+  where: ProfileWhereUniqueInput!
+}
+
+input ProfileUpdateWithoutProfilePictureInput {
+  bio: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
+  placeOfBirth: NullableDateTimeFieldUpdateOperationsInput
+  profileId: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  user: UsersUpdateOneWithoutProfileNestedInput
+}
+
+input ProfileUpdateWithoutUserInput {
+  bio: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
+  placeOfBirth: NullableDateTimeFieldUpdateOperationsInput
+  profileId: StringFieldUpdateOperationsInput
+  profilePicture: FileEntityUpdateOneWithoutProfilesNestedInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ProfileUpsertWithWhereUniqueWithoutProfilePictureInput {
+  create: ProfileCreateWithoutProfilePictureInput!
+  update: ProfileUpdateWithoutProfilePictureInput!
+  where: ProfileWhereUniqueInput!
+}
+
+input ProfileUpsertWithoutUserInput {
+  create: ProfileCreateWithoutUserInput!
+  update: ProfileUpdateWithoutUserInput!
+}
+
+input ProfileWhereInput {
+  AND: [ProfileWhereInput!]
+  NOT: [ProfileWhereInput!]
+  OR: [ProfileWhereInput!]
+  bio: StringFilter
+  createdAt: DateTimeFilter
+  dateOfBirth: DateTimeNullableFilter
+  fileEntityId: StringNullableFilter
+  placeOfBirth: DateTimeNullableFilter
+  profileId: StringFilter
+  profilePicture: FileEntityRelationFilter
+  updatedAt: DateTimeFilter
+  user: UsersRelationFilter
+  userId: StringNullableFilter
+}
+
+input ProfileWhereUniqueInput {
+  fileEntityId: String
+  profileId: String
+  userId: String
+}
+
+input RestauUsersCreateManyRestaurantInput {
+  createdAt: DateTime
+  idRestauUser: String
+  password: String!
+  role: Role
+  updatedAt: DateTime
+  userFullName: String!
+  userName: String!
+}
+
+input RestauUsersCreateManyRestaurantInputEnvelope {
+  data: [RestauUsersCreateManyRestaurantInput!]!
+  skipDuplicates: Boolean
+}
+
+input RestauUsersCreateNestedManyWithoutRestaurantInput {
+  connect: [RestauUsersWhereUniqueInput!]
+  connectOrCreate: [RestauUsersCreateOrConnectWithoutRestaurantInput!]
+  create: [RestauUsersCreateWithoutRestaurantInput!]
+  createMany: RestauUsersCreateManyRestaurantInputEnvelope
+}
+
+input RestauUsersCreateOrConnectWithoutRestaurantInput {
+  create: RestauUsersCreateWithoutRestaurantInput!
+  where: RestauUsersWhereUniqueInput!
+}
+
+input RestauUsersCreateWithoutRestaurantInput {
+  createdAt: DateTime
+  idRestauUser: String
+  password: String!
+  role: Role
+  updatedAt: DateTime
+  userFullName: String!
+  userName: String!
+}
+
+input RestauUsersListRelationFilter {
+  every: RestauUsersWhereInput
+  none: RestauUsersWhereInput
+  some: RestauUsersWhereInput
+}
+
+input RestauUsersOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input RestauUsersOrderByWithRelationInput {
+  createdAt: SortOrder
+  idRestauUser: SortOrder
+  password: SortOrder
+  restauId: SortOrder
+  restaurant: RestaurantsOrderByWithRelationInput
+  role: SortOrder
+  updatedAt: SortOrder
+  userFullName: SortOrder
+  userName: SortOrder
+}
+
+input RestauUsersScalarWhereInput {
+  AND: [RestauUsersScalarWhereInput!]
+  NOT: [RestauUsersScalarWhereInput!]
+  OR: [RestauUsersScalarWhereInput!]
+  createdAt: DateTimeFilter
+  idRestauUser: StringFilter
+  password: StringFilter
+  restauId: StringFilter
+  role: EnumRoleFilter
+  updatedAt: DateTimeFilter
+  userFullName: StringFilter
+  userName: StringFilter
+}
+
+input RestauUsersUpdateInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  idRestauUser: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  restaurant: RestaurantsUpdateOneRequiredWithoutUsersNestedInput
+  role: EnumRoleFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  userFullName: StringFieldUpdateOperationsInput
+  userName: StringFieldUpdateOperationsInput
+}
+
+input RestauUsersUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  idRestauUser: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  role: EnumRoleFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  userFullName: StringFieldUpdateOperationsInput
+  userName: StringFieldUpdateOperationsInput
+}
+
+input RestauUsersUpdateManyWithWhereWithoutRestaurantInput {
+  data: RestauUsersUpdateManyMutationInput!
+  where: RestauUsersScalarWhereInput!
+}
+
+input RestauUsersUpdateManyWithoutRestaurantNestedInput {
+  connect: [RestauUsersWhereUniqueInput!]
+  connectOrCreate: [RestauUsersCreateOrConnectWithoutRestaurantInput!]
+  create: [RestauUsersCreateWithoutRestaurantInput!]
+  createMany: RestauUsersCreateManyRestaurantInputEnvelope
+  delete: [RestauUsersWhereUniqueInput!]
+  deleteMany: [RestauUsersScalarWhereInput!]
+  disconnect: [RestauUsersWhereUniqueInput!]
+  set: [RestauUsersWhereUniqueInput!]
+  update: [RestauUsersUpdateWithWhereUniqueWithoutRestaurantInput!]
+  updateMany: [RestauUsersUpdateManyWithWhereWithoutRestaurantInput!]
+  upsert: [RestauUsersUpsertWithWhereUniqueWithoutRestaurantInput!]
+}
+
+input RestauUsersUpdateWithWhereUniqueWithoutRestaurantInput {
+  data: RestauUsersUpdateWithoutRestaurantInput!
+  where: RestauUsersWhereUniqueInput!
+}
+
+input RestauUsersUpdateWithoutRestaurantInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  idRestauUser: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  role: EnumRoleFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  userFullName: StringFieldUpdateOperationsInput
+  userName: StringFieldUpdateOperationsInput
+}
+
+input RestauUsersUpsertWithWhereUniqueWithoutRestaurantInput {
+  create: RestauUsersCreateWithoutRestaurantInput!
+  update: RestauUsersUpdateWithoutRestaurantInput!
+  where: RestauUsersWhereUniqueInput!
+}
+
+input RestauUsersWhereInput {
+  AND: [RestauUsersWhereInput!]
+  NOT: [RestauUsersWhereInput!]
+  OR: [RestauUsersWhereInput!]
+  createdAt: DateTimeFilter
+  idRestauUser: StringFilter
+  password: StringFilter
+  restauId: StringFilter
+  restaurant: RestaurantsRelationFilter
+  role: EnumRoleFilter
+  updatedAt: DateTimeFilter
+  userFullName: StringFilter
+  userName: StringFilter
+}
+
+input RestauUsersWhereUniqueInput {
+  idRestauUser: String
+}
+
+input RestaurantsCreateManyRestauMainImageInput {
+  createdAt: DateTime
+  creationDate: DateTime
+  idRestaurant: String
+  restauDescription: String!
+  restauName: String!
+  updatedAt: DateTime
+}
+
+input RestaurantsCreateManyRestauMainImageInputEnvelope {
+  data: [RestaurantsCreateManyRestauMainImageInput!]!
+  skipDuplicates: Boolean
+}
+
+input RestaurantsCreateNestedManyWithoutRestauMainImageInput {
+  connect: [RestaurantsWhereUniqueInput!]
+  connectOrCreate: [RestaurantsCreateOrConnectWithoutRestauMainImageInput!]
+  create: [RestaurantsCreateWithoutRestauMainImageInput!]
+  createMany: RestaurantsCreateManyRestauMainImageInputEnvelope
+}
+
+input RestaurantsCreateNestedOneWithoutAdressesInput {
+  connect: RestaurantsWhereUniqueInput
+  connectOrCreate: RestaurantsCreateOrConnectWithoutAdressesInput
+  create: RestaurantsCreateWithoutAdressesInput
+}
+
+input RestaurantsCreateOrConnectWithoutAdressesInput {
+  create: RestaurantsCreateWithoutAdressesInput!
+  where: RestaurantsWhereUniqueInput!
+}
+
+input RestaurantsCreateOrConnectWithoutRestauMainImageInput {
+  create: RestaurantsCreateWithoutRestauMainImageInput!
+  where: RestaurantsWhereUniqueInput!
+}
+
+input RestaurantsCreateOrConnectWithoutUsersInput {
+  create: RestaurantsCreateWithoutUsersInput!
+  where: RestaurantsWhereUniqueInput!
+}
+
+input RestaurantsCreateWithoutAdressesInput {
+  createdAt: DateTime
+  creationDate: DateTime
+  idRestaurant: String
+  otherImages: ImagesSecondaryCreateNestedManyWithoutRestaurantsInput
+  restauDescription: String!
+  restauMainImage: FileEntityCreateNestedOneWithoutRestaurantsInput!
+  restauName: String!
+  updatedAt: DateTime
+  users: RestauUsersCreateNestedManyWithoutRestaurantInput
+}
+
+input RestaurantsCreateWithoutRestauMainImageInput {
+  adresses: AdressesCreateNestedManyWithoutRestaurantInput
+  createdAt: DateTime
+  creationDate: DateTime
+  idRestaurant: String
+  otherImages: ImagesSecondaryCreateNestedManyWithoutRestaurantsInput
+  restauDescription: String!
+  restauName: String!
+  updatedAt: DateTime
+  users: RestauUsersCreateNestedManyWithoutRestaurantInput
+}
+
+input RestaurantsCreateWithoutUsersInput {
+  adresses: AdressesCreateNestedManyWithoutRestaurantInput
+  createdAt: DateTime
+  creationDate: DateTime
+  idRestaurant: String
+  otherImages: ImagesSecondaryCreateNestedManyWithoutRestaurantsInput
+  restauDescription: String!
+  restauMainImage: FileEntityCreateNestedOneWithoutRestaurantsInput!
+  restauName: String!
+  updatedAt: DateTime
+}
+
+input RestaurantsListRelationFilter {
+  every: RestaurantsWhereInput
+  none: RestaurantsWhereInput
+  some: RestaurantsWhereInput
+}
+
+input RestaurantsOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input RestaurantsOrderByWithRelationInput {
+  adresses: AdressesOrderByRelationAggregateInput
+  createdAt: SortOrder
+  creationDate: SortOrder
+  fileEntityId: SortOrder
+  idRestaurant: SortOrder
+  otherImages: ImagesSecondaryOrderByRelationAggregateInput
+  restauDescription: SortOrder
+  restauMainImage: FileEntityOrderByWithRelationInput
+  restauName: SortOrder
+  updatedAt: SortOrder
+  users: RestauUsersOrderByRelationAggregateInput
+}
+
+input RestaurantsRelationFilter {
+  is: RestaurantsWhereInput
+  isNot: RestaurantsWhereInput
+}
+
+input RestaurantsScalarWhereInput {
+  AND: [RestaurantsScalarWhereInput!]
+  NOT: [RestaurantsScalarWhereInput!]
+  OR: [RestaurantsScalarWhereInput!]
+  createdAt: DateTimeFilter
+  creationDate: DateTimeFilter
+  fileEntityId: StringFilter
+  idRestaurant: StringFilter
+  restauDescription: StringFilter
+  restauName: StringFilter
+  updatedAt: DateTimeFilter
+}
+
+input RestaurantsUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  creationDate: DateTimeFieldUpdateOperationsInput
+  idRestaurant: StringFieldUpdateOperationsInput
+  restauDescription: StringFieldUpdateOperationsInput
+  restauName: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input RestaurantsUpdateManyWithWhereWithoutRestauMainImageInput {
+  data: RestaurantsUpdateManyMutationInput!
+  where: RestaurantsScalarWhereInput!
+}
+
+input RestaurantsUpdateManyWithoutRestauMainImageNestedInput {
+  connect: [RestaurantsWhereUniqueInput!]
+  connectOrCreate: [RestaurantsCreateOrConnectWithoutRestauMainImageInput!]
+  create: [RestaurantsCreateWithoutRestauMainImageInput!]
+  createMany: RestaurantsCreateManyRestauMainImageInputEnvelope
+  delete: [RestaurantsWhereUniqueInput!]
+  deleteMany: [RestaurantsScalarWhereInput!]
+  disconnect: [RestaurantsWhereUniqueInput!]
+  set: [RestaurantsWhereUniqueInput!]
+  update: [RestaurantsUpdateWithWhereUniqueWithoutRestauMainImageInput!]
+  updateMany: [RestaurantsUpdateManyWithWhereWithoutRestauMainImageInput!]
+  upsert: [RestaurantsUpsertWithWhereUniqueWithoutRestauMainImageInput!]
+}
+
+input RestaurantsUpdateOneRequiredWithoutUsersNestedInput {
+  connect: RestaurantsWhereUniqueInput
+  connectOrCreate: RestaurantsCreateOrConnectWithoutUsersInput
+  create: RestaurantsCreateWithoutUsersInput
+  update: RestaurantsUpdateWithoutUsersInput
+  upsert: RestaurantsUpsertWithoutUsersInput
+}
+
+input RestaurantsUpdateOneWithoutAdressesNestedInput {
+  connect: RestaurantsWhereUniqueInput
+  connectOrCreate: RestaurantsCreateOrConnectWithoutAdressesInput
+  create: RestaurantsCreateWithoutAdressesInput
+  delete: Boolean
+  disconnect: Boolean
+  update: RestaurantsUpdateWithoutAdressesInput
+  upsert: RestaurantsUpsertWithoutAdressesInput
+}
+
+input RestaurantsUpdateWithWhereUniqueWithoutRestauMainImageInput {
+  data: RestaurantsUpdateWithoutRestauMainImageInput!
+  where: RestaurantsWhereUniqueInput!
+}
+
+input RestaurantsUpdateWithoutAdressesInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  creationDate: DateTimeFieldUpdateOperationsInput
+  idRestaurant: StringFieldUpdateOperationsInput
+  otherImages: ImagesSecondaryUpdateManyWithoutRestaurantsNestedInput
+  restauDescription: StringFieldUpdateOperationsInput
+  restauMainImage: FileEntityUpdateOneRequiredWithoutRestaurantsNestedInput
+  restauName: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  users: RestauUsersUpdateManyWithoutRestaurantNestedInput
+}
+
+input RestaurantsUpdateWithoutRestauMainImageInput {
+  adresses: AdressesUpdateManyWithoutRestaurantNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  creationDate: DateTimeFieldUpdateOperationsInput
+  idRestaurant: StringFieldUpdateOperationsInput
+  otherImages: ImagesSecondaryUpdateManyWithoutRestaurantsNestedInput
+  restauDescription: StringFieldUpdateOperationsInput
+  restauName: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  users: RestauUsersUpdateManyWithoutRestaurantNestedInput
+}
+
+input RestaurantsUpdateWithoutUsersInput {
+  adresses: AdressesUpdateManyWithoutRestaurantNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  creationDate: DateTimeFieldUpdateOperationsInput
+  idRestaurant: StringFieldUpdateOperationsInput
+  otherImages: ImagesSecondaryUpdateManyWithoutRestaurantsNestedInput
+  restauDescription: StringFieldUpdateOperationsInput
+  restauMainImage: FileEntityUpdateOneRequiredWithoutRestaurantsNestedInput
+  restauName: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input RestaurantsUpsertWithWhereUniqueWithoutRestauMainImageInput {
+  create: RestaurantsCreateWithoutRestauMainImageInput!
+  update: RestaurantsUpdateWithoutRestauMainImageInput!
+  where: RestaurantsWhereUniqueInput!
+}
+
+input RestaurantsUpsertWithoutAdressesInput {
+  create: RestaurantsCreateWithoutAdressesInput!
+  update: RestaurantsUpdateWithoutAdressesInput!
+}
+
+input RestaurantsUpsertWithoutUsersInput {
+  create: RestaurantsCreateWithoutUsersInput!
+  update: RestaurantsUpdateWithoutUsersInput!
+}
+
+input RestaurantsWhereInput {
+  AND: [RestaurantsWhereInput!]
+  NOT: [RestaurantsWhereInput!]
+  OR: [RestaurantsWhereInput!]
+  adresses: AdressesListRelationFilter
+  createdAt: DateTimeFilter
+  creationDate: DateTimeFilter
+  fileEntityId: StringFilter
+  idRestaurant: StringFilter
+  otherImages: ImagesSecondaryListRelationFilter
+  restauDescription: StringFilter
+  restauMainImage: FileEntityRelationFilter
+  restauName: StringFilter
+  updatedAt: DateTimeFilter
+  users: RestauUsersListRelationFilter
+}
+
+input RestaurantsWhereUniqueInput {
+  idRestaurant: String
+}
+
+input StringFieldUpdateOperationsInput {
+  set: String
+}
+
+input StringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  mode: QueryMode
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input StringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  mode: QueryMode
+  not: NestedStringNullableFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input UpdateOneAuthUserArgs {
+  data: AuthUserUpdateInput!
+  where: AuthUserWhereUniqueInput!
+}
+
+input UpdateOneProfileArgs {
+  data: ProfileUpdateInput!
+  where: ProfileWhereUniqueInput!
+}
+
+input UpdateOneRestauUsersArgs {
+  data: RestauUsersUpdateInput!
+  where: RestauUsersWhereUniqueInput!
+}
+
+input UpdateOneUsersArgs {
+  data: UsersUpdateInput!
+  where: UsersWhereUniqueInput!
+}
+
+input UsersCreateInput {
+  adresses: AdressesCreateNestedManyWithoutUserInput
+  createdAt: DateTime
+  firstName: String
+  idUser: String
+  lastName: String
+  profile: ProfileCreateNestedOneWithoutUserInput
+  updatedAt: DateTime
+  userName: String!
+}
+
+input UsersCreateNestedOneWithoutAdressesInput {
+  connect: UsersWhereUniqueInput
+  connectOrCreate: UsersCreateOrConnectWithoutAdressesInput
+  create: UsersCreateWithoutAdressesInput
+}
+
+input UsersCreateNestedOneWithoutProfileInput {
+  connect: UsersWhereUniqueInput
+  connectOrCreate: UsersCreateOrConnectWithoutProfileInput
+  create: UsersCreateWithoutProfileInput
+}
+
+input UsersCreateOrConnectWithoutAdressesInput {
+  create: UsersCreateWithoutAdressesInput!
+  where: UsersWhereUniqueInput!
+}
+
+input UsersCreateOrConnectWithoutProfileInput {
+  create: UsersCreateWithoutProfileInput!
+  where: UsersWhereUniqueInput!
+}
+
+input UsersCreateWithoutAdressesInput {
+  createdAt: DateTime
+  firstName: String
+  idUser: String
+  lastName: String
+  profile: ProfileCreateNestedOneWithoutUserInput
+  updatedAt: DateTime
+  userName: String!
+}
+
+input UsersCreateWithoutProfileInput {
+  adresses: AdressesCreateNestedManyWithoutUserInput
+  createdAt: DateTime
+  firstName: String
+  idUser: String
+  lastName: String
+  updatedAt: DateTime
+  userName: String!
+}
+
+input UsersRelationFilter {
+  is: UsersWhereInput
+  isNot: UsersWhereInput
+}
+
+input UsersUpdateInput {
+  adresses: AdressesUpdateManyWithoutUserNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  firstName: NullableStringFieldUpdateOperationsInput
+  idUser: StringFieldUpdateOperationsInput
+  lastName: NullableStringFieldUpdateOperationsInput
+  profile: ProfileUpdateOneWithoutUserNestedInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  userName: StringFieldUpdateOperationsInput
+}
+
+input UsersUpdateOneWithoutAdressesNestedInput {
+  connect: UsersWhereUniqueInput
+  connectOrCreate: UsersCreateOrConnectWithoutAdressesInput
+  create: UsersCreateWithoutAdressesInput
+  delete: Boolean
+  disconnect: Boolean
+  update: UsersUpdateWithoutAdressesInput
+  upsert: UsersUpsertWithoutAdressesInput
+}
+
+input UsersUpdateOneWithoutProfileNestedInput {
+  connect: UsersWhereUniqueInput
+  connectOrCreate: UsersCreateOrConnectWithoutProfileInput
+  create: UsersCreateWithoutProfileInput
+  delete: Boolean
+  disconnect: Boolean
+  update: UsersUpdateWithoutProfileInput
+  upsert: UsersUpsertWithoutProfileInput
+}
+
+input UsersUpdateWithoutAdressesInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  firstName: NullableStringFieldUpdateOperationsInput
+  idUser: StringFieldUpdateOperationsInput
+  lastName: NullableStringFieldUpdateOperationsInput
+  profile: ProfileUpdateOneWithoutUserNestedInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  userName: StringFieldUpdateOperationsInput
+}
+
+input UsersUpdateWithoutProfileInput {
+  adresses: AdressesUpdateManyWithoutUserNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  firstName: NullableStringFieldUpdateOperationsInput
+  idUser: StringFieldUpdateOperationsInput
+  lastName: NullableStringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  userName: StringFieldUpdateOperationsInput
+}
+
+input UsersUpsertWithoutAdressesInput {
+  create: UsersCreateWithoutAdressesInput!
+  update: UsersUpdateWithoutAdressesInput!
+}
+
+input UsersUpsertWithoutProfileInput {
+  create: UsersCreateWithoutProfileInput!
+  update: UsersUpdateWithoutProfileInput!
+}
+
+input UsersWhereInput {
+  AND: [UsersWhereInput!]
+  NOT: [UsersWhereInput!]
+  OR: [UsersWhereInput!]
+  adresses: AdressesListRelationFilter
+  createdAt: DateTimeFilter
+  firstName: StringNullableFilter
+  idUser: StringFilter
+  lastName: StringNullableFilter
+  profile: ProfileRelationFilter
+  updatedAt: DateTimeFilter
+  userName: StringFilter
+}
+
+input UsersWhereUniqueInput {
+  idUser: String
+}

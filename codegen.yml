@@ -1,6 +1,6 @@
 overwrite: true
 schema: "http://localhost:3333/graphql"
-documents: "libs/uishared-types/src/graphql/*.graphql"
+documents: "libs/uishared-types/src/graphql/schemas/*.graphql"
 generates:
   libs/uishared-types/src/generated/graphqlTypes.tsx:
     plugins:

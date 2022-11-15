@@ -6,7 +6,8 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "testing:perf": "k6 run --vus 10 --duration 10s testingScript.js"
+    "testing:perf": "k6 run --vus 10 --duration 10s testingScript.js",
+    "codegen": "graphql-codegen --config codegen.yml --errors-only"
   },
   "private": true,
   "dependencies": {

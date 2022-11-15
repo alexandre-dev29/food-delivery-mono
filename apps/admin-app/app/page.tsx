@@ -1,3 +1,11 @@
+import { apolloClient, GetAllUsersDocument, GetAllUsersQuery } from '@food-delivery-mono/uishared-types';
+import OtherCompo from './otherCompo';
+
 export default async function Home() {
-  return <h1>Alexandre Mwenze</h1>;
+  const { data } = await apolloClient.query<GetAllUsersQuery>({ query: GetAllUsersDocument });
+  return (
+    <div>
+      <OtherCompo name={'Mwenze Nkwembe'} />
+    </div>
+  );
 }

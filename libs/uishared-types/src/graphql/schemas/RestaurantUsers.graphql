@@ -1,0 +1,28 @@
+mutation LoginRestaurantUser($username: String!, $password: String!){
+  loginRestauUser(userName: $username, password: $password)
+}
+
+mutation CreateRestaurantUser($username: String!, $password: String!, $userFullName: String!, $userRole: Role!){
+  createRestauUser(userName: $username, password: $password, userFullName: $userFullName, role: $userRole){
+    idRestauUser
+    userFullName
+    userName
+    restaurant {
+      ...RestaurantFragment
+    }
+  }
+}
+
+
+fragment RestaurantUserFragment on RestauUsers{
+  idRestauUser
+  userName
+  userFullName
+  role
+  createdAt
+  updatedAt
+  restauId
+  restaurant {
+    ...RestaurantFragment
+  }
+}

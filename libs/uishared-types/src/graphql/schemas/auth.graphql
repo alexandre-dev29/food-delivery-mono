@@ -1,0 +1,12 @@
+mutation LoginUser($phoneNumber: String!, $password: String!){
+  loginUser(phoneNumber:$phoneNumber, password: $password  )
+}
+
+mutation RegisterUser($phoneNumber: String!, $password: String!, $username: String!){
+  signUp(registerUserInputs: {username:$username, password: $password, phoneNumber: $phoneNumber }){
+    id
+    phoneNumber
+    isPhoneConfirmed
+    role
+  }
+}

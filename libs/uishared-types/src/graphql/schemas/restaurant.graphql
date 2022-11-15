@@ -1,0 +1,7 @@
+fragment RestaurantFragment on Restaurants{
+  idRestaurant
+  restauName
+  restauDescription
+  createdAt
+  updatedAt
+}

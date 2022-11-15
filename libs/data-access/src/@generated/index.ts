@@ -1,5 +1,12 @@
-import { Field, registerEnumType, Int, InputType, ObjectType, ID, HideField } from '@nestjs/graphql';
+import { Field } from '@nestjs/graphql';
+import { ArgsType } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
+import { Int } from '@nestjs/graphql';
+import { InputType } from '@nestjs/graphql';
+import { ObjectType } from '@nestjs/graphql';
+import { registerEnumType } from '@nestjs/graphql';
+import { ID } from '@nestjs/graphql';
+import { HideField } from '@nestjs/graphql';
 
 export enum UsersScalarFieldEnum {
   idUser = 'idUser',
@@ -4002,6 +4009,198 @@ export class EnumRoleWithAggregatesFilter {
   _min?: InstanceType<typeof NestedEnumRoleFilter>;
   @Field(() => NestedEnumRoleFilter, { nullable: true })
   _max?: InstanceType<typeof NestedEnumRoleFilter>;
+}
+
+@InputType()
+export class FindFirstAdressesOrThrowArgs {
+  @Field(() => AdressesWhereInput, { nullable: true })
+  @Type(() => AdressesWhereInput)
+  where?: InstanceType<typeof AdressesWhereInput>;
+  @Field(() => [AdressesOrderByWithRelationInput], { nullable: true })
+  orderBy?: Array<AdressesOrderByWithRelationInput>;
+  @Field(() => AdressesWhereUniqueInput, { nullable: true })
+  cursor?: InstanceType<typeof AdressesWhereUniqueInput>;
+  @Field(() => Int, { nullable: true })
+  take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
+  @Field(() => [AdressesScalarFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof AdressesScalarFieldEnum>;
+}
+
+@InputType()
+export class FindFirstAuthUserOrThrowArgs {
+  @Field(() => AuthUserWhereInput, { nullable: true })
+  @Type(() => AuthUserWhereInput)
+  where?: InstanceType<typeof AuthUserWhereInput>;
+  @Field(() => [AuthUserOrderByWithRelationInput], { nullable: true })
+  orderBy?: Array<AuthUserOrderByWithRelationInput>;
+  @Field(() => AuthUserWhereUniqueInput, { nullable: true })
+  cursor?: InstanceType<typeof AuthUserWhereUniqueInput>;
+  @Field(() => Int, { nullable: true })
+  take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
+  @Field(() => [AuthUserScalarFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof AuthUserScalarFieldEnum>;
+}
+
+@InputType()
+export class FindFirstFileEntityOrThrowArgs {
+  @Field(() => FileEntityWhereInput, { nullable: true })
+  @Type(() => FileEntityWhereInput)
+  where?: InstanceType<typeof FileEntityWhereInput>;
+  @Field(() => [FileEntityOrderByWithRelationInput], { nullable: true })
+  orderBy?: Array<FileEntityOrderByWithRelationInput>;
+  @Field(() => FileEntityWhereUniqueInput, { nullable: true })
+  cursor?: InstanceType<typeof FileEntityWhereUniqueInput>;
+  @Field(() => Int, { nullable: true })
+  take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
+  @Field(() => [FileEntityScalarFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof FileEntityScalarFieldEnum>;
+}
+
+@InputType()
+export class FindFirstImagesSecondaryOrThrowArgs {
+  @Field(() => ImagesSecondaryWhereInput, { nullable: true })
+  @Type(() => ImagesSecondaryWhereInput)
+  where?: InstanceType<typeof ImagesSecondaryWhereInput>;
+  @Field(() => [ImagesSecondaryOrderByWithRelationInput], { nullable: true })
+  orderBy?: Array<ImagesSecondaryOrderByWithRelationInput>;
+  @Field(() => ImagesSecondaryWhereUniqueInput, { nullable: true })
+  cursor?: InstanceType<typeof ImagesSecondaryWhereUniqueInput>;
+  @Field(() => Int, { nullable: true })
+  take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
+  @Field(() => [ImagesSecondaryScalarFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof ImagesSecondaryScalarFieldEnum>;
+}
+
+@InputType()
+export class FindFirstProfileOrThrowArgs {
+  @Field(() => ProfileWhereInput, { nullable: true })
+  @Type(() => ProfileWhereInput)
+  where?: InstanceType<typeof ProfileWhereInput>;
+  @Field(() => [ProfileOrderByWithRelationInput], { nullable: true })
+  orderBy?: Array<ProfileOrderByWithRelationInput>;
+  @Field(() => ProfileWhereUniqueInput, { nullable: true })
+  cursor?: InstanceType<typeof ProfileWhereUniqueInput>;
+  @Field(() => Int, { nullable: true })
+  take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
+  @Field(() => [ProfileScalarFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof ProfileScalarFieldEnum>;
+}
+
+@InputType()
+export class FindFirstRestauUsersOrThrowArgs {
+  @Field(() => RestauUsersWhereInput, { nullable: true })
+  @Type(() => RestauUsersWhereInput)
+  where?: InstanceType<typeof RestauUsersWhereInput>;
+  @Field(() => [RestauUsersOrderByWithRelationInput], { nullable: true })
+  orderBy?: Array<RestauUsersOrderByWithRelationInput>;
+  @Field(() => RestauUsersWhereUniqueInput, { nullable: true })
+  cursor?: InstanceType<typeof RestauUsersWhereUniqueInput>;
+  @Field(() => Int, { nullable: true })
+  take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
+  @Field(() => [RestauUsersScalarFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof RestauUsersScalarFieldEnum>;
+}
+
+@InputType()
+export class FindFirstRestaurantsOrThrowArgs {
+  @Field(() => RestaurantsWhereInput, { nullable: true })
+  @Type(() => RestaurantsWhereInput)
+  where?: InstanceType<typeof RestaurantsWhereInput>;
+  @Field(() => [RestaurantsOrderByWithRelationInput], { nullable: true })
+  orderBy?: Array<RestaurantsOrderByWithRelationInput>;
+  @Field(() => RestaurantsWhereUniqueInput, { nullable: true })
+  cursor?: InstanceType<typeof RestaurantsWhereUniqueInput>;
+  @Field(() => Int, { nullable: true })
+  take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
+  @Field(() => [RestaurantsScalarFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof RestaurantsScalarFieldEnum>;
+}
+
+@InputType()
+export class FindFirstUsersOrThrowArgs {
+  @Field(() => UsersWhereInput, { nullable: true })
+  @Type(() => UsersWhereInput)
+  where?: InstanceType<typeof UsersWhereInput>;
+  @Field(() => [UsersOrderByWithRelationInput], { nullable: true })
+  orderBy?: Array<UsersOrderByWithRelationInput>;
+  @Field(() => UsersWhereUniqueInput, { nullable: true })
+  cursor?: InstanceType<typeof UsersWhereUniqueInput>;
+  @Field(() => Int, { nullable: true })
+  take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
+  @Field(() => [UsersScalarFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof UsersScalarFieldEnum>;
+}
+
+@InputType()
+export class FindUniqueAdressesOrThrowArgs {
+  @Field(() => AdressesWhereUniqueInput, { nullable: false })
+  @Type(() => AdressesWhereUniqueInput)
+  where!: InstanceType<typeof AdressesWhereUniqueInput>;
+}
+
+@InputType()
+export class FindUniqueAuthUserOrThrowArgs {
+  @Field(() => AuthUserWhereUniqueInput, { nullable: false })
+  @Type(() => AuthUserWhereUniqueInput)
+  where!: InstanceType<typeof AuthUserWhereUniqueInput>;
+}
+
+@InputType()
+export class FindUniqueFileEntityOrThrowArgs {
+  @Field(() => FileEntityWhereUniqueInput, { nullable: false })
+  @Type(() => FileEntityWhereUniqueInput)
+  where!: InstanceType<typeof FileEntityWhereUniqueInput>;
+}
+
+@InputType()
+export class FindUniqueImagesSecondaryOrThrowArgs {
+  @Field(() => ImagesSecondaryWhereUniqueInput, { nullable: false })
+  @Type(() => ImagesSecondaryWhereUniqueInput)
+  where!: InstanceType<typeof ImagesSecondaryWhereUniqueInput>;
+}
+
+@InputType()
+export class FindUniqueProfileOrThrowArgs {
+  @Field(() => ProfileWhereUniqueInput, { nullable: false })
+  @Type(() => ProfileWhereUniqueInput)
+  where!: InstanceType<typeof ProfileWhereUniqueInput>;
+}
+
+@InputType()
+export class FindUniqueRestauUsersOrThrowArgs {
+  @Field(() => RestauUsersWhereUniqueInput, { nullable: false })
+  @Type(() => RestauUsersWhereUniqueInput)
+  where!: InstanceType<typeof RestauUsersWhereUniqueInput>;
+}
+
+@InputType()
+export class FindUniqueRestaurantsOrThrowArgs {
+  @Field(() => RestaurantsWhereUniqueInput, { nullable: false })
+  @Type(() => RestaurantsWhereUniqueInput)
+  where!: InstanceType<typeof RestaurantsWhereUniqueInput>;
+}
+
+@InputType()
+export class FindUniqueUsersOrThrowArgs {
+  @Field(() => UsersWhereUniqueInput, { nullable: false })
+  @Type(() => UsersWhereUniqueInput)
+  where!: InstanceType<typeof UsersWhereUniqueInput>;
 }
 
 @InputType()

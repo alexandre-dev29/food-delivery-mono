@@ -7,7 +7,14 @@ module.exports = {
     './libs/ui-shared-components/src/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        bgColorWhite: '#F1F1EF',
+        blueDark: '#2F414F',
+        blueLight: '#3894A3',
+        sadGreenL: '#C7DAD4',
+      },
+    },
   },
   plugins: [],
 };

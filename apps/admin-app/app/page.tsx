@@ -5,6 +5,7 @@ export default async function Home() {
   const { data } = await apolloClient.query<GetAllUsersQuery>({ query: GetAllUsersDocument });
   return (
     <div>
+      <input type={''} />
       <OtherCompo name={'Mwenze Nkwembe'} />
     </div>
   );

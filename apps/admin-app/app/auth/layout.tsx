@@ -3,8 +3,18 @@ import { Container } from '@nextui-org/react';
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <Container display={'flex'} justify={'center'} alignItems={'center'} css={{ height: '100vh' }}>
+    <div
+      className={'flex justify-center items-center '}
+      style={{
+        height: '100vh',
+        padding: 0,
+        backgroundImage: "url('/wave.svg')",
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'bottom',
+        backgroundOrigin: '0',
+      }}
+    >
       {children}
-    </Container>
+    </div>
   );
 }

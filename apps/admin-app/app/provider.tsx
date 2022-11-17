@@ -3,7 +3,7 @@ import { useServerInsertedHTML } from 'next/navigation';
 import { Container, CssBaseline, useTheme } from '@nextui-org/react';
 import { NextUIProvider } from '@nextui-org/react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
-import { DarkTheme, LightTheme } from '@food-delivery-mono/ui-shared-components';
+import { DarkTheme, LightTheme, poppins } from '@food-delivery-mono/ui-shared-components';
 import { Toaster } from 'react-hot-toast';
 import { IconoirProvider } from 'iconoir-react';
 
@@ -11,10 +11,9 @@ export default function Providers({ children }) {
   useServerInsertedHTML(() => {
     return <>{CssBaseline.flush()}</>;
   });
-  const { theme } = useTheme();
 
   return (
-    <Container css={{ backgroundColor: '$bgColorWhite' }}>
+    <Container xl={true} css={{ backgroundColor: '$bgColorWhite', padding: 0 }}>
       <NextThemesProvider
         defaultTheme={'light'}
         attribute={'class'}

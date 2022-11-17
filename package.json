@@ -51,6 +51,7 @@
     "passport-jwt": "^4.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.39.4",
     "react-hot-toast": "^2.4.0",
     "reflect-metadata": "^0.1.13",
     "regenerator-runtime": "0.13.7",

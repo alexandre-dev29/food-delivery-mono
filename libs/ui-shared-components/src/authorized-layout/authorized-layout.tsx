@@ -1,5 +1,8 @@
-import { ReactNode } from 'react';
-import MainLayout from '../main-layout/main-layout';
+import { ReactNode } from "react";
+import NavbarElement from "../navbar/navbar";
+import { Container } from "@nextui-org/react";
+import SideBar from "../side-bar/side-bar";
+
 
 export interface AuthorizedLayoutProps {
   children?: ReactNode;
@@ -7,9 +10,10 @@ export interface AuthorizedLayoutProps {
 
 export function AuthorizedLayout({ children }: AuthorizedLayoutProps) {
   return (
-    <MainLayout>
+    <div className={"flex flex-col"}>
+      <NavbarElement />
       <div>{children}</div>
-    </MainLayout>
+    </div>
   );
 }
 

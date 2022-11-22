@@ -10,3 +10,14 @@ mutation RegisterUser($phoneNumber: String!, $password: String!, $username: Stri
     role
   }
 }
+
+query CurrentUser{
+  currentUser {
+    userName
+    firstName
+    lastName
+    profile {
+      bio
+    }
+  }
+}

@@ -818,37 +818,45 @@ export type Mutation = {
   updateUser: Users;
 };
 
+
 export type MutationAskingForOtpCodeArgs = {
   phoneNumber: Scalars['String'];
 };
+
 
 export type MutationChangePasswordArgs = {
   newPassword: Scalars['String'];
   phoneNumber: Scalars['String'];
 };
 
+
 export type MutationChangeRestauUserPasswordArgs = {
   newPassword: Scalars['String'];
   userName: Scalars['String'];
 };
+
 
 export type MutationConfirmOtpForForgotArgs = {
   otpCode: Scalars['String'];
   phoneNumber: Scalars['String'];
 };
 
+
 export type MutationConfirmPhoneNumberArgs = {
   otpCode: Scalars['String'];
   phoneNumber: Scalars['String'];
 };
 
+
 export type MutationCreateAuthArgs = {
   createAuthInput: CreateOneAuthUserArgs;
 };
 
+
 export type MutationCreateProfileArgs = {
   createProfileInput: CreateOneProfileArgs;
 };
+
 
 export type MutationCreateRestauUserArgs = {
   password: Scalars['String'];
@@ -857,63 +865,78 @@ export type MutationCreateRestauUserArgs = {
   userName: Scalars['String'];
 };
 
+
 export type MutationCreateUserArgs = {
   createUserInput: CreateOneUsersArgs;
 };
+
 
 export type MutationLoginRestauUserArgs = {
   password: Scalars['String'];
   userName: Scalars['String'];
 };
 
+
 export type MutationLoginUserArgs = {
   password: Scalars['String'];
   phoneNumber: Scalars['String'];
 };
 
+
 export type MutationRefreshTokenArgs = {
   oldRefreshToken: Scalars['String'];
 };
+
 
 export type MutationRemoveAuthArgs = {
   id: Scalars['String'];
 };
 
+
 export type MutationRemoveProfileArgs = {
   profileId: Scalars['String'];
 };
+
 
 export type MutationRemoveRestauUserArgs = {
   deleteArgs: DeleteOneRestauUsersArgs;
 };
 
+
 export type MutationRemoveUserArgs = {
   userId: Scalars['String'];
 };
+
 
 export type MutationSignUpArgs = {
   registerUserInputs: CreateUserInput;
 };
 
+
 export type MutationStartForgotPasswordArgs = {
   phoneNumber: Scalars['String'];
 };
+
 
 export type MutationUpdateAuthArgs = {
   updateAuthInput: UpdateOneAuthUserArgs;
 };
 
+
 export type MutationUpdatePhotoProfileArgs = {
   myFile: Scalars['Upload'];
 };
+
 
 export type MutationUpdateProfileArgs = {
   updateProfileInput: UpdateOneProfileArgs;
 };
 
+
 export type MutationUpdateRestauUserArgs = {
   updateRestauUserInput: UpdateOneRestauUsersArgs;
 };
+
 
 export type MutationUpdateUserArgs = {
   updateUserInput: UpdateOneUsersArgs;
@@ -1241,9 +1264,10 @@ export type ProfileWhereUniqueInput = {
 };
 
 export type Query = {
-  __typename?: 'Query';
+  __typename?: "Query";
   FindAllRestauUsers: Array<RestauUsers>;
   FindOneRestauUser: RestauUsers;
+  currentUser: Users;
   getAllAuths: Array<AuthUser>;
   getOneAuth: AuthUser;
   profile: Profile;
@@ -1252,21 +1276,26 @@ export type Query = {
   users: Array<Users>;
 };
 
+
 export type QueryFindAllRestauUsersArgs = {
   findAllArgs: FindManyRestauUsersArgs;
 };
+
 
 export type QueryFindOneRestauUserArgs = {
   findOneArgs: FindFirstRestauUsersArgs;
 };
 
+
 export type QueryGetOneAuthArgs = {
   id: Scalars['String'];
 };
 
+
 export type QueryProfileArgs = {
   profileId: Scalars['String'];
 };
+
 
 export type QueryUserArgs = {
   userId: Scalars['String'];
@@ -1274,7 +1303,7 @@ export type QueryUserArgs = {
 
 export enum QueryMode {
   Default = 'default',
-  Insensitive = 'insensitive',
+  Insensitive = "insensitive"
 }
 
 export type RestauUsers = {
@@ -1391,7 +1420,7 @@ export enum RestauUsersScalarFieldEnum {
   Role = 'role',
   UpdatedAt = 'updatedAt',
   UserFullName = 'userFullName',
-  UserName = 'userName',
+  UserName = "userName"
 }
 
 export type RestauUsersScalarWhereInput = {
@@ -1793,12 +1822,12 @@ export enum Role {
   RestaurantAdmin = 'RestaurantAdmin',
   RestaurantUser = 'RestaurantUser',
   SuperAdmin = 'SuperAdmin',
-  User = 'User',
+  User = "User"
 }
 
 export enum SortOrder {
   Asc = 'asc',
-  Desc = 'desc',
+  Desc = "desc"
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -2038,93 +2067,57 @@ export type UsersWhereInput = {
 };
 
 export type UsersWhereUniqueInput = {
-  idUser?: InputMaybe<Scalars['String']>;
+  idUser?: InputMaybe<Scalars["String"]>;
 };
 
 export type LoginRestaurantUserMutationVariables = Exact<{
-  username: Scalars['String'];
-  password: Scalars['String'];
+  username: Scalars["String"];
+  password: Scalars["String"];
 }>;
 
-export type LoginRestaurantUserMutation = { __typename?: 'Mutation'; loginRestauUser: any };
+
+export type LoginRestaurantUserMutation = { __typename?: "Mutation", loginRestauUser: any };
 
 export type CreateRestaurantUserMutationVariables = Exact<{
-  username: Scalars['String'];
-  password: Scalars['String'];
-  userFullName: Scalars['String'];
+  username: Scalars["String"];
+  password: Scalars["String"];
+  userFullName: Scalars["String"];
   userRole: Role;
 }>;
 
-export type CreateRestaurantUserMutation = {
-  __typename?: 'Mutation';
-  createRestauUser: {
-    __typename?: 'RestauUsers';
-    idRestauUser: string;
-    userFullName: string;
-    userName: string;
-    restaurant: {
-      __typename?: 'Restaurants';
-      idRestaurant: string;
-      restauName: string;
-      restauDescription: string;
-      createdAt: any;
-      updatedAt: any;
-    };
-  };
-};
 
-export type RestaurantUserFragmentFragment = {
-  __typename?: 'RestauUsers';
-  idRestauUser: string;
-  userName: string;
-  userFullName: string;
-  role: Role;
-  createdAt: any;
-  updatedAt: any;
-  restauId: string;
-  restaurant: {
-    __typename?: 'Restaurants';
-    idRestaurant: string;
-    restauName: string;
-    restauDescription: string;
-    createdAt: any;
-    updatedAt: any;
-  };
-};
+export type CreateRestaurantUserMutation = { __typename?: "Mutation", createRestauUser: { __typename?: "RestauUsers", idRestauUser: string, userFullName: string, userName: string, restaurant: { __typename?: "Restaurants", idRestaurant: string, restauName: string, restauDescription: string, createdAt: any, updatedAt: any } } };
+
+export type RestaurantUserFragmentFragment = { __typename?: "RestauUsers", idRestauUser: string, userName: string, userFullName: string, role: Role, createdAt: any, updatedAt: any, restauId: string, restaurant: { __typename?: "Restaurants", idRestaurant: string, restauName: string, restauDescription: string, createdAt: any, updatedAt: any } };
 
 export type LoginUserMutationVariables = Exact<{
-  phoneNumber: Scalars['String'];
-  password: Scalars['String'];
+  phoneNumber: Scalars["String"];
+  password: Scalars["String"];
 }>;
 
-export type LoginUserMutation = { __typename?: 'Mutation'; loginUser: any };
+
+export type LoginUserMutation = { __typename?: "Mutation", loginUser: any };
 
 export type RegisterUserMutationVariables = Exact<{
-  phoneNumber: Scalars['String'];
-  password: Scalars['String'];
-  username: Scalars['String'];
+  phoneNumber: Scalars["String"];
+  password: Scalars["String"];
+  username: Scalars["String"];
 }>;
 
-export type RegisterUserMutation = {
-  __typename?: 'Mutation';
-  signUp: { __typename?: 'AuthUser'; id: string; phoneNumber: string; isPhoneConfirmed: boolean; role: Role };
-};
 
-export type RestaurantFragmentFragment = {
-  __typename?: 'Restaurants';
-  idRestaurant: string;
-  restauName: string;
-  restauDescription: string;
-  createdAt: any;
-  updatedAt: any;
-};
+export type RegisterUserMutation = { __typename?: "Mutation", signUp: { __typename?: "AuthUser", id: string, phoneNumber: string, isPhoneConfirmed: boolean, role: Role } };
 
-export type GetAllUsersQueryVariables = Exact<{ [key: string]: never }>;
+export type CurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type GetAllUsersQuery = {
-  __typename?: 'Query';
-  users: Array<{ __typename?: 'Users'; firstName?: string | null; lastName?: string | null; updatedAt: any }>;
-};
+
+export type CurrentUserQuery = { __typename?: "Query", currentUser: { __typename?: "Users", userName: string, firstName?: string | null, lastName?: string | null, profile?: { __typename?: "Profile", bio: string } | null } };
+
+export type RestaurantFragmentFragment = { __typename?: "Restaurants", idRestaurant: string, restauName: string, restauDescription: string, createdAt: any, updatedAt: any };
+
+export type GetAllUsersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllUsersQuery = { __typename?: "Query", users: Array<{ __typename?: "Users", firstName?: string | null, lastName?: string | null, updatedAt: any }> };
 
 export const RestaurantFragmentFragmentDoc = gql`
   fragment RestaurantFragment on Restaurants {
@@ -2148,17 +2141,13 @@ export const RestaurantUserFragmentFragmentDoc = gql`
       ...RestaurantFragment
     }
   }
-  ${RestaurantFragmentFragmentDoc}
-`;
+${RestaurantFragmentFragmentDoc}`;
 export const LoginRestaurantUserDocument = gql`
   mutation LoginRestaurantUser($username: String!, $password: String!) {
     loginRestauUser(userName: $username, password: $password)
   }
 `;
-export type LoginRestaurantUserMutationFn = Apollo.MutationFunction<
-  LoginRestaurantUserMutation,
-  LoginRestaurantUserMutationVariables
->;
+export type LoginRestaurantUserMutationFn = Apollo.MutationFunction<LoginRestaurantUserMutation, LoginRestaurantUserMutationVariables>;
 
 /**
  * __useLoginRestaurantUserMutation__
@@ -2178,25 +2167,22 @@ export type LoginRestaurantUserMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useLoginRestaurantUserMutation(
-  baseOptions?: Apollo.MutationHookOptions<LoginRestaurantUserMutation, LoginRestaurantUserMutationVariables>
-) {
+export function useLoginRestaurantUserMutation(baseOptions?: Apollo.MutationHookOptions<LoginRestaurantUserMutation, LoginRestaurantUserMutationVariables>) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<LoginRestaurantUserMutation, LoginRestaurantUserMutationVariables>(
-    LoginRestaurantUserDocument,
-    options
-  );
+  return Apollo.useMutation<LoginRestaurantUserMutation, LoginRestaurantUserMutationVariables>(LoginRestaurantUserDocument, options);
 }
 
 export type LoginRestaurantUserMutationHookResult = ReturnType<typeof useLoginRestaurantUserMutation>;
 export type LoginRestaurantUserMutationResult = Apollo.MutationResult<LoginRestaurantUserMutation>;
-export type LoginRestaurantUserMutationOptions = Apollo.BaseMutationOptions<
-  LoginRestaurantUserMutation,
-  LoginRestaurantUserMutationVariables
->;
+export type LoginRestaurantUserMutationOptions = Apollo.BaseMutationOptions<LoginRestaurantUserMutation, LoginRestaurantUserMutationVariables>;
 export const CreateRestaurantUserDocument = gql`
   mutation CreateRestaurantUser($username: String!, $password: String!, $userFullName: String!, $userRole: Role!) {
-    createRestauUser(userName: $username, password: $password, userFullName: $userFullName, role: $userRole) {
+    createRestauUser(
+      userName: $username
+      password: $password
+      userFullName: $userFullName
+      role: $userRole
+    ) {
       idRestauUser
       userFullName
       userName
@@ -2205,12 +2191,8 @@ export const CreateRestaurantUserDocument = gql`
       }
     }
   }
-  ${RestaurantFragmentFragmentDoc}
-`;
-export type CreateRestaurantUserMutationFn = Apollo.MutationFunction<
-  CreateRestaurantUserMutation,
-  CreateRestaurantUserMutationVariables
->;
+${RestaurantFragmentFragmentDoc}`;
+export type CreateRestaurantUserMutationFn = Apollo.MutationFunction<CreateRestaurantUserMutation, CreateRestaurantUserMutationVariables>;
 
 /**
  * __useCreateRestaurantUserMutation__
@@ -2232,22 +2214,13 @@ export type CreateRestaurantUserMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useCreateRestaurantUserMutation(
-  baseOptions?: Apollo.MutationHookOptions<CreateRestaurantUserMutation, CreateRestaurantUserMutationVariables>
-) {
+export function useCreateRestaurantUserMutation(baseOptions?: Apollo.MutationHookOptions<CreateRestaurantUserMutation, CreateRestaurantUserMutationVariables>) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CreateRestaurantUserMutation, CreateRestaurantUserMutationVariables>(
-    CreateRestaurantUserDocument,
-    options
-  );
+  return Apollo.useMutation<CreateRestaurantUserMutation, CreateRestaurantUserMutationVariables>(CreateRestaurantUserDocument, options);
 }
-
 export type CreateRestaurantUserMutationHookResult = ReturnType<typeof useCreateRestaurantUserMutation>;
 export type CreateRestaurantUserMutationResult = Apollo.MutationResult<CreateRestaurantUserMutation>;
-export type CreateRestaurantUserMutationOptions = Apollo.BaseMutationOptions<
-  CreateRestaurantUserMutation,
-  CreateRestaurantUserMutationVariables
->;
+export type CreateRestaurantUserMutationOptions = Apollo.BaseMutationOptions<CreateRestaurantUserMutation, CreateRestaurantUserMutationVariables>;
 export const LoginUserDocument = gql`
   mutation LoginUser($phoneNumber: String!, $password: String!) {
     loginUser(phoneNumber: $phoneNumber, password: $password)
@@ -2273,19 +2246,18 @@ export type LoginUserMutationFn = Apollo.MutationFunction<LoginUserMutation, Log
  *   },
  * });
  */
-export function useLoginUserMutation(
-  baseOptions?: Apollo.MutationHookOptions<LoginUserMutation, LoginUserMutationVariables>
-) {
+export function useLoginUserMutation(baseOptions?: Apollo.MutationHookOptions<LoginUserMutation, LoginUserMutationVariables>) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<LoginUserMutation, LoginUserMutationVariables>(LoginUserDocument, options);
 }
-
 export type LoginUserMutationHookResult = ReturnType<typeof useLoginUserMutation>;
 export type LoginUserMutationResult = Apollo.MutationResult<LoginUserMutation>;
 export type LoginUserMutationOptions = Apollo.BaseMutationOptions<LoginUserMutation, LoginUserMutationVariables>;
 export const RegisterUserDocument = gql`
   mutation RegisterUser($phoneNumber: String!, $password: String!, $username: String!) {
-    signUp(registerUserInputs: { username: $username, password: $password, phoneNumber: $phoneNumber }) {
+    signUp(
+      registerUserInputs: {username: $username, password: $password, phoneNumber: $phoneNumber}
+    ) {
       id
       phoneNumber
       isPhoneConfirmed
@@ -2314,19 +2286,55 @@ export type RegisterUserMutationFn = Apollo.MutationFunction<RegisterUserMutatio
  *   },
  * });
  */
-export function useRegisterUserMutation(
-  baseOptions?: Apollo.MutationHookOptions<RegisterUserMutation, RegisterUserMutationVariables>
-) {
+export function useRegisterUserMutation(baseOptions?: Apollo.MutationHookOptions<RegisterUserMutation, RegisterUserMutationVariables>) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<RegisterUserMutation, RegisterUserMutationVariables>(RegisterUserDocument, options);
 }
 
 export type RegisterUserMutationHookResult = ReturnType<typeof useRegisterUserMutation>;
 export type RegisterUserMutationResult = Apollo.MutationResult<RegisterUserMutation>;
-export type RegisterUserMutationOptions = Apollo.BaseMutationOptions<
-  RegisterUserMutation,
-  RegisterUserMutationVariables
->;
+export type RegisterUserMutationOptions = Apollo.BaseMutationOptions<RegisterUserMutation, RegisterUserMutationVariables>;
+export const CurrentUserDocument = gql`
+  query CurrentUser {
+    currentUser {
+      userName
+      firstName
+      lastName
+      profile {
+        bio
+      }
+    }
+  }
+`;
+
+/**
+ * __useCurrentUserQuery__
+ *
+ * To run a query within a React component, call `useCurrentUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCurrentUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCurrentUserQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCurrentUserQuery(baseOptions?: Apollo.QueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, options);
+}
+
+export function useCurrentUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, options);
+}
+
+export type CurrentUserQueryHookResult = ReturnType<typeof useCurrentUserQuery>;
+export type CurrentUserLazyQueryHookResult = ReturnType<typeof useCurrentUserLazyQuery>;
+export type CurrentUserQueryResult = Apollo.QueryResult<CurrentUserQuery, CurrentUserQueryVariables>;
 export const GetAllUsersDocument = gql`
   query GetAllUsers {
     users {
@@ -2352,16 +2360,12 @@ export const GetAllUsersDocument = gql`
  *   },
  * });
  */
-export function useGetAllUsersQuery(
-  baseOptions?: Apollo.QueryHookOptions<GetAllUsersQuery, GetAllUsersQueryVariables>
-) {
+export function useGetAllUsersQuery(baseOptions?: Apollo.QueryHookOptions<GetAllUsersQuery, GetAllUsersQueryVariables>) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<GetAllUsersQuery, GetAllUsersQueryVariables>(GetAllUsersDocument, options);
 }
 
-export function useGetAllUsersLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<GetAllUsersQuery, GetAllUsersQueryVariables>
-) {
+export function useGetAllUsersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllUsersQuery, GetAllUsersQueryVariables>) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<GetAllUsersQuery, GetAllUsersQueryVariables>(GetAllUsersDocument, options);
 }

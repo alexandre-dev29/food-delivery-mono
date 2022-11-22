@@ -13,8 +13,8 @@ import { GraphQLLiveDirective, useLiveQuery } from '@envelop/live-query';
 import { GetInMemoryStore } from '@food-delivery-mono/utilities';
 import { CaslModule } from 'nest-casl';
 import { Role } from '@food-delivery-mono/data-access';
-import UserSecurity from '../../../../libs/app-security/src/lib/user.security';
-import { RestauUsersModule } from '../restau-users/restau-users.module';
+import { RestauUsersModule } from "../restau-users/restau-users.module";
+import { UserSecurity } from "@food-delivery-mono/app-security";
 
 const redis = new Redis({});
 

@@ -12,7 +12,6 @@ type LoginFormValues = {
 };
 
 export function LoginPage() {
-  // console.log(context);
   const { register, handleSubmit, reset } = useForm<LoginFormValues>();
   const [loginUserMutation, { loading }] = useMutation<LoginUserMutation, LoginUserMutationVariables>(
     LoginUserDocument,
@@ -24,7 +23,8 @@ export function LoginPage() {
   const onSubmit: SubmitHandler<LoginFormValues> = async ({ phoneNumber, password }) => {
     const { data, errors } = await loginUserMutation({ variables: { phoneNumber: phoneNumber, password: password } });
     if (!errors) {
-      reset({ phoneNumber: '', password: '' });
+      reset({ phoneNumber: "", password: "" });
+      window.location.assign("/dashboard");
     }
   };
   return (

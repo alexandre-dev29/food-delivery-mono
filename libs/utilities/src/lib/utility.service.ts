@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { ConfigService } from '@nestjs/config';
-import { Tokens } from '@food-delivery-mono/shared-types';
-import UserSecurity from '../../../app-security/src/lib/user.security';
+import { Tokens } from "@food-delivery-mono/shared-types";
+import { UserSecurity } from "@food-delivery-mono/app-security";
 
 @Injectable()
 export class UtilityService {
@@ -26,8 +26,8 @@ export class UtilityService {
       this.jwtService.signAsync(
         { sub: id, roles, phoneNumber, userId, id, isRestaurant, restaurantId, isSuperAdmin },
         {
-          expiresIn: this.configService.get<number>('JWT_ACCESS_EXPIRATION'),
-          secret: this.configService.get<string>('ACCESS_TOKEN_SECRET'),
+          expiresIn: 60 * 60 * 24,
+          secret: this.configService.get<string>("ACCESS_TOKEN_SECRET")
         }
       ),
       this.jwtService.signAsync(

@@ -272,6 +272,7 @@ type ProfileMinAggregate {
 type Query {
   FindAllRestauUsers(findAllArgs: FindManyRestauUsersArgs!): [RestauUsers!]!
   FindOneRestauUser(findOneArgs: FindFirstRestauUsersArgs!): RestauUsers!
+  currentUser: [Users!]!
   getAllAuths: [AuthUser!]!
   getOneAuth(id: String!): AuthUser!
   profile(profileId: String!): Profile!

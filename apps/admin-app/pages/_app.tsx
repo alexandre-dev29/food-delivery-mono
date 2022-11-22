@@ -1,8 +1,8 @@
 import { ReactElement, ReactNode } from 'react';
 import { NextPage } from 'next';
-import { AppProps } from 'next/app';
-import { AuthorizedLayout } from '@food-delivery-mono/ui-shared-components';
-import './global.scss';
+import { AppProps } from "next/app";
+import { AuthorizedLayout, MainLayout } from "@food-delivery-mono/ui-shared-components";
+import "./global.scss";
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -13,7 +13,8 @@ type AppPropsWithLayout = AppProps & {
 };
 
 const App = ({ Component, pageProps }: AppPropsWithLayout) => {
-  const getLayout = Component.getLayout ?? ((page) => <AuthorizedLayout>{page}</AuthorizedLayout>);
+  const getLayout = Component.getLayout ?? ((page) =>
+    <MainLayout><AuthorizedLayout>{page}</AuthorizedLayout></MainLayout>);
 
   return getLayout(<Component {...pageProps} />);
 };

@@ -1,6 +1,6 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-import { GqlExecutionContext } from '@nestjs/graphql';
-import UserSecurity from './user.security';
+import { GqlExecutionContext } from "@nestjs/graphql";
+import { UserSecurity } from "./user.security";
 
 export const CurrentUser = createParamDecorator((data, context: ExecutionContext) => {
   const { id, userId, userName, roles, isRestaurant, restaurantId, isSuperAdmin, phoneNumber }: UserSecurity =

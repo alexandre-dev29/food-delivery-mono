@@ -64,7 +64,6 @@ export class AuthenticationResolver {
     @Args('password', { type: () => String }) password: string,
     @Context() context: any
   ) {
-    console.log(context);
     return this.authService.loginUser(phoneNumber, password, context.reply);
   }
 

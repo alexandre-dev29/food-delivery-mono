@@ -144,10 +144,7 @@ export class AuthenticationService {
       });
 
       if (user.role == Role.SuperAdmin) {
-        console.log('Yesss he is');
-        const tokenString = `token=${access_token};HttpOnly;Path=/;Max-Age=${this.configService.get(
-          'JWT_ACCESS_EXPIRATION'
-        )};samesite=Strict;`;
+        const tokenString = `token=${access_token};HttpOnly;Path=/;Max-Age=${86400};samesite=Strict;`;
         context.cookie(tokenString, cookieOption);
         return {
           refresh_token,

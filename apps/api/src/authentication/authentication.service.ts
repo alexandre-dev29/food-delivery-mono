@@ -12,7 +12,8 @@ import {
   Role,
   UpdateOneAuthUserArgs,
 } from '@food-delivery-mono/data-access';
-import { LoginResponse } from '@food-delivery-mono/shared-types';
+import { cookieOption, LoginResponse } from '@food-delivery-mono/shared-types';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthenticationService {
@@ -20,7 +21,8 @@ export class AuthenticationService {
     private authPrismaService: DataAccessPrismaService,
     private jwtService: JwtService,
     private twilioService: TwilioOperationService,
-    private utilityService: UtilityService
+    private utilityService: UtilityService,
+    private configService: ConfigService
   ) {}
 
   create(createAuthInput: CreateOneAuthUserArgs): Promise<AuthUser> {
@@ -43,7 +45,7 @@ export class AuthenticationService {
     return this.authPrismaService.authUser.delete({ where: { id: id } });
   }
 
-  // Auth Methods
+  // auth-layout Methods
 
   async registerUser({ phoneNumber, password, username }: Partial<AuthUser>): Promise<AuthUser | any> {
     const userFounded = await this.authPrismaService.authUser.findFirst({
@@ -118,7 +120,7 @@ export class AuthenticationService {
     }
   }
 
-  async loginUser(phoneNumber: string, password: string): Promise<LoginResponse | any> {
+  async loginUser(phoneNumber: string, password: string, context: any): Promise<LoginResponse | any> {
     const user = await this.authPrismaService.authUser.findFirst({
       where: { phoneNumber: phoneNumber },
     });
@@ -141,14 +143,29 @@ export class AuthenticationService {
         },
       });
 
-      return {
-        access_token,
-        refresh_token,
-        user: {
-          userId: user.userId,
-          phoneNumber: user.phoneNumber,
-        },
-      } as LoginResponse;
+      if (user.role == Role.SuperAdmin) {
+        console.log('Yesss he is');
+        const tokenString = `token=${access_token};HttpOnly;Path=/;Max-Age=${this.configService.get(
+          'JWT_ACCESS_EXPIRATION'
+        )};samesite=Strict;`;
+        context.cookie(tokenString, cookieOption);
+        return {
+          refresh_token,
+          user: {
+            userId: user.userId,
+            phoneNumber: user.phoneNumber,
+          },
+        } as LoginResponse;
+      } else {
+        return {
+          access_token,
+          refresh_token,
+          user: {
+            userId: user.userId,
+            phoneNumber: user.phoneNumber,
+          },
+        } as LoginResponse;
+      }
     } else {
       return new GraphQLError('The phone number or password is invalid please try again');
     }

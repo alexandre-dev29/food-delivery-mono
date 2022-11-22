@@ -1,27 +1,28 @@
-'use client';
 import { Button, Card, Col, Input, Text } from '@nextui-org/react';
 import { Lock, NoLock } from 'iconoir-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import {
-  apolloClient,
-  LoginUserDocument,
-  LoginUserMutation,
-  LoginUserMutationVariables,
-} from '@food-delivery-mono/uishared-types';
+import { LoginUserDocument, LoginUserMutation, LoginUserMutationVariables } from '@food-delivery-mono/uishared-types';
+import { ReactElement } from 'react';
+import { AuthLayout } from '@food-delivery-mono/ui-shared-components';
+import { useMutation } from '@apollo/client';
 
 type LoginFormValues = {
   phoneNumber: string;
   password: string;
 };
 
-export function Page() {
-  const { register, handleSubmit } = useForm<LoginFormValues>();
+export function LoginPage() {
+  // console.log(context);
+  const { register, handleSubmit, reset } = useForm<LoginFormValues>();
+  const [loginUserMutation] = useMutation<LoginUserMutation, LoginUserMutationVariables>(LoginUserDocument, {
+    errorPolicy: 'all',
+    fetchPolicy: 'network-only',
+  });
   const onSubmit: SubmitHandler<LoginFormValues> = async ({ phoneNumber, password }) => {
-    const result = await apolloClient.mutate<LoginUserMutation, LoginUserMutationVariables>({
-      mutation: LoginUserDocument,
-      fetchPolicy: 'network-only',
-      variables: { phoneNumber: phoneNumber, password: password },
-    });
+    const { data, errors } = await loginUserMutation({ variables: { phoneNumber: phoneNumber, password: password } });
+    if (!errors) {
+      reset({ phoneNumber: '', password: '' });
+    }
   };
   return (
     <Card css={{ width: '30vw', height: '45vh', maxHeight: '400px' }}>
@@ -73,4 +74,8 @@ export function Page() {
   );
 }
 
-export default Page;
+LoginPage.getLayout = (page: ReactElement) => {
+  return <AuthLayout>{page}</AuthLayout>;
+};
+
+export default LoginPage;

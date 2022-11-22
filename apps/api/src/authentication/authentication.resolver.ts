@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql';
 import { AuthenticationService } from './authentication.service';
 import { AuthUser, CreateOneAuthUserArgs, UpdateOneAuthUserArgs } from '@food-delivery-mono/data-access';
 import { CreateUserInput } from './Dto/auth-user.dto';
@@ -61,9 +61,11 @@ export class AuthenticationResolver {
   @Mutation(() => LoginResponse, { name: 'loginUser' })
   loginUser(
     @Args('phoneNumber', { type: () => String }) phoneNumber: string,
-    @Args('password', { type: () => String }) password: string
+    @Args('password', { type: () => String }) password: string,
+    @Context() context: any
   ) {
-    return this.authService.loginUser(phoneNumber, password);
+    console.log(context);
+    return this.authService.loginUser(phoneNumber, password, context.reply);
   }
 
   @Mutation(() => Boolean, { name: 'confirmPhoneNumber' })

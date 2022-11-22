@@ -44,13 +44,13 @@ describe('ProfileResolver', () => {
         expect(jest.spyOn(profileService, 'findAll')).toHaveBeenCalled();
       });
 
-      test('then is should return auth users', () => {
+      test('then is should return auth-layout users', () => {
         expect(profiles).toEqual([profileStub()]);
       });
     });
   });
 
-  describe('Get One auth users', () => {
+  describe('Get One auth-layout users', () => {
     describe('when getUser is called', () => {
       let profile: Profile;
 
@@ -66,7 +66,7 @@ describe('ProfileResolver', () => {
         expect(jest.spyOn(profileService, 'findOne')).toHaveBeenCalledWith(profileStub().profileId);
       });
 
-      test('then is should return auth users', () => {
+      test('then is should return auth-layout users', () => {
         expect(profile).toEqual(profileStub());
       });
     });

@@ -58,7 +58,8 @@
     "rxjs": "^7.0.0",
     "tslib": "^2.3.0",
     "twilio": "^3.83.2",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "zustand": "^4.1.4"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.13.11",

@@ -14,7 +14,7 @@ export const AuthenticationService = jest.fn().mockReturnValue({
   update: jest.fn<() => Promise<AuthUser>>().mockResolvedValue(authUserStub()),
 
   remove: jest.fn<() => Promise<AuthUser>>().mockResolvedValue(authUserStub()),
-  // Auth Methods
+  // auth-layout Methods
 
   registerUser: jest.fn<() => Promise<AuthUser>>().mockResolvedValue(authUserStub()),
 

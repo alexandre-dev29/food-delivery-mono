@@ -26,7 +26,7 @@ describe('AuthResolver', () => {
     jest.clearAllMocks();
   });
 
-  describe('Get All auth users', () => {
+  describe('Get All auth-layout users', () => {
     describe('when getUser is called', () => {
       let user: AuthUser[];
 
@@ -38,13 +38,13 @@ describe('AuthResolver', () => {
         expect(jest.spyOn(authService, 'findAll')).toHaveBeenCalled();
       });
 
-      test('then is should return auth users', () => {
+      test('then is should return auth-layout users', () => {
         expect(user).toEqual([authUserStub()]);
       });
     });
   });
 
-  describe('Get One auth users', () => {
+  describe('Get One auth-layout users', () => {
     describe('when getUser is called', () => {
       let user: AuthUser;
 
@@ -60,7 +60,7 @@ describe('AuthResolver', () => {
         expect(jest.spyOn(authService, 'findOne')).toHaveBeenCalledWith(authUserStub().id);
       });
 
-      test('then is should return auth users', () => {
+      test('then is should return auth-layout users', () => {
         expect(user).toEqual(authUserStub());
       });
     });
@@ -92,7 +92,7 @@ describe('AuthResolver', () => {
       });
     });
   });
-  describe('Update a auth user', () => {
+  describe('Update a auth-layout user', () => {
     describe('when update is called', () => {
       let user: AuthUser;
       let updateUserDto: UpdateOneAuthUserArgs;

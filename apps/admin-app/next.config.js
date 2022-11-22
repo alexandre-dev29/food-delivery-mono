@@ -13,7 +13,7 @@ const nextConfig = {
     svgr: false,
   },
   experimental: {
-    appDir: true,
+    appDir: false,
     fontLoaders: [{ loader: '@next/font/google', options: { subsets: ['latin'] } }],
   },
 };
